@@ -1,0 +1,24 @@
+---
+title: Vysvědčení
+demand: 2
+---
+
+Vraťme se k našemu příkladu s vysvědčením, tentokrát je zadané jako slovník. 
+
+- Napiš program, který spočte průměrnou známku ze všech předmětů.
+- Uprav program, aby vypsal všechny předměty, ve kterých získal student známku 1.
+
+```py
+schoolReport = {
+  "Český jazyk": 1,
+  "Anglický jazyk": 1, 
+  "Matematika", 1, 
+  "Přírodopis", 2,
+  "Dějepis", 1,
+  "Fyzika", 2,
+  "Hudební výchova", 4,
+  "Výtvarná výchova", 2,
+  "Tělešná výchova", 3,
+  "Chemie", 4,
+}
+```

@@ -1,0 +1,21 @@
+title: Základy programování 2
+link: zaklady-programovani-2
+lessons:
+  - title: Co všechno už umíme
+    link: uvod
+    brief: Zopakujeme si, co všechno už umíme, abychom na tyto znalosti mohli navázat.
+  - title: Podmínky 2
+    link: podminky-2
+    brief: Rozšíříme naše znalosti o podminkách a ukážeme si, jak spojit více podmínek do jedné.
+  - title: Cykly 2
+    link: cykly-2
+    brief: Ukážeme si, že cykly můžeme používat nejen pro sekvence, ale i pro číselné posloupnosti.
+  - title: Slovníky
+    link: slovniky
+    brief: Slovníky jsou nový typ kolekcí, která umožňují ukládat data spolu s popiskami.
+  - title: Funkce
+    link: funkce
+    brief: Zatím jsme jen používali funkce napsané někým jiným, nyní si vyzkoušíme napsat vlastní.
+  - title: Třídy a objekty
+    link: tridy
+    brief: Třídy a objekty jsou způsob, jak strukturovat program. Tato kapitola nás uvede do světa objektově orientovaného programování.
