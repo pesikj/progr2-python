@@ -35,7 +35,7 @@ totalPrice = numberOfTickets * pricePerTicket
 print(totalPrice)
 ```
 
-Python bere náš vstup jako řetězec a pokud jej násobíme číslem, udělá standardní operaci při násobení čísla a řetězce - 345krát zopakuje daný text. Následující progrma už bude fungovat tak, jak čekáme.
+Python bere náš vstup jako řetězec a pokud jej násobíme číslem, udělá standardní operaci při násobení čísla a řetězce - 345krát zopakuje daný text. Následující program už bude fungovat tak, jak čekáme.
 
 ```py
 numberOfTickets = input("Kolik si přejete lístků? ")
@@ -45,7 +45,7 @@ totalPrice = numberOfTickets * pricePerTicket
 print(totalPrice)
 ```
 
-**Námět:** Zkus spojit funkce `input` a `int` do jedné, tj. spojte obě funkce do jednoho řádku. Tím program zkrátíš a zpřehledníš.
+**Námět:** Zkus spojit funkce `input` a `int` do jedné, tj. napiš obě funkce do jednoho řádku. Tím program zkrátíš a zpřehledníš.
 
 #### Tip
 
