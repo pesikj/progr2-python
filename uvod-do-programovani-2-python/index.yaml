@@ -19,3 +19,9 @@ lessons:
   - title: Třídy a objekty
     link: tridy
     brief: Třídy a objekty jsou způsob, jak strukturovat program. Tato kapitola nás uvede do světa objektově orientovaného programování.
+  - title: Balíčky z internetu
+    link: balicky-z-internetu
+    brief: Pro Python existuje obrovské množství volně dostupných knihoven. Zkusme si jednu přidat do našeho programu.
+  - title: Další zdroje
+    link: dalsi-zdroje
+    brief: Na konci si rozebereme, jak můžeš pokračovat dál ve svém vzdělávání.
