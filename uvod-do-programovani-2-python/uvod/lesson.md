@@ -61,7 +61,7 @@ totalPrice = pricePerTicket * numberOfTickets
 print("Cena " + str(numberOfTickets) + " lístků na hru " + play + " je celkem " + str(totalPrice) + " Kč.")
 ```
 
-Relativně novou vlastnístí Pythonu je možnost využívání f-stringů. Důležité je před uvozovky vložit písmeno `f`. Poté můžeme vkládat do složených závorek přímo názvy proměnných, nemusíme tedy používat znaménka `+`. Navíc za nás Python automaticky obstará i převod čísel na `string`, není tedy třeba používat funkci `str()`.
+Relativně novou vlastností Pythonu je možnost využívání f-stringů. Důležité je před uvozovky vložit písmeno `f`. Poté můžeme vkládat do složených závorek přímo názvy proměnných, nemusíme tedy používat znaménka `+`. Navíc za nás Python automaticky obstará i převod čísel na `string`, není tedy třeba používat funkci `str()`.
 
 ```py
 print(f"Cena {numberOfTickets} lístků na hru {play} je celkem {totalPrice} Kč.")
@@ -69,7 +69,7 @@ print(f"Cena {numberOfTickets} lístků na hru {play} je celkem {totalPrice} Kč
 
 ## Podmínky
 
-Naše programy se často musejí *rozhodovat* a některé bloky kódu se spouštěstí pouze za předpokladu splnění nějaké podmínky. Podmínku začínáme klíčovým slovem `if`. Blok, který se spouští při splnění podmínky, je vždy odsazený (standardně se používají 2 nebo 4 mezery).
+Naše programy se často musejí *rozhodovat* a některé bloky kódu se spouštějí pouze za předpokladu splnění nějaké podmínky. Podmínku začínáme klíčovým slovem `if`. Blok, který se spouští při splnění podmínky, je vždy odsazený (standardně se používají 2 nebo 4 mezery).
 
 Uvažujme například kino, které dává slevu 10 % při nákupu lístků za celkovou cenu více než 500 Kč. Pokud tedy zákazník zakoupí větší množství lístků, dostaneme informaci o získané slevě. Každý zákazník pak získá informaci o celkvé ceně, protože tento blok již není odsazený.
 
@@ -121,11 +121,11 @@ else:
 print(f"Známka z testu je {mark}.")
 ```
 
- Všiměte si, že Python "skočí" do prvního bloku, kde je podmínka splněná. Pokud tedy student například získá 55 bodů, byla by splněná i podmínka `points <= 75`, `points <= 90`. Díky první podmínce se ale do proměnné `mark` uloží známka 5 a program dále skočí na konec bloku s výpisem podmínek.
+ Všimni si, že Python "skočí" do prvního bloku, kde je podmínka splněná. Pokud tedy student například získá 55 bodů, byla by splněná i podmínka `points <= 75`, `points <= 90`. Díky první podmínce se ale do proměnné `mark` uloží známka 5 a program dále skočí na konec bloku s výpisem podmínek.
 
  **Námět**: Bylo by možné namísto operátoru `<=` použít operátor `>=`? Stačí pouze nahradit znaménka? Nebo je potřeba jinak seřadit podmínky?
 
-Poslední možností jsou vnořené podmínky, tj. podmínky uvnitř podmínek. Uvažujme například mládeži nepřístupný film. Není-li zájemce o film plnoletý, je mu vypsát text o nepřístupnosti. Pouze plnoletý zákazník je tázán na počet lístků a při nákupu většího množství lístků může opět získat slevu. Tentokrát máme dvě možné slevy - 10 % při nákupu nad 500 Kč a 25 % při nákupu nad 1000 Kč.
+Poslední možností jsou vnořené podmínky, tj. podmínky uvnitř podmínek. Uvažujme například mládeži nepřístupný film. Není-li zájemce o film plnoletý, je mu vypsán text o nepřístupnosti. Pouze plnoletý zákazník je tázán na počet lístků a při nákupu většího množství lístků může opět získat slevu. Tentokrát máme dvě možné slevy - 10 % při nákupu nad 500 Kč a 25 % při nákupu nad 1000 Kč.
 
 ```py
 pricePerTicket = 190
@@ -149,7 +149,7 @@ else:
 
 Všimněte si, že klíčová slova `else` a `elif` jsou vždy zarovnaná stejně jako začátek podmínky, ke které se vztahují.
 
-**Námět:** Zkus program upravit tak, že nedává slevy v procentech, ale například při nákupu nad 500 Kč má zákazník 1 lístek zdarma a při nákupu nad 1000 Kč 3 lístky zdarma.
+**Námět:** Zkus program upravit pro případ, že kino nedává slevy v procentech, ale například při nákupu nad 500 Kč má zákazník 1 lístek zdarma a při nákupu nad 1000 Kč 3 lístky zdarma.
 
 ## Sekvence
 
@@ -172,7 +172,7 @@ else:
 print(f"Uživatel(ka) se narodil(a) v roce {yearOfBirth}.")
 ```
 
-**Námět:** Doplň do programu určení rodného čísla na základě pohlaví a vypište ho. Zkus určit měsíc narození obecně pro obě pohlaví pomocí zbytku po celočíselném dělení.
+**Námět:** Doplň do programu určení pohlaví na základě rodného čísla a vypiš ho. Zkus určit měsíc narození obecně pro obě pohlaví pomocí zbytku po celočíselném dělení (operátor `%`).
 
 ### Seznamy
 
@@ -190,7 +190,7 @@ guestList.append(newGuest)
 print(guestList)
 ```
 
-**Námět:** Vypiš uživateli informaci o počtu hostů v seznamu.
+**Námět:** Vypiš uživateli informaci o počtu hostů v seznamu. Můžeš použít funkci `len`.
 
 Chceme-li si ověřit, zda je nějaká hodnota v seznamu, můžeme použít operátor in.
 
@@ -202,7 +202,7 @@ else:
   print("Bohužel nejsi na seznamu.")
 ```
 
-Sekvence v sobě mohou obsahovat i jiné sekvence. Je to podobné, jako polička na knihy. Ta obsahuje několik knih, každá kniha má několik kapitol, každá kapitola se skládá ze spousty slov a písmen. Níže máš příklad seznamu uvnitř seznamu, který obsahuje známky studentů v nějakém předmětu.
+Sekvence v sobě mohou obsahovat i jiné sekvence. Je to podobné, jako polička na knihy. Ta obsahuje několik knih, každá kniha má několik kapitol, každá kapitola se skládá ze spousty slov a písmen. Níže máš příklad seznamu uvnitř seznamu, který obsahuje jména a známky studentů v nějakém předmětu.
 
 ```py
 schoolMarks = [
@@ -258,4 +258,4 @@ for mark in schoolReport:
     print(mark[0])
 ```
 
-**Námět:** Pro přijetí na střední školu jsou často důležité známky jen z některých předmětů. Vypočtěte tedy průměr známek z obou jazyků, matematiky a fyziky. Tip: uložte si tyto předměty do seznamu a použijte podmínku s operátorem `in`.
+**Námět:** Pro přijetí na střední školu jsou často důležité známky jen z některých předmětů. Vypočítej tedy průměr známek z obou jazyků, matematiky a fyziky. Tip: ulož si tyto předměty do seznamu a použij podmínku s operátorem `in`.
