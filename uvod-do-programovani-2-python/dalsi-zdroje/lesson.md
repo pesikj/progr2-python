@@ -7,6 +7,7 @@ Ty nejzajímavější zdroje jsou zde.
 - V sekci [Czechitas programuju](https://www.czechitas.cz/cs/co-delame/programuju) najdete seznam navazujících a dlouhodobých kurzů.
 - Kurzy [pyladies](https://pyladies.cz/), které nabízejí tříměsíční kurz programování v Pythonu pro začátečníky.
 - Česká komunita [python.cz](https://python.cz/) má rozsáhlou stránku pro začátečníky s mnoha odkazy na studijní zdroje.
+- Na Facebooku existuje skupina [Czechitas Coding Club Python](https://www.facebook.com/groups/1206014036214443), kde si můžeme vyměňovat informace a tipy.
 
 Určitě se neboj přihlásit se i na kurz v jiném jazyce, než je Python. Jistě se v novém jazyce brzy zorientuješ.
 
