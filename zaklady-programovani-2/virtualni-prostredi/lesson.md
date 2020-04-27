@@ -16,7 +16,7 @@ python3 -m venv czechitas-env
 Uživatelé **Windows** se přepnou do nově vytvořeného virtuálního prostředí příkazem:
 
 ```
-czechitas-env\Scripts\activate.bat
+czechitas-env\Scripts\activate
 ```
 
 Uživatelé **Linuxu a MacOS** se přepnou do nově vytvořeného virtuálního prostředí příkazem:
