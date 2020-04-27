@@ -12,27 +12,6 @@ Stránka balíčku přímo pro `pip` jde [zde](https://pypi.org/project/forex-py
 
 Dále si můžeme otevřít i dokumentaci programu, která je [zde](https://forex-python.readthedocs.io/en/latest/usage.html). Je trochu podrobnější než text na GitHubu.
 
-## Virtuální prostředí
-
-Často v Pythonu používáme virtuální prostředí. To nám umožní pracovat na programech, které vyžadují různé verze určitých balíčků, aniž bychom je museli vždy při změně projektu přeinstalovat. Práce s virtuálním prostředím je popsaná [zde](https://docs.python.org/3/tutorial/venv.html).
-
-```
-python -m venv czechitas-env
-```
-
-Uživatelé **Windows** se přepnou do nově vytvořeného virtuálního prostředí příkazem:
-
-```
-czechitas-env\Scripts\activate.bat
-```
-
-Uživatelé **Linuxu a MacOS** se přepnou do nově vytvořeného virtuálního prostředí příkazem:
-
-```
-source czechitas-env/bin/activate
-```
-
-Od teď pracujeme ve virtuálním prostředí.
 
 ## Instalace knihovny
 
