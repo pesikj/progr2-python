@@ -1,11 +1,23 @@
+"""
+Pokračuj ve své práci pro zásilkovou společnost. Společnost nyní eviduje jednotlivé řidiče a eviduje balíky, které má každý řidič doručit.
+
+Vytvoř třídu Driver, která má dva atributy: name (jméno řidiče) a packageList (seznam balíků k doručení, na začátku je prázdný).
+
+Přidej třídě funkci assignPackage, která bude mít jeden parametr - package (balík k doručení).
+
+Funkce nejprve zkontroluje, zda balík již nebyl doručen. Pokud ano, vypíše funkce text: “Nelze přiřadit, balík již byl doručen.”
+
+Pokud balík ještě nebyl doručen, je přidán do seznamu balíků packageList (použij funkci assign).
+"""
+
 class Package:
   def getInfo(self):
-    print(self.address)
-    print(self.weightInKilos)
+    text = f"Adresa: {self.address}. Hmotnost: {self.weightInKilos} kg. "
     if self.delivered:
-      print("Již byl doručen.")
+      text += "Již byl doručen."
     else:
-      print("Ještě nebyl doručen.")
+      text += "Ještě nebyl doručen."
+    print(text)
   def deliver(self):
     self.delivered = True
   def __init__(self, address, weightInKilos):
