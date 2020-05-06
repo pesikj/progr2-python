@@ -2,7 +2,9 @@ Funkcí již jsme poznali několik (např. `round`, `int`, `float`, `print`, `in
 
 ## Definice funkce
 
-K definici funkce používáme klíčové slovo `def`. Dále následuje název funkce a její parametry v kulatých závorkách. Pojem "parametr funkce" už také známe, jsou to hodnoty, které předáváme funkci ke zpracování. Například funkci `print` předáváme řetězec, která má vypsat na obrazovku. Poté následuje dvojtečka `:`, která napovídá, že kód pod dvojtečkou bude odsazený. Kód funkce končí tam, kde již kód není odsazený.
+K definici funkce používáme klíčové slovo `def`. Dále následuje **název funkce** a její **parametry** (`parameter`) v kulatých závorkách. Pojem parametr funkce už také známe, jsou to hodnoty, které předáváme funkci ke zpracování. Například funkci `print` předáváme řetězec, která má vypsat na obrazovku. Poté následuje **dvojtečka** `:`, která napovídá, že kód pod dvojtečkou bude **odsazený**. Kód funkce končí tam, kde již kód není odsazený.
+
+Je zde též trochu zrádná terminologie. Při definici funkce definujeme její parametry, ale při volání funkce zapisujeme do závorek hodnoty (`arguments`).
 
 Začněme s jednoduchou funkcí, která pouze vypíše text na obrazovku.
 
@@ -11,7 +13,7 @@ def greetUser():
   print("Ahoj!")
 ```
 
-Pokud tento kód nakoírujeme do programu, zdánlivě se nic nestane. Funkce je sice vytvořena, ale protože ji nevoláme, nespustí se a program skončí. 
+Pokud tento kód nakoírujeme do programu, zdánlivě se nic nestane. Funkce je sice vytvořena, ale nevoláme ji. 
 
 ```py
 def greetUser():
@@ -19,10 +21,12 @@ def greetUser():
 greetUser()
 ```
 
-Všimni si dvou věcí:
+Nyní již program náš pozdrav vypíše.
 
-- Volání funkce je až pod její definicí. Pokud bychom pořadí obrátili, Python vrátí chybu, protože by v čase volání funkci ještě neznal.
-- Za voláním funkce musíme vždy uvést kulaté závorky. Pokud nepředáváme žádný parametr, zůstanou závorky prázdné.
+Všimni si ještě dvou dvou věcí:
+
+- Volání funkce je až **pod její definicí**. Pokud bychom pořadí obrátili, Python vrátí chybu, protože by v čase volání funkci ještě neznal.
+- Za voláním funkce musíme vždy uvést kulaté závorky. Pokud nepředáváme žádnou hodnotu, zůstanou závorky prázdné.
 
 ```py
 def greetUser(address):
@@ -30,14 +34,14 @@ def greetUser(address):
 greetUser("Jirko")
 ```
 
-Naše funkce zatím provedly nějakou akci, ale nevrátily nám žádný výstup.  Často nám funkce vracejí nějakou hodnotu. Hodnotu, kterou má funkce vrátit, označíme klíčovým slovem `return`. Zkusme si tedy vytvořit funkci, která vrací součet dvou čísel.
+Naše funkce zatím provedly nějakou akci, ale nevrátily nám žádný výstup. Často nám funkce vracejí nějakou hodnotu. Hodnotu, kterou má funkce vrátit, označíme klíčovým slovem `return`. Zkusme si tedy vytvořit funkci, která vrací součet dvou čísel.
 
 ```py
 def sumTwoNumbers(a, b):
   return a + b
 ```
 
-Výstup funkce můžeme uložit do proměnné a dál s ním pracovat.
+Výstup funkce můžeme uložit do proměnné.
 
 ```py
 def sumTwoNumbers(a, b):
@@ -49,7 +53,7 @@ print(returnedValue)
 
 V proměnné `returnedValue` tedy budeme mít uložený výsledek našeho součtu a s ním můžeme dále pracovat.
 
-**Poznámka:** Jakmile program narazí na slovo `return`, běh funkce se ukončí. Následující příkazy se tedy již nespustí.
+**Poznámka:** Jakmile program narazí na slovo `return`, běh funkce se ukončí. Například funkce níže žádný výpis neprovede.
 
 ```py
 def sumTwoNumbers(a, b):
@@ -82,7 +86,7 @@ def getMark(points):
   return mark
 ```
 
-Nyní můžeme tuto funkci volat z různých míst programu:
+Funkci můžeme volat z různých míst programu:
 
 ```py
 points = int(input("Zadej počet bodů v testu: "))
@@ -95,59 +99,42 @@ print(f"Výsledná známka je {mark}.")
 
 ## Nepovinné parametry
 
-Na příkladu funkce `round` jsme viděli, že u některých funkcí není třeba vyplňovat všechny parametry. Zkusme si takovou funkci napsat sami. Napišme si funkci, která projde seznam položek a vybere ty, které jsou skladem a současně je jejich hodnota v dané cenové relaci. 
+Na příkladu funkce `round` jsme viděli, že u některých funkcí není třeba vyplňovat všechny parametry. Vraťme se k funkci `getMark`. Uvažujme nyní, že studenti mají možnost získat bonusové body (např. za odevzdání úkolů), které se pak připočítávají k bodům z testu. 
 
 ```py
-listOfItems = [
-  {"title": "Modrá kravata", "price": 239, "inStock": True},
-  {"title": "Luxusní psací pero", "price": 1599, "inStock": True},
-  {"title": "Parfém", "price": 559, "inStock": False},
-  {"title": "Čajová konvička s hrnky", "price": 899, "inStock": True},
-  {"title": "Sklenice na víno", "price": 799, "inStock": True},
-  {"title": "Finess náramek", "price": 2399, "inStock": False},
-  {"title": "Degustační balíček kávy", "price": 599, "inStock": True},
-]
+def getMark(points, bonus=0):
+  if points + bonus <= 60:
+    mark = 5
+  elif points + bonus <= 70:
+    mark = 4
+  elif points + bonus <= 80:
+    mark = 3
+  elif points + bonus <= 90:
+    mark = 2
+  else:
+    mark = 1
+  return mark
 ```
 
-Uvažujeme, že parametry `minPrice` a `maxPrice` není třeba zadávat a pokud je uživatel nezadá, pak jako `minPrice` budeme uvažovat 0 a jako `maxPrice` 5000. Naše funkce projde seznam a vrátí ty položky, které vyhovují našim požadavkům.
+Nyní opět zavoláme funkci. Uvažujeme stále možnost jednoho opravného pokusu, počet bonusových bodů zůstává.
 
 ```py
-def filterItems(listOfItems, minPrice=0, maxPrice=5000):
-  suitableItems = []
-  for item in listOfItems:
-    if minPrice <= item["price"] <= maxPrice and item["inStock"]:
-      suitableItems.append(item)
-  return suitableItems
-```
-
-Nyní funkce vrátí všechny položky, které mají cenu mezi 0 a 5000 Kč.
-
-```py
-suitableItems = filterItems(listOfItems)
-print(f"Na seznamu je {len(suitableItems)} možných dárků.")
-```
-
-Pokud zadáme jako první parametr 500, odpadne Modrá kravata s cenou 239.
-
-```py
-suitableItems = filterItems(listOfItems, 500)
-print(f"Na seznamu je {len(suitableItems)} možných dárků.")
-```
-
-A pokud vyplníme i druhý parametr, zůstanou ve výběru 3 dárky.
-
-```py
-suitableItems = filterItems(listOfItems, 500, 1000)
-print(f"Na seznamu je {len(suitableItems)} možných dárků.")
+points = int(input("Zadej počet bodů v testu: "))
+bonus = int(input("Zadej počet bonusových bodů: "))
+mark = getMark(points, bonus)
+if mark == 5:
+  points = int(input("Zadej počet bodů v opravném pokusu: "))
+  mark = getMark(points, bonus)
+print(f"Výsledná známka je {mark}.")
 ```
 
 
 @exercises ## Funkce [
 
 - nasobeni
-- bonusy
-- narozeni ]@
+- hotel ]@
 
 @exercises bonuses [
 
-- delitel ]@
+- narozeni
+ ]@

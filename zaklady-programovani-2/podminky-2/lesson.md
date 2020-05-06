@@ -2,16 +2,16 @@ V této kapitle rozšíříme naše znalosti podmínek a cyklů. Vyzkoušíme si
 
 ## Vícenásobné podmínky
 
-Uvažujme, že chceme, aby se náš program rozhodoval na základě více podmínek. Máme-li dvě podmínky, musíme si nejprve určit vztah mezi nimi. Příkazu `if` totiž vždy musíme předat jen jednu hodnotu `True` nebo `False`. Musíme tedy zkombinovat obě podmínky tak, aby z nich vzešel jen jeden výsledek.
+Uvažujme, že chceme, aby se náš program rozhodoval na základě více podmínek. Máme-li dvě podmínky, musíme si nejprve určit **vztah mezi nimi**. Příkazu `if` totiž vždy musíme předat jen jednu hodnotu `True` nebo `False`. Musíme tedy **zkombinovat** obě podmínky tak, aby z nich vzešel jen jeden výsledek.
 
 Máme dvě možnosti, jak podmínky kombinovat:
 
-- logický součet (OR),
-- logický součin (AND).
+- logický součet (`or`),
+- logický součin (`and`).
 
 ### Logické sčítání - OR
 
-Nejprve si ukážeme, jak funguje logický součet. Výsledek logického součtu je `True`, jakmile má hodnotu `True` alespoň jeden ze dvou výrazů, za kterých se součet skládá.
+Nejprve si ukážeme, jak funguje logický součet. Výsledek logického součtu je `True`, jakmile má hodnotu `True` **alespoň jeden** ze dvou výrazů, za kterých se součet skládá.
 
 Uvažujme následující dvě skutečnosti:
 
@@ -41,7 +41,7 @@ print(wetStreet)
 
 #### Tip
 
-Část `== True` můžete vynechat, následujíci kód provede to samé.
+Část `== True` můžete vynechat, následující kód provede to samé.
 
 ```py
 rain = True
@@ -55,7 +55,7 @@ print(wetStreet)
 
 ### Logický součin - AND
 
-Výsledek logického součinu je `True` pouze tehdy, mají-li hodnotu `True` oba výrazy, ze kterých se součin skládá. Uvažujme například dvě skutečnosti:
+Výsledek logického součinu je `True` pouze tehdy, mají-li hodnotu `True` **oba výrazy**, ze kterých se součin skládá. Uvažujme například dvě skutečnosti:
 
 - Venku je mokrá ulice.
 - Jdu ven.
@@ -98,21 +98,7 @@ print(wetShoes)
 
 ### Kombinace operátorů
 
-V logickém násobení a sčítání se samozřejmě nemusíme držet jen proměnných typu `bool`, ale můžeme používat operátory na porovnání, jako například `>`, `<=`, `in` a další. 
-
-Vraťme se k našemu příkladu se seznamem hostů na večírek. Paranoidní hostitel má strach, že by se na párty mohla vetřít osoba tím, že místo svého nahlásí jméno někoho z hostů. Proto odeslal hostům spolu s pozvánkou i tajné heslo. Uživatel tedy musí kromě jména zadat i heslo, aby byl vpuštěn.
-
-```py
-guestList = ["Jirka", "Klára", "Natálie"]
-name = input("Zadej jméno: ")
-password = input("Zadej heslo: ")
-if name in guestList and password == "livanec":
-  print("Můžeš vstoupit.")
-else:
-  print("Koukej zmizet.")
-```
-
-Poslední příklad nás zavede zpět k divadlu Pěst na oko. Uvažujme, že divadlo zjednodušilo cenovou politiku a dává slevu 50 % všem osobám do 26 let a nad 65 let. Náš program má určitě cenu vstupenky pro konkrétního návštěvníka na základě jeho věku. Pro poskytnutí slevy však musí být návštěvník členem klubu Přátele Divadla Pěst na oko.
+Další příklad nás zavede zpět k divadlu Pěst na oko. Uvažujme, že divadlo zjednodušilo cenovou politiku a dává slevu 50 % všem osobám do 26 let a nad 65 let. Náš program má určitě cenu vstupenky pro konkrétního návštěvníka na základě jeho věku. Pro poskytnutí slevy však musí být návštěvník členem klubu Přátele Divadla Pěst na oko.
 
 ```py
 price = 250

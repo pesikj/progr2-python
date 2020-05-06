@@ -3,7 +3,7 @@ title: Vysvědčení
 demand: 2
 ---
 
-Vraťme se k našemu příkladu s vysvědčením, tentokrát je zadané jako slovník. 
+Uvažujme vysvědčení, které máme zapsané jako slovník.
 
 - Napiš program, který spočte průměrnou známku ze všech předmětů.
 - Uprav program, aby vypsal všechny předměty, ve kterých získal student známku 1.
