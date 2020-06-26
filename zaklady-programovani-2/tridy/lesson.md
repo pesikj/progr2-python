@@ -1,18 +1,18 @@
-Dalším konceptem, se kterým se v tomto kurzu seznámíme, jsou objekty (`objects`). Na objektech je založeno **objektově orientované programování** (Object-oriented programming - OOP), tedy princip psaní programů, ve kterém jsou bloky kódu poskládané do tříd a objektů. 
+Dalším konceptem, se kterým se v tomto kurzu seznámíme, jsou objekty (`objects`). Na objektech je založeno **objektově orientované programování** (Object-oriented programming - OOP), tedy princip psaní programů, ve kterém jsou bloky kódu poskládané do **tříd** a **objektů**. 
 
 Objekty mají často reprezentovat nějaké entity v realitě. Pokud bychom například vyvíjeli administrativní software pro firmy, vytvoříme tam objekty reprezentující zaměstnance, pracoviště, firemní automobily atd. U zásilkové společnosti bychom vytvářeli objekty, které reprezentují balíky, řidiče atd.
 
-### Objekty a třídy
+## Objekty a třídy
 
 Na začátku si musíme vytvořit **třídu** (`class`). Vztah mezi třídou a objekty si můžeme představit na příkladu formulářů. Třída je prázdný formulář - obsahuje kolonky, které by měly být vyplněny. Objekt je pak vyplněný formulář, který už má v sobě nějaká konkrétní data. Podobně jako formulářů můžeme vyplnit více, může na základě jedné třídy vzniknout několik objektů. Objekty jsou vzájemně nezávislé, takže práce s jedním objektem neovlivňuje ostatní. Analogicky, pokud upravujeme jeden formulář, nijak tím neměníme ostatní.
 
 Třídy mají dvě důležité charakteristiky - mají **atributy** (v nich uchováváme hodnoty) a **funkce** (vykonávají nějaké příkazy). Atributy jsou vlastně proměnné, pouze jsou navázané na konkrétní objekt. Funkce jsme poznali v předchozí kapitole, jsou ale též navázané na konkrétní objekt a pracují s jeho atributy.
 
-Popišme si konkrétně náš příklad software pro firmy. V něm můžeme mít například třídu `Employee`, který reprezentuje zaměstnance. Třída může mít jméno, pracovní pozici, oddělení, plat, zbývající dny dovolené atd. Zaměstnanec může mít i funkce - například funkci na vybrání dovolené, vytištění výplatní pásky atd.
+Popišme si konkrétně náš příklad software pro firmy. V něm můžeme mít například třídu `Employee`, který reprezentuje zaměstnance. Třída může mít jméno, pracovní pozici, oddělení, plat, zbývající dny dovolené atd. Zaměstnanec může mít i funkce - například funkci na vybrání dovolené, vytištění výplatní pásky, výpočet věku atd.
 
 Před vytvářením objektů je třeba mít připravenou třídu, na základě které objekt vznikne. K tomu použijeme klíčové slovo `class`. Za něj přijde **název třídy** a opět **dvojtečka**. Pro začátek si vytvořme třídu jen s jednou funkcí `getInfo`, která vypíše informace o zaměstnanci.
 
-Všimni si parametru `self` u funkce. Pomocí `self` se odkazujeme na atributy objektu. Pokud chceme získat hodnotu atributu, napíšeme klíčové slovo `self`, **tečku** a **název atributu**. Tečky při práci s objekty používáme velmi často a jsou jakousi analogií k hranatým závorkám u sekvencí.
+Všimni si parametru `self` u funkce. Pomocí `self` se **odkazujeme na atributy objektu**. Pokud chceme získat hodnotu atributu, napíšeme klíčové slovo `self`, **tečku** a **název atributu**. Tečky při práci s objekty používáme velmi často a jsou jakousi analogií k hranatým závorkám u sekvencí.
 
 ```py
 class Employee:
@@ -46,7 +46,7 @@ print(frantisek.getInfo())
 print(klara.getInfo())
 ```
 
-### Funkce `__init__`
+## Funkce `__init__`
 
 Z výpis vidíme, že se informace zaměstnanců nijak nepomíchaly a každý zaměstnanec má uložené své vlastní údaje.
 
@@ -61,12 +61,12 @@ class Employee:
     self.position = position
 ```
 
-Tento styl je standardní - parametry jsou pojmenované stejně jako atributy objektu, kam se jejich hodnoty ukládají. Mezi `self.name` a `name` je tedy tento rozdíl:
+Tento styl je standardní - parametry jsou pojmenované stejně jako atributy objektu, kam se jejich hodnoty ukládají. Mezi `self.name` a `name` je důležitý rozdíl:
 
 - `name` je parametr funkce `__init__` a jeho hodnota **není přístupná** pro ostatní funkce objektu.
 - `self.name` je atribut objektu, který v objektu **zůstane** a můžou s ním pracovat ostatní funkce. 
 
-Díky funkci `__init__` máme zjednodušené i vytváření objektu, protože hodnoty parametrů nyní vepíšeme přímo do závorek při vytváření objektu.
+Díky funkci `__init__` máme zjednodušené vytváření objektu, protože hodnoty parametrů nyní vepíšeme přímo do závorek při vytváření objektu.
 
 ```py
 frantisek = Employee("František Novák", "konstruktér")

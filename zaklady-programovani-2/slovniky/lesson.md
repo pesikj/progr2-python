@@ -1,4 +1,4 @@
-Seznamy jsou velmi užitečná datová struktura, protože umožňují ukládat spoustu dat do jedné proměnné. Pokud do nich ale ukládáme informace různého typu, může brzy vzniknout chaos. Podívejme se třeba seznam, který obsahuje informace o předmětu v obchodě.
+Seznamy jsou velmi užitečná datová struktura, protože umožňují ukládat spoustu dat do jedné proměnné. Pokud do nich ale ukládáme informace různého typu, může brzy vzniknout chaos. Podívejme se třeba seznam, který obsahuje informace o položce v e-shopu.
 
 ```py
 ["Čajová konvička s hrnky", 899, True]
@@ -12,19 +12,17 @@ A přesně toto řeší datový typ slovník (`dict`).
 
 Princip slovníků skutečně vychází z papírových slovníků, kde je každý záznam identifikován pomocí nějakého slova a k tomuto slovu jsou přiřazená nějaká data (nejčastěji textový popis). Na podobném principu fungují třeba i muzea, kde exponáty mají štítky s popisky.
 
-Na rozdíl od seznamů nemají slovníky indexy, ale **klíče** (`key`). Jako klíče mohou sloužit všechny datové typy, které známe, s výjimkou seznamů (tj. `int`, `float`, `bool` `string`). Nejčastěji se přirozeně používají řetězce. Každý klíč má přiřazenou **hodnotu**. Hodnotou může být libovolný datový typ.
+Na rozdíl od seznamů nemají slovníky indexy, ale **klíče** (`key`). Jako klíče mohou sloužit datové typy `int`, `float`, `bool` `string` (a další, které zatím neznáme). Nejčastěji se přirozeně používají řetězce. Každý klíč má přiřazenou **hodnotu**. Hodnotou může být libovolný datový typ.
 
-Vezměme nyní náš seznam s informacemi o předmětu a převeďme ho na slovník.
+Vezměme nyní náš seznam s informacemi o položce v e-shopu a převeďme ho na slovník.
 
 ```py
 item = {"title": "Čajová konvička s hrnky", "price": 899, "inStock": True}
 ```
 
-Takový zápis je jistě mnohem srozumitelnější. Nyní vidíme, že poslední hodnota označuje, zda je položka skladem.
+Takový zápis je jistě mnohem srozumitelnější. Nyní vidíme, že poslední hodnota označuje, zda je položka skladem. Všimni si, že slovníky zapisujeme do **složených závorek**, mezi klíčem a hodnotou je **dvojtečka** a jednotlivé dvojice jsou odděleny **čárkami**.
 
-Všimni si, že slovníky zapisujeme do **složených závorek**, mezi klíčem a hodnotou je **dvojtečka** a jednotlivé dvojice jsou odděleny **čárkami**.
-
-Ze slovníku můžeme snadno získat jednu jeho hodnotu. K tomu použijeme hranaté závorky, do kterých zapíšeme klíč.
+Ze slovníku můžeme snadno získat jednu jeho hodnotu. K tomu použijeme **hranaté závorky**, do kterých zapíšeme klíč.
 
 ```py
 title = item['title']
@@ -33,91 +31,79 @@ title = item['title']
 Zkusme si třeba vypsat informace o položce.
 
 ```py
-print(f"Vybraný předmět je {gift['title']} a stojí {gift['price']} Kč.")
+print(f"Vybraný předmět je {item['title']} a stojí {item['price']} Kč.")
 ```
 
 **Pozor:** Při použití f-stringů je nutné uvnitř hranatých závorek použít jiný typ označení řetězců. Začínáte-li text pomocí uvozovek, pro klíče slovníku použijte apostrofy.
 
-Podobně snadno můžeme nějakou existující hodnotu upravit nebo přidat novou.
+Funkci `print` můžeme použít i na celý slovník. Python pak použije standardní výpis, který vypadá stejně, jako když slovník zapisujeme. Hodí se to, když potřebujeme zkontrolovat, co vlastně ve slovníku je.
 
 ```py
-gift['price'] = 929
-gift['weightInKilos'] = 0.4
+{'title': 'Čajová konvička s hrnky', 'price': 899, 'inStock': True}
 ```
-
-Dále je možné jako slovníky používat i proměnné.
-
-```py
-key = 'price'
-gift[key] = 929
-```
-
-Prádný slovník vytvoříme pomocí prázdných složených závorek, tedy například:
-
-```py
-gift = {}
-```
-
-### Slovníky a cykly
-
-V úvodním workshopu jsme si ukázali, že pro práci se sekvencemi jsou ideální cykly. Vyzkoušíme si nyní, jak se slovníky pracovat pomocí cyklů.
-
-Vraťme se nyní k našemu úplně prvnímu příkladu - finančnímu vyrovnání spolubydlících. Slovníky by nám zde mohla pomoci, protože nám pomůžou při tvorbě tabulky s celkovou útratou za jednotlivé spolubydlící. 
-
-Samotné nákupy již náme též uložené jako slovníky.
-
-```py
-purchaseList = [
-  {"person": "Petr", "item": "Prací prášek", "value": 399},
-  {"person": "Ondra", "item": "Savo", "value": 80},
-  {"person": "Petr", "item": "Toaletní papír", "value": 65},
-  {"person": "Libor", "item": "Pivo", "value": 124},
-  {"person": "Petr", "item": "Pytel na odpadky", "value": 75},
-  {"person": "Míša", "item": "Utěrky na nádobí", "value": 130},
-  {"person": "Ondra", "item": "Toaletní papír", "value": 120},
-  {"person": "Míša", "item": "Pečící papír", "value": 30},
-  {"person": "Zuzka", "item": "Savo", "value": 80},
-  {"person": "Pavla", "item": "Máslo", "value": 50},
-  {"person": "Ondra", "item": "Káva", "value": 300}
-]
-```
-
-Útraty jednotlivých spolubydlících si budeme ukládat do nového slovníku. Musíme si tedy nejprve vysvětlit, jak ověřit, jestli nějaká hodnota už ve slovníku je. Pokud spolubydlící v našem novém slovníku ještě částku nemá, vložíme tam hodnotu aktuálního nákupu. Pokud tam nějakou částku už má, přičteme k této částce hodnotu aktuálního nákupu.
 
 K ověření, jestli nějaký klíč už ve slovníku je, použijeme operátor `in`, jako tomu bylo v případě seznamu. Pouze namísto indexu vkládáme klíč.
 
 ```py
-sumPerPerson = {}
-for purchase in purchaseList:
-  person = purchase["person"]
-  value = purchase["value"]
-  if person in sumPerPerson:
-    sumPerPerson[person] += value
-  else:
-    sumPerPerson[person] = value
+item = {"title": "Čajová konvička s hrnky", "price": 899, "inStock": True}
+if "weight" in item:
+  print(f"Hmotnost předmětu je {item['weight']} kg.")
+else:
+  print("Hmotnost není zadána.")
 ```
 
-Vypíšeme si nyní útraty jednotlivých spolubydlících a spočteme celkovou útratu. K tomu můžeme využít cyklus `for`. Zde je pouze jeden malý rozdíl. Každá položka slovníku se skládá z klíče a samotné hodnoty. V cyklu můžeme použít oboje (a často i používáme). Využijeme tedy **dvě proměnné**, které oddělíme čárkou. Do první proměnné je uložený klíč a do druhé hodnota. Všimněte si též, že za slovník vkládáme `.items()`.
+Snadno můžeme nějakou existující hodnotu upravit nebo přidat novou.
 
 ```py
-totalValue = 0
-for person, value in sumPerPerson.items():
-  totalValue += value
-  print(f"{person} utratil(a) za společné nákupy {value} Kč.")
+item['price'] = 929
+item['weight'] = 0.4
 ```
 
-Jako poslední krok zbývá určení průměrné hodnoty na osobu. Zde opět využijeme funkci `len`, která umí pracovat i se slovníky.
+Jako klíče slovníku používat i proměnné.
 
 ```py
-averageValue = totalValue / len(sumPerPerson)
-print(f"Průměrná hodnota na osobu je {round(averageValue)} Kč.")
+key = 'price'
+item[key] = 929
 ```
 
-@exercises ## Další možnosti podmínek [
+Prázdný slovník vytvoříme pomocí prázdných složených závorek, tedy například:
 
-- vecirek
-- ctenar ]@
+```py
+item = {}
+```
+
+Zkusme si ještě jeden motivační příklad. Uvažujme například, že chystáme firemní výlet a chceme nakoupit špekáčky pro kolegy. Abychom věděli, kolik jich máme celkem koupit, vytvoříme si slovník a pro každého z kolegů a kolegyň si budeme evidovat, kolik špekáčků plánují během výletu sníst.
+
+```py
+sausages = {"Jirka": 2, "Naty": 1, "Adam": 4, "Lucka": 2, "Pavča": 2}
+```
+
+Počet kolegů, kteří jdou na párty, zjistíme pomocí nám již známé funkce funkce `len`.
+
+```py
+print(len(sausages))
+```
+
+Uvažujme například, že se Naty na poslední chvíli omluví. Upravíme tedy hodnotu s klíčem `Naty` na 0.
+
+```py
+sausages["Naty"] = 0
+print(len(sausages))
+```
+
+Drobnou nevýhodou je, že funkce `len` bude stále vracet hodnotu 5, protože klíč `Naty` je ve slovníku stále přítomen. Alternativně můžeme klíč ze slovníku úplně vyřadit. K tomu slouží funkce `pop`.
+
+```py
+sausages.pop("Naty")
+```
+
+Nyní funkce `len` vrátí 4.
+
+@exercises ## Sovníky [
+
+- vysvedceni
+- detektivky
+- tombola ]@
 
 @exercises bonuses [
-- vysvedceni
-- spolubydlici ]@
+- vecirek ]@

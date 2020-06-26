@@ -1,10 +1,10 @@
-Funkcí již jsme poznali několik (např. `round`, `int`, `float`, `print`, `input`), zatím jsme ale žádnou vlastní funkci nenapsali. Funkce nám umožňují program strukturovat do bloků a využívat stejný kód na více místech, aniž bychom ho museli kopírovat.
+Funkce nám umožňují program strukturovat do bloků a využívat stejný kód na více místech, aniž bychom ho museli kopírovat. Funkcí již jsme poznali několik (např. `round`, `int`, `len`, `print`, `input`), zatím jsme ale žádnou vlastní funkci nevytvořili. Vytváření funkcí se naučíme v této části.
 
 ## Definice funkce
 
-K definici funkce používáme klíčové slovo `def`. Dále následuje **název funkce** a její **parametry** (`parameter`) v kulatých závorkách. Pojem parametr funkce už také známe, jsou to hodnoty, které předáváme funkci ke zpracování. Například funkci `print` předáváme řetězec, která má vypsat na obrazovku. Poté následuje **dvojtečka** `:`, která napovídá, že kód pod dvojtečkou bude **odsazený**. Kód funkce končí tam, kde již kód není odsazený.
+K definici funkce používáme klíčové slovo `def`. Dále následuje **název funkce** a její **parametry** (`parameter`) v kulatých závorkách. Pojem parametr funkce už také známe, pomocí parametrů předáváme funkci hodnoty ke zpracování. Například funkci `print` předáváme řetězec, která má vypsat na obrazovku. Po názvu funkce následuje **dvojtečka** `:`, která napovídá, že kód pod dvojtečkou bude **odsazený**. Kód funkce končí tam, kde již kód není odsazený.
 
-Je zde též trochu zrádná terminologie. Při definici funkce definujeme její parametry, ale při volání funkce zapisujeme do závorek hodnoty (`arguments`).
+**Poznámka:** Je zde též trochu zrádná terminologie. Při definici funkce definujeme její parametry, ale při volání funkce zapisujeme do závorek hodnoty (`arguments`).
 
 Začněme s jednoduchou funkcí, která pouze vypíše text na obrazovku.
 
@@ -13,7 +13,7 @@ def greetUser():
   print("Ahoj!")
 ```
 
-Pokud tento kód nakoírujeme do programu, zdánlivě se nic nestane. Funkce je sice vytvořena, ale nevoláme ji. 
+Pokud tento kód zkopírujeme do programu, zdánlivě se nic nestane. Funkce je sice vytvořena, ale nevoláme ji. 
 
 ```py
 def greetUser():
@@ -26,15 +26,17 @@ Nyní již program náš pozdrav vypíše.
 Všimni si ještě dvou dvou věcí:
 
 - Volání funkce je až **pod její definicí**. Pokud bychom pořadí obrátili, Python vrátí chybu, protože by v čase volání funkci ještě neznal.
-- Za voláním funkce musíme vždy uvést kulaté závorky. Pokud nepředáváme žádnou hodnotu, zůstanou závorky prázdné.
+- Za **voláním** funkce musíme vždy uvést **kulaté závorky**. Pokud nepředáváme žádnou hodnotu, zůstanou závorky prázdné.
+
+Upravme naši funkci tak, aby vypsala oslovení, které jí zadáme:
 
 ```py
-def greetUser(address):
-  print(f"Ahoj {address}!")
+def greetUser(name):
+  print(f"Ahoj {name}!")
 greetUser("Jirko")
 ```
 
-Naše funkce zatím provedly nějakou akci, ale nevrátily nám žádný výstup. Často nám funkce vracejí nějakou hodnotu. Hodnotu, kterou má funkce vrátit, označíme klíčovým slovem `return`. Zkusme si tedy vytvořit funkci, která vrací součet dvou čísel.
+Naše funkce zatím provedly nějakou akci, ale nevrátily nám žádný **výstup**. Často nám funkce vracejí nějakou hodnotu. Hodnotu, kterou má funkce vrátit, označíme klíčovým slovem `return`. Zkusme si tedy vytvořit funkci, která vrací součet dvou čísel.
 
 ```py
 def sumTwoNumbers(a, b):
@@ -44,9 +46,6 @@ def sumTwoNumbers(a, b):
 Výstup funkce můžeme uložit do proměnné.
 
 ```py
-def sumTwoNumbers(a, b):
-  return a + b
-
 returnedValue = sumTwoNumbers(5, 3)
 print(returnedValue)
 ```
@@ -137,4 +136,4 @@ print(f"Výsledná známka je {mark}.")
 @exercises bonuses [
 
 - narozeni
- ]@
+- ruleta ]@

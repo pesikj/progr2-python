@@ -1,6 +1,6 @@
 ---
 title: Balík
-demand: 3
+demand: 2
 ---
 
 Uvažuj, že navrhuješ software pro zásilkovou společnost. 

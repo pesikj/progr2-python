@@ -1,24 +1,6 @@
 ---
 title: Vysvědčení
-demand: 2
+demand: 1
 ---
 
-Uvažujme vysvědčení, které máme zapsané jako slovník.
-
-- Napiš program, který spočte průměrnou známku ze všech předmětů.
-- Uprav program, aby vypsal všechny předměty, ve kterých získal student známku 1.
-
-```py
-schoolReport = {
-  "Český jazyk": 1,
-  "Anglický jazyk": 1, 
-  "Matematika", 1, 
-  "Přírodopis", 2,
-  "Dějepis", 1,
-  "Fyzika", 2,
-  "Hudební výchova", 4,
-  "Výtvarná výchova", 2,
-  "Tělešná výchova", 3,
-  "Chemie", 4,
-}
-```
+Vytvoř slovník, který reprezentuje vysvědčení. Klíč slovníku bude název předmětu a hodnota známka z daného předmětu. Pro zjednodušení vlož do slovníku pouze tři předměty (například český jazyk, matematiku a dějepis). Vypiš obsah slovníku pomocí funkce `print()`.

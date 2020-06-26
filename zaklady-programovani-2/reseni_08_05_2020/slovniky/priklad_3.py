@@ -20,9 +20,9 @@ schoolReport = {
 }
 
 sumOfMarks = 0
-for subject, mark in schoolReport.items():
+for mark in schoolReport.values():
   sumOfMarks += mark
 print(f"Průměrná známka je {sumOfMarks/len(schoolReport)}.")
-for subject, mark in schoolReport.items():
-  if mark == 1:
-    print(subject)
+for x, y in schoolReport.items():
+  if y == 1:
+    print(x)

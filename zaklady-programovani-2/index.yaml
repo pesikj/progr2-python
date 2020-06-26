@@ -1,5 +1,6 @@
 title: Základy programování 2
 link: zaklady-programovani-2
+brief: Materiály k jednodennímu workshopu Úvod do programování v Pythonu 2.
 lessons:
   - title: Co všechno už umíme
     link: uvod
@@ -7,6 +8,9 @@ lessons:
   - title: Slovníky
     link: slovniky
     brief: Slovníky jsou nový typ kolekcí, která umožňují ukládat data spolu s popiskami.
+  - title: Slovníky a cykly
+    link: slovniky-a-cykly
+    brief: Vyzkoušíme si, jak se slovníky pracovat pomocí cyklů.
   - title: Funkce
     link: funkce
     brief: Zatím jsme jen používali funkce napsané někým jiným, nyní si vyzkoušíme napsat vlastní.
@@ -16,13 +20,13 @@ lessons:
   - title: Dědičnost
     link: dedicnost
     brief: V objektově orientovaném programování existuje důležitý pojem, kterým je dedičnost. Podíváme se, jak funguje.
-  - title: Podmínky 2
+  - title: Podmínky 2 (bonusová kapitola)
     link: podminky-2
     brief: Rozšíříme naše znalosti o podminkách a ukážeme si, jak spojit více podmínek do jedné.
-  - title: Cykly 2
+  - title: Cykly 2 (bonusová kapitola)
     link: cykly-2
     brief: Ukážeme si, že cykly můžeme používat nejen pro sekvence, ale i pro číselné posloupnosti.
-  - title: Balíčky z internetu
+  - title: Balíčky z internetu (bonusová kapitola)
     link: balicky-z-internetu
     brief: Pro Python existuje obrovské množství volně dostupných knihoven. Zkusme si jednu přidat do našeho programu.
   - title: Další zdroje
