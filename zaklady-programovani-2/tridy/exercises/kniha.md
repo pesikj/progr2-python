@@ -1,6 +1,6 @@
 ---
 title: Kniha
-demand: 3
+demand: 2
 ---
 
 Zkus pro našeho nakladatele vytvořit software s využitím tříd a objektů. Vytvoř tedy třídu `Book`, která reprezentuje knihu. Každá kniha bude mít atributy `title`, `pages` a `price`. Hodnoty nastav ve funkci `__init__`. 

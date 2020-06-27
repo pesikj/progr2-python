@@ -1,6 +1,6 @@
 ---
 title: Zkušební doba
-demand: 3
+demand: 4
 ---
 
 U zaměstnanců budeme nově evidovat, jestli jsou ve zkušební době. 

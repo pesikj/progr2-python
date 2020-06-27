@@ -108,9 +108,8 @@ Tím jsme si ukázali, jak vytvořit třídu, objekty a jak s nimi pracovat.
 
 
 @exercises ## Objekty a třídy [
-
-- balik
-- zkusebka ]@
+- kniha
+- balik ]@
 
 @exercises bonuses [
-- kniha ]@
+- zkusebka ]@
