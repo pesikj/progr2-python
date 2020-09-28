@@ -8,6 +8,8 @@ Přidej třídě funkci assignPackage, která bude mít jeden parametr - package
 Funkce nejprve zkontroluje, zda balík již nebyl doručen. Pokud ano, vypíše funkce text: “Nelze přiřadit, balík již byl doručen.”
 
 Pokud balík ještě nebyl doručen, je přidán do seznamu balíků packageList (použij funkci assign).
+
+U řidiče chceme sledovat, kolik by měl ještě doručit balíků. Napiš funkci remainingPackages, která vrátí počet balíků, které má řidič přiřazené a ještě je nedoručil.
 """
 
 class Package:
@@ -38,6 +40,12 @@ class Driver():
       print("Balík nelze přiřadit. Balík již byl doručen.")
     else:
       self.packageList.append(package)
+  def remainingPackages(self):
+    count = 0
+    for package in self.packageList:
+      if package.delivered == False:
+        count += 1
+    return count
   def printPackages(self):
     # Tato funkce je navíc, není v zadání.
     for package in self.packageList:
@@ -45,7 +53,11 @@ class Driver():
   def __init__(self, name):
     self.name = name
     self.packageList = []
+package = Package("Praha 6", 2.7)
 valuablePackage = ValuablePackage("Liberec 123", 4.0, 2000)
 pavel = Driver("Pavel")
 pavel.assignPackage(valuablePackage)
-pavel.printPackages()
+pavel.assignPackage(package)
+print(pavel.remainingPackages())
+package.deliver()
+print(pavel.remainingPackages())
