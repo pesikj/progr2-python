@@ -1,0 +1,10 @@
+title: Python pro data 1
+link: python-pro-data-1
+brief: Materiály k jednodennímu workshopu Python pro data 1.
+lessons:
+  - title: Instalace
+    link: instalace
+    brief: Ukážeme si, jak doinstalovat moduly, které budeme používat.
+  - title: Datová analýza
+    link: datova-analyza
+    brief: O čem datová analýza vlastně je a proč se jí zabýváme.

@@ -1,0 +1,7 @@
+title: Python pro data 2
+link: python-pro-data-2
+brief: Materiály k jednodennímu workshopu Python pro data 2.
+lessons:
+  - title: Instalace
+    link: instalace
+    brief: Ukážeme si, jak doinstalovat moduly, které budeme používat.
