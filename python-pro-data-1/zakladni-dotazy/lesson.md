@@ -2,54 +2,80 @@
 
 V Pandasu většinou pracujeme s datovou strukturou zvanou `DataFrame`. Je to tabulková datová struktura a funguje podobně jako tabulka v Exelu. Můžeme jej považovat za další datový typ vedle slovníků a seznamů. DataFrame obsahuje data ve sloupcích, kde každý sloupec může mít různý datový typ, tedy například číslo, desetinné číslo, řetězec, pravdivostní hodnota a jiné.
 
-Abychom si práci s DataFrame vyzkoušeli, budeme používat následující cvičnou tabulku českých měst, která provozují tramvajovou dopravu.
+Abychom si práci s DataFrame vyzkoušeli, vrátíme se k naší tabulce se seznamem nákupů. Abychom si mohli vyzkoušet i práci s daty, máme v tabulce navíc sloupec `Datum`.
 
-| Jméno |       Věc        | Částka v korunách |
-| :--- | :-------------- | ----------------: |
-| Petr  |   Prací prášek   |               399 |
-| Ondra |       Savo       |                80 |
-| Petr  |  Toaletní papír  |                65 |
-| Libor |       Pivo       |               124 |
-| Petr  | Pytel na odpadky |                75 |
-| Míša  | Utěrky na nádobí |               130 |
-| Ondra |  Toaletní papír  |               120 |
-| Míša  |   Pečící papír   |                30 |
-| Zuzka |       Savo       |                80 |
-| Pavla |      Máslo       |                50 |
-| Ondra |       Káva       |               300 |
+| Jméno   | Datum      | Věc              |   Částka v korunách |
+|:--------|:-----------|:-----------------|--------------------:|
+| Petr    | 2020-02-05 | Prací prášek     |                 399 |
+| Ondra   | 2020-02-08 | Savo             |                  80 |
+| Petr    | 2020-02-24 | Toaletní papír   |                  65 |
+| Libor   | 2020-03-05 | Pivo             |                 124 |
+| Petr    | 2020-03-18 | Pytel na odpadky |                  75 |
+| Míša    | 2020-03-30 | Utěrky na nádobí |                 130 |
+| Ondra   | 2020-04-22 | Toaletní papír   |                 120 |
+| Míša    | 2020-05-05 | Pečící papír     |                  30 |
+| Zuzka   | 2020-06-05 | Savo             |                  80 |
+| Pavla   | 2020-06-13 | Máslo            |                  50 |
+| Ondra   | 2020-07-25 | Káva             |                 300 |
 
 ### Načítání dat
 
-Tabulku výše si můžete stáhnout ve [formátu CSV](assets/nakupy.csv). Abychom si ji mohli prohlédnout jako DataFrame, otevřeme si nejprve Python konzoli, importujeme modul `pandas` a načteme CSV soubor pomocí funkce `read_csv().`
+Tabulku výše si můžete stáhnout ve [formátu CSV](assets/nakupy.csv). Důležité je, že si soubor musíš uložit nebo zkopírovat do **stejného adresáře**, v jakém právě pracuješ ve Visual Studiu! Abychom si ji mohli prohlédnout jako DataFrame, otevřeme si nejprve Python konzoli, importujeme modul `pandas` a načteme CSV soubor pomocí funkce `read_csv().`
 
 ```pycon
 >>> import pandas
 >>> nakupy = pandas.read_csv('nakupy.csv')
 ```
 
-Funkce `read_csv` má spoustu nepovnných parametrů, o kterých si můžeme přečíst [v dokumentaci](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html). Například se tam dočteme, že `pandas` standardně nastavuje jako oddělovač sloupců čárku (parametr `sep`). Protože my většinou používáme středník, můžeme si požadovaný oddělovač změnit.
+Funkce `read_csv` má spoustu nepovnných parametrů, o kterých si můžeme přečíst [v dokumentaci](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html). Například se tam dočteme, že `pandas` standardně nastavuje jako oddělovač sloupců čárku (parametr `sep`). Protože my většinou používáme středník, budeme muset tento parametr často nastavit. Náš soubor `nakupy.csv` ale používá čárku, takže nyní nic měnit nemusíš.
 
-Celý DataFrame vypíšeme na obrazovku prostě tak, že zobrazíme přímo proměnnou `nakupy`.
+Celý DataFrame vypíšeme na obrazovku tak, že zobrazíme přímo proměnnou `nakupy`.
 
 ```pycon
 >>> nakupy
-    Jméno               Věc  Částka v korunách
-0    Petr      Prací prášek                399
-1   Ondra              Savo                 80
-2    Petr    Toaletní papír                 65
-3   Libor              Pivo                124
-4    Petr  Pytel na odpadky                 75
-5    Míša  Utěrky na nádobí                130
-6   Ondra    Toaletní papír                120
-7    Míša      Pečící papír                 30
-8   Zuzka              Savo                 80
-9   Pavla             Máslo                 50
-10  Ondra              Káva                300
+    Jméno       Datum               Věc  Částka v korunách
+0    Petr  2020-02-05      Prací prášek                399
+1   Ondra  2020-02-08              Savo                 80
+2    Petr  2020-02-24    Toaletní papír                 65
+3   Libor  2020-03-05              Pivo                124
+4    Petr  2020-03-18  Pytel na odpadky                 75
+5    Míša  2020-03-30  Utěrky na nádobí                130
+6   Ondra  2020-04-22    Toaletní papír                120
+7    Míša  2020-05-05      Pečící papír                 30
+8   Zuzka  2020-06-05              Savo                 80
+9   Pavla  2020-06-13             Máslo                 50
+10  Ondra  2020-07-25              Káva                300
 ```
+
+Všimni si, že `pandas` nám přidal nový sloupec s číslem řádku. Jedná se o **index**, se kterým budeme později pracovat.
 
 Pandas nabízí kromě funkce `read_csv()` také funkci pro čtení formátu JSON `read_json()` nebo dokonce funkci pro čtení přímo Excelovových tabulek `read_excel()`.
 
 ### Základní informace o tabulce
+
+V realitě máme většinou větší objemy dat a stačí nám prohlédnout si začátek tabulky, abychom měli představu o jejím obsahu. K tomu slouží funkce `head`. Ta standardně vypíše 5 řádků.
+
+```
+>>> nakupy.head()
+   Jméno       Datum               Věc  Částka v korunách
+0   Petr  2020-02-05      Prací prášek                399
+1  Ondra  2020-02-08              Savo                 80
+2   Petr  2020-02-24    Toaletní papír                 65
+3  Libor  2020-03-05              Pivo                124
+4   Petr  2020-03-18  Pytel na odpadky                 75
+```
+
+Často je užitečné podívat se spíše na konec souboru. Pokud jsou data seřazená podle času, uvidíme na konci souboru nejnovější data, která nás často (např. u kurzu měn nebo akcií) zajímají víc než dávná historie.
+
+```
+>>> nakupy.tail()
+    Jméno       Datum             Věc  Částka v korunách
+6   Ondra  2020-04-22  Toaletní papír                120
+7    Míša  2020-05-05    Pečící papír                 30
+8   Zuzka  2020-06-05            Savo                 80
+9   Pavla  2020-06-13           Máslo                 50
+10  Ondra  2020-07-25            Káva                300
+```
 
 Jakmile máme tabulku načtenou, budeme o ní chtít vědět nějaké úplně základní údaje. K tomu nám pomůže metoda `info()`, která vrací souhrnné informace o celé tabulce: názvy sloupců, datové typy, počet neprázdných hodnot atd.
 
@@ -57,49 +83,36 @@ Jakmile máme tabulku načtenou, budeme o ní chtít vědět nějaké úplně z�
 >>> nakupy.info()
 <class 'pandas.core.frame.DataFrame'>
 RangeIndex: 11 entries, 0 to 10
-Data columns (total 3 columns):
- #   Column             Non-Null Count  Dtype
----  ------             --------------  -----
+Data columns (total 4 columns):
+ #   Column             Non-Null Count  Dtype 
+---  ------             --------------  ----- 
  0   Jméno              11 non-null     object
- 1   Věc                11 non-null     object
- 2   Částka v korunách  11 non-null     int64
-dtypes: int64(1), object(2)
-memory usage: 240.0+ bytes
+ 1   Datum              11 non-null     object
+ 2   Věc                11 non-null     object
+ 3   Částka v korunách  11 non-null     int64 
+dtypes: int64(1), object(3)
+memory usage: 480.0+ bytes
 ```
 
 Počet řádků a sloupců můžeme získat z vlastnosti `shape`:
 
 ```pycon
 >>> nakupy.shape
-(11, 3)
+(11, 4)
 ```
 
 Názvy všech sloupců pak z vlastnosti `columns`:
 
 ```pycon
 >>> nakupy.columns
-Index(['Jméno', 'Věc', 'Částka v korunách'], dtype='object')
+Index(['Jméno', 'Datum', 'Věc', 'Částka v korunách'], dtype='object')
 ```
 
 ## Index
 
-V `Pandas` má každý řádek přiřazený index. Jako index můžeme zvolit některý ze sloupců. Pokud však tabulku načteme bez toho, abychom specifikovali index, Pandas nám vytvoří číselný index automaticky. Je to něco podobného jako číslování řádků v Excelu. Napišme tedy příkaz pro načtení tabulky takto:
+V `pandas` má každý řádek přiřazený index. Jako index můžeme zvolit některý ze sloupců. Pokud však tabulku načteme bez toho, abychom specifikovali index, `pandas` nám vytvoří číselný index automaticky. Je to něco podobného jako číslování řádků v Excelu.
 
-Načtená tabulka tedy ve skutečnosti vypadá následovně
-
-|        | Jméno |       Věc        | Částka v korunách |
-| ----: | :--- | :-------------- | ----------------: |
-| **0**  | Petr  |   Prací prášek   |               399 |
-| **1**  | Ondra |       Savo       |                80 |
-| **2**  | Petr  |  Toaletní papír  |                65 |
-| **3**  | Libor |       Pivo       |               124 |
-| **4**  | Petr  | Pytel na odpadky |                75 |
-| **5**  | Míša  | Utěrky na nádobí |               130 |
-| **6**  | Ondra |  Toaletní papír  |               120 |
-| **7**  | Míša  |   Pečící papír   |                30 |
-| **8**  | Zuzka |       Savo       |                80 |
-| **9**  | Pavla |      Máslo       |                50 |
-| **10** | Ondra |       Káva       |               300 |
+K vybrání jednoho konkrétního řádku můžeme použít funkce `loc[]` a `iloc[]`.
 
 Všimněte si nového prvního sloupečku, který obsahuje index vytvořený Pandas. Vzhledem k tomu, že index je nyní číselný, může být trochu matoucí rozdíl mezi použitím metod `loc[]` a `iloc[]`. Metoda `loc[]` vždycky vždycky vždycky používá pro výběr dat **jména** řádků (tedy index). V předchozích příkladech byla jména řádků názvy měst, nyní jsou jména řádků obyčejná čísla. Index je v tedy v tomto případě stejný, jako pozice řádků. Dejme tomu, že chceme získat všechna města od začátku tabulky po město Most. V předchozím příkladu, kde indexem byly názvy měst, bychom psali
 
