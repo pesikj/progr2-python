@@ -8,3 +8,7 @@ lessons:
   - title: Datová analýza
     link: datova-analyza
     brief: O čem datová analýza vlastně je a proč se jí zabýváme.
+  - title: Načtení dat
+    link: nacteni-dat
+    brief: Jak načíst data do pandas a jak se na ně podívat
+    
