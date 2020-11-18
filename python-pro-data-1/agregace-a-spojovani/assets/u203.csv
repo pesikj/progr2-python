@@ -1,16 +1,16 @@
-jméno,předmět,známka,den
-Kateřina Novotná,Společenské vědy,3,po
-Arnošt Sas,Matematika,5,po
-Vasil Lácha,Informatika,3,po
-Lenka Jarošová,Fyzika,3,st
-Marie Kortusová,Fyzika,3,st
-Monika Dudysová,Chemie,3,pá
-Josef Vodseďálek,Informatika,2,út
-Alexey Opatrný,Zeměpis,1,po
-Antonín Hlídek,Fyzika,4,po
-Monika Dudysová,Společenské vědy,3,pá
-Hedvika Popelková,Informatika,,po
-Filip Lacina,Fyzika,2,čt
-Petr Valenta,Společenské vědy,,pá
-Marta Kinclová,Biologie,4,st
-Martina Korbářová,Zeměpis,3,út
+cisloStudenta,predmet,znamka,den
+5,Společenské vědy,3,po
+13,Matematika,5,po
+7,Informatika,3,po
+12,Fyzika,3,st
+14,Fyzika,3,st
+15,Chemie,3,pá
+16,Informatika,2,út
+8,Zeměpis,1,po
+17,Fyzika,4,po
+15,Společenské vědy,3,pá
+19,Informatika,,po
+20,Fyzika,2,čt
+9,Společenské vědy,,pá
+21,Biologie,4,st
+22,Zeměpis,3,út

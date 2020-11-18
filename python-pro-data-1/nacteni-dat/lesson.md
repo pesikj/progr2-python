@@ -1,10 +1,12 @@
+Než s daty začneme pracovat, musíme si je nejprve načíst.
+
 ## Základní práce s DataFrame
 
-V Pandasu většinou pracujeme s datovou strukturou zvanou `DataFrame`. Je to tabulková datová struktura a funguje podobně jako tabulka v Exelu. Můžeme jej považovat za další datový typ vedle slovníků a seznamů. DataFrame obsahuje data ve sloupcích, kde každý sloupec může mít různý datový typ, tedy například číslo, desetinné číslo, řetězec, pravdivostní hodnota a jiné.
+V Pandasu většinou pracujeme s datovou strukturou zvanou `DataFrame`. Je to tabulková datová struktura a funguje podobně jako tabulka v Exelu nebo v databázi. Můžeme jej považovat za další datový typ vedle slovníků a seznamů. `DataFrame` obsahuje data ve sloupcích, kde každý sloupec může mít různý datový typ, tedy například číslo, desetinné číslo, řetězec, pravdivostní hodnota a jiné.
 
-**Poznámka:** Pokud znáš základy objektově orientovaného programování, pak věz, že `DataFrame` je ve skutečnosti třída a my na jejím základě budeme vytvářet objekty.
+**Poznámka:** Pokud znáš základy objektově orientovaného programování, pak věz, že `DataFrame` je ve skutečnosti třída a my na jejím základě budeme vytvářet objekty. 
 
-Abychom si práci s DataFrame vyzkoušeli, vrátíme se k naší tabulce se seznamem nákupů. Abychom si mohli vyzkoušet i práci s daty, máme v tabulce navíc sloupec `Datum`.
+Abychom si práci s DataFrame vyzkoušeli, vrátíme se k naší tabulce se seznamem nákupů.
 
 | Jméno   | Datum      | Věc              |   Částka v korunách |
 |:--------|:-----------|:-----------------|--------------------:|
@@ -22,12 +24,16 @@ Abychom si práci s DataFrame vyzkoušeli, vrátíme se k naší tabulce se sezn
 
 ### Načítání dat
 
-Tabulku výše si můžete stáhnout ve [formátu CSV](assets/nakupy.csv). Důležité je, že si soubor musíš uložit nebo zkopírovat do **stejného adresáře**, v jakém právě pracuješ ve Visual Studiu! Abychom si ji mohli prohlédnout jako DataFrame, otevřeme si nejprve Python konzoli, importujeme modul `pandas` a načteme CSV soubor pomocí funkce `read_csv().`
+Tabulku výše si můžete stáhnout ve [formátu CSV](assets/nakupy.csv). Důležité je, že si soubor musíš uložit nebo zkopírovat do **stejného adresáře**, v jakém právě pracuješ ve Visual Studiu! To si ověříš pomocí příkazu `dir` ve Windows nebo `ls` v MacOS nebo Linuxu. Tento příkaz ti vypíše obsah aktuální adresáře. V přehledu souborů bys měla vidět soubor `nakupy.csv`.
+
+Abychom tabulku načetli jako `DataFrame`, otevřeme si nejprve Python konzoli, importujeme modul `pandas` a načteme CSV soubor pomocí funkce `read_csv().`
 
 ```pycon
 >>> import pandas
 >>> nakupy = pandas.read_csv('nakupy.csv')
 ```
+
+**Poznámka:** Modul `pandas` nabízí obrovské množství možností. Nemusíš si samozřejmě vše pamatovat, protože vše najdeš přehledně popsáno [v dokumentaci](https://pandas.pydata.org/docs/). Například funkce `read_csv` je [popsána zde](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html). Dokumentaci k samotnému DataFrame najdeš [zde](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html).
 
 Funkce `read_csv` má spoustu nepovnných parametrů, o kterých si můžeme přečíst [v dokumentaci](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html). Například se tam dočteme, že `pandas` standardně nastavuje jako oddělovač sloupců čárku (parametr `sep`). Protože my většinou používáme středník, budeme muset tento parametr často nastavit. Náš soubor `nakupy.csv` ale používá čárku, takže nyní nic měnit nemusíš.
 
@@ -49,7 +55,7 @@ Celý DataFrame vypíšeme na obrazovku tak, že zobrazíme přímo proměnnou `
 10  Ondra  2020-07-25              Káva                300
 ```
 
-Všimni si, že `pandas` nám přidal nový sloupec s číslem řádku. Jedná se o **index**, se kterým budeme později pracovat.
+Všimni si, že `pandas` nám přidal nový sloupec s číslem řádku. Jedná se o **index**, se kterým budeme později pracovat. Index je hodnota, která identifikuje řádek. V některých případech nemusíme jako index používat číslo řádku, ale můžeme jako index vybrat některý ze sloupců. Obdobnou funkci má v databázích **primární klíč**. Jako *best practice* se většinou uvádí, že index by měl být **unikátní**, i když to `pandas` (narozdíl od právě databází) nevyžadují. Mohli bychom si tedy jako index zvolit napříkad sloupec `Jmeno`, ale tím bychom si zadělávali na problém do budoucna (například v tom, že by práce s `DataFrame` byla [pomalejší](https://stackoverflow.com/q/16626058/4693904)).
 
 Pandas nabízí kromě funkce `read_csv()` také funkci pro čtení formátu JSON `read_json()` nebo dokonce funkci pro čtení přímo Excelovových tabulek `read_excel()`.
 
@@ -79,6 +85,15 @@ Počet řádků a sloupců můžeme získat z vlastnosti `shape`:
 (11, 4)
 ```
 
+**Poznámka:** Pokud znáš základy objektově orientovaného programování, pak věz, že `info` je ve skutečnosti funkce třídy `DataFrame`. 
+
+`pandas` nám vrací výsledky v sekvenci, která se jmenuje `tuple`. Nás stačí vědět, že si z ní data můžeme načíst stejně jako ze seznamu. Na prvním místě je vždy počet řádků a na druhém počet sloupců. Pokud by nás třeba zajímal jen počet řádků, napíšeme: 
+
+```pycon
+>>> nakupy.shape[0]
+11
+```
+
 Názvy všech sloupců pak z vlastnosti `columns`:
 
 ```pycon
@@ -88,9 +103,9 @@ Index(['Jméno', 'Datum', 'Věc', 'Částka v korunách'], dtype='object')
 
 ## Index
 
-V `pandas` má každý řádek přiřazený index. Jako index můžeme zvolit některý ze sloupců. Pokud však tabulku načteme bez toho, abychom specifikovali index, `pandas` nám vytvoří číselný index automaticky. Je to něco podobného jako číslování řádků v Excelu.
+Jak už víme, v `pandas` má každý řádek přiřazený index. Jako index můžeme zvolit některý ze sloupců. Pokud však tabulku načteme bez toho, abychom specifikovali index, `pandas` nám vytvoří **číselný index** automaticky. Je to něco podobného jako číslování řádků v Excelu.
 
-K vybrání jednoho konkrétního řádku můžeme použít funkce `iloc[]`. Jde sice o funkci, ale voláme ji pomocí hranatých závorek. Je to sice zvláštní, ale na to si bohužel musíme zvyknout.
+K vybrání jednoho konkrétního řádku můžeme použít `iloc[]`. `iloc` nám umožní ptát se na konkrétní záznam podobně jako u sekvencí, jsou zde přítomné i hranaté závorky. `iloc` tedy ve skutečnosti není funkce, ale kromě jiného typu závorek s ní pracujeme jako s funkcí.
 
 Zkusme si zobrazit třeba **čtvrtý** nákup. Číslujeme tradičně od nuly, jistě tě tedy nepřekvapí, že napíšeme `nakupy.iloc[3]`.
 
@@ -105,7 +120,7 @@ Name: 3, dtype: object
 
 Všimni si, že když jsme chtěli pouze jeden řádek, vypsal se nám výsledek jinak orientovaný, než když jsme chtěli řádků více. Je to proto, že pokud vybíráme pouze jeden řádek, vrátí nám takzvanou **sérii** (`Series`), což je jiný datový typ než DataFrame.
 
-Metoda `iloc[]` umožňuje pro výběr řádků použít rozsah od:do. K tomu používáme dvojtečku. Před dvojtečku píšeme první řádek, který chceme vypsat a za dvojtečku první řádek, který již vy výpisu nebude. Pokud tedy například napíšeme `nakupy.iloc[3:5]`, získáme třetí a čtvrtý řádek, ale už ne pátý.
+Metoda `iloc[]` umožňuje pro výběr řádků použít rozsah ve formátu `od:do`. K tomu používáme **dvojtečku**. Před dvojtečku píšeme první řádek, který chceme vypsat a za dvojtečku první řádek, který již vy výpisu nebude. Pokud tedy například napíšeme `nakupy.iloc[3:5]`, získáme třetí a čtvrtý řádek, ale už ne pátý.
 
 ```pycon
 >>> nakupy.iloc[3:5] 
@@ -154,7 +169,7 @@ Nevýhodou postupu je, že si musíme předem zjistit, jak kolik řádků máme.
 
 ### Začátek a konec jinak
 
-Na prvních a posledních nkěolik řádků se chceme podívat často, hlavně v případě, když moc dobře neznáme strukturu dat. Kromě funkce `iloc`, z jíž se ti možná už začala točit hlava, k tomu ještě můžeme použít funkce `head` a `tail`.
+Na prvních a posledních několik řádků se chceme podívat často, hlavně v případě, když moc dobře neznáme strukturu dat. Kromě funkce `iloc`, z níž se ti možná už začala točit hlava, k tomu ještě můžeme použít funkce `head` a `tail`.
 
 ```pycon
 >>> nakupy.head()

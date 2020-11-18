@@ -4,20 +4,6 @@ V této lekci si ukážeme, jak zobrazovat různé druhy grafů pomocí modulu `
 
 Modul `matplotlib` nabízí ohromné množství možností pro vizualizaci dat. My zde probereme jen naprosté základy, aby nám lekce nenarostla to olbřímých rozměrů.
 
-Pokud chceme v Pythonu používat modul `matplotlib`, je potřeba jej již tradičním způsobem nainstalovat
-
-```shell
-$ pip3 install matplotlib
-```
-
-Popř. pod Windows
-
-```shell
-$ py -m pip install matplotlib
-```
-
-Nyní můžeme otevřít Python konzoli a náš zbrusu nový modul naimportovat.
-
 ```pycon
 >>> import matplotlib.pyplot as plt
 ```
