@@ -10,5 +10,14 @@ lessons:
     brief: O čem datová analýza vlastně je a proč se jí zabýváme.
   - title: Načtení dat
     link: nacteni-dat
-    brief: Jak načíst data do pandas a jak se na ně podívat
+    brief: Pojďme načíst data do pandas a podívat se na ně
+  - title: Základní dotazy
+    link: zakladni-dotazy
+    brief: Vyzkoušíme si základní dotazy, které pandas umí
+  - title: Agregace a spojování
+    link: agregace-a-spojování
+    brief: Agregace, spojování a propojování, výpočty a řazení jsou základní výbavou datového analytika
+  - title: Vizualizace
+    link: vizualizace
+    brief: Jeden graf řekne více než tisíc tabulek, ukážeme si tedy, jak grafy vytvářet
     

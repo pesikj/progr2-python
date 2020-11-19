@@ -230,7 +230,7 @@ Poslední nepříjemností, na kterou se podíváme, je to, že sloupce `jmeno` 
 ```pycon
 >>> novyPropojenyDF = novyPropojenyDF.rename(columns={'jméno_x': 'jméno', 'jméno_y': 'předs'})
 ```
-## Grupování
+## Agragace
 
 Z databází známe kromě UNION a JOIN také operaci GROUP BY. V Pandase ji provedeme tak, že pomocí metody `groupby` vyrobíme z `DataFrame` speciální objekt `DataFrameGroupBy`. Dejme tomu, že chceme grupovat podle sloupečku `mistnost`.
 
@@ -273,13 +273,14 @@ Nemusíme samozřejmě grupovat přes všechny sloupečky. Vybereme si pouze ty,
 Všimněte si, že takto obdržíme sérii, nikoliv `DataFrameU. Pozornější z vás možná tuší, že abychom získali DataFrame, musíme psát
 
 ```pycon
->>> maturita2.groupby('předmět')[['známka']].mean()
+>>> maturita2 = maturita.groupby("cisloStudenta").agg({"znamka": ["max", "mean"]})
 ```
 
 Pomocí agregací můžeme vyřešit i náš problém s nákupy. Pokud máme stále načtený `Data Frame` `nakupy`, můžeme použít funkci `groupby` podle jména a následně spočítat sumu nákupů pomocí `.sum()`.
 
 ```pycon
->>> nakupy.groupby("Jméno")["Částka v korunách"].sum()
+>>> nakupyCelkem = nakupy.groupby("Jméno")["Částka v korunách"].sum()  
+>>> nakupyCelkem
 Jméno
 Libor    124
 Míša     160
@@ -289,3 +290,80 @@ Petr     539
 Zuzka     80
 Name: Částka v korunách, dtype: int64
 ```
+
+### Čtení na doma: Více různých agregací
+
+Pokud chceme provést více různých agregací, použijeme metodu `agg`. Metodě `agg` vložíme jako parametr slovník, kde klíčem je název sloupce, pro který počítáme agregaci, a hodnotou je řetězec nebo seznam řetězců se jmény agregací, které chceme provést. Například u maturity chceme zjistit, jestli student prospěl, prospěl s vyznamenámím nebo neprospěl. K tomu potřebujeme funkci `max()` (pětka znamená, že student neuspěl a trojka znamená, že nemůže získat vyznamenání) a funkci `mean()` (abychom zjistili, zda je průměr známek menší než 1.5).
+
+```pycon
+>>> maturita2 = maturita.groupby("cisloStudenta").agg({"znamka": ["max", "mean"]})
+```
+
+K určení výsledk studenta bychom ještě potřebovali nový sloupec, jehož hodnota bude určena na základě podmínky, což si ukážeme níže.
+
+## Počítané sloupce
+
+Občas je užitečné přidat nový sloupec, který obsahuje hodnotu vypočtenou na základě hodnot ostatních sloupců. Vraťme se například k naší tabulce s údaji o státech ve světě. Máme informaci o rozloze a počtu obyvatel, mohli bychom tedy přidal sloupec s hodnotou hustoty zalidnění (počet obyvatel na 1 km čtvereční), který získáme vydělením počtu obyvatel rozlohou země.
+
+Pokud nemáme načtený soubor s daty, načteme si ho.
+
+```pycon
+>>> staty = pandas.read_json("staty.json")
+>>> staty = staty.set_index("name")
+```
+
+Přidání nového sloupce je poměrně jednoduché. Před znaménko `=` vložíme proměnnou s `DataFrame` a do hranaých závorek vložíme název nového sloupce. Na pravou stranu umístíme výpočet. Ve výpočtu pracujeme s jednotlivými sloupci, v našem konkrétním případě vydělíme sloupec `population` sloupcem `area`.
+
+```pycon
+>>> staty["populationDensity"] = staty["population"] / staty["area"]
+```
+
+**Poznámka:** `pandas` nás neupozorní, pokud sloupec již existuje, musíme si tedy dát pozor, abychom nepřepsali nějaký existující sloupec.
+
+### Čtení na doma: Podmíněný sloupec
+
+Občas chceme do výpočtu zapracovat i podmínku. Ve skutečnosti je podmínka to poslední, co nám chybělo k vyřešení našeho problému s finančním vypořádání spolubydlících pomocí `pandas`. Náš výpočet se skládá z pěti kroků.
+
+1. Provedeme agregaci hodnot nákupů podle jmen. Tím zjistíme sumu, kolik každý utratil.
+1. Zjistíme si průměrnou útratu za osobu. K tomu použijeme funkci `mean()`.
+1. Přidáme sloupec s podmínkou. V podmínce porovnáváme, zda spolubydlící utratil více nebo méně, než je průměr. K tomu použijeme funkci `where`, která je součástí modulu `numpy`. Nejprve provedeme import modulu `numpy` a následně z modulu zavoláme funkci `where()`. Jako první parametr zadáme podmínku (porovnání hodnot), jako druhý hodnotu vloženou v případě splnění podmínky (text "má dáti") a jako poslední hodnotu vloženou v případě nesplnění podmínky (text "dostane"). Jako předposlední krok si určíme částku potřebnou k vypořádání - rozdíl mezi součtem pro danou osbu a průměrnou útratou. Poslední krok je pak jen výpisem hodnoty.
+
+```pycon
+>>> nakupy = pandas.read_csv('nakupy.csv')
+>>> nakupyCelkem = nakupy.groupby("Jméno")[["Částka v korunách"]].sum() 
+>>> prumernaHodnota = nakupyCelkem["Částka v korunách"].mean()
+>>> import numpy
+>>> nakupyCelkem["Operace"] = numpy.where(nakupyCelkem["Částka v korunách"] > prumernaHodnota, "má dáti", "dostane")
+>>> nakupyCelkem["Kolik"] = abs(nakupyCelkem["Částka v korunách"] - prumernaHodnota)
+>>> nakupyCelkem[["Operace", "Kolik"]]
+       Operace       Kolik
+Jméno
+Libor  dostane  118.166667
+Míša   dostane   82.166667
+Ondra  má dáti  257.833333
+Pavla  dostane  192.166667
+Petr   má dáti  296.833333
+Zuzka  dostane  162.166667
+```
+
+Srovnej si toto řešení s tím, které jsme si ukazovali na úvodním workshopu. Zdá se ti jednodušší?
+
+## Řazení
+
+Data řadíme poměrně často. U běžeckého závodu nás zajímají ti nejrychlejší běžci, u položek v e-shopu ty nejlépe hodnocené, u projektu zase chceme vidět úkoly s nejbližším deadline. Abychom tyto hodnoty získali, musíme data seřadit. Ve světě databází pro to používáme klíčová slova `ORDER BY`, v `pandas` nám poslouží metoda `sort_values`. Jako její první parametr zadáváme sloupec (nebo seznam sloupců), podle kterého (kterých) řadíme.
+
+```pycon
+>>> staty.sort_values(by="population")
+```
+
+Metoda `sort_values` standardně řadí vzestupně. Chceme-li řadit sestupně, zadáme jí parametr `ascending` a nastavíme ho na `False`.
+
+```pycon
+>>> staty.sort_values(by="population", ascending=False)
+```
+
+@exercises ## Cvičení [
+
+- studenti
+  ]@
+  

@@ -52,7 +52,7 @@ dtypes: float64(2), int64(1), object(5)
 memory usage: 17.6+ KB
 ```
 
-### Výběr konkrétního a jedné hodnoty
+### Výběr konkrétního řádku a hodnoty
 
 Z názvů sloupců bychom mohli odvodit, jaké informace se v našem `DataFrame` nacházejí, ale možná se zorientujeme lépe, když se podíváme na nějaký konkrétní řádek.
 
@@ -77,7 +77,28 @@ Opět jsme vybrali jeden řádek, získáme tedy výsledek jako sérii. Můžeme
 rozloha = staty.loc["Czech Republic","area"]
 ```
 
-Pokud by nás zajímaly informace o více řádcích, můžeme opět použít seznam. Index řádků, které nás zajímají, vložíme do seznamu a ten předáme jako první parametr funkci `loc`.
+### Výběr několika řádků
+
+Funkce `loc()` si podobně jako `iloc()` dobře rozumí s dvojtečkou. Náš soubor je seřazený dle abecedy. Pokud tedy chceme vypsat všechny státy, jejich názvy v abecedě patří mezi Českou republikou a Dominikánskou republikou, vložíme tato jméno do uvozovek a dáme mezi ně dvojtečku.
+
+```pycon
+>>> staty.loc["Czech Republic":"Dominican Republic"] 
+                   alpha2Code alpha3Code        capital    region        subregion  population     area  gini
+name
+Czech Republic             CZ        CZE         Prague    Europe   Eastern Europe    10558524  78865.0  26.0
+Denmark                    DK        DNK     Copenhagen    Europe  Northern Europe     5717014  43094.0  24.0
+Djibouti                   DJ        DJI       Djibouti    Africa   Eastern Africa      900000  23200.0  40.0
+Dominica                   DM        DMA         Roseau  Americas        Caribbean       71293    751.0   NaN
+Dominican Republic         DO        DOM  Santo Domingo  Americas        Caribbean    10075045  48671.0  47.2
+```
+
+Podobně se funkce chová, i když zadáme jen jednu hranici. Můžeme si třeba zkusit vypsat hodnoty od začátku po Andorru nebo od Uzbekistánu do konce.
+```pycon
+>>> staty.loc[:"Andorra"]
+>>> staty.loc["Uzbekistan":] 
+```
+
+Pokud by nás zajímaly informace o více řádcích, které spolu nesousedí, můžeme opět použít seznam. Index řádků, které nás zajímají, vložíme do seznamu a ten předáme jako první parametr funkci `loc`.
 
 ```pycon
 >>> staty.loc[["Czech Republic","Slovakia"]]   
@@ -346,7 +367,7 @@ nakupy = [
 Výhodou je, že nyní nemusíme přidávat názvy sloupců, protože ty už funkce `DataFrame` získá z klíčů slovníků.
 
 ```pycon
->>> nakupy = pandas.DataFrame(purchaseList)
+>>> nakupy = pandas.DataFrame(nakupy)
 >>> nakupy.info()
 <class 'pandas.core.frame.DataFrame'>
 RangeIndex: 11 entries, 0 to 10
@@ -359,3 +380,9 @@ Data columns (total 3 columns):
 dtypes: int64(1), object(2)
 memory usage: 392.0+ bytes
 ```
+
+@exercises ## Cvičení [
+
+- ceska-jmena
+- ceska-jmena-2
+  ]@
