@@ -104,6 +104,7 @@ Další příklad nás zavede zpět k divadlu Pěst na oko. Uvažujme, že divad
 price = 250
 age = int(input("Zadejte věk: "))
 clubMember = input("Jste členem klubu přátel divadla? [ano/ne] ")
+clubMember = clubMember.lower() == "ano"
 if (age <= 26 or age >= 65) and clubMember:
   price = round(0.5 * price)
 print(f"Cena vstupenky je {price}.")

@@ -5,6 +5,9 @@ lessons:
   - title: Instalace
     link: instalace
     brief: Ukážeme si, jak doinstalovat moduly, které budeme používat.
+  - title: Datum a čas
+    link: datum
+    brief: Jak pracovat s údaji o datu a čase
   - title: Datová analýza
     link: datova-analyza
     brief: O čem datová analýza vlastně je a proč se jí zabýváme.
@@ -20,4 +23,7 @@ lessons:
   - title: Vizualizace
     link: vizualizace
     brief: Jeden graf řekne více než tisíc tabulek, ukážeme si tedy, jak grafy vytvářet
+  - title: Další zdroje
+    link: dalsi-zdroje
+    brief: Na konci si rozebereme, jak můžeš pokračovat dál ve svém vzdělávání.
     

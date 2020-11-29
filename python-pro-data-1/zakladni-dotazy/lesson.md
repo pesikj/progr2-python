@@ -143,7 +143,7 @@ Pokud nás zajímá více sloupců, můžeme opět použít seznam, do kterého 
 Asi se teď říkáš, k čemu je to vlastně dobré. Zkusme si jednoduchý příklad: Chceme zjistit, kolik lidí žije ve všech státech světa. Bude nás tedy zajímat pouze sloupec `population`, kde máme sérii s počty obavytel jednotlivých států. Série sama o sobě umí zajímavé věci, například umí sama spočítat svůj součet a vrátit výsledek jako číslo. K tomu slouží funkce `sum`. K jejímu volání opět použijeme tečkovou notaci.
 
 ```pycon
->>> populace = staty["population"]      
+>>> populace = staty["population"]
 >>> populace.sum()
 7349137231
 ```
@@ -222,8 +222,8 @@ Pokud chceme, aby musely být splněny obě podmínky, vložíme mezi ně symbol
 Obě tyto podmínky napíšeme do závorek a vložíme mezi ně symbol `&`. Následně použijeme již známé hranaté závorky, které přidáme hned za proměnnou `staty`.
 
 ```pycon
->>> velkeEvropskeStaty = staty[(staty["population"] > 20000000) & (staty["region"] == "Europe")]
->>> velkeEvropskeStaty["population"]                                                            
+>>> lidnateEvropskeStaty = staty[(staty["population"] > 20000000) & (staty["region"] == "Europe")]
+>>> lidnateEvropskeStaty["population"]
 name
 France                                                   66710000
 Germany                                                  81770900
@@ -239,7 +239,7 @@ Name: population, dtype: int64
 Pokud chceme, aby stačilo splnění jedné podmínky, použijeme symbol `|`. Zde vypisujeme státy, které mají buď více než miliardu obyvatel nebo rozlohu větší než 3 miliony kilometrů čtverečních.
 
 ```pycon
->>> staty[(staty["population"] > 1 * 10 ** 9) | (staty["area"] > 3 * 10**6)]    
+>>> staty[(staty["population"] > 10_000_000_000) | (staty["area"] > 3_000_000)]
                          alpha2Code alpha3Code           capital    region                  subregion  population        area  gini
 name
 Antarctica                       AQ        ATA                       Polar                                   1000  14000000.0   NaN
@@ -251,6 +251,8 @@ India                            IN        IND         New Delhi      Asia      
 Russian Federation               RU        RUS            Moscow    Europe             Eastern Europe   146599183  17124442.0  40.1
 United States of America         US        USA  Washington, D.C.  Americas           Northern America   323947000   9629091.0  48.0
 ```
+
+**Poznámka:** Abychom zpřehlednili zápis velkých čísel, použili jsme podtržítko.
 
 ### Použití seznamu v podmínce
 

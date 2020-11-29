@@ -22,8 +22,6 @@ Abychom měli nějaký praktický příklad k procvičování, použijeme fiktiv
 |12 |Biologie        |4     |st |
 |10 |Dějepis         |5     |st |
 
-Tajemná zkratka `ID` (zkratka od identifier) v prvním sloupci obsahuje číslo studenta.
-
 ## Práce s chybějícími hodnotami
 
 V praxi se poměrně často setkáme s tím, že v datovém setu některé hodnoty chybí. Můžeme si například všimnout, že v tabulce U202 dvěma studentům chybí známka. To může znamenat, že se doma hrůzou zhroutili a na maturitu ani nedorazili. Na takové případy je třeba být připraven.
@@ -68,7 +66,7 @@ Name: znamka, dtype: bool
 Tyto metody můžeme využít například k tomu, abychom získali všechna data, kde chybí hodnota ve sloupečku *známka*.
 
 ```pycon
->>> u202[u202['znamka'].isnull()]      
+>>> u202[u202['znamka'].isnull()]
    cisloStudenta  predmet  znamka den
 0              1   Chemie     NaN  pá
 9              9  Dějepis     NaN  pá
@@ -77,7 +75,7 @@ Tyto metody můžeme využít například k tomu, abychom získali všechna data
 Další užitečné metody na práci s chybějícími hodnotami najdeme na DataFrame.
 
 1. `dropna()` \- vrátí datový set očištěn od chybějících dat
-1. `dropna(ax`is=1) - odstraní všechny sloupce, které obsahují chybějící data
+1. `dropna(axis=1)` \ - odstraní všechny sloupce, které obsahují chybějící data
 1. `fillna(x)` \- nahradí všechna chybějící data a hodnoty hodnotou x
 
 ## Spojení dat
@@ -125,11 +123,11 @@ Výslednou tabulku si můžete stáhnout jako soubor [maturita.csv](assets/matur
 
 Pandas však umí `DataFrame` také mergovat, což odpovídá SQL příkazu JOIN. Nyní si ukážeme, jak na to.
 
-Naše výsledky byly anonymní. Pokud bychom ale chtěli vytisknout maturitní vysvědčení, potřebujeme k číslům studenta zjistit jejich jména. Jména najdeme v samostatné tabulce [jmena.csv](assets/jmena.csv). Načtěme si jej jako `DataFrame`.
+Naše výsledky byly anonymní. Pokud bychom ale chtěli vytisknout maturitní vysvědčení, potřebujeme k číslům studenta zjistit jejich jména. Jména najdeme v samostatné tabulce [studenti.csv](assets/studenti.csv). Načtěme si jej jako `DataFrame`.
 
 ```pycon
->>> jmena = pandas.read_csv('jmena.csv')
->>> jmena.head()
+>>> studenti = pandas.read_csv('studenti.csv')
+>>> studenti.head()
    cisloStudenta             jméno
 0              1    Jana Zbořilová
 1              2      Lukáš Jurčík
@@ -148,7 +146,7 @@ Join tabulek se v Pandase dělá pomocí funkce `merge` (dokumentaci k ní je [z
 Ve výchozím nastavení funkce `merge()` ponechá pouze řádky, které mají záznamy v obou tabulkách. V SQL bychom tuto operaci označili jako INNER JOIN. 
 
 ```pycon
->>> propojenyDF = pandas.merge(u202, jmena)
+>>> propojenyDF = pandas.merge(u202, studenti)
 >>> propojenyDF.head()
    cisloStudenta           predmet  znamka den           jmeno
 0              1            Chemie     NaN  pá  Jana Zbořilová
@@ -161,9 +159,9 @@ Ve výchozím nastavení funkce `merge()` ponechá pouze řádky, které mají z
 Pokud by například nějaký student nebyl uvedený v tabulce se studenty, jeho maturitní výsledek by zmizel. U nového `DataFrame` bychom tedy měli zkontrolovat, zda má `spojenyDF` stejný počet řádků jako `u202`.
 
 ```pycon
->>> u202.shape              
+>>> u202.shape
 (15, 4)
->>> spojenyDF.shape
+>>> propojenyDF.shape
 (15, 5)
 ```
 
@@ -188,42 +186,51 @@ Index: []
 Tentokrát jsme příliš neuspěli, spojený `DataFrame` je prázdný. Proč tomu tak je? Protože v obou `DataFrame` máme sloupec `jmeno`, v jednom případě však jde o jméno studenta a ve druhém o jméno předsedy komise. To ale `pandas` samozřejmě neví. Proto mu musíme říct, že chceme data spojit pouze podle sloupce `den`.
 
 ```pycon
->>> novyPropojenyDF = pandas.merge(preds, spojenyDF, on=['den'])
+>>> novyPropojenyDF = pandas.merge(propojenyDF, preds, on=['den'])
 >>> novyPropojenyDF.head()
-       datum           jmeno_x den  cisloStudenta     predmet  znamka          jmeno_y
-0  21.5.2019  Marie Zuzaňáková  út              3  Matematika     2.0      Pavel Horák
-1  21.5.2019  Marie Zuzaňáková  út              3      Chemie     5.0      Pavel Horák
-2  22.5.2019     Petr Ortinský  st             10      Chemie     2.0  Miroslav Bednář
-3  22.5.2019     Petr Ortinský  st             10     Dějepis     5.0  Miroslav Bednář
-4  22.5.2019     Petr Ortinský  st             11  Matematika     1.0  Ivana Dvořáková
+       datum           jmeno_x den  cisloStudenta     predmet  znamka mistnost          jmeno_y
+0  21.5.2019  Marie Zuzaňáková  út              3  Matematika     2.0     u202      Pavel Horák
+1  21.5.2019  Marie Zuzaňáková  út              3      Chemie     5.0     u202      Pavel Horák
+2  22.5.2019     Petr Ortinský  st             10      Chemie     2.0     u202  Miroslav Bednář
+3  22.5.2019     Petr Ortinský  st             10     Dějepis     5.0     u202  Miroslav Bednář
+4  22.5.2019     Petr Ortinský  st             11  Matematika     1.0     u202  Ivana Dvořáková
 ```
 
 Zatím to vypadá dobře. Pokud se ovšem podíváme na `shape`, něco nám tady nehraje.
 
 ```pycon
 >>> novyPropojenyDF.shape   
-(7, 7)
+(10, 8)
 ```
 
 Najednou máme v tabulce pouze 12 řádků, některé tedy zmizely. To znamená, že funkce `merge()` nenašla pro všechna zkoušení odpovídajícího předsedu. Jak je to možné? Zkusme nyní říct funkci `merge()`, aby nám zachovala v prvním `DataFrame` ty řádky, pro které nenajde odpovídající záznam. Této operaci se v jazyce SQL říká LEFT OUTER JOIN. My ho provede tak, že funkci `merge()` jako parametr `how` zadáme hodnotu `left`.
 
 ```pycon
->>> novyPropojenyDF = pandas.merge(spojenyDF, preds, on=['den'], how="outer") 
+>>> novyPropojenyDF = pandas.merge(propojenyDF, preds, on=['den'], how="outer") 
 >>> novyPropojenyDF.shape
-(17, 7)
+(14, 8)
 ```
 
 Tentokrát jsme již o data nepřišli, ale kde se stala chyba? Zkusme si zobrazit ty řádky, které se nepodařilo propojit. Poznáme je tak, že mají prázdný sloupec `datum`.
 
 ```pycon
 >>> novyPropojenyDF[novyPropojenyDF["datum"].isnull()]
-   cisloStudenta     predmet  znamka den           jmeno_x datum jmeno_y
-7            5.0     Dějepis     1.0  po  Kateřina Novotná   NaN     NaN
-8            7.0     Dějepis     4.0  po       Vasil Lácha   NaN     NaN
-9            8.0  Matematika     2.0  po    Alexey Opatrný   NaN     NaN
+   cisloStudenta     predmet  znamka den mistnost           jmeno_x datum jmeno_y
+5            5.0     Dějepis     1.0  po     u202  Kateřina Novotná   NaN     NaN
+6            7.0     Dějepis     4.0  po     u202       Vasil Lácha   NaN     NaN
+7            8.0  Matematika     2.0  po     u202    Alexey Opatrný   NaN     NaN
 ```
 
 Nyní jsme již na stopě problému. Z nějakého důvodu nám nefunguje propojení v případě, že ve sloupci `den` je hodnota `po`. Po chvíli zkoumání zjistíme, že za chybu může nenápadná mezera, která je ve sloupci `den` za hodnotou `po` v souboru `prednasejici.csv`. Ať už vznikla chyba překlepem nebo nějakou jinou chybou, takové věci se bohužel stávají a proto při práci s daty musíme neustále kontrolovat, zda jsme nějako operací o část dat nepřišli.
+
+Pokud nemáme možnost vstupní data opravit, můžeme použít funkci `strip()`, která z řetězce odstraní mezery (a další bílé znaky) na začátku a na konci. Tyto mezery jsou v drtivé většině případů způsobeny chybou a proto jejich ostraněním nic nezkazíme.
+
+```pycon
+>>> preds["den"] = preds["den"].str.strip()
+>>> novyPropojenyDF = pandas.merge(propojenyDF, preds, on=['den'], how="outer")
+>>> novyPropojenyDF.shape
+(13, 8)
+```
 
 Poslední nepříjemností, na kterou se podíváme, je to, že sloupce `jmeno` se automaticky přejmenovaly, aby neměly v tabulce stejný název. Zde můžeme použít metodu `rename`, abychom sloupečky přejmenovali na něco smysluplného.
 
@@ -235,14 +242,14 @@ Poslední nepříjemností, na kterou se podíváme, je to, že sloupce `jmeno` 
 Z databází známe kromě UNION a JOIN také operaci GROUP BY. V Pandase ji provedeme tak, že pomocí metody `groupby` vyrobíme z `DataFrame` speciální objekt `DataFrameGroupBy`. Dejme tomu, že chceme grupovat podle sloupečku `mistnost`.
 
 ```pycon
->>> maturita2.groupby('mistnost')
+>>> maturita.groupby('mistnost')
 <pandas.core.groupby.generic.DataFrameGroupBy object at 0x7f96153a1cf8>
 ```
 
 Na tomto speciálním objektu pak můžeme používat různé agregační funkce. Nejjednodušší je funkce `count`
 
 ```pycon
->>> maturita2.groupby('místnost').count()
+>>> maturita.groupby('mistnost').count()
           jméno  předmět  známka  den  datum  předs
 místnost
 u202         13       13      13   13     13     13
@@ -267,18 +274,13 @@ Další užitečné agregační funkce jsou například
 Nemusíme samozřejmě grupovat přes všechny sloupečky. Vybereme si pouze ty, které nás zajímají. Zkusme například spočítat průměrnou známku z jednotlivých předmětů.
 
 ```pycon
->>> maturita2.groupby('predmet')['znamka'].mean()
-```
-
-Všimněte si, že takto obdržíme sérii, nikoliv `DataFrameU. Pozornější z vás možná tuší, že abychom získali DataFrame, musíme psát
-
-```pycon
->>> maturita2 = maturita.groupby("cisloStudenta").agg({"znamka": ["max", "mean"]})
+>>> maturita.groupby('predmet')['znamka'].mean()
 ```
 
 Pomocí agregací můžeme vyřešit i náš problém s nákupy. Pokud máme stále načtený `Data Frame` `nakupy`, můžeme použít funkci `groupby` podle jména a následně spočítat sumu nákupů pomocí `.sum()`.
 
 ```pycon
+>>> nakupy = pandas.read_csv('nakupy.csv')
 >>> nakupyCelkem = nakupy.groupby("Jméno")["Částka v korunách"].sum()  
 >>> nakupyCelkem
 Jméno
@@ -296,7 +298,7 @@ Name: Částka v korunách, dtype: int64
 Pokud chceme provést více různých agregací, použijeme metodu `agg`. Metodě `agg` vložíme jako parametr slovník, kde klíčem je název sloupce, pro který počítáme agregaci, a hodnotou je řetězec nebo seznam řetězců se jmény agregací, které chceme provést. Například u maturity chceme zjistit, jestli student prospěl, prospěl s vyznamenámím nebo neprospěl. K tomu potřebujeme funkci `max()` (pětka znamená, že student neuspěl a trojka znamená, že nemůže získat vyznamenání) a funkci `mean()` (abychom zjistili, zda je průměr známek menší než 1.5).
 
 ```pycon
->>> maturita2 = maturita.groupby("cisloStudenta").agg({"znamka": ["max", "mean"]})
+>>> maturita.groupby("cisloStudenta").agg({"znamka": ["max", "mean"]})
 ```
 
 K určení výsledk studenta bychom ještě potřebovali nový sloupec, jehož hodnota bude určena na základě podmínky, což si ukážeme níže.
