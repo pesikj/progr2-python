@@ -18,7 +18,7 @@ lessons:
     link: zakladni-dotazy
     brief: Vyzkoušíme si základní dotazy, které pandas umí
   - title: Agregace a spojování
-    link: agregace-a-spojování
+    link: agregace-a-spojovani
     brief: Agregace, spojování a propojování, výpočty a řazení jsou základní výbavou datového analytika
   - title: Vizualizace
     link: vizualizace
@@ -26,4 +26,3 @@ lessons:
   - title: Další zdroje
     link: dalsi-zdroje
     brief: Na konci si rozebereme, jak můžeš pokračovat dál ve svém vzdělávání.
-    
