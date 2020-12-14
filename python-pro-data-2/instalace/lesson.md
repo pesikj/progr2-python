@@ -13,6 +13,8 @@ $ pip3 install pymongo
 $ pip3 install matplotlib
 ```
 
+Instalace bude trvat jen pár sekund. Terminál během instalace vypíše spoustu textu. Někde na konci bychom pak měli vidět text
+
 ```shell
 Successfully installed pymongo-3.11.2
 ```
