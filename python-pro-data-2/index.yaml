@@ -5,3 +5,6 @@ lessons:
   - title: Instalace
     link: instalace
     brief: Ukážeme si, jak doinstalovat moduly, které budeme používat.
+  - title: Regulární výrazy
+    link: regularni-vyrazy
+    brief: Ovládneme regulární výrazy, které nám umožní dělat kouzla při dolování dat z textů.
