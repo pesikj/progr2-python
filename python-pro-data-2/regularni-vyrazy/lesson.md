@@ -103,12 +103,12 @@ Víme, že v britské angličtině používáme pro barvu výraz "colour" a v am
 
 Podobně můžeme využít regulární výraz k "license" "licence", napíšeme `licen[cs]e`.
 
-Otazník nám například pomůžou vypořádat se s nepovinnou mezerou, kterou píšeme například u data. U nás často používáme zápisy data 19. 12. 2020 nebo 19.12.2020. Pojďme sestavit regulární výraz.
+Otazníky nám například pomůžou vypořádat se s nepovinnou mezerou, kterou píšeme například u data. U nás často používáme zápisy data 19. 12. 2020 nebo 19.12.2020. Pojďme sestavit regulární výraz:
 
 * Na začátku je číslo dne. Uvažujme, že tam může být jedno nebo dvě čísla. Použujeme množinu `\d` a kvantifikátor `{1,2}`.
 * Následuje tečka, kterou musíme zkrášlit zpětným lomítkem.
 * Následuje nepovinná mezera. Zde využijeme kvantifikátor `?`.
-* Pak už opakujeme tu samou myšlenku, abychom sestavili celý výraz.
+* Pak už opakujeme tu samou myšlenku, abychom sestavili celý výraz: `\d{1,2}\. ?\d{1,2}\. ?\d{4}`.
 
 Často chceme označit několik slov do jednoho bloku. Skuina `\w` nezahrnuje mezery, musíme ji tedy rozšířit na `[\w ]*`. Například adresu `Václavské náměstí 11, 110 00 Nové Město` tak rozdělíme na dva samostatné bloky.
 
@@ -123,9 +123,23 @@ Nyní už umíme sestavit výraz, kterým vybereme celý řádek s kurzem dolaru
 
 Pokud bychom neuvažovali předčíslí, stačí nám regulární výraz `\d{6,10}\/\d{4}`, který by měl pasovat např. na číslo účtu 2300117015/2010. Nesmíme zapomenout na zpětné lomítko před lomítkem.
 
+Uvažujme, že máme program, do kterého nějaký programátor vložil proměnnou `magickaKonstanta`. Víme, že proměnná je desetinné číslo, ale potřebujeme vědět, kde je zadána její hodnota. Napiš regulární výraz, který najde řádek, který 
+
+```
+polomer = input("Zadej poloměr koule: ")
+polomer = int(polomer)
+magickaKonstanta = 3.1415
+objem = 4/3 * magickaKonstanta * polomer ** 3
+povrch = 4 * magickaKonstanta * r ** 2
+```
+
+Zkus si program zkopírovat do Visual Studia a vyzkoušej si vyhledávání přepnout na regulární výrazy. Najde regulární výraz `magickaKonstanta = \d+\.\d*` správný řádek?
+
 ### Rozmezí
 
 Kromě výpisu znaků a předdefinovanými skupiny můžeme ještě vybrat znaky pomocí rozmezí. K tomu použijeme pomlčku, kterou vepíšeme do hranatých závorek. Například čísla od 1 do 5 napíšeme jako `[1-5]`, malá písmena od `[a-e]` a všechna velká písmena jako `[A-Z]`.
+
+Pokud například víme, že se na nějaké střední školy vyskytují třídy označené od A do M, regulární výraz pasující na všechna jména tříd je `[1-4][A-M]`.
 
 Pokud potřebujeme zajistit, opakování určité sekvence znaků (ne jen znaku jednoho), můžeme sekvenci znaků uzavřít do kulatých závorek `( )` a za pravou závorku umístit kvantifikátor. Pokud máme variant více, můžeme k jejich oddělení použít znak `|`. Například pokud chceme vybrat oba víkendové dny, napíšme `(sobota|neděle)`.
 
@@ -135,8 +149,7 @@ Podívejme se nyní na pár příkladů. Níže máme tabulku s kurzy Czechitas.
 
 * Chceme jít na kurz programování v Pythonu nebo v JavaScriptu. Kurz musí být pro začátečníky. Řádky, které nás zajímají, vyhledáme pomocí `Úvod do programování 1 - (JavaScript|Python)`. Co kdyby nám nevadil ani navazující kurz?
 * Uvažujme, že nás zajímají pouze kurzy o víkendu. Vyzkoušíme si výraz `(sobota|neděle)`. Můžeme k povoleným dnům přidat ještě úterý?
-* Protože se nám o víkendu nechce příliš brzy vstávat, chceme víkendové kurzy, které začínají nejdříve v 8:30. Napíšeme `(sobota|neděle) [89]:30`. Co kdybychom naopak chtěji kurzy, které začínají nejpozději v 8:30?
-* Poštovní směrovací číslo označíme výrazem `\d{3} ?\d{2}`.
+* Protože se nám o víkendu nechce příliš brzy vstávat, chceme víkendové kurzy, které začínají nejdříve v 8:30. Napíšeme `(sobota|neděle) [89]:30`. Co kdybychom naopak chtěji kurzy, které začínají nejpozději v 8:30
 * Napíšeme si regulární výraz, který označí všechna data ve formátu, jaký je v tabulce. Můžeme například použít výraz `\d{1,2}\. (led|úno). 2021`. Do závorky bychom pro rozvrh na celý rok potřebovali přidat zkratky všech měsíců.
 
 ```
@@ -150,6 +163,9 @@ Podívejme se nyní na pár příkladů. Níže máme tabulku s kurzy Czechitas.
 14. úno. 2021 neděle 8:30 - 17:30 Úvod do programování 1 - Python ONLINE
 20. úno. 2021 sobota 9:30 - 17:30 Testuju Úvod do testování - manuální
 ```
+
+* Poštovní směrovací číslo označíme výrazem `\d{3} ?\d{2}`.
+* Regulární výraz, který rozpozná všechny paragrafy, které mají maximálně tři čísla, je `§\d{3}`.
 
 ## Cvičení
 
@@ -209,6 +225,17 @@ Napiš regulární výraz, který z následujícího řádku vybere celé názvy
 Ministerstvo pro místní rozvoj, Celní správa České republiky, Ministerstvo životního prostředí, Ministerstvo práce a sociálních věcí, Český statistický úřad, Nejvyšší kontrolní úřad
 ```
 
+### Slavný soude
+
+Spisová značka, tj. označení spisu u soudu, má zpravidla následující formát:
+
+* číslo soudního oddělení (např. 1 až 2 čísla),
+* rejstříková značka (např. jedno až tři velká písmena),
+* běžné číslo, podle toho kdy k soudu věc přišla (např. 1 až 4 čísla),
+* za lomítkem daný ročník (4 čísla).
+
+Může vypadat například takto: 63 C 397/2014. Napiš regulární výraz a na tomto příkladu jej vyzkoušej.
+
 ## Regulární výrazy v Pythonu
 
 V Pythonu máme řadu funkcí, které můžeme použít pro práci s regulárními výrazy. Projdeme si ty základní. Funkce jsou v modulu `re`, který je součástí Pythonu a můžeš ho importovat pomocí příkazu `import re` na začátku programu.
@@ -263,9 +290,70 @@ print(regularniVyraz.fullmatch(rezetec))
 
 ### Zapojení podmínky
 
-Pojďme nyní zapojit do akce podmínku. Můžeme třeba uživateli vypsat, jestli jím zadaná hodnota je správná.
+Pojďme nyní zapojit do akce podmínku. Můžeme třeba uživateli vypsat, jestli jím zadaná hodnota je správná. Výsledek volání funkce `match()` můžeme vložit přímo do podmínky, protože podmínka, které nevložíme operátor na porovnávání (např. `==`) funguje takto:
+
+* Pokud podmínce vložíme nějaký smysluplný výraz, vyhodnotí ho jako **pravda**.
+* Pokud podmínce vložíme prázdnou hodnotu `None`, vyhodnotí ji jako **nepravda**.
+
+```py
+import re
+
+regularniVyraz = re.compile(r"\d{9,10}")
+vstup = input("Zadej rodné číslo: ")
+hledani = regularniVyraz.fullmatch(vstup)
+if hledani:
+    print("Rodné číslo je v pořádku!")
+else:
+    print("Nesprávné rodné číslo!")
+```
+
+### E-maily
 
 Pokud např. dostaneme e-mail `info@czechitas.cz`, víme, že je v pořádku. E-mail `info@czechitascz` by ale v pořádku nebyl, protože "koncovka" `"cz"` (v řeči počítačů doména prvního řádu) musí být oddělena tečkou.
+
+```py
+import re
+
+regularniVyraz = re.compile(r"\w+@\w+\.cz")
+email = input("Zadej e-mail: ")
+hledani = regularniVyraz.fullmatch(email)
+if hledani:
+    print("Rodné číslo je v pořádku!")
+else:
+    print("Nesprávné rodné číslo!")
+```
+
+### Vyhledávání
+
+Kromě ověřování správného formátu můžeme použít regulární výrazy i k vyhledávání. Například funkce `findall` vrátí ze zadaného řetězce všechny řetězece, které odpovídají danému regulárnímu výrazu, jako seznam.
+
+Následující program například z deníku lékaře vyhledá rodná čísla všech pacientů, které lékař zmínil.
+
+```py
+zapis = """
+Zápisy o provedených vyšetřeních:
+Pacient 6407156800 trpěl bolestí zad a byl poslán na vyšetření. 
+Pacientka 8655057477 přišla na kontrolu po zranění kontníku.
+Do ordinace telefonovala pacientka 7752126712, které byl elektronicky vydán recept na Paralen. 
+"""
+import re
+regularniVyraz = re.compile(r"\d{9,10}")
+vysledky = regularniVyraz.findall(zapis)
+for vysledek in vysledky:
+    print(vysledek)
+```
+
+Uvažujme, že máme nějakém textu provést anonymizaci, tj. vymazat všechny osobní údaje. Rodné
+
+## Cvičení
+
+### Uživatelské jméno
+
+Náš systém vyžaduje od uživatele zadání uživatelského jména. Uživatelské jméno smí obsahovat pouze malá písmena a smí být maximálně 8 znaků dlouhé. Požádej uživatele o zadání uživatelského jména a pomocí regulárního výrazu vyhodnoť, zda je zadané správné.
+
+### E-mail s tečkou
+
+Uprav program na ověření e-mailu tak, aby akceptoval i e-maily, které mají v první části tečku, např jiri.pesik@python.cz.
 
 
 match()
