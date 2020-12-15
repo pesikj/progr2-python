@@ -325,7 +325,7 @@ else:
 
 ### Vyhledávání
 
-Kromě ověřování správného formátu můžeme použít regulární výrazy i k vyhledávání. Například funkce `findall` vrátí ze zadaného řetězce všechny řetězece, které odpovídají danému regulárnímu výrazu, jako seznam.
+Kromě ověřování správného formátu můžeme použít regulární výrazy i k vyhledávání. Například funkce `findall` vrátí ze zadaného řetězce všechny podřetězece, které odpovídají danému regulárnímu výrazu, jako seznam.
 
 Následující program například z deníku lékaře vyhledá rodná čísla všech pacientů, které lékař zmínil.
 
@@ -343,7 +343,22 @@ for vysledek in vysledky:
     print(vysledek)
 ```
 
-Uvažujme, že máme nějakém textu provést anonymizaci, tj. vymazat všechny osobní údaje. Rodné
+### Nahrazování
+
+Uvažujme, že máme nějakém textu provést anonymizaci, tj. vymazat všechny osobní údaje. K tomu můžeme využít funkci `sub()`, která nahradí všechny podřetězce, které odpovídají regulárnímu výrazu, námi zadanou hodnotou.
+
+```py
+zapis = """
+Zápisy o provedených vyšetřeních:
+Pacient 6407156800 trpěl bolestí zad a byl poslán na vyšetření. 
+Pacientka 8655057477 přišla na kontrolu po zranění kontníku.
+Do ordinace telefonovala pacientka 7752126712, které byl elektronicky vydán recept na Paralen. 
+"""
+import re
+regularniVyraz = re.compile(r"\d{9,10}")
+anonymniZapis = regularniVyraz.sub("X" * 9, zapis)
+print(anonymniZapis)
+```
 
 ## Cvičení
 
@@ -355,19 +370,19 @@ Náš systém vyžaduje od uživatele zadání uživatelského jména. Uživatel
 
 Uprav program na ověření e-mailu tak, aby akceptoval i e-maily, které mají v první části tečku, např jiri.pesik@python.cz.
 
+### Záznamy
 
-match()
+Uvažujme aplikaci, která si ukládá informace o činnosti uživatelů do textového souboru. Příklad souboru je níže.
 
-Determine if the RE matches at the beginning of the string.
+```py
+zaznamy = """
+searchNumber: 
+searchNumber: pavca.czechitas action: search phone number of user dita
+user: pavca action: send sms to phone number +420728123456
+user: jirka: action: send 2 sms to phone number +420734123456
+"""
+```
 
-search()
+* Napiš program, který vypíše všechna telefonní čísla, která jsou v textovém souboru zmíněna.
+* Nahraď tato telefonní čísla nějakým řetězcem (např. "XXX"), aby nebyla v záznamech dostupná.
 
-Scan through a string, looking for any location where this RE matches.
-
-findall()
-
-Find all substrings where the RE matches, and returns them as a list.
-
-finditer()
-
-Find all substrings where the RE matches, and returns them as an iterator.
