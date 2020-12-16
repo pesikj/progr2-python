@@ -236,6 +236,21 @@ Spisová značka, tj. označení spisu u soudu, má zpravidla následující for
 
 Může vypadat například takto: 63 C 397/2014. Napiš regulární výraz a na tomto příkladu jej vyzkoušej.
 
+### Ave, Caesar!
+
+Římské číslice se dodnes používají například pro označení století, pořadí panovníků a papežů atd. Zkus sestavit regulární výraz, který zachytí římské číslice od 1 (I) do 10 (X).
+
+```
+IX. století
+Matematika pro VII. třídu
+Game of Thrones III
+Karel IV.
+papež Benedict V.
+Bělá je X. část statutárního města Děčín.
+III. patro
+II. stupeň povodňové aktivity
+```
+
 ## Regulární výrazy v Pythonu
 
 V Pythonu máme řadu funkcí, které můžeme použít pro práci s regulárními výrazy. Projdeme si ty základní. Funkce jsou v modulu `re`, který je součástí Pythonu a můžeš ho importovat pomocí příkazu `import re` na začátku programu.
