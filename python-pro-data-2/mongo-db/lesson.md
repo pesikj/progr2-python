@@ -1,0 +1,213 @@
+Databáze je systém, který slouží k ukládání dat. Standardní relační databáze ukládají data do předem definovaých tabulek, které jsou provázány vztahy (odtud pojem "relační"). Nejznámější zdarma dostupné databáze jsou PostreSQL, MySQL a SQLite, z placených poté Microsoft SQL Server nebo Oracle Database. Pro práci s databázemi používáme jazyk SQL (Structured Query Language).
+
+## Ukládání dat
+
+NoSQL databáze jsou poměrně široký pojem a zahrnuje různé typy databází, které používají jiný způsob ukládání dat než tabulky provázané relacemi. Konkrétně existuje několik typů NoSQL databází.
+
+* Key-value databáze ukládají data do dvojic, kde jeden prvek (klíč) identifikuje hodnotu (value). Na stejném principuje fungují například slovníky v Pythonu.
+* Grafové databáze vycházejí z teorie grafů. To je součást matematiky, která se zabývá strukturami složenými z bodů (vrcholů) a spojnic mezi nimi (hranami). Pomocí teorie grafů lze řešit například dopravní úlohy. V grafu pak vrcholy symbolizují města a hrany vzdálenosti mezi nimi. Můžeme pak např. spočítat nejkratší trasu pro návštěvu několika měst. (Speciální případ, kdy navštěvujeme všechna města, se na nazývá problém obchodního cestujícího.)
+* Dokumentové databáze slouží k ukládání dokumentů, nejčastěji ve formátu JSON, XML nebo YAML.
+
+My se budeme zabývat databází MongoDB, což je dokumentová databáze využívající formát JSON.
+
+### Formát JSON
+
+Pojďme se nyní vrátit k našemu příkladu se spolubydlícími. Uvažujeme, že si chtějí svoje výdaje evidovat v databázi. Protože jsou ale poněkud neukáznění, ke každému nákupu si zapisuje různé věci. Např. někdo zapisuje datum nákupu, jiný poznámku, značku výrobku, jestli byl produkt v akci atd. Kvůli jejich kreativitě se rozhodli, že využijí NoSQL databázi, která jim dá větší volnost než klasická databáze. Domluvili se ale, že je nutné vždy uvést jméno kupujícího a cenu. Jednotlivé nákupy pak máme zapsané ve formátu JSON a naším úkolem je uložit je do databáze.
+
+Níže jsou informace o nákupu, jak je zaprotokoloval Petr.
+
+* jméno: Petr,
+* věc: Prací prášek,
+* částka v korunách: 399,
+* datum: 2020-03-04,
+* značka: Persil,
+* hmotnost: 7.8.
+
+Formát JSON taktéž připomíná slovníky v Pythonu. Data jsou uspořádána do dvojic - klíče a hodnoty. Níže vidíš, jak vypadají data zapsaná ve formátu JSON.
+
+```
+nakup = {
+    "Jméno": "Petr",
+    "Cena": 399,
+    "Věc": "Prací prášek",
+    "Datum": "2020-03-04",
+    "Značka": "Persil",
+    "Hmotnost": 7.8
+}
+```
+
+### Vložení jednoho záznamu
+
+Pojďme tento nákup zapsat do naší databáze. V jazyce SQL obvykle používáme příkaz `INSERT`. Názvem příkazu je inspirován i název funkce, kterou budeme používat my.
+
+Ještě malá poznámka ke struktuře. Každá databázový server může obsahovat několik databází (např. máme různé databáze pro různé zákazníky, programy, oddělení atd.). V MongoDB se každá databáze skládá z kolekcí (v relačních databázích se skládá z tabulek) a každá kolekce se skládá z dokumentů (v relačních databázích se tabulka skládá z řádků). Chceme-li něco ukládat, musíme nejprve vytvořit nebo zvolit databázi a kolekci, aby MongoDB vědělo, kam dokument vložit.
+
+K připojení k databázi použijeme modul `pymongo`, který je potřeba importovat příkazem `import`. Následně musíme zadat adresu serveru, uživatelské jméno a heslo. Tyto informace zjistíš během kurzu. Po přihlášení vytvoříme klienta, který bude prostředníkem mezi námi a MongoDB serverem. Následně vybereme konkrétní databázi a kolekci.
+
+```py
+import pymongo
+nakup = {
+    "Jméno": "Petr",
+    "Věc": "Prací prášek",
+    "Částka v korunách": 399,
+    "Datum": "2020-03-04",
+    "Značka": "Persil",
+    "Hmotnost": 7.8
+}
+
+userName = ""
+password = ""
+address = ""
+myclient = pymongo.MongoClient(f"mongodb://{userName}:{password}@{address}:27017/?")
+databaze = klient[""]
+kolekce = databaze[""]
+id = kolekce.insert_one(nakup)
+print(id)
+```
+
+Ke vložení dokumentu do kolekce použijeme funkce `insert_one()`, která slouží ke vložení jednoho dokumentu. Funkce vrací hodnotu `id`, což je jednoznačný identifikátor našeho záznamu. Samotné ID nám toho moc neřekne, jeho hodnota je například `5fda6f16e6aeccec0ef40b87`.
+
+### Vložení více záznamů
+
+Nyní zkusme vložit více záznamů najednou. Zbývající nákupy máme v proměnné, která se jmenuje `zbyvajici_nakupy`. Tato proměnná obsahuje seznam, což poznáme podle hranatých závorek na začátku a na konci. Seznam se skládá ze slovníků, které mají různé klíče podle toho, co kdo považoval za důležité.
+
+```py
+zbyvajici_nakupy = [
+    {
+        "Jméno": "Petr",
+        "Věc": "Toaletní papír",
+        "Částka v korunách": 65,
+        "Počet rolí": 6,
+    },
+    {
+        "Jméno": "Libor",
+        "Věc": "Pivo",
+        "Částka v korunách": 124,
+        "Vratná záloha": 20,
+        "Datum": "2020-03-01",
+        "Poznámka": "Vrátit otevírák sousedům",
+    },
+    {
+        "Jméno": "Petr",
+        "Věc": "Pytel na odpadky",
+        "Částka v korunách": 75,
+        "Objem pytle": 10,
+        "Upozornění": "Příště koupit větší!!!",
+    },
+    {
+        "Jméno": "Míša",
+        "Věc": "Utěrky na nádobí",
+        "Částka v korunách": 130,
+        "Barva": "modrá",
+        "Počet kusů v balení": 10,
+    },
+    {
+        "Jméno": "Ondra",
+        "Věc": "Toaletní papír",
+        "Částka v korunách": 120,
+        "Počet rolí": 15,
+        "Běžná cena": 150,
+        "Délka v metrech": 30,
+    },
+    {
+        "Jméno": "Míša",
+        "Věc": "Pečící papír",
+        "Částka v korunách": 30,
+        "Místo nákupu": "Albert",
+        "Poznámka": "Peče celá země",
+    },
+    {
+        "Jméno": "Zuzka",
+        "Věc": "Savo",
+        "Částka v korunách": 80,
+        "Poznámka": "Dokoupit rukavice",
+    },
+    {
+        "Jméno": "Pavla",
+        "Věc": "Máslo",
+        "Částka v korunách": 50,
+        "Datum trvanlivosti": "2020-05-01",
+    },
+    {
+        "Jméno": "Ondra",
+        "Věc": "Káva",
+        "Částka v korunách": 300,
+        "Počet kusů": 2,
+        "Značka": "Davidoff",
+        "Poznámka": "Nejvíc vypila Míša",
+    },
+]
+
+kolekce.insert_many(zbyvajici_nakupy)
+```
+
+Více záznamů vložíme pomocí funkce `insert_many()`, které předáme náš seznam.
+
+## Cvičení
+
+### Každý má svou pravdu
+
+Uvažujme data o třech divadelních hrách, která jsou v následující tabulce.
+
+
+| Představení        | Délka v minutách | Premiéra | Derníéra |
+| ------------------ |-----------------:| ---------| ---------|
+| Modrovous          |               70 | 2018-12-15 |        |
+| Každý má svou pravdu |                | 2020-02-08 |        |
+| Expres na záped    |              120 |          | 2019-11-13 |
+
+Splň následující úkoly.
+
+* Přepiš tato data to tří slovníků. Pokud nějaký sloupec nemá hodnotu, vynech ho.
+* Vlož jednotlivé slovníky postupně do své databáze do kolekce `hry`.
+* Nechci si na obrazovku vypsat ID alespoň jednoho vloženého dokumentu.
+
+### Knihovna
+
+Níže jsou informace o třech různých knihách.
+
+První kniha:
+* Název: Smrt bere jackpot	
+* Žánr: Detektivní příběh
+* Počet stran: 542
+* Oběť: Freddy Brower
+* Vrah: Leon Lamarr
+* Motiv: Výhra v loterii
+
+Druhá kniha:
+* Název: Zaklínač I. - Poslední přání
+* Autor: Andrzej Sapkowski
+* Žánr: Fantasy
+* Počet povídek: 8
+* Počet stran: 274
+
+Třetí kniha:
+* Název: Matyáš Sandorf
+* Podtitul: Nový hrabě Monte Christo
+* Autor: Jules Verne
+* Počet stran: 442
+* První vydání: 1885
+
+Přepiš informace do slovníků a tyto slovníky vlož do jednoho seznamu. Tento seznam pak vlož najednou do kolekce `knihy` funkcí `insert_many()`.
+
+## Čtení dat
+
+Zatím jsme data pouze vkládali, nyní je zkusíme přečíst. Ve světě relačních databází používáme ke čtení příkaz `SELECT`. Většinou nechceme načíst všechna data v tabulce (kolekci), ale pouze jejich část. Nyní si ukážeme, jak nastavit, jaká data chceme získat.
+
+### Test načtení dat
+
+K načtení jednoho záznamu použijeme funkci `find_one()`. Pokud funkci nedáme žádný parametr, vrátí nám první záznam z kolekce.
+
+```py
+vysledek = kolekce.find_one()
+print(vysledek)
+```
+
+Funkce vrátí první vložený záznam, který obsahuje námi zadané hodnoty a vygenerované ID.
+
+### Sestavení dotazu
+
+Na MongoDB a modulu `pymongo` je sympatické, že pro dotazy používáme slovník. Dotazy tedy píšeme stejně, jako když připravujeme data pro vložení.
+
+## Úprava dat
+
