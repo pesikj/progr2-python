@@ -1,5 +1,13 @@
 Databáze je systém, který slouží k ukládání dat. Standardní relační databáze ukládají data do předem definovaých tabulek, které jsou provázány vztahy (odtud pojem "relační"). Nejznámější zdarma dostupné databáze jsou PostreSQL, MySQL a SQLite, z placených poté Microsoft SQL Server nebo Oracle Database. Pro práci s databázemi používáme jazyk SQL (Structured Query Language).
 
+Hlavní motivace, proč používat databáze, jsou:
+
+* umožňují efektivně uložit velké množství dat,
+* poskytují způsob, jak snadno a rychle najít požadovatnou informaci,
+* snadno můžeme přidávat, upravovat, řadit a mazat záznamy,
+* umožňují propojení s aplikacemi (např. weby),
+* řeší přístup více uživatelů najednou,
+* zajišťují zabezpečení dat.
 ## Ukládání dat
 
 NoSQL databáze jsou poměrně široký pojem a zahrnuje různé typy databází, které používají jiný způsob ukládání dat než tabulky provázané relacemi. Konkrétně existuje několik typů NoSQL databází.
@@ -9,6 +17,8 @@ NoSQL databáze jsou poměrně široký pojem a zahrnuje různé typy databází
 * Dokumentové databáze slouží k ukládání dokumentů, nejčastěji ve formátu JSON, XML nebo YAML.
 
 My se budeme zabývat databází MongoDB, což je dokumentová databáze využívající formát JSON.
+
+Kromě NoSQL databází se v poslední době objevil blockchain, což je způsob ukládání dat, kdy již vložené záznamy nelze nijak upravit.
 
 ### Formát JSON
 
@@ -107,13 +117,13 @@ zbyvajici_nakupy = [
         "Částka v korunách": 120,
         "Počet rolí": 15,
         "Běžná cena": 150,
-        "Délka v metrech": 30,
     },
     {
         "Jméno": "Míša",
         "Věc": "Pečící papír",
         "Částka v korunách": 30,
         "Místo nákupu": "Albert",
+        "Délka v metrech": 30,
         "Poznámka": "Peče celá země",
     },
     {
@@ -207,7 +217,41 @@ Funkce vrátí první vložený záznam, který obsahuje námi zadané hodnoty a
 
 ### Sestavení dotazu
 
-Na MongoDB a modulu `pymongo` je sympatické, že pro dotazy používáme slovník. Dotazy tedy píšeme stejně, jako když připravujeme data pro vložení.
+Na MongoDB a modulu `pymongo` je sympatické, že pro dotazy používáme slovník. Dotazy tedy píšeme stejně, jako když připravujeme data pro vložení. Zkusme třeba napsat dotaz na nákupy, které provedl Libor. Dotaz ve formě slovníku předáme funkce `find_one()`.
+
+```py
+dotaz = {"Jméno": "Libor"}
+vysledek = kolekce.find_one(dotaz)
+print(vysledek)
+```
+
+Většinou chceme vrátit všechny řádky, které odpovídají našemu dotazu. K tomu slouží funkce `find()`. Ta nám vrátí všechny dokumenty, které odpovídají našemu dotazu, jako seznam. Seznam poté můžeme projít pomocí cyklu.
+
+```py
+dotaz = {"Jméno": "Petr"}
+vysledek = kolekce.find(dotaz)
+for dokument in vysledek:
+    print(dokument)
+```
+Pokud chceme požadovaný dokument vybrat na základě více klíčů, jednoduše z těchto klíčů sestavíme slovník.
+
+```py
+dotaz = {"Jméno": "Petr", "Věc": "Toaletní papír"}
+vysledek = kolekce.find(dotaz)
+for dokument in vysledek:
+    print(dokument)
+```
+
+### Další možnosti dotazů
+
+Někdy potřebujeme do jednoho dotazu vložit více možných hodnot pro jeden klíč.
+
+```py
+dotaz = {"Jméno": {"$in": ["Libor", "Míša"]}}
+vysledek = kolekce.find(dotaz)
+for dokument in vysledek:
+    print(dokument)
+```
 
 ## Úprava dat
 
