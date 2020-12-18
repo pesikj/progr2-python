@@ -10,7 +10,6 @@ Pokud používáme MacOS nebo Linux, napíšeme:
 
 ```shell
 $ pip3 install pymongo
-$ pip3 install matplotlib
 ```
 
 Instalace bude trvat jen pár sekund. Terminál během instalace vypíše spoustu textu. Někde na konci bychom pak měli vidět text
@@ -24,8 +23,8 @@ Successfully installed pymongo-3.11.2
 Pokud Python reaguje chybou `ModuleNotFoundError` (viz níže), pak se instalace nepodařila.
 
 ```
->>> import pandas
+>>> import pymongo
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
-ModuleNotFoundError: No module named 'pandas'
+ModuleNotFoundError: No module named 'pymongo'
 ```
