@@ -121,7 +121,7 @@ Nyní už umíme sestavit výraz, kterým vybereme celý řádek s kurzem dolaru
 * lomítko,
 * kód banky (právě 4 číslice).
 
-Pokud bychom neuvažovali předčíslí, stačí nám regulární výraz `\d{6,10}\/\d{4}`, který by měl pasovat např. na číslo účtu 2300117015/2010. Nesmíme zapomenout na zpětné lomítko před lomítkem.
+Pokud bychom neuvažovali předčíslí, stačí nám regulární výraz `\d{6,10}/\d{4}`, který by měl pasovat např. na číslo účtu 2300117015/2010. Nesmíme zapomenout na zpětné lomítko před lomítkem.
 
 Uvažujme, že máme program, do kterého nějaký programátor vložil proměnnou `magickaKonstanta`. Víme, že proměnná je desetinné číslo, ale potřebujeme vědět, kde je zadána její hodnota. Napiš regulární výraz, který najde řádek, který 
 
