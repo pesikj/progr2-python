@@ -66,12 +66,13 @@ nakup = {
     "Hmotnost": 7.8
 }
 
-userName = ""
-password = ""
-address = ""
-myclient = pymongo.MongoClient(f"mongodb://{userName}:{password}@{address}:27017/?")
-databaze = klient[""]
-kolekce = databaze[""]
+uzivatelskeJmeno = ""
+heslo = ""
+adresa = ""
+databaze = ""
+adresaServeru = ""
+myclient = pymongo.MongoClient(f"mongodb://{uzivatelskeJmeno}:{heslo}@{adresa}:27017/{adresaServeru}")
+kolekce = myclient[""]
 id = kolekce.insert_one(nakup)
 print(id)
 ```
@@ -305,3 +306,14 @@ kolekce.update(dotaz, noveHodnoty)
 
 ## Úkoly
 
+### Expres na západ
+
+* Načti z kolekce `hry` informace o hře Expres na západ, které jsi uložila v předchozím bolku cvičení.
+* Doplň k této hře datum premiéry 2015-11-10.
+* Ověř, že byla data správně uložena.
+
+### Hodnocení knih
+
+* Z předem připravené kolekce `goodreads`, která obsahuje knihy a jejich hodnocení na webu Goodreads.com, načti první dostupný dokument pomocí funkce `find_one()`.
+* Napiš dotaz na knihy, jejichž autorem (pole `authors`) je spisovatel "Robert Graves".
+* Načti všechny knihy dle daného dotazu a vypiš informace o nich na obrazovku.
