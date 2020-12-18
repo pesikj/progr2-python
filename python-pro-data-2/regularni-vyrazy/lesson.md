@@ -1,16 +1,16 @@
 Regulární výrazy jsou v podstatě malí "kouzelníci", kteří nám umožní vytáhnout z textu důležitá data. Často například dostaneme celou adresu jako jeden řetězec, například jako "Václavské nám. 837/11, 110 00 Nové Město" a my potřebujeme z adresy vytáhnout poštovní směrovací číslo, abychom zhruba věděli, kde se dané místo nachází.
 
-O poštovním směrovacím čísle víme, že je složeno z pěti číslic a většinou (ale ne vždy) ho zapisujeme s mezerou mezi třetím a čtvrtém čísle. Potřebujeme tedy nějak obecně říct, že máme z textu vybrat pětici čísel, která může mít mezi třetím a čtvrtým číslem mezeru.
+O poštovním směrovacím čísle víme, že je složeno z pěti číslic a většinou (ale ne vždy) ho zapisujeme s mezerou mezi třetím a čtvrtém čísle. Potřebujeme tedy nějak obecně říct, že máme z textu vybrat pětici čísel, která může mít mezi třetím a čtvrtým číslem mezeru. K řešení takových uloh slouží regulární výrazy.
 
 ## Jak fungují regulární výrazy
 
-Regulární výrazy umožňují používání symbolů, které mohou zastoupit nějaký znak (nebo více znaků). Fungují podobně jako třeba žolík v karetní hře nebo hvězdička ve vyhledávání souborů, umoňují ale přesněji specifikovat, co vlastně zastupují. Práci s regulárními výrazy si můžeme pohodlně trénovat například v aplikaci [Regular Expressions 101](https://regex101.com/). Do pole "Regular Expression" zadáváme reguálrní výraz a do pole "Text String" řetězec, se kterým pracujeme. Aplikace nám interaktivně podbarvuje části textu, které odpovídají našemu výrazu. Protože regulární výrazy se v různých programovacích jazycích mírně liší, měli bychom si vlevo v části "Flavor" přepnout na Python.
+Regulární výrazy umožňují používání symbolů, které mohou zastoupit nějaký znak (nebo více znaků). Fungují podobně jako třeba žolík v karetní hře nebo hvězdička ve vyhledávání souborů, umoňují ale přesněji specifikovat, co vlastně zastupují. Práci s regulárními výrazy si můžeme pohodlně trénovat například v aplikaci [Regular Expressions 101](https://regex101.com/). Do pole "Regular Expression" zadáváme reguálrní výraz a do pole "Text String" řetězec, se kterým pracujeme. Aplikace nám interaktivně podbarvuje části textu, které odpovídají našemu výrazu. Protože regulární výrazy se v různých programovacích jazycích mírně liší, měli bychom si vlevo v části `Flavor` **přepnout na Python**.
 
 Oněm magickým znakům říkáme *metaznaky*. 
 
-### Kvantifikátory
+### Žolík
 
-Zkusme si to na příkladu tečky `.`. Tečka zastupuje **právě jeden** libovolný znak. Ta skutečně odpovídá právě "žolíku". Pokud tedy budeme pracovat s řetězecem `"A23456789JQKA"` a zadáme regulární výraz `"78.JQK"`, podbarví se nám část řetězce od `7` do `J`.
+Zkusme si to na příkladu tečky `.`. Tečka zastupuje **právě jeden** libovolný znak, přsně tedy odpovídá právě "žolíku". Pokud budeme pracovat s řetězecem `"A23456789JQKA"` a zadáme regulární výraz `"78.JQK"`, podbarví se nám část řetězce od `7` do `J`.
 
 Vyzkoušejme si nyní upravit program, který bude sledovat vývoj kurzu měn ve Směnárně Na Růžku, aby nám například poslal upozornění ve chvíli, kdy má nějaká měna výhodný kurz. Náš program zatím umí stáhnout informace do následující řetězce. 
 
@@ -32,9 +32,9 @@ Podívejme se nejprve na řádek, kde máme kurz Eura. Mohli bychom napsat pouze
 
 Pokud chceme, aby náš metaznak zastupoval jeden ze skupiny znaků, vložíme tyto znaky do hranatých závorek `[ ]`. Například pokud chceme v kurzovním lístku vyhledat řádky, které mají v sobě znak dolaru nebo eura, napíšeme `1 [€$]`.
 
-### Další kvantifikátory
+### Kvantifikátory
 
-Další významnou skupinou metaznaků jsou kvantifikátory. Kvantifikátorů máme několik, začneme se složenými závorkami `{ }`. Ty nám říkají, kolikrát se znak před kvantifikátrem v řetězci může opakovat. Pokud vložíme do závorek jedno číslo `{n}`, znamená to opakování právě *n*-krát. Pokud dvě čísla `{m,n}`, znamená to opakování minimálně *m*-krát a maximálně *n*-krát a pokud `{n,}`, znamená to opakování minimálně *n*-krát a maximální počet opakování není omezený. Platí, že regulární výrazy jsou **žravé**, tedy zaberou vždy maximální možný počet znaků.
+Další významnou skupinou metaznaků jsou kvantifikátory. Kvantifikátorů máme několik, začneme se složenými závorkami `{ }`. Ty nám říkají, kolikrát se znak před kvantifikátrem může opakovat. Pokud vložíme do závorek jedno číslo `{n}`, znamená to opakování právě *n*-krát. Pokud dvě čísla `{m,n}`, znamená to opakování minimálně *m*-krát a maximálně *n*-krát a pokud `{n,}`, znamená to opakování minimálně *n*-krát a maximální počet opakování není omezený. Platí, že regulární výrazy jsou **žravé**, tedy zaberou vždy maximální možný počet znaků.
 
 Pokud například chceme označit celou část našeho řádku s kurzem měn před symbolem `=`, napíšeme `1 [€$] {3}`. Mezera před složenými závorkami je důležitá, protože právě ona se má opakovat.
 
@@ -103,10 +103,10 @@ Víme, že v britské angličtině používáme pro barvu výraz "colour" a v am
 
 Podobně můžeme využít regulární výraz k "license" "licence", napíšeme `licen[cs]e`.
 
-Otazníky nám například pomůžou vypořádat se s nepovinnou mezerou, kterou píšeme například u data. U nás často používáme zápisy data 19. 12. 2020 nebo 19.12.2020. Pojďme sestavit regulární výraz:
+Otazníky nám pomůžou vypořádat se s nepovinnou mezerou, kterou píšeme například u data. U nás často používáme zápisy data 19. 12. 2020 nebo 19.12.2020. Pojďme sestavit regulární výraz:
 
 * Na začátku je číslo dne. Uvažujme, že tam může být jedno nebo dvě čísla. Použujeme množinu `\d` a kvantifikátor `{1,2}`.
-* Následuje tečka, kterou musíme zkrášlit zpětným lomítkem.
+* Následuje tečka, kterou musíme "zkrášlit" zpětným lomítkem.
 * Následuje nepovinná mezera. Zde využijeme kvantifikátor `?`.
 * Pak už opakujeme tu samou myšlenku, abychom sestavili celý výraz: `\d{1,2}\. ?\d{1,2}\. ?\d{4}`.
 
@@ -137,11 +137,11 @@ Zkus si program zkopírovat do Visual Studia a vyzkoušej si vyhledávání pře
 
 ### Rozmezí
 
-Kromě výpisu znaků a předdefinovanými skupiny můžeme ještě vybrat znaky pomocí rozmezí. K tomu použijeme pomlčku, kterou vepíšeme do hranatých závorek. Například čísla od 1 do 5 napíšeme jako `[1-5]`, malá písmena od `[a-e]` a všechna velká písmena jako `[A-Z]`.
+Kromě výpisu znaků a předdefinovaných skupin můžeme ještě vybrat znaky pomocí rozmezí. K tomu použijeme pomlčku, kterou vepíšeme do hranatých závorek. Například čísla od 1 do 5 napíšeme jako `[1-5]`, malá písmena od `[a-e]` a všechna velká písmena jako `[A-Z]`.
 
 Pokud například víme, že se na nějaké střední školy vyskytují třídy označené od A do M, regulární výraz pasující na všechna jména tříd je `[1-4][A-M]`.
 
-Pokud potřebujeme zajistit, opakování určité sekvence znaků (ne jen znaku jednoho), můžeme sekvenci znaků uzavřít do kulatých závorek `( )` a za pravou závorku umístit kvantifikátor. Pokud máme variant více, můžeme k jejich oddělení použít znak `|`. Například pokud chceme vybrat oba víkendové dny, napíšme `(sobota|neděle)`.
+Pokud potřebujeme zajistit opakování určité sekvence znaků (ne jen jednoho), můžeme sekvenci znaků uzavřít do kulatých závorek `( )` a za pravou závorku umístit kvantifikátor. Pokud máme variant více, můžeme k jejich oddělení použít znak `|`. Například pokud chceme vybrat oba víkendové dny, napíšme `(sobota|neděle)`.
 
 ### Další příklady
 
@@ -167,6 +167,8 @@ Podívejme se nyní na pár příkladů. Níže máme tabulku s kurzy Czechitas.
 * Poštovní směrovací číslo označíme výrazem `\d{3} ?\d{2}`.
 * Regulární výraz, který rozpozná všechny paragrafy, které mají maximálně tři čísla, je `§\d{3}`.
 
+**Tip:** Pokud chceme získat z webové stránky data jako texty, bez jakéhokoli formátování, můžeme použít jednu z on-line služeb, například [html2txt](https://www.w3.org/services/html2txt).
+
 ## Cvičení
 
 ### Předčíslí u čísla účtu
@@ -182,7 +184,7 @@ Nejmenovaná česká banka rozlišuje typy účtů podle číslic na začátku �
 
 ### Registrační značka
 
-Standardní egistrační značky automobilů, vydané od roku 2004, mají následující formát:
+Standardní registrační značky automobilů, vydané od roku 2004, mají následující formát:
 
 * Na prvním místě je číslo.
 * Na druhém místě písmeno, které označuje kraj.
@@ -232,7 +234,7 @@ Spisová značka, tj. označení spisu u soudu, má zpravidla následující for
 * číslo soudního oddělení (např. 1 až 2 čísla),
 * rejstříková značka (např. jedno až tři velká písmena),
 * běžné číslo, podle toho kdy k soudu věc přišla (např. 1 až 4 čísla),
-* za lomítkem daný ročník (4 čísla).
+* lomítko a za ním ročník (4 čísla).
 
 Může vypadat například takto: 63 C 397/2014. Napiš regulární výraz a na tomto příkladu jej vyzkoušej.
 
@@ -273,21 +275,9 @@ rezetec = "ahoj"
 print(regularniVyraz.match(rezetec))
 ```
 
-**Otázka:** Často je rodné číslo zapisováno ve formátu s podtržítkem, které odděluje datum narození od zbytku. Jak upravíme regulární výraz, aby akceptoval oba formáty, tj. formát s podtržítkem i bez potržítka?
-
 Pokud funkce `match` došla k závěru, že se řetězec shoduje s regulárním výrazem, vrátí objekt  `Match`. S ním později budeme pracovat. Pokud by však funkce došla k závěru, že se řetězce s regulárním výrazem neshoduje, vrátí hodnotu označovanou jako `None`, tj. prázdnou hodnotu.
 
-Funkce `match()` kontroluje řetězec od prvního znaku a pokud nenarazí na problém až do konce reguálního výrazu, vrátí objekt `Match`.
-
-```py
-import re
-regularniVyraz = re.compile(r"\d{9,10}")
-
-rezetec = "9511121234 je moje rodné číslo"
-print(regularniVyraz.match(rezetec))
-rezetec = "Moje rodné číslo je 9511121234"
-print(regularniVyraz.match(rezetec))
-```
+**Otázka:** Často je rodné číslo zapisováno ve formátu s podtržítkem, které odděluje datum narození od zbytku. Jak upravíme regulární výraz, aby akceptoval oba formáty, tj. formát s podtržítkem i bez potržítka?
 
 ### Přísnější ověření formátu
 
@@ -403,7 +393,6 @@ Uvažujme aplikaci, která si ukládá informace o činnosti uživatelů do text
 
 ```py
 zaznamy = """
-searchNumber: 
 searchNumber: pavca.czechitas action: search phone number of user dita
 user: pavca action: send sms to phone number +420728123456
 user: jirka: action: send 2 sms to phone number +420734123456
@@ -415,7 +404,7 @@ user: jirka: action: send 2 sms to phone number +420734123456
 
 ### Adresy stránek
 
-Adresy webových stránek zpravidla začínají záhadným shlukem písmen http:// nebo https://. Například náš web najdete pod adresou [http://nove.kodim.cz/](http://nove.kodim.cz/). Zkrátka HTTP nebo HTTPS je ve skutečnosti označení protokolu, což je nějaký popis toho, jak by měla vypadat komunikace mezi dvěma zařízeními. Standardního tvaru můžeme využít, abychom z textu vytáhli všechny adresy. Napiš program, který z proměnné `emailSRadami` vytáhne všechny webové stránky, které jsou tam zmíněny.
+Adresy webových stránek zpravidla začínají záhadným shlukem písmen http:// nebo https://. Například náš web najdete pod adresou [http://nove.kodim.cz](http://nove.kodim.cz). Zkrátka HTTP nebo HTTPS je ve skutečnosti označení protokolu, což je nějaký popis toho, jak by měla vypadat komunikace mezi dvěma zařízeními. Standardního tvaru můžeme využít, abychom z textu vytáhli všechny adresy. Napiš program, který z proměnné `emailSRadami` vytáhne všechny webové stránky, které jsou tam zmíněny.
 
 ```py
 emailSRadami = """
