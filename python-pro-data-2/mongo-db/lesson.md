@@ -72,7 +72,8 @@ adresa = ""
 databaze = ""
 adresaServeru = ""
 myclient = pymongo.MongoClient(f"mongodb://{uzivatelskeJmeno}:{heslo}@{adresa}:27017/{adresaServeru}")
-kolekce = myclient[""]
+databaze = myclient[""]
+kolekce = databaze["nakupy"]
 id = kolekce.insert_one(nakup)
 print(id)
 ```
