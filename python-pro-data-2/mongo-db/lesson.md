@@ -2,19 +2,20 @@ Databáze je systém, který slouží k ukládání dat. Standardní relační d
 
 Hlavní motivace, proč používat databáze, jsou:
 
-* umožňují efektivně uložit velké množství dat,
-* poskytují způsob, jak snadno a rychle najít požadovatnou informaci,
-* snadno můžeme přidávat, upravovat, řadit a mazat záznamy,
-* umožňují propojení s aplikacemi (např. weby),
-* řeší přístup více uživatelů najednou,
-* zajišťují zabezpečení dat.
+- umožňují efektivně uložit velké množství dat,
+- poskytují způsob, jak snadno a rychle najít požadovatnou informaci,
+- snadno můžeme přidávat, upravovat, řadit a mazat záznamy,
+- umožňují propojení s aplikacemi (např. weby),
+- řeší přístup více uživatelů najednou,
+- zajišťují zabezpečení dat.
+
 ## Ukládání dat
 
 NoSQL databáze jsou poměrně široký pojem a zahrnuje různé typy databází, které používají jiný způsob ukládání dat než tabulky provázané relacemi. Konkrétně existuje několik typů NoSQL databází.
 
-* Key-value databáze ukládají data do dvojic, kde jeden prvek (klíč) identifikuje hodnotu (value). Na stejném principuje fungují například slovníky v Pythonu.
-* Grafové databáze vycházejí z teorie grafů. To je součást matematiky, která se zabývá strukturami složenými z bodů (vrcholů) a spojnic mezi nimi (hranami). Pomocí teorie grafů lze řešit například dopravní úlohy. V grafu pak vrcholy symbolizují města a hrany vzdálenosti mezi nimi. Můžeme pak např. spočítat nejkratší trasu pro návštěvu několika měst. (Speciální případ, kdy navštěvujeme všechna města, se na nazývá problém obchodního cestujícího.)
-* Dokumentové databáze slouží k ukládání dokumentů, nejčastěji ve formátu JSON, XML nebo YAML.
+- Key-value databáze ukládají data do dvojic, kde jeden prvek (klíč) identifikuje hodnotu (value). Na stejném principuje fungují například slovníky v Pythonu.
+- Grafové databáze vycházejí z teorie grafů. To je součást matematiky, která se zabývá strukturami složenými z bodů (vrcholů) a spojnic mezi nimi (hranami). Pomocí teorie grafů lze řešit například dopravní úlohy. V grafu pak vrcholy symbolizují města a hrany vzdálenosti mezi nimi. Můžeme pak např. spočítat nejkratší trasu pro návštěvu několika měst. (Speciální případ, kdy navštěvujeme všechna města, se na nazývá problém obchodního cestujícího.)
+- Dokumentové databáze slouží k ukládání dokumentů, nejčastěji ve formátu JSON, XML nebo YAML.
 
 My se budeme zabývat databází MongoDB, což je dokumentová databáze využívající formát JSON.
 
@@ -26,12 +27,12 @@ Pojďme se nyní vrátit k našemu příkladu se spolubydlícími. Uvažujeme, �
 
 Níže jsou informace o nákupu, jak je zaprotokoloval Petr.
 
-* jméno: Petr,
-* věc: Prací prášek,
-* částka v korunách: 399,
-* datum: 2020-03-04,
-* značka: Persil,
-* hmotnost: 7.8.
+- jméno: Petr,
+- věc: Prací prášek,
+- částka v korunách: 399,
+- datum: 2020-03-04,
+- značka: Persil,
+- hmotnost: 7.8.
 
 Formát JSON taktéž připomíná slovníky v Pythonu. Data jsou uspořádána do dvojic - klíče a hodnoty. Níže vidíš, jak vypadají data zapsaná ve formátu JSON.
 
@@ -91,7 +92,7 @@ zbyvajici_nakupy = [
     },
     {
         "Jméno": "Libor",
-        "Věc": "Pivo",
+        "Věc": "Pivo na kolaudačku",
         "Částka v korunách": 124,
         "Vratná záloha": 20,
         "Datum": "2020-03-01",
@@ -159,44 +160,46 @@ Více záznamů vložíme pomocí funkce `insert_many()`, které předáme náš
 
 Uvažujme data o třech divadelních hrách, která jsou v následující tabulce.
 
-
-| Představení        | Délka v minutách | Premiéra | Derníéra |
-| ------------------ |-----------------:| ---------| ---------|
-| Modrovous          |               70 | 2018-12-15 |        |
-| Každý má svou pravdu |                | 2020-02-08 |        |
-| Expres na záped    |              120 |          | 2019-11-13 |
+| Představení          | Délka v minutách | Premiéra   | Derníéra   |
+| -------------------- | ---------------: | ---------- | ---------- |
+| Modrovous            |               70 | 2018-12-15 |            |
+| Každý má svou pravdu |                  | 2020-02-08 |            |
+| Expres na záped      |              120 |            | 2019-11-13 |
 
 Splň následující úkoly.
 
-* Přepiš tato data to tří slovníků. Pokud nějaký sloupec nemá hodnotu, vynech ho.
-* Vlož jednotlivé slovníky postupně do své databáze do kolekce `hry`.
-* Nechci si na obrazovku vypsat ID alespoň jednoho vloženého dokumentu.
+- Přepiš tato data to tří slovníků. Pokud nějaký sloupec nemá hodnotu, vynech ho.
+- Vlož jednotlivé slovníky postupně do své databáze do kolekce `hry`.
+- Nechci si na obrazovku vypsat ID alespoň jednoho vloženého dokumentu.
 
 ### Knihovna
 
 Níže jsou informace o třech různých knihách.
 
 První kniha:
-* Název: Smrt bere jackpot	
-* Žánr: Detektivní příběh
-* Počet stran: 542
-* Oběť: Freddy Brower
-* Vrah: Leon Lamarr
-* Motiv: Výhra v loterii
+
+- Název: Smrt bere jackpot
+- Žánr: Detektivní příběh
+- Počet stran: 542
+- Oběť: Freddy Brower
+- Vrah: Leon Lamarr
+- Motiv: Výhra v loterii
 
 Druhá kniha:
-* Název: Zaklínač I. - Poslední přání
-* Autor: Andrzej Sapkowski
-* Žánr: Fantasy
-* Počet povídek: 8
-* Počet stran: 274
+
+- Název: Zaklínač I. - Poslední přání
+- Autor: Andrzej Sapkowski
+- Žánr: Fantasy
+- Počet povídek: 8
+- Počet stran: 274
 
 Třetí kniha:
-* Název: Matyáš Sandorf
-* Podtitul: Nový hrabě Monte Christo
-* Autor: Jules Verne
-* Počet stran: 442
-* První vydání: 1885
+
+- Název: Matyáš Sandorf
+- Podtitul: Nový hrabě Monte Christo
+- Autor: Jules Verne
+- Počet stran: 442
+- První vydání: 1885
 
 Přepiš informace do slovníků a tyto slovníky vlož do jednoho seznamu. Tento seznam pak vlož najednou do kolekce `knihy` funkcí `insert_many()`.
 
@@ -233,6 +236,7 @@ vysledek = kolekce.find(dotaz)
 for dokument in vysledek:
     print(dokument)
 ```
+
 Pokud chceme požadovaný dokument vybrat na základě více klíčů, jednoduše z těchto klíčů sestavíme slovník.
 
 ```py
@@ -246,12 +250,12 @@ for dokument in vysledek:
 
 U číselných hodnot a dat chceme často formulovat dotaz obsahující nerovnost. Mohli bychom například chtít vypsat všechny nákupy v hodnotě větší než 100 Kč. MongoDB nepoužívá symboly `>` a `<`, ale jejich anglické zkratky. Například porovnání **větší než** zapisujeme jako `$gt`, což vychází z anglického "greater than". Dolar přidáváme, aby si MongoDB zkratku nespletlo s názvem sloupce. Kompletní přehled operátorů najdeš v tabulce níže.
 
-| Význam             | Zápis v Pythonu  | Zápis v MongoDB |
-| ------------------ |:----------------:|:--------------: | 
-| Větší než          |      `>`         | `$gt`           |
-| Menší než          |      `<`         | `$lt`           |
-| Větší nebo rovno   |      `>=`        | `$gte`          |
-| Menší nebo rovno   |      `<=`        | `$lte`          |
+| Význam           | Zápis v Pythonu | Zápis v MongoDB |
+| ---------------- | :-------------: | :-------------: |
+| Větší než        |       `>`       |      `$gt`      |
+| Menší než        |       `<`       |      `$lt`      |
+| Větší nebo rovno |      `>=`       |     `$gte`      |
+| Menší nebo rovno |      `<=`       |     `$lte`      |
 
 Operátor a hodnotu, se kterou chceme porovnávat, píšeme jako slovník, kde operátor je klíč `{"$gt": 100}`. To pak vložíme do dalšího slovníku, kterým určíme, pro jaký sloupec naše podmínka platí `{"Částka v korunách": {"$gt": 100}}`. Celý zápis tedy vypadá takto:
 
@@ -275,4 +279,29 @@ for dokument in vysledek:
 
 ## Úprava dat
 
-Často potřebujeme upravit již existující záznam.
+Často potřebujeme upravit již existující záznam. V jazyce SQL k tomu existuje příkaz `UPDATE`, MongoDB můžeme využít funkce `update_one()` nebo `update_many()`.
+
+### Úprava jednoho záznamu
+
+Při úpravách záznamů musíme vždy specifikovat, který záznam chceme upravit. Záznam, který chceme upravit, opět vybereme pomocí dotazu. Jednomu dotazu může vyhovovat více dokumentů. funkce `update_one()` však upraví pouze první vyhovující záznam, na který narazí. Úpravu hodnot specifikujeme jako slovník, do něhož vložíme dvojice klíče-hodnota stejně, jako když jsme vytvářeli nový záznam, např. takto: `{ "Poznámka": "Otevírák jsme vrátili. " }`. Podobně jako u dotazů pak použijeme operátor, který bude tvořit nadřazený slovník. Tentokrát použijeme operátor `$set`. Výsledný slovník pro úpravu dokumentu tedy vypadá takto: `{ "$set": { "Poznámka": "Otevírák jsme vrátili. " } }`.
+
+Níže vidíš sestavení obou slovníků a volání funkce `update_one()`.
+
+```py
+dotaz = { "Věc": "Pivo" }
+noveHodnoty = { "$set": { "Poznámka": "Otevírák jsme vrátili. " } }
+kolekce.update_one(dotaz, noveHodnoty)
+```
+
+### Úprava více záznamů
+
+Pokud našemu dotazu vyhovuje více dotazů a my chceme upravit všechny, použijeme funkci `update_many()`. Zadání pro ni připravíme stejně, tj. vytvoříme jeden slovník pro dotaz a další slovník jako popis toho, co má funkce upravit. Například víme, že Petr notoricky zapomíná na dodání účtenky, tak k jeho nákupům přidáme připomenutí.
+
+```py
+dotaz = { "Jméno": "Petr" }
+noveHodnoty = { "$set": { "Poznámka": "Chybí účtenka." } }
+kolekce.update(dotaz, noveHodnoty)
+```
+
+## Úkoly
+
