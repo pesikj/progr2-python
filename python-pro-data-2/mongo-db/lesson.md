@@ -242,9 +242,29 @@ for dokument in vysledek:
     print(dokument)
 ```
 
-### Další možnosti dotazů
+### Větší než, menší než...
 
-Někdy potřebujeme do jednoho dotazu vložit více možných hodnot pro jeden klíč.
+U číselných hodnot a dat chceme často formulovat dotaz obsahující nerovnost. Mohli bychom například chtít vypsat všechny nákupy v hodnotě větší než 100 Kč. MongoDB nepoužívá symboly `>` a `<`, ale jejich anglické zkratky. Například porovnání **větší než** zapisujeme jako `$gt`, což vychází z anglického "greater than". Dolar přidáváme, aby si MongoDB zkratku nespletlo s názvem sloupce. Kompletní přehled operátorů najdeš v tabulce níže.
+
+| Význam             | Zápis v Pythonu  | Zápis v MongoDB |
+| ------------------ |:----------------:|:--------------: | 
+| Větší než          |      `>`         | `$gt`           |
+| Menší než          |      `<`         | `$lt`           |
+| Větší nebo rovno   |      `>=`        | `$gte`          |
+| Menší nebo rovno   |      `<=`        | `$lte`          |
+
+Operátor a hodnotu, se kterou chceme porovnávat, píšeme jako slovník, kde operátor je klíč `{"$gt": 100}`. To pak vložíme do dalšího slovníku, kterým určíme, pro jaký sloupec naše podmínka platí `{"Částka v korunách": {"$gt": 100}}`. Celý zápis tedy vypadá takto:
+
+```py
+dotaz = {"Částka v korunách": {"$gt": 100}}
+vysledek = kolekce.find(dotaz)
+for dokument in vysledek:
+    print(dokument)
+```
+
+### Čtení na doma: Výběr hodnoty ze seznamu
+
+Někdy potřebujeme do jednoho dotazu vložit více možných hodnot pro jeden klíč. V MongoDB používáme operátor `in`. Operátor `in` známe i z Pythonu a jeho funkce je zde obdobná: ptáme se, jestli je hodnota klíče pro daný řádek přítomna v námi zadaném seznamu. Syntaxi najdeš na příkladu níže.
 
 ```py
 dotaz = {"Jméno": {"$in": ["Libor", "Míša"]}}
@@ -255,3 +275,4 @@ for dokument in vysledek:
 
 ## Úprava dat
 
+Často potřebujeme upravit již existující záznam.
