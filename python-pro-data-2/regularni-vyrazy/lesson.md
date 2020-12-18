@@ -236,6 +236,21 @@ Spisová značka, tj. označení spisu u soudu, má zpravidla následující for
 
 Může vypadat například takto: 63 C 397/2014. Napiš regulární výraz a na tomto příkladu jej vyzkoušej.
 
+### Ave, Caesar!
+
+Římské číslice se dodnes používají například pro označení století, pořadí panovníků a papežů atd. Zkus sestavit regulární výraz, který zachytí římské číslice od 1 (I) do 10 (X).
+
+```
+IX. století
+Matematika pro VII. třídu
+Game of Thrones III
+Karel IV.
+papež Benedict V.
+Bělá je X. část statutárního města Děčín.
+III. patro
+II. stupeň povodňové aktivity
+```
+
 ## Regulární výrazy v Pythonu
 
 V Pythonu máme řadu funkcí, které můžeme použít pro práci s regulárními výrazy. Projdeme si ty základní. Funkce jsou v modulu `re`, který je součástí Pythonu a můžeš ho importovat pomocí příkazu `import re` na začátku programu.
@@ -398,3 +413,14 @@ user: jirka: action: send 2 sms to phone number +420734123456
 * Napiš program, který vypíše všechna telefonní čísla, která jsou v textovém souboru zmíněna.
 * Nahraď tato telefonní čísla nějakým řetězcem (např. "XXX"), aby nebyla v záznamech dostupná.
 
+### Adresy stránek
+
+Adresy webových stránek zpravidla začínají záhadným shlukem písmen http:// nebo https://. Například náš web najdete pod adresou [http://nove.kodim.cz/](http://nove.kodim.cz/). Zkrátka HTTP nebo HTTPS je ve skutečnosti označení protokolu, což je nějaký popis toho, jak by měla vypadat komunikace mezi dvěma zařízeními. Standardního tvaru můžeme využít, abychom z textu vytáhli všechny adresy. Napiš program, který z proměnné `emailSRadami` vytáhne všechny webové stránky, které jsou tam zmíněny.
+
+```py
+emailSRadami = """
+Ahoj,
+posílám ti pár tipů, kam se podívat. https://realpython.com nabízí spoustu článků i kurzů. http://docs.python.org nabízí tutorial i rozsáhlou dokumentaci. http://www.learnpython.org nabízí hezky strukturovaný kurz pro začátečníky, rozebírá ale i nějaká pokročilejší témata. https://www.pluralsight.com je placený web, který ale kvalitou kurzů víceméně nemá konkurenci. Určitě ale sleduj i web https://www.czechitas.cz.
+
+"""
+```

@@ -8,3 +8,6 @@ lessons:
   - title: Regulární výrazy
     link: regularni-vyrazy
     brief: Ovládneme regulární výrazy, které nám umožní dělat kouzla při dolování dat z textů.
+  - title: Databáze MongoDB
+    link: mongo-db
+    brief: Vyzkoušíme si v jazyce Python pracovat s NoSQL databází MongoDB
