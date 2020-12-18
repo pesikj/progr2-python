@@ -343,6 +343,18 @@ for vysledek in vysledky:
     print(vysledek)
 ```
 
+Nyní máme zpracovat program, připraví informaci o pokutě pro majitele vozidla, který projel měřeným úsekem příliš rychle. V šabloně máme 
+
+```py
+zapis = """
+Vážený majiteli vozidla,
+náš rychlostní radar dne ${offenseDate} v ${offenseTime} hodin, který je umístěný na silnici ${road} ve směru jízdy ${direction}, 
+změřil, že  motorové vozidlo registrační značky ${lp} překročilo maximální povolenou rychlost v daném místě a pohybovalo se rychlostí ${speed}. ¨
+Za tento přestupek Vás vyzýváme k zaplacení pokuty ${fine} Kč. 
+Vyřizuje ${firstname} ${lastname}
+"""
+```
+
 ### Nahrazování
 
 Uvažujme, že máme nějakém textu provést anonymizaci, tj. vymazat všechny osobní údaje. K tomu můžeme využít funkci `sub()`, která nahradí všechny podřetězce, které odpovídají regulárnímu výrazu, námi zadanou hodnotou.
