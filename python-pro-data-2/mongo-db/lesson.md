@@ -14,7 +14,7 @@ Hlavní motivace, proč používat databáze, jsou:
 NoSQL databáze jsou poměrně široký pojem a zahrnuje různé typy databází, které používají jiný způsob ukládání dat než tabulky provázané relacemi. Konkrétně existuje několik typů NoSQL databází.
 
 - Key-value databáze ukládají data do dvojic, kde jeden prvek (klíč) identifikuje hodnotu (value). Na stejném principuje fungují například slovníky v Pythonu.
-- Grafové databáze vycházejí z teorie grafů. To je součást matematiky, která se zabývá strukturami složenými z bodů (vrcholů) a spojnic mezi nimi (hranami). Pomocí teorie grafů lze řešit například dopravní úlohy. V grafu pak vrcholy symbolizují města a hrany vzdálenosti mezi nimi. Můžeme pak např. spočítat nejkratší trasu pro návštěvu několika měst. (Speciální případ, kdy navštěvujeme všechna města, se na nazývá problém obchodního cestujícího.)
+- Grafové databáze vycházejí z teorie grafů. To je součást matematiky, která se zabývá strukturami složenými z bodů (vrcholů) a spojnic mezi nimi (hranami). Pomocí teorie grafů lze řešit například dopravní úlohy. V grafu pak vrcholy symbolizují města a hrany vzdálenosti mezi nimi. Můžeme pak např. spočítat nejkratší trasu pro návštěvu několika měst. (Speciální případ, kdy navštěvujeme všechna města, se na nazývá *problém obchodního cestujícího*.)
 - Dokumentové databáze slouží k ukládání dokumentů, nejčastěji ve formátu JSON, XML nebo YAML.
 
 My se budeme zabývat databází MongoDB, což je dokumentová databáze využívající formát JSON.
@@ -51,7 +51,7 @@ nakup = {
 
 Pojďme tento nákup zapsat do naší databáze. V jazyce SQL obvykle používáme příkaz `INSERT`. Názvem příkazu je inspirován i název funkce, kterou budeme používat my.
 
-Ještě malá poznámka ke struktuře. Každá databázový server může obsahovat několik databází (např. máme různé databáze pro různé zákazníky, programy, oddělení atd.). V MongoDB se každá databáze skládá z kolekcí (v relačních databázích se skládá z tabulek) a každá kolekce se skládá z dokumentů (v relačních databázích se tabulka skládá z řádků). Chceme-li něco ukládat, musíme nejprve vytvořit nebo zvolit databázi a kolekci, aby MongoDB vědělo, kam dokument vložit.
+Ještě malá poznámka ke struktuře. Každá databázový server může obsahovat několik **databází** (např. máme různé databáze pro různé zákazníky, programy, oddělení atd.). V MongoDB se každá databáze skládá z **kolekcí** (v relačních databázích se skládá z tabulek) a každá kolekce se skládá z **dokumentů** (v relačních databázích se tabulka skládá z řádků). Chceme-li něco ukládat, musíme nejprve vytvořit nebo zvolit databázi a kolekci, aby MongoDB vědělo, kam dokument vložit.
 
 K připojení k databázi použijeme modul `pymongo`, který je potřeba importovat příkazem `import`. Následně musíme zadat adresu serveru, uživatelské jméno a heslo. Tyto informace zjistíš během kurzu. Po přihlášení vytvoříme klienta, který bude prostředníkem mezi námi a MongoDB serverem. Následně vybereme konkrétní databázi a kolekci.
 
@@ -180,17 +180,14 @@ Níže jsou informace o třech různých knihách.
 První kniha:
 
 - Název: Smrt bere jackpot
-- Žánr: Detektivní příběh
 - Počet stran: 542
 - Oběť: Freddy Brower
 - Vrah: Leon Lamarr
-- Motiv: Výhra v loterii
 
 Druhá kniha:
 
 - Název: Zaklínač I. - Poslední přání
 - Autor: Andrzej Sapkowski
-- Žánr: Fantasy
 - Počet povídek: 8
 - Počet stran: 274
 
@@ -200,7 +197,6 @@ Třetí kniha:
 - Podtitul: Nový hrabě Monte Christo
 - Autor: Jules Verne
 - Počet stran: 442
-- První vydání: 1885
 
 Přepiš informace do slovníků a tyto slovníky vlož do jednoho seznamu. Tento seznam pak vlož najednou do kolekce `knihy` funkcí `insert_many()`.
 
@@ -322,3 +318,7 @@ kolekce.update(dotaz, noveHodnoty)
 ### Oprava chyby
 
 U dat je často nutné kontrolovat jejich správnost. Například datum může být uvedeno v nesprávném formátu nebo může být zadaný den, který neexistuje. V kolekci je `goodreads` jedna kniha, která má jako datum vydání (`publication_date`) nastavenou podivnou hodnotu 6/31/1982, tedy 31. června 1986. Zjisti, o jakou knihu jde. Uprav hodnotu na "7/1/1982". Zkontroluj, že se hodnota správně uložila.
+
+### Větší než
+
+Z kolekce `goodreads` získej všechny knihy, které získaly více než 2 milion hodnocení (`ratings_count`).

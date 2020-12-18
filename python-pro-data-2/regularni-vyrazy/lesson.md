@@ -10,7 +10,7 @@ Oněm magickým znakům říkáme *metaznaky*.
 
 ### Žolík
 
-Zkusme si to na příkladu tečky `.`. Tečka zastupuje **právě jeden** libovolný znak, přsně tedy odpovídá právě "žolíku". Pokud budeme pracovat s řetězecem `"A23456789JQKA"` a zadáme regulární výraz `"78.JQK"`, podbarví se nám část řetězce od `7` do `J`.
+Zkusme si to na příkladu tečky `.`. Tečka zastupuje **právě jeden** libovolný znak, přsně tedy odpovídá právě "žolíku". Pokud budeme pracovat s řetězecem `"A23456789JQKA"` a zadáme regulární výraz `"78.J"`, podbarví se nám část řetězce od `7` do `J`.
 
 Vyzkoušejme si nyní upravit program, který bude sledovat vývoj kurzu měn ve Směnárně Na Růžku, aby nám například poslal upozornění ve chvíli, kdy má nějaká měna výhodný kurz. Náš program zatím umí stáhnout informace do následující řetězce. 
 
@@ -73,7 +73,7 @@ Pro náš případ s výběrem řádků můžeme použít např. `1 [€$] +`.
 
 ### Skupiny znaků
 
-Ve většině případů potřebujeme pracovat nejen s konkrétním znakem nebo konkrétními znaky, ale skupinami znaků. Abychom si práci usnadnili a nemuseli používat příliš často hranaté závorky, existují předem definované skupiny znaků. Skupiny jsou celkem tři a ke každé z nich existuje i její "opak". Např. skupina `\d` označuje čísla a skupina `\D` označuje vše kromě čísel, tj. písmena, mezery, speciální znaky jako `€`, `$` atd. Přehled skunin najdeš zde:
+Ve většině případů potřebujeme pracovat nejen s konkrétním znakem nebo konkrétními znaky, ale skupinami znaků. Abychom si práci usnadnili a nemuseli používat příliš často hranaté závorky, existují předem definované skupiny znaků. Skupiny jsou celkem tři a ke každé z nich existuje i její "opak". Např. skupina `\d` označuje čísla a skupina `\D` označuje vše kromě čísel, tj. písmena, mezery, speciální znaky jako `€`, `$` atd. Přehled skupin najdeš zde:
 
 * `\d` zahrnuje číslice 0-9.
 * `\D` zahrnuje jakýkoliv znak kromě číslic 0-9
@@ -105,12 +105,12 @@ Podobně můžeme využít regulární výraz k "license" "licence", napíšeme 
 
 Otazníky nám pomůžou vypořádat se s nepovinnou mezerou, kterou píšeme například u data. U nás často používáme zápisy data 19. 12. 2020 nebo 19.12.2020. Pojďme sestavit regulární výraz:
 
-* Na začátku je číslo dne. Uvažujme, že tam může být jedno nebo dvě čísla. Použujeme množinu `\d` a kvantifikátor `{1,2}`.
+* Na začátku je číslo dne. Uvažujme, že tam může být jedno nebo dvě čísla. Použijeme množinu `\d` a kvantifikátor `{1,2}`.
 * Následuje tečka, kterou musíme "zkrášlit" zpětným lomítkem.
 * Následuje nepovinná mezera. Zde využijeme kvantifikátor `?`.
 * Pak už opakujeme tu samou myšlenku, abychom sestavili celý výraz: `\d{1,2}\. ?\d{1,2}\. ?\d{4}`.
 
-Často chceme označit několik slov do jednoho bloku. Skuina `\w` nezahrnuje mezery, musíme ji tedy rozšířit na `[\w ]*`. Například adresu `Václavské náměstí 11, 110 00 Nové Město` tak rozdělíme na dva samostatné bloky.
+Často chceme označit několik slov do jednoho bloku. Skupina `\w` nezahrnuje mezery, musíme ji tedy rozšířit na `[\w ]*`. Například adresu `Václavské náměstí 11, 110 00 Nové Město` tak rozdělíme na dva samostatné bloky.
 
 Nyní už umíme sestavit výraz, kterým vybereme celý řádek s kurzem dolaru nebo eura: `1 [€$] += +\d+.\d+ Kč`.
 
@@ -141,7 +141,7 @@ Kromě výpisu znaků a předdefinovaných skupin můžeme ještě vybrat znaky 
 
 Pokud například víme, že se na nějaké střední školy vyskytují třídy označené od A do M, regulární výraz pasující na všechna jména tříd je `[1-4][A-M]`.
 
-Pokud potřebujeme zajistit opakování určité sekvence znaků (ne jen jednoho), můžeme sekvenci znaků uzavřít do kulatých závorek `( )` a za pravou závorku umístit kvantifikátor. Pokud máme variant více, můžeme k jejich oddělení použít znak `|`. Například pokud chceme vybrat oba víkendové dny, napíšme `(sobota|neděle)`.
+Pokud potřebujeme zajistit opakování určité sekvence znaků (ne jen jednoho), můžeme sekvenci znaků uzavřít do kulatých závorek `( )` a za pravou závorku umístit kvantifikátor. Pokud máme variant více, můžeme k jejich oddělení použít znak `|`. Například pokud chceme vybrat oba víkendové dny, napíšeme `(sobota|neděle)`.
 
 ### Další příklady
 
@@ -165,7 +165,7 @@ Podívejme se nyní na pár příkladů. Níže máme tabulku s kurzy Czechitas.
 ```
 
 * Poštovní směrovací číslo označíme výrazem `\d{3} ?\d{2}`.
-* Regulární výraz, který rozpozná všechny paragrafy, které mají maximálně tři čísla, je `§\d{3}`.
+* Regulární výraz, který rozpozná všechny paragrafy, které mají maximálně tři čísla, je `§\d{0,3}`.
 
 **Tip:** Pokud chceme získat z webové stránky data jako texty, bez jakéhokoli formátování, můžeme použít jednu z on-line služeb, například [html2txt](https://www.w3.org/services/html2txt).
 
