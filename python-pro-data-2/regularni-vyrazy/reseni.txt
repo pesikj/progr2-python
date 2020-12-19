@@ -14,3 +14,4 @@ Slavný soude
 \d{2} [A-Z] \d{1,4}/\d{4}
 Ave, Caesar!
 I?(V|X)?I{0,3}
+# Není to dokonalé, ale jako řešení stačí
