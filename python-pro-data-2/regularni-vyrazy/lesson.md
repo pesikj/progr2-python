@@ -323,9 +323,9 @@ regularniVyraz = re.compile(r"\w+@\w+\.cz")
 email = input("Zadej e-mail: ")
 hledani = regularniVyraz.fullmatch(email)
 if hledani:
-    print("Rodné číslo je v pořádku!")
+    print("E-mail je v pořádku!")
 else:
-    print("Nesprávné rodné číslo!")
+    print("Nesprávný e-mail!")
 ```
 
 ### Vyhledávání
