@@ -1,31 +1,31 @@
 """
-Pokračuj ve své práci pro zásilkovou společnost. Společnost nově doručuje i cenné balíky, které mají zadanou určitou hodnotu.
-
-Vytvoř třídu ValuablePackage, která dědí od třídy Package. ValuablePackage má navíc atribut value, ostatní atributy dědí od třídy Package.
-Atribut value nastav pomocí funkce __init__. Ostatní parametry předej funkci __init__ třídy Package.
-Vytvoř si alespoň jeden objekt a zkus volání jeho funkcí.
+Naše firma se rozhodla zaměstnávat i pracovníky na částečné úvazky, 
+pro které bude vytvořena zvláštní třída. Vytvoř novou třídu PartTimeEmployee, 
+která bude dědit od třídy Employee a bude mít navíc atribut workload (float), 
+který reprezentuje velikost úvazku oproti plnému. 
+Přidej informaci o úvazku k výpisu informací do funkce getInfo.
 """
 
-class Package:
-  def deliver(self):
-    self.delivered = True
-  def getInfo(self):
-    if self.delivered:
-      deliveredText = "Balík byl doručen"
+class Employee:
+  def takeHoliday(self, days):
+    if self.remainingHolidayDays >= days:
+      self.remainingHolidayDays -= days
+      return f"Užij si to."
     else:
-      deliveredText = "Balík zatím nebyl doručen."
-    print(f"Balík je na adresu {self.address} a váží {self.weightInKilos}. {deliveredText}")
-  def __init__(self, address, weightInKilos):
-    self.address = address
-    self.weightInKilos = weightInKilos
-    self.delivered = False
+      return f"Bohužel už máš nárok jen na {self.remainingHolidayDays} dní."
+  def getInfo(self):
+    return f"{self.name} pracuje na pozici {self.position}."
+  def __init__(self, name, position):
+    self.name = name
+    self.position = position
+    self.remainingHolidayDays = 25
 
-class ValuablePackage(Package):
-  def __init__(self, address, weightInKilos, value):
-    super().__init__(address, weightInKilos)
-    self.value = value
+class PartTimeEmployee(Employee):
+  def getInfo(self):
+    return f"{super().getInfo()} Má úvazek {self.workload}."
+  def __init__(self, name, position, workload):
+    super().__init__(name, position)
+    self.workload = workload
 
-valuablePackage = ValuablePackage("Plzeňská 123, Praha", 2, 10000)
-valuablePackage.getInfo()
-valuablePackage.deliver()
-valuablePackage.getInfo()
+brigadnik = PartTimeEmployee("Jan Dvořák", "asistent", 0.5)
+print(brigadnik.getInfo())
