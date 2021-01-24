@@ -1,25 +1,38 @@
 """
-Nyní píšeme software pro knihkupce. Vytvoř tedy třídu Book, která reprezentuje knihu. 
-Každá kniha bude mít atributy authors (typ str), title (typ str) a price (typ float). 
-Hodnoty nastav ve funkci __init__.
+U zaměstnanců budeme nově evidovat, jestli jsou ve zkušební době.
 
-Přidej knize funkci getInfo, která vypíše informace o knize v nějakém pěkném formátu.
-Občas se stane, že se kniha moc neprodává a knihkupec se snaží nalákat kupující slevou. 
-Přidej funkci discount, která bude mít jeden parametr - velikost slevy v procentech. 
-Funkce sníží cenu knihy o dané procento.
+Rozšiřte funkci __init__ třídy Employee o parametr probation, který bude typu bool. Tuto hodnotu uložte jako atribut třídy Employee.
+
+Upravte funkci __init__ třídy Manager. Hodnotu parametru probation předejte funkci __init__ třídy Employee.
+
+Upravte funkci getInfo. Pokud je zaměstnanec ve zkušební době, přidát k jeho/jejímu výpisu text Je ve zkušební době.
 """
 
-class Book:
-  def discount(self, discountInPercents):
-    self.price *= (1 - discountInPercents/100)
+class Employee:
+  def takeHoliday(self, days):
+    if self.remainingHolidayDays >= days:
+      self.remainingHolidayDays -= days
+      return f"Poté zbývá {self.remainingHolidayDays} dní."
+    else:
+      return f"Bohužel už máš nárok jen na {self.remainingHolidayDays} dní."
   def getInfo(self):
-    print(f"Název knihy: {self.title}. Autoři: {self.authors}. Cena: {self.price}")
-  def __init__(self, authors, title, price):
-    self.authors = authors
-    self.title = title
-    self.price = price
+    vypis = f"{self.name} pracuje na pozici {self.position}. "
+    if self.probation:
+      vypis += "Je ve zkušební době."
+    return vypis
+  def __init__(self, name, position, probation):
+    self.name = name
+    self.position = position
+    self.probation = probation
+    self.remainingHolidayDays = 25
 
-kniha = Book("Abigail Mitchell", "Noc, která mě zabila", 500)
-kniha.getInfo()
-kniha.discount(10)
-kniha.getInfo()
+class Manager(Employee):
+  def addEmployee(self, employee):
+    self.employeeList.append(employee)
+  def getEmployees(self):
+    print("Vypisuji podřízené:")
+    for employee in self.employeeList:
+      print(employee.name)
+  def __init__(self, name, position, probation):
+    super().__init__(name, position, probation)
+    self.employeeList = []
