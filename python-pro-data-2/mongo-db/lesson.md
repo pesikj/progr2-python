@@ -166,7 +166,7 @@ Uvažujme data o třech divadelních hrách, která jsou v následující tabulc
 | -------------------- | ---------------: | ---------- | ---------- |
 | Modrovous            |               70 | 2018-12-15 |            |
 | Každý má svou pravdu |                  | 2020-02-08 |            |
-| Expres na záped      |              120 |            | 2019-11-13 |
+| Expres na západ      |              120 |            | 2019-11-13 |
 
 Splň následující úkoly.
 
