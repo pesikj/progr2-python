@@ -107,9 +107,11 @@ print(frantisek.takeHoliday(10))
 Tím jsme si ukázali, jak vytvořit třídu, objekty a jak s nimi pracovat.
 
 
-@exercises ## Objekty a třídy [
+[[[ excs Objekty a třídy [
 - kniha
-- balik ]@
+- balik
+]]]
 
-@exercises bonuses [
-- zkusebka ]@
+[[[ excs Bonusy
+- zkusebka
+]]]

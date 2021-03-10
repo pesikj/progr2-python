@@ -128,12 +128,12 @@ print(f"Výsledná známka je {mark}.")
 ```
 
 
-@exercises ## Funkce [
-
+[[[ excs Funkce [
 - nasobeni
-- hotel ]@
+- hotel
+]]]
 
-@exercises bonuses [
-
+[[[ excs Bonusy
 - narozeni
-- ruleta ]@
+- ruleta
+]]]

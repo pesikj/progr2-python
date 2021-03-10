@@ -156,50 +156,11 @@ kolekce.insert_many(zbyvajici_nakupy)
 
 Více záznamů vložíme pomocí funkce `insert_many()`, které předáme náš seznam.
 
-## Cvičení
+[[[ excs Cvičení
+- pravda.md
+- knihovna.md
+]]]
 
-### Každý má svou pravdu
-
-Uvažujme data o třech divadelních hrách, která jsou v následující tabulce.
-
-| Představení          | Délka v minutách | Premiéra   | Derníéra   |
-| -------------------- | ---------------: | ---------- | ---------- |
-| Modrovous            |               70 | 2018-12-15 |            |
-| Každý má svou pravdu |                  | 2020-02-08 |            |
-| Expres na západ      |              120 |            | 2019-11-13 |
-
-Splň následující úkoly.
-
-- Přepiš tato data to tří slovníků. Pokud nějaký sloupec nemá hodnotu, vynech ho.
-- Vlož jednotlivé slovníky postupně do své databáze do kolekce `hry`.
-- Nechci si na obrazovku vypsat ID alespoň jednoho vloženého dokumentu.
-
-### Knihovna
-
-Níže jsou informace o třech různých knihách.
-
-První kniha:
-
-- Název: Smrt bere jackpot
-- Počet stran: 542
-- Oběť: Freddy Brower
-- Vrah: Leon Lamarr
-
-Druhá kniha:
-
-- Název: Zaklínač I. - Poslední přání
-- Autor: Andrzej Sapkowski
-- Počet povídek: 8
-- Počet stran: 274
-
-Třetí kniha:
-
-- Název: Matyáš Sandorf
-- Podtitul: Nový hrabě Monte Christo
-- Autor: Jules Verne
-- Počet stran: 442
-
-Přepiš informace do slovníků a tyto slovníky vlož do jednoho seznamu. Tento seznam pak vlož najednou do kolekce `knihy` funkcí `insert_many()`.
 
 ## Čtení dat
 
@@ -301,25 +262,11 @@ noveHodnoty = { "$set": { "Poznámka": "Chybí účtenka." } }
 kolekce.update(dotaz, noveHodnoty)
 ```
 
-## Úkoly
+[[[ excs Úkoly
+- expres.md
+- hodnoceni-knih.md
+- oprava-chyby.md
+- vetsi-nez.md
+]]]
 
-### Expres na západ
 
-* Načti z kolekce `hry` informace o hře Expres na západ, kterou jsi uložila v předchozím bolku cvičení.
-* Doplň k této hře datum premiéry 2015-11-10.
-* Ověř, že byla data správně uložena.
-
-### Hodnocení knih
-
-* Z předem připravené kolekce `goodreads`, která obsahuje knihy a jejich hodnocení na webu Goodreads.com, načti první dostupný dokument pomocí funkce `find_one()`.
-* Napiš dotaz na knihy, jejichž autorem (`authors`) je spisovatel "Robert Graves".
-* Načti všechny knihy dle daného dotazu a vypiš informace o nich na obrazovku.
-* Všimni si, v jakém formátu je zadané datum vydání (`publication_date`). Jde o americký formát, který má ze záhadných důvodů na prvním místě měsíc a na druhém den.
-
-### Oprava chyby
-
-U dat je často nutné kontrolovat jejich správnost. Například datum může být uvedeno v nesprávném formátu nebo může být zadaný den, který neexistuje. V kolekci je `goodreads` jedna kniha, která má jako datum vydání (`publication_date`) nastavenou podivnou hodnotu 6/31/1982, tedy 31. června 1986. Zjisti, o jakou knihu jde. Uprav hodnotu na "7/1/1982". Zkontroluj, že se hodnota správně uložila.
-
-### Větší než
-
-Z kolekce `goodreads` získej všechny knihy, které získaly více než 2 milion hodnocení (`ratings_count`).

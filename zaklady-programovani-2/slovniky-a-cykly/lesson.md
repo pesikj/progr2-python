@@ -87,13 +87,14 @@ for item in books:
 print(f"Celkové tržby za knihy prodané v roce 2019 jsou {sales} Kč.")
 ```
 
-@exercises ## Slovníky a cykly [
-
+[[[ excs Slovníky a cykly [
 - ctenar
-- vysvedceni ]@
+- vysvedceni
+]]]
 
-@exercises bonuses [
-- spz ]@
+[[[ excs Bonusy
+- spz
+]]]
 
 ## Čtení na doma
 
@@ -152,6 +153,6 @@ averageValue = totalValue / len(sumPerPerson)
 print(f"Průměrná hodnota na osobu je {round(averageValue)} Kč.")
 ```
 
-@exercises ## Čtení na doma [
-
-- spolubydlici ]@
+[[[ excs Čtení na doma [
+- spolubydlici
+]]]
