@@ -239,7 +239,6 @@ Pokud bys chtěla vidět všechny řádky, jako první parametr napiš pouze dvo
 10  Ondra                300
 ```
 
-@exercises ## Cvičení [
-
+[[[ excs Cvičení
 - nabidky
-  ]@
+]]]

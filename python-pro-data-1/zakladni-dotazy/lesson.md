@@ -383,8 +383,7 @@ dtypes: int64(1), object(2)
 memory usage: 392.0+ bytes
 ```
 
-@exercises ## Cvičení [
-
+[[[ excs Cvičení
 - ceska-jmena
 - ceska-jmena-2
-  ]@
+]]]

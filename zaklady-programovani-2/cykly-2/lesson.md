@@ -92,12 +92,12 @@ Pokud bychom příkaz `break` odebrali, program by pokračoval v hledání a vyp
 
 Všimni si, že podmínku, zda určité číslo leží mezi dvěma jinými čísly, můžeme zapsat ve stylu `dolniHranice <= cislo <= horniHranice`. To je zjednodušení zápisu `dolniHranice <= cislo and cislo <= horniHranice`.
 
-@exercises ## Cykly 2 [
-
+[[[ excs Cykly 2 [
 - tombola
 - delitelnost
-- hoste ]@
+- hoste
+]]]
 
-@exercises bonuses [
-
-- prvocislo ]@
+[[[ excs Bonusy
+- prvocislo
+]]]

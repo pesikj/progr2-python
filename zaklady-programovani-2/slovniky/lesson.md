@@ -99,11 +99,12 @@ sausages.pop("Naty")
 
 Nyní funkce `len` vrátí 4.
 
-@exercises ## Slovníky [
-
+[[[ excs Slovníky [
 - vysvedceni
 - detektivky
-- tombola ]@
+- tombola
+]]]
 
-@exercises bonuses [
-- vecirek ]@
+[[[ excs Bonusy
+- vecirek
+]]]

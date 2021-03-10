@@ -364,8 +364,6 @@ Metoda `sort_values` standardně řadí vzestupně. Chceme-li řadit sestupně, 
 >>> staty.sort_values(by="population", ascending=False)
 ```
 
-@exercises ## Cvičení [
-
+[[[ excs Cvičení
 - studenti
-  ]@
-  
+]]]
