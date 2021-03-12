@@ -73,7 +73,7 @@ print(boss.getSubordinates())
 
 Náš program tedy vytvoří tři objekty - dva zaměstnance a jednoho manažera. Manažerovi jsme přiřadili zaměstnance jako podřízené. A vidíme, že naše akce proběhla správně, protože tito dva zaměstnanci se objevili ve výpisu podřízených.
 
-[[[ excs Příklady na dědičnost [
+[[[ excs Cvičení: Dědičnost
 - cenny-balik
 - castecny-uvazek
 ]]]
