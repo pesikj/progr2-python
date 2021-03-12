@@ -128,7 +128,7 @@ print(f"Výsledná známka je {mark}.")
 ```
 
 
-[[[ excs Funkce [
+[[[ excs Cvičení: Funkce
 - nasobeni
 - hotel
 ]]]
