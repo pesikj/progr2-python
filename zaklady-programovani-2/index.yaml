@@ -26,6 +26,9 @@ lessons:
   - title: Cykly 2 (bonusová kapitola)
     link: cykly-2
     brief: Ukážeme si, že cykly můžeme používat nejen pro sekvence, ale i pro číselné posloupnosti.
+  - title: Obshluha výjimek (bonusová kapitola)
+    link: vyjimky
+    brief: Jak ošetřit chybové stavy v programu pomocí bloku try/except
   - title: Balíčky z internetu (bonusová kapitola)
     link: balicky-z-internetu
     brief: Pro Python existuje obrovské množství volně dostupných knihoven. Zkusme si jednu přidat do našeho programu.
