@@ -1,4 +1,4 @@
-Tato bonusová kapitola není nezbytně nutná pro základní programování v Pythonu. V mnoha případech se obejdete bez znalosti práce s výjimkami. Pokud to ale s Pythonem myslíte vážně, tato část se vám bude rozhodně hodit.
+Tato bonusová kapitola není nezbytně nutná pro základní programování v Pythonu. V mnoha případech se obejdeš bez znalosti práce s výjimkami. Pokud to ale s Pythonem myslíš vážně, tato část se ti bude rozhodně hodit.
 
 ## Chyby v programu
 Mnohokrát jsme se již setkali s tím, že náš program neudělal co jsme si mysleli a Python skončil s chybovou hláškou. V tuto chvíli je nejdůležitější nepanikařit a v klidu si přečíst co nám Python interpret říká. Drtivá většina základních chyb nejsou žádné záludnosti a Python interpret nám často přímo radí, jak chybu opravit. Důležité je nemít z těchto chyb špatný pocit. Programování je často neustálé zkoušení různých pokusů dokud to nebude dělat to, co chceme.
@@ -6,7 +6,7 @@ Mnohokrát jsme se již setkali s tím, že náš program neudělal co jsme si m
 Chybové hlášky jsou taky ta lepší varianta chyby. Pokud nám ji Python vypíše a skončí, tak jistě víme, že je něco špatně. Mnohem hůř se hledají chyby v programu, který Python interpret vyhodnotí jako syntakticky a sémanticky správný, ale ve skutečnosti vůbec nedělá to co si myslíme, že má dělat.
 
 ### Chyby, které musíme opravit
-Nyní si ukážeme pár typických chyb, které se vám jistě často dějí:
+Nyní si ukážeme pár typických chyb, které se ti jistě často dějí:
 ```pycon
 >>> promenna = 10
 >>> print(promenna)
@@ -37,7 +37,7 @@ Další častý problém je chyba v syntaxi. V předcházejícím případě chy
     ^
 IndentationError: expected an indented block
 ```
-_Indentation_ je anglický výraz pro odsazení. Vše co je shodně odsazeno patří do jednoho bloku, který končí prvním řádkem, který je odsazen o jedno méně. V tomto případě je problém, že volání funkce `print()` není v bloku odsazeno vůbec. Dbejte na správné nastavení editoru a nemíchejte odsazování různým počtem mezer nebo tabulátorů. Pozor na kód, který kopírujete z internetu!
+_Indentation_ je anglický výraz pro odsazení. Vše co je shodně odsazeno patří do jednoho bloku, který končí prvním řádkem, který je odsazen o jedno méně. V tomto případě je problém, že volání funkce `print()` není v bloku odsazeno vůbec. Dbej na správné nastavení editoru a nemíchej odsazování různým počtem mezer nebo tabulátorů. Pozor na kód, který kopíruješ z internetu!
 
 
 ### Chyby, které můžeme zkusit ošetřit
@@ -69,7 +69,7 @@ Poslední příklad, který si ukážeme je chyba, která může nastat např. p
 Zadej cislo: 0
 0
 ```
-Funkce `intput()` nám zastaví běh, programu a vyčkává na uživatele, než něco napíše a zmáčkne _Enter_. Můžeme se setkat s _"hodným"_ uživatelem, který na výzvu k zadání čísla skutečně zadá číslo. My si ho přetypujeme pomocí funkce `int()` a můžeme s ním dále počítat.
+Funkce `intput()` nám zastaví běh, programu a vyčkává na uživatele, než něco napíše a zmáčkne Enter. Můžeme se setkat s "hodným" uživatelem, který na výzvu k zadání čísla skutečně zadá číslo. My si ho přetypujeme pomocí funkce `int()` a můžeme s ním dále počítat.
 
 Co když ale uživatel zadá řetězec, který není složen pouze z cifer desítkové číselné soustavy 0 až 9, a tím pádem ho není možné přetypovat na datový typ `int`?
 ```pycon
@@ -81,7 +81,7 @@ ValueError: invalid literal for int() with base 10: 'cislo'
 ```
 
 ## Různé přístupy k ošetřování vstupů
-Ještě než se pustíme do samotného ošetřování výjimek povíme si něco o ošetřování vstupů programu. Pokud totiž program nemá žádné uživatelské vstupy, nejedná se o moc užitečný program. Takový program by se choval vždy stejně a vypsal by jen to, co jsme mu zadrátovali uvnitř (např. text _"Hello wordl!"_).
+Ještě než se pustíme do samotného ošetřování výjimek povíme si něco o ošetřování vstupů programu. Pokud totiž program nemá žádné uživatelské vstupy, nejedná se o moc užitečný program. Takový program by se choval vždy stejně a vypsal by jen to, co jsme mu zadrátovali uvnitř (např. text "Hello wordl!").
 
 Důležité je si pod pojmem vstup programu představit mnoho různých věcí, např.:
 * Návratovou hodnotu funkce `input()` - vstup textu z klávesnice
@@ -178,7 +178,7 @@ except ValueError:
 ]]]
 
 ## Dobrovolné čtení na doma: Pokročilá práce s výjimkami v Pythonu
-Pro úplnost doplním, že je možné odchytávat více výjimek v jednom bloku `except`. Tyto výjimky oddělený čárkou **musí** být v závorkách, aby tvořily _n-tici_ (_tuple_). N-tice jsou možná trochu pokročilejší koncept v Pythonu. Pokud netušíte o co se jedná, tak si s tím zatím nelamte hlavu. Rozšířením bloku `except` o klíčové slov `as` si můžeme text výjimky uložit do proměnné. V Pythonu je možný i mechanismus odchytávání všech možných výjimek v jednom bloku `except`, ale to patří k zavrženíhodným programátorským technikám, a proto si to ani nebudeme ukazovat.
+Pro úplnost doplním, že je možné odchytávat více výjimek v jednom bloku `except`. Tyto výjimky oddělený čárkou **musí** být v závorkách, aby tvořily <term cs="n-tici" en="tuple">. N-tice jsou možná trochu pokročilejší koncept v Pythonu. Pokud netušíš o co se jedná, tak si s tím zatím nelam hlavu. Rozšířením bloku `except` o klíčové slov `as` si můžeme text výjimky uložit do proměnné. V Pythonu je možný i mechanismus odchytávání všech možných výjimek v jednom bloku `except`, ale to patří k zavrženíhodným programátorským technikám, a proto si to ani nebudeme ukazovat.
 
 ```python
 import sys
@@ -191,7 +191,7 @@ except (IndexError, ValueError) as e:
     print("Zadej číslo jako parametr na příkazovou řádku!")
 ```
 
-Pokud stále pokračujete ve čtení této dobrovolné části, vězte, že kromě bloku `try` a `except` je možné zařadit i bloky `else` (toto `else` se nekamarádí s `if`, ale patří k obsluze výjimek. Je to pouze znovu využité klíčové slovo). Tento blok `else` se vykoná, pokud výjimka v bloku `try` nenastala.
+Pokud stále pokračuješ ve čtení této dobrovolné části, věz, že kromě bloku `try` a `except` je možné zařadit i bloky `else` (toto `else` se nekamarádí s `if`, ale patří k obsluze výjimek. Je to pouze znovu využité klíčové slovo). Tento blok `else` se vykoná, pokud výjimka v bloku `try` nenastala.
 
 Poslední parťák mezi klíčovými slovy k obsluze výjimek je `finally`. Uvozuje blok kódu, který se vykoná za všech okolností (i kdyby výjimka nastala či nenastala). Důležité je zachovat pořadí těchto bloků:
 
@@ -201,10 +201,10 @@ Poslední parťák mezi klíčovými slovy k obsluze výjimek je `finally`. Uvoz
 * `else`
 * `finally`
 
-Jedná už o pokročilé téma, proto zde nebudu uvádět žádné příklady a odkážu vás na oficiální dokumentaci [oficiální tutoriál](https://docs.python.org/3/tutorial/errors.html).
+Jedná už o pokročilé téma, proto zde nebudu uvádět žádné příklady a odkážu tě na oficiální dokumentaci [oficiální tutoriál](https://docs.python.org/3/tutorial/errors.html).
 
 ### Vyvolání výjimky
-Až budete tvořit složité programy v Pythonu a budete dobře rozumět obsluze výjimek, může vám přijít na mysl otázka, jestli můžeme výjimku sami vyvolat.
+Až budeš tvořit složité programy v Pythonu a budeš dobře rozumět obsluze výjimek, může ti přijít na mysl otázka, jestli můžeme výjimku sami vyvolat.
 
 Uvažujme předchozí příklad s přetypováním čísla na příkazové řádce a zvolme si další podmínku, např. musí se jednat o kladné číslo. Tuto podmínku musíme otestovat pomocí `if`:
 
@@ -226,4 +226,4 @@ except RuntimeError:
     print("Zadej KLADNÉ číslo jako parametr na příkazovou řádku!")
 ```
 
-Pomocí klíčového slova `raise` jsme zde vyvolali obecnou výjimku chyby v běhu programu, kterou poté v příslušném bloku `except` odchytíme. _RuntimeError_ jsem vybral ze seznamu vestavěných výjimek v Pythonu a nejlépe vystihuje chybu, která nastala. _ValueError_ by byl také dobrou volbou, ale už se používá pro jinou chybu. Pokud bych potřeboval, mohu si vytvořit i výjimku s vlastním názvem, ale to už si zájemci přečtou v [oficiální dokumentaci](https://docs.python.org/3/tutorial/errors.html).
+Pomocí klíčového slova `raise` jsme zde vyvolali obecnou výjimku chyby v běhu programu, kterou poté v příslušném bloku `except` odchytíme. _RuntimeError_ jsem vybral ze seznamu vestavěných výjimek v Pythonu a nejlépe vystihuje chybu, která nastala. _ValueError_ by byl také dobrou volbou, ale už se používá pro jinou chybu. Pokud bychom potřebovali, můžeme si vytvořit úplně novou vlastní výjimku, ale to už si zájemci přečtou v [oficiální dokumentaci](https://docs.python.org/3/tutorial/errors.html).
