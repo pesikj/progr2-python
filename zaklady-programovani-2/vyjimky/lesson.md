@@ -191,7 +191,7 @@ except (IndexError, ValueError) as e:
     print("Zadej číslo jako parametr na příkazovou řádku!")
 ```
 
-Pokud stále pokračuješ ve čtení této dobrovolné části, věz, že kromě bloku `try` a `except` je možné zařadit i bloky `else` (toto `else` se nekamarádí s `if`, ale patří k obsluze výjimek. Je to pouze znovu využité klíčové slovo). Tento blok `else` se vykoná, pokud výjimka v bloku `try` nenastala.
+Pokud stále pokračuješ ve čtení této dobrovolné části, věz, že kromě bloku `try` a `except` je možné zařadit i blok `else` (toto `else` se nekamarádí s `if`, ale patří k obsluze výjimek. Je to pouze znovu využité klíčové slovo). Blok `else` se vykoná, pokud výjimka v bloku `try` nenastala.
 
 Poslední parťák mezi klíčovými slovy k obsluze výjimek je `finally`. Uvozuje blok kódu, který se vykoná za všech okolností (i kdyby výjimka nastala či nenastala). Důležité je zachovat pořadí těchto bloků:
 
