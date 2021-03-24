@@ -1,11 +1,12 @@
 Pokud ještě nemáš nainstalovaný Python a Visual Studio Code na svém počítači, postupuj nejprve podle [tohoto návodu](http://kodim.cz/kurzy/uvod-do-progr/jazyky-nastroje/).
 
-V rámci workshopu budeme používat modul pro práci s daty `pandas` a modul pro tvorbu grafů `matplotlib`. `pandas` a `matplotlib` je externí moduly, který musíme nejdříve nainstalovat. Pro instalaci si otevřeme terminál a napíšeme následující příkazy (pozor, znak dolaru `$` neopisuj):
+V rámci workshopu budeme používat modul pro práci s daty `pandas`, modul pro tvorbu grafů `matplotlib` a modul pro stahování dat z internetu `requests`. `pandas`, `matplotlib` a `requests` jsou externí moduly, který musíme nejdříve nainstalovat. Pro instalaci si otevřeme terminál a napíšeme následující příkazy (pozor, znak dolaru `$` neopisuj):
 
 ```shell
 $ py -m pip install numpy==1.19.3
 $ py -m pip install pandas
 $ py -m pip install matplotlib
+$ py -m pip install requests
 ```
 
 `pandas` používá modul `numpy`, jehož současná verze si bohužel moc nerozumí s prostředím Visual Studio Code. Proto je v příkazech první řádek, kterým si nainstaluješ trochu starší, ale funkční verzi `numpy`. 
@@ -15,6 +16,7 @@ Pokud používáme MacOS nebo Linux, napíšeme:
 ```shell
 $ pip3 install pandas
 $ pip3 install matplotlib
+$ pip3 install requests
 ```
 
 Chyba modulu `numpy` se MacOS a Linuxu netýká, proto je v příkazech o jeden řádek méně.
