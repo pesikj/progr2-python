@@ -32,11 +32,19 @@ My budeme využívat framework Django, který je založený na obdobném příst
 
 Na začátku si v našem vývojovém prostředí vytvoříme nový projekt. Pokud používáme virtuální prostředí, nainstalujeme si do prostředí modul `django`.
 
+### Vytvoření projektu
+
 Máš-li modul dobře nainstalovaný, měl by ti fungovat následující příkaz na vytvoření nového projektu:
 
 ```
 django-admin startproject czechitas
 ```
+
+Django vytvoří řadu souborů, z nichž jsou pro nás důležité:
+
+- `manage.py` je skript, který zajišťuje správu naší aplikace, např. díky ní můžeme aplikaci spustit.
+- `czechitas/settings` obsahuje nastavení applikace (např. nastavení připojení k databázi).
+- `czechitas/urls.py` obsahuje URL adresy, které jsou dostupné v naší aplikaci (ukážeme si později).
 
 Příkaz ti vytvoří nový webový projekt. Tento projekt už si můžeš zkusit spustit pomocí příkazu
 
@@ -46,8 +54,26 @@ python manage.py runserver
 
 Zkus si nyní otevřít [tento odkaz](http://127.0.0.1:8000/), ve kterém by měl běžet tvůj nový projekt. Adresa `127.0.0.1` je adresa tvého počítače, často označovaná jako `loopback`. Nepřipojuješ se tedy nikam do internetu, ale pracuješ na svém počítači.
 
+### Vytvoření aplikace
+
 Aplikace v `django` je složena do funkčních celků, které označujeme jako `app` (aplikace). Jednotlivé aplikace jsou mezi sebou relativně nezávislé a v jednom projektu jich samozřejmě můžeme mít více.
 
 ```
 python manage.py startapp czechitas
 ```
+
+Nová aplikace obsahuje následující soubory:
+
+- `admin.py` obsahuje modely, které budou přístupné v administrátorském rozhraní.
+- `migrations/` je adresář s tzv. migracemi, tj. úpravami struktury databáze.
+- `models.py` obsahuje definici modelů.
+- `tests.py` obsahuje definici automatických textů.
+- `views.py` je soubor s definicí pohledů.
+
+### Vytvoření pohledu
+
+### Přidání URL adresy
+
+### Vytvoření modelu
+
+### Migrace databáze
