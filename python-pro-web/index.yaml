@@ -1,0 +1,11 @@
+title: Python pro web
+link: python-pro-web
+brief: Materiály k jednodennímu workshopu Python pro web.
+lessons:
+  - title: Instalace
+    link: instalace
+    brief: Ukážeme si, jak doinstalovat moduly, které budeme používat.
+  - title: Úvod do vývoje webu
+    link: uvod
+    brief: Řekneme si něco o tom, jak vlastně vyvíjíme web.
+    
