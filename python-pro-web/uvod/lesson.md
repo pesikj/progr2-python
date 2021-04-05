@@ -28,6 +28,8 @@ Druhou možností je architektura označovaná jako model-view-controller, obvyk
 
 My budeme využívat framework Django, který je založený na obdobném přístupu, který je označovaný jako model-template-views. Modely zde mají stejnou funkci jako v MVC architektuře. Šablony určují, jak má stránka vypadat (obsahují i HTML kód) a view připravuje data k zobrazení uživateli a řídí zpracování uživatelských požadavků.
 
+![Adult only](assets/django-mvt-based-control-flow.png)
+
 ## Django
 
 Na začátku si v našem vývojovém prostředí vytvoříme nový projekt. Pokud používáme virtuální prostředí, nainstalujeme si do prostředí modul `django`.
