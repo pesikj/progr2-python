@@ -111,7 +111,7 @@ from django.urls import include, path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include("kurzy.urls")),
+    path('kurzy/', include("kurzy.urls")),
 ]
 ```
 
@@ -259,3 +259,12 @@ admin.site.register(models.Kurz)
 ```
 
 Po obnovení stránky již model vidíme. Zkus si nyní do vytvořit nějaký záznam.
+
+## Úkol
+
+Czechitas potřebují spravovat nejen kurzy, ale i tradiční firemní agendu, mezi kterou patří kontakty se sponzory, partnery a dalšími důležitými osobami. Vytvořme si základ jednoduchého CRM systému (Customer Relationship Management), který by takovou agendu dokázal obstarat.
+
+- Uvnitř svého projektu `czechitas` založ novou aplikaci `crm`.
+- Vytvoř pohled, který přivítá uživatele na úvodní straně textem "Vítej v CRM systému Czechitas!"
+- Vytvoř moddel `Kontakt`, který bude reprezentovat kontakt na nějakou osobu. U kontaktu eviduj jméno, příjmení, e-mail a datum posledního kontaktu. Vyber pro každý údaj vhodný typ pole. Přidej aplikaci do souboru `settings.py` a proveď migraci databáze.
+- Zaregistruj model do administrátorského rozhraní a vytvoř testovací záznam.
