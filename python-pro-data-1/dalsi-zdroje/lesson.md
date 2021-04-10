@@ -16,7 +16,7 @@ Než budeš pokračovat ve studiu, rozmysli si, jaký styl studia by Tě bavil n
 - Pokud jsi hravý typ, programování je pro Tebe jako stvořené. Můžeš si psát prográmky a zkoušet, jak Python funguje a co vlastně umí. Pamatuj, že nemáš co zkazit - pokud něco nebude fungovat, tak to můžeš opravit. A pokud tě něco přestane bavit, smaž to a začni si hrát s něčím jiným.
 - Na své si přijdeš i v případě, že nejraději studuješ ze knih. Spousta knih se dá z webu stáhnout zdarma (i v češtině), případně si můžeš i nějakou koupit. V knize bývají i příklady, kde si můžeš své znalosti procvičit.
 - Pokud raději sleduješ videa než čteš, vyber si nějaký z online kurzů. Pár tipů najdeš níže.
-- Preferuješ-li prezenční výuku, přihlas se do [digiální akademii Czechitas](https://www.czechitas.cz/cs/co-delame/digitalni-akademie) nebo na kurz pořádaný [pyladies](https://pyladies.cz/).
+- Preferuješ-li prezenční výuku, přihlas se na [Digitální akademii Czechitas](https://www.czechitas.cz/cs/co-delame/digitalni-akademie) nebo na kurz pořádaný [pyladies](https://pyladies.cz/).
 
 ## Online zdroje a kurzy v angličtině
 
@@ -26,8 +26,8 @@ Tipy na zajímavé zdroje jsou níže:
 
 - [RealPython.com](https://realpython.com/) nabízí spoustu článků i kurzů. Část obsahu je zdarma a část je placená, ale cena je řádově 500 Kč za měsíc. Zajímavé jsou i Learning Paths - můžeš si vybrat, jaké části IT by ses chtěla věnovat (datová analýza, datová věda atd.) a podle toho Ti web nabídne seznam kurzů zaměřených na tento obor.
 - [DataCamp](https://www.datacamp.com/) je placený web zaměřený především na datovou analýzu. [Udemy](https://www.udemy.com/) a [Coursea](https://www.coursera.org/) jsou obdobné weby.
-- [edX.org](https://www.edx.org/) nabízí řadu kurzů od nejlepších světových univerzit a technologických firem. Absolvování kurzu je zdarma, je možné si případně dokoupit komerční 
-- [Oficiální web jazyka Python](https://docs.python.org/3/) nabízí tutorial i rozsáhlou dokumentaci. Ideální zdroj, pokud tě zajímá nějaká konkrétní funkce nebo vlastnost jazyka.
+- [edX.org](https://www.edx.org/) nabízí řadu kurzů od nejlepších světových univerzit a technologických firem. Absolvování kurzu je zdarma, je možné si případně dokoupit komerční
+- [Oficiální web jazyka Python](https://docs.python.org/3/) nabízí tutoriál i rozsáhlou dokumentaci. Ideální zdroj, pokud tě zajímá nějaká konkrétní funkce nebo vlastnost jazyka.
 certifikát.
 - [PluralSight](https://www.pluralsight.com/) je placený web, který ale kvalitou kurzů víceméně nemá konkurenci.
 

@@ -1,16 +1,16 @@
 Regulární výrazy jsou v podstatě malí "kouzelníci", kteří nám umožní vytáhnout z textu důležitá data. Často například dostaneme celou adresu jako jeden řetězec, například jako "Václavské nám. 837/11, 110 00 Nové Město" a my potřebujeme z adresy vytáhnout poštovní směrovací číslo, abychom zhruba věděli, kde se dané místo nachází.
 
-O poštovním směrovacím čísle víme, že je složeno z pěti číslic a většinou (ale ne vždy) ho zapisujeme s mezerou mezi třetím a čtvrtém čísle. Potřebujeme tedy nějak obecně říct, že máme z textu vybrat pětici čísel, která může mít mezi třetím a čtvrtým číslem mezeru. K řešení takových uloh slouží regulární výrazy.
+O poštovním směrovacím čísle víme, že je složeno z pěti číslic a většinou (ale ne vždy) ho zapisujeme s mezerou mezi třetím a čtvrtém čísle. Potřebujeme tedy nějak obecně říct, že máme z textu vybrat pětici čísel, která může mít mezi třetím a čtvrtým číslem mezeru. K řešení takových úloh slouží regulární výrazy.
 
 ## Jak fungují regulární výrazy
 
-Regulární výrazy umožňují používání symbolů, které mohou zastoupit nějaký znak (nebo více znaků). Fungují podobně jako třeba žolík v karetní hře nebo hvězdička ve vyhledávání souborů, umoňují ale přesněji specifikovat, co vlastně zastupují. Práci s regulárními výrazy si můžeme pohodlně trénovat například v aplikaci [Regular Expressions 101](https://regex101.com/). Do pole "Regular Expression" zadáváme reguálrní výraz a do pole "Text String" řetězec, se kterým pracujeme. Aplikace nám interaktivně podbarvuje části textu, které odpovídají našemu výrazu. Protože regulární výrazy se v různých programovacích jazycích mírně liší, měli bychom si vlevo v části `Flavor` **přepnout na Python**.
+Regulární výrazy umožňují používání symbolů, které mohou zastoupit nějaký znak (nebo více znaků). Fungují podobně jako třeba žolík v karetní hře nebo hvězdička ve vyhledávání souborů, umožňují ale přesněji specifikovat, co vlastně zastupují. Práci s regulárními výrazy si můžeme pohodlně trénovat například v aplikaci [Regular Expressions 101](https://regex101.com/). Do pole "Regular Expression" zadáváme regulární výraz a do pole "Text String" řetězec, se kterým pracujeme. Aplikace nám interaktivně podbarvuje části textu, které odpovídají našemu výrazu. Protože regulární výrazy se v různých programovacích jazycích mírně liší, měli bychom si vlevo v části `Flavor` **přepnout na Python**.
 
 Oněm magickým znakům říkáme *metaznaky*.
 
 ### Žolík
 
-Zkusme si to na příkladu tečky `.`. Tečka zastupuje **právě jeden** libovolný znak, přsně tedy odpovídá právě "žolíku". Pokud budeme pracovat s řetězecem `"A23456789JQKA"` a zadáme regulární výraz `"78.J"`, podbarví se nám část řetězce od `7` do `J`.
+Zkusme si to na příkladu tečky `.`. Tečka zastupuje **právě jeden** libovolný znak, přesně tedy odpovídá právě "žolíku". Pokud budeme pracovat s řetězcem `"A23456789JQKA"` a zadáme regulární výraz `"78.J"`, podbarví se nám část řetězce od `7` do `J`.
 
 Vyzkoušejme si nyní upravit program, který bude sledovat vývoj kurzu měn ve Směnárně Na Růžku, aby nám například poslal upozornění ve chvíli, kdy má nějaká měna výhodný kurz. Náš program zatím umí stáhnout informace do následující řetězce.
 
@@ -34,7 +34,7 @@ Pokud chceme, aby náš metaznak zastupoval jeden ze skupiny znaků, vložíme t
 
 ### Kvantifikátory
 
-Další významnou skupinou metaznaků jsou kvantifikátory. Kvantifikátorů máme několik, začneme se složenými závorkami `{ }`. Ty nám říkají, kolikrát se znak před kvantifikátrem může opakovat. Pokud vložíme do závorek jedno číslo `{n}`, znamená to opakování právě *n*-krát. Pokud dvě čísla `{m,n}`, znamená to opakování minimálně *m*-krát a maximálně *n*-krát a pokud `{n,}`, znamená to opakování minimálně *n*-krát a maximální počet opakování není omezený. Platí, že regulární výrazy jsou **žravé**, tedy zaberou vždy maximální možný počet znaků.
+Další významnou skupinou metaznaků jsou kvantifikátory. Kvantifikátorů máme několik, začneme se složenými závorkami `{ }`. Ty nám říkají, kolikrát se znak před kvantifikátorem může opakovat. Pokud vložíme do závorek jedno číslo `{n}`, znamená to opakování právě *n*-krát. Pokud dvě čísla `{m,n}`, znamená to opakování minimálně *m*-krát a maximálně *n*-krát a pokud `{n,}`, znamená to opakování minimálně *n*-krát a maximální počet opakování není omezený. Platí, že regulární výrazy jsou **žravé**, tedy zaberou vždy maximální možný počet znaků.
 
 Pokud například chceme označit celou část našeho řádku s kurzem měn před symbolem `=`, napíšeme `1 [€$] {3}`. Mezera před složenými závorkami je důležitá, protože právě ona se má opakovat.
 
@@ -66,8 +66,8 @@ K ověření, zda odesílatel volá o pomoc, napíšeme `\.{3} -{3} \.{3}`. Důl
 Kromě složených závorek existují i tři speciální kvantifikátory.
 
 * `?` znamená výskyt minimálně 0-krát, maximálně 1-krát.
-* `*` znamená výskyt minimálně 0-krát, maxiální počet není omezen.
-* `+` znamená výskyt minimálně 1-krát, maxiální počet není omezen.
+* `*` znamená výskyt minimálně 0-krát, maximální počet není omezen.
+* `+` znamená výskyt minimálně 1-krát, maximální počet není omezen.
 
 Pro náš případ s výběrem řádků můžeme použít např. `1 [€$] +`.
 
@@ -149,7 +149,7 @@ Podívejme se nyní na pár příkladů. Níže máme tabulku s kurzy Czechitas.
 
 * Chceme jít na kurz programování v Pythonu nebo v JavaScriptu. Kurz musí být pro začátečníky. Řádky, které nás zajímají, vyhledáme pomocí `Úvod do programování 1 - (JavaScript|Python)`. Co kdyby nám nevadil ani navazující kurz?
 * Uvažujme, že nás zajímají pouze kurzy o víkendu. Vyzkoušíme si výraz `(sobota|neděle)`. Můžeme k povoleným dnům přidat ještě úterý?
-* Protože se nám o víkendu nechce příliš brzy vstávat, chceme víkendové kurzy, které začínají nejdříve v 8:30. Napíšeme `(sobota|neděle) [89]:30`. Co kdybychom naopak chtěji kurzy, které začínají nejpozději v 8:30
+* Protože se nám o víkendu nechce příliš brzy vstávat, chceme víkendové kurzy, které začínají nejdříve v 8:30. Napíšeme `(sobota|neděle) [89]:30`. Co kdybychom naopak chtěli kurzy, které začínají nejpozději v 8:30
 * Napíšeme si regulární výraz, který označí všechna data ve formátu, jaký je v tabulce. Můžeme například použít výraz `\d{1,2}\. (led|úno). 2021`. Do závorky bychom pro rozvrh na celý rok potřebovali přidat zkratky všech měsíců.
 
 ```
@@ -176,7 +176,7 @@ Podívejme se nyní na pár příkladů. Níže máme tabulku s kurzy Czechitas.
 - registracni-znacka
 - telefonni-cislo
 - ministerstva
-- stavny-soude
+- slavny-soude
 - ave-caesar
 ]]]
 
@@ -205,7 +205,7 @@ print(regularniVyraz.match(rezetec))
 
 Pokud funkce `match` došla k závěru, že se řetězec shoduje s regulárním výrazem, vrátí objekt  `Match`. S ním později budeme pracovat. Pokud by však funkce došla k závěru, že se řetězce s regulárním výrazem neshoduje, vrátí hodnotu označovanou jako `None`, tj. prázdnou hodnotu.
 
-**Otázka:** Často je rodné číslo zapisováno ve formátu s podtržítkem, které odděluje datum narození od zbytku. Jak upravíme regulární výraz, aby akceptoval oba formáty, tj. formát s podtržítkem i bez potržítka?
+**Otázka:** Často je rodné číslo zapisováno ve formátu s podtržítkem, které odděluje datum narození od zbytku. Jak upravíme regulární výraz, aby akceptoval oba formáty, tj. formát s podtržítkem i bez podtržítka?
 
 ### Přísnější ověření formátu
 
@@ -258,7 +258,7 @@ else:
 
 ### Vyhledávání
 
-Kromě ověřování správného formátu můžeme použít regulární výrazy i k vyhledávání. Například funkce `findall` vrátí ze zadaného řetězce všechny podřetězece, které odpovídají danému regulárnímu výrazu, jako seznam.
+Kromě ověřování správného formátu můžeme použít regulární výrazy i k vyhledávání. Například funkce `findall` vrátí ze zadaného řetězce všechny podřetězce, které odpovídají danému regulárnímu výrazu, jako seznam.
 
 Následující program například z deníku lékaře vyhledá rodná čísla všech pacientů, které lékař zmínil.
 
@@ -266,7 +266,7 @@ Následující program například z deníku lékaře vyhledá rodná čísla v�
 zapis = """
 Zápisy o provedených vyšetřeních:
 Pacient 6407156800 trpěl bolestí zad a byl poslán na vyšetření. 
-Pacientka 8655057477 přišla na kontrolu po zranění kontníku.
+Pacientka 8655057477 přišla na kontrolu po zranění kotníku.
 Do ordinace telefonovala pacientka 7752126712, které byl elektronicky vydán recept na Paralen. 
 """
 import re
@@ -296,7 +296,7 @@ Uvažujme, že máme nějakém textu provést anonymizaci, tj. vymazat všechny 
 zapis = """
 Zápisy o provedených vyšetřeních:
 Pacient 6407156800 trpěl bolestí zad a byl poslán na vyšetření. 
-Pacientka 8655057477 přišla na kontrolu po zranění kontníku.
+Pacientka 8655057477 přišla na kontrolu po zranění kotníku.
 Do ordinace telefonovala pacientka 7752126712, které byl elektronicky vydán recept na Paralen. 
 """
 import re

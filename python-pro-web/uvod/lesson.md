@@ -24,7 +24,7 @@ Druhou možností je architektura označovaná jako model-view-controller, obvyk
 
 - Model reprezentuje datovou strukturu. Pomocí modelu říkáme, s jakými daty bude naše aplikace pracovat, jaká bude ukládat do databáze atd.
 - View (pohled) převádí data do podoby vhodné k zobrazení uživateli.
-- Controler (řadič) reaguje na události uživatele.
+- Controller (řadič) reaguje na události uživatele.
 
 My budeme využívat framework Django, který je založený na obdobném přístupu, který je označovaný jako model-template-views. Modely zde mají stejnou funkci jako v MVC architektuře. Šablony určují, jak má stránka vypadat (obsahují i HTML kód) a view připravuje data k zobrazení uživateli a řídí zpracování uživatelských požadavků.
 
@@ -45,7 +45,7 @@ django-admin startproject czechitas
 Django vytvoří řadu souborů, z nichž jsou pro nás důležité:
 
 - `manage.py` je skript, který zajišťuje správu naší aplikace, např. díky ní můžeme aplikaci spustit.
-- `czechitas/settings` obsahuje nastavení applikace (např. nastavení připojení k databázi).
+- `czechitas/settings` obsahuje nastavení aplikace (např. nastavení připojení k databázi).
 - `czechitas/urls.py` obsahuje URL adresy, které jsou dostupné v naší aplikaci (ukážeme si později).
 
 Příkaz ti vytvoří nový webový projekt. Tento projekt už si můžeš zkusit spustit pomocí příkazu
@@ -77,7 +77,7 @@ Nová aplikace obsahuje následující soubory:
 
 Začneme s tím, že si vytvoříme pohled. Náš pohled bude velmi jednoduchý a zobrazí jen jednoduchý text "Vítej na webu Czechitas". Vyzkoušíme si na něm ale základní techniku vytvoření pohledu a přiřazení URL adresy.
 
-Pohled vytvoř v souboru `views.py`. Django umožňuje vytvářet dva typy pohledů - pohledy založené na třídě (`class-based`) a pohledy založené na funkci (`function-based`). Doporučuji ti využívat pohledy založené na třídě, protože jsou přehlednější a využívají techniku, kterou již známe, a tou je dedičnost.
+Pohled vytvoř v souboru `views.py`. Django umožňuje vytvářet dva typy pohledů - pohledy založené na třídě (`class-based`) a pohledy založené na funkci (`function-based`). Doporučuji ti využívat pohledy založené na třídě, protože jsou přehlednější a využívají techniku, kterou již známe, a tou je dědičnost.
 
 Nový pohled může dědit od celé řady tříd, tvůj první pohled bude dědit od třídy `View`. Následně přidej funkci `get()`.
 
@@ -167,7 +167,7 @@ INSTALLED_APPS = [
 ]
 ```
 
-Už v zákadu v sobě má například aplikaci `auth`, která zajišťuje přihlášení uživatele pomocí hesla. Aplikace `admin` obsahuje administrátorské rozhraní, ve kterém můžete neomzeně prohlížet, upravovat, přidávat a mazat data v aplikaci.
+Už v základu v sobě má například aplikaci `auth`, která zajišťuje přihlášení uživatele pomocí hesla. Aplikace `admin` obsahuje administrátorské rozhraní, ve kterém můžete neomezeně prohlížet, upravovat, přidávat a mazat data v aplikaci.
 
 ### Vytvoření modelu
 
@@ -266,5 +266,5 @@ Czechitas potřebují spravovat nejen kurzy, ale i tradiční firemní agendu, m
 
 - Uvnitř svého projektu `czechitas` založ novou aplikaci `crm`.
 - Vytvoř pohled, který přivítá uživatele na úvodní straně textem "Vítej v CRM systému Czechitas!"
-- Vytvoř moddel `Kontakt`, který bude reprezentovat kontakt na nějakou osobu. U kontaktu eviduj jméno, příjmení, e-mail a datum posledního kontaktu. Vyber pro každý údaj vhodný typ pole. Přidej aplikaci do souboru `settings.py` a proveď migraci databáze.
+- Vytvoř model `Kontakt`, který bude reprezentovat kontakt na nějakou osobu. U kontaktu eviduj jméno, příjmení, e-mail a datum posledního kontaktu. Vyber pro každý údaj vhodný typ pole. Přidej aplikaci do souboru `settings.py` a proveď migraci databáze.
 - Zaregistruj model do administrátorského rozhraní a vytvoř testovací záznam.

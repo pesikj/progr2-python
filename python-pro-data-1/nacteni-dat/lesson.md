@@ -2,7 +2,7 @@ Než s daty začneme pracovat, musíme si je nejprve načíst.
 
 ## Základní práce s DataFrame
 
-V Pandasu většinou pracujeme s datovou strukturou zvanou `DataFrame`. Je to tabulková datová struktura a funguje podobně jako tabulka v Exelu nebo v databázi. Můžeme jej považovat za další datový typ vedle slovníků a seznamů. `DataFrame` obsahuje data ve sloupcích, kde každý sloupec může mít různý datový typ, tedy například číslo, desetinné číslo, řetězec, pravdivostní hodnota a jiné.
+V Pandas většinou pracujeme s datovou strukturou zvanou `DataFrame`. Je to tabulková datová struktura a funguje podobně jako tabulka v Excelu nebo v databázi. Můžeme jej považovat za další datový typ vedle slovníků a seznamů. `DataFrame` obsahuje data ve sloupcích, kde každý sloupec může mít různý datový typ, tedy například číslo, desetinné číslo, řetězec, pravdivostní hodnota a jiné.
 
 **Poznámka:** Pokud znáš základy objektově orientovaného programování, pak věz, že `DataFrame` je ve skutečnosti třída a my na jejím základě budeme vytvářet objekty. 
 
@@ -35,7 +35,7 @@ Abychom tabulku načetli jako `DataFrame`, otevřeme si nejprve Python konzoli, 
 
 **Poznámka:** Modul `pandas` nabízí obrovské množství možností. Nemusíš si samozřejmě vše pamatovat, protože vše najdeš přehledně popsáno [v dokumentaci](https://pandas.pydata.org/docs/). Například funkce `read_csv` je [popsána zde](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html). Dokumentaci k samotnému DataFrame najdeš [zde](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html).
 
-Funkce `read_csv` má spoustu nepovnných parametrů, o kterých si můžeme přečíst [v dokumentaci](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html). Například se tam dočteme, že `pandas` standardně nastavuje jako oddělovač sloupců čárku (parametr `sep`). Protože my většinou používáme středník, budeme muset tento parametr často nastavit. Náš soubor `nakupy.csv` ale používá čárku, takže nyní nic měnit nemusíš.
+Funkce `read_csv` má spoustu nepovinných parametrů, o kterých si můžeme přečíst [v dokumentaci](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html). Například se tam dočteme, že `pandas` standardně nastavuje jako oddělovač sloupců čárku (parametr `sep`). Protože my většinou používáme středník, budeme muset tento parametr často nastavit. Náš soubor `nakupy.csv` ale používá čárku, takže nyní nic měnit nemusíš.
 
 Celý DataFrame vypíšeme na obrazovku tak, že zobrazíme přímo proměnnou `nakupy`.
 
@@ -55,9 +55,9 @@ Celý DataFrame vypíšeme na obrazovku tak, že zobrazíme přímo proměnnou `
 10  Ondra  2020-07-25              Káva                300
 ```
 
-Všimni si, že `pandas` nám přidal nový sloupec s číslem řádku. Jedná se o **index**, se kterým budeme později pracovat. Index je hodnota, která identifikuje řádek. V některých případech nemusíme jako index používat číslo řádku, ale můžeme jako index vybrat některý ze sloupců. Obdobnou funkci má v databázích **primární klíč**. Jako *best practice* se většinou uvádí, že index by měl být **unikátní**, i když to `pandas` (narozdíl od právě databází) nevyžadují. Mohli bychom si tedy jako index zvolit napříkad sloupec `Jmeno`, ale tím bychom si zadělávali na problém do budoucna (například v tom, že by práce s `DataFrame` byla [pomalejší](https://stackoverflow.com/q/16626058/4693904)).
+Všimni si, že `pandas` nám přidal nový sloupec s číslem řádku. Jedná se o **index**, se kterým budeme později pracovat. Index je hodnota, která identifikuje řádek. V některých případech nemusíme jako index používat číslo řádku, ale můžeme jako index vybrat některý ze sloupců. Obdobnou funkci má v databázích **primární klíč**. Jako *best practice* se většinou uvádí, že index by měl být **unikátní**, i když to `pandas` (na rozdíl od právě databází) nevyžadují. Mohli bychom si tedy jako index zvolit například sloupec `Jmeno`, ale tím bychom si zadělávali na problém do budoucna (například v tom, že by práce s `DataFrame` byla [pomalejší](https://stackoverflow.com/q/16626058/4693904)).
 
-Pandas nabízí kromě funkce `read_csv()` také funkci pro čtení formátu JSON `read_json()` nebo dokonce funkci pro čtení přímo Excelovových tabulek `read_excel()`.
+Pandas nabízí kromě funkce `read_csv()` také funkci pro čtení formátu JSON `read_json()` nebo dokonce funkci pro čtení přímo Excelových tabulek `read_excel()`.
 
 ### Základní informace o tabulce
 
@@ -197,7 +197,7 @@ Na prvních a posledních několik řádků se chceme podívat často, hlavně v
 
 Kromě řádků si často chceme vybrat jen některé sloupce, protože mnoho tabulek obsahuje spoustu různých informací a ne všechny nás musejí zajímat. Čísla sloupců zadáváme jako druhý parametr funkce `iloc`.
 
-Pokud chceš například vypsat jména u prvních pět nákpů, jako první parametr napíš `:5` a jako druhý `0`.
+Pokud chceš například vypsat jména u prvních pět nákupů, jako první parametr napiš `:5` a jako druhý `0`.
 
 ```pycon
 >>> nakupy.iloc[:5,0]
@@ -221,7 +221,7 @@ U sloupců ale často narazíme na to, že jich chceme několik, ale ony nutně 
 4   Petr                 75
 ```
 
-Pokud bys chtěla vidět všechny řádky, jako první parametr napiš pouze dvoutečku.
+Pokud bys chtěla vidět všechny řádky, jako první parametr napiš pouze dvojtečku.
 
 ```pycon
 >>> nakupy.iloc[:,[0,3]]  
