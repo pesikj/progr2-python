@@ -59,7 +59,7 @@ print(guestList)
 
 #### Tip
 
-Všiměte si, že prázdný seznam jsme vytvořili jednoduše pomocí prázdných hranatých závorek `[]`.
+Všimněte si, že prázdný seznam jsme vytvořili jednoduše pomocí prázdných hranatých závorek `[]`.
 
 ## Přerušení cyklu
 
@@ -77,7 +77,7 @@ listOfItems = [
   {"title": "Parfém", "price": 559, "inStock": False},
   {"title": "Čajová konvička s hrnky", "price": 899, "inStock": True},
   {"title": "Sklenice na víno", "price": 799, "inStock": True},
-  {"title": "Finess náramek", "price": 2399, "inStock": False},
+  {"title": "Fitness náramek", "price": 2399, "inStock": False},
 ]
 
 for item in listOfItems:
@@ -102,7 +102,7 @@ Všimni si, že podmínku, zda určité číslo leží mezi dvěma jinými čís
 - prvocislo
 ]]]
 
-## Dobrovolné čtení na doma: cyklus `while` a příkaz `continue`
+## Dobrovolné čtení na doma
 
 Aby byl tento text co nejkompletnější, je třeba zmínit i cyklus `while` a příkaz `continue`.
 
@@ -123,7 +123,7 @@ while zadaneHeslo != spravneHeslo:
 print("Heslo zadano")
 ```
 
-Pokud používáme cyklus `while` je třeba mít na paměti, že v těle cyklu musí existovat šance na to, že se podmínka cyklu změní a cyklus se tím ukončí. Při programování se však velmi často stane, že uděláme chybu, která neumožní ukončení cyklu a nám vznikne _nekonečný_ cyklus. Naštěstí existuje klávesová zkratka Ctrl+C, která v terminálu program vykonávaný Python interpretem nemilosrdně ukončí i uprostřed nekonečného cyklu.
+Pokud používáme cyklus `while` je třeba mít na paměti, že v těle cyklu musí existovat šance na to, že se podmínka cyklu změní a cyklus se tím ukončí. Při programování se však velmi často stane, že uděláme chybu, která neumožní ukončení cyklu a nám vznikne _nekonečný cyklus_. Naštěstí existuje klávesová zkratka Ctrl+C, která v terminálu program vykonávaný Python interpretem nemilosrdně ukončí i uprostřed nekonečného cyklu.
 
 O pojmu _nekonečný cyklus_ si povíme něco více. Protože již z předchozí části známe příkaz `break`, který nám ukončí cyklus (to platí i pro cyklus `while`), můžeme si dovolit vytvořit nekonečný cyklus záměrně. Předchozí příklad je možné přepsat do následující podoby a například obohatit o výpis o nevyhovujícím heslu.
 

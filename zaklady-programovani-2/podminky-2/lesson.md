@@ -1,4 +1,4 @@
-V této kapitle rozšíříme naše znalosti podmínek a cyklů. Vyzkoušíme si, jak vložit více podmínek do jednoho příkazu `if` a jak určit vztah mezi nimi. Dále si vyzkoušíme, jak pracovat s cykly i bez seznamů.
+V této kapitole rozšíříme naše znalosti podmínek a cyklů. Vyzkoušíme si, jak vložit více podmínek do jednoho příkazu `if` a jak určit vztah mezi nimi. Dále si vyzkoušíme, jak pracovat s cykly i bez seznamů.
 
 ## Vícenásobné podmínky
 
