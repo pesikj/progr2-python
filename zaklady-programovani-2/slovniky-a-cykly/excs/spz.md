@@ -3,7 +3,7 @@ title: Poznávací značky
 demand: 3
 ---
 
-V následujícím slovníků je evidence automobilů. Klíčem jsou státní poznávací značky (SPZ) a hodnotou je jméno majitele vozu. Napiš program, který vypíše všechny majitele, jejichž vozidlo je registrováno v Plzňském kraji, tj. na druhém místě (index 1!) řetězce v klíči je písmeno P.
+V následujícím slovníků je evidence automobilů. Klíčem jsou státní poznávací značky (SPZ) a hodnotou je jméno majitele vozu. Napiš program, který vypíše všechny majitele, jejichž vozidlo je registrováno v Plzeňském kraji, tj. na druhém místě (index 1!) řetězce v klíči je písmeno P.
 
 ```py
 plates = {"4A2 3000": "František Novák",

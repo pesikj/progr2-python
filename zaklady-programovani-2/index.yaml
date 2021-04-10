@@ -19,14 +19,14 @@ lessons:
     brief: Třídy a objekty jsou způsob, jak strukturovat program. Tato kapitola nás uvede do světa objektově orientovaného programování.
   - title: Dědičnost
     link: dedicnost
-    brief: V objektově orientovaném programování existuje důležitý pojem, kterým je dedičnost. Podíváme se, jak funguje.
+    brief: V objektově orientovaném programování existuje důležitý pojem, kterým je dědičnost. Podíváme se, jak funguje.
   - title: Podmínky 2 (bonusová kapitola)
     link: podminky-2
-    brief: Rozšíříme naše znalosti o podminkách a ukážeme si, jak spojit více podmínek do jedné.
+    brief: Rozšíříme naše znalosti o podmínkách a ukážeme si, jak spojit více podmínek do jedné.
   - title: Cykly 2 (bonusová kapitola)
     link: cykly-2
     brief: Ukážeme si, že cykly můžeme používat nejen pro sekvence, ale i pro číselné posloupnosti.
-  - title: Obshluha výjimek (bonusová kapitola)
+  - title: Obsluha výjimek (bonusová kapitola)
     link: vyjimky
     brief: Jak ošetřit chybové stavy v programu pomocí bloku try/except
   - title: Balíčky z internetu (bonusová kapitola)
