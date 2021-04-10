@@ -1,4 +1,4 @@
-Data patří k základním datovým typům a provázejí nás celý život. Každý máme své datum narození, daum, kdy jsme šli poprvé do školy atd. Data jsou však záludná v tom, že je můžeeme zapsat v různých fomátech. Pojďme se podívat, jak data v různých formátech zpracovat a jak je naopak vypsat.
+Data patří k základním datovým typům a provázejí nás celý život. Každý máme své datum narození, datum, kdy jsme šli poprvé do školy atd. Data jsou však záludná v tom, že je můžeme zapsat v různých formátech. Pojďme se podívat, jak data v různých formátech zpracovat a jak je naopak vypsat.
 
 ## Vytvoření data
 
@@ -53,7 +53,7 @@ Standardně je jako oddělovač použit symbol `T`. Stoprocentně autentický z�
 
 Často ale chceme data vypsat v jiném formátu. Ve střední Evropě jsme zvyklí psát na začátek číslo dne, pak měsíc atd. a jako oddělovač používáme tečku. Pokud chceme výpis v tomto formátu, musíme to Pythonu říct. 
 
-Pokud chceme datum vypsat ve vlastním formátu, použijeme funkci `strftime()`. Ta používá tzv. direktivy, což jsou vlastně značky, které reprezentují nějaý konkrétní časový údaj. Tyto značky poskládáme do řetězce a ten pak tvoří instrukce pro Python, jak má zpracovat datum. Základní direktivy jsou v tabulce níže.
+Pokud chceme datum vypsat ve vlastním formátu, použijeme funkci `strftime()`. Ta používá tzv. direktivy, což jsou vlastně značky, které reprezentují nějaký konkrétní časový údaj. Tyto značky poskládáme do řetězce a ten pak tvoří instrukce pro Python, jak má zpracovat datum. Základní direktivy jsou v tabulce níže.
 
 | Direktiva  | Význam |
 |:---| :---|

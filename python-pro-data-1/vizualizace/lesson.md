@@ -2,7 +2,7 @@ V této lekci si ukážeme, jak zobrazovat různé druhy grafů pomocí modulu `
 
 ## První graf
 
-Modul `matplotlib` nabízí ohromné množství možností pro vizualizaci dat. My zde probereme jen naprosté základy, aby nám lekce nenarostla to olbřímých rozměrů.
+Modul `matplotlib` nabízí ohromné množství možností pro vizualizaci dat. My zde probereme jen naprosté základy, aby nám lekce nenarostla to olbřímích rozměrů.
 
 ```pycon
 >>> import matplotlib.pyplot as plt
@@ -14,7 +14,7 @@ Pokud vše proběhlo jak má, můžeme vyzkoušet zobrazit naše první data. Bu
 >>> pohyby = [746, 52, -749, -63, 71, 958, 157, -1223, -1509, -285, -350, 728, -260, 809, -164, 243, -238, 233, -646, -82, -275, 179, 417, 149, 301, 957, -711, 376, 421, -15, -663]
 ```
 
-Z těchto dat si vyrobíme Pandas sérii. Abychom byli co nejpoctivější, vyrobíme si index naší série jako skutečné datumy,
+Z těchto dat si vyrobíme Pandas sérii. Abychom byli co nejpoctivější, vyrobíme si index naší série jako objekty typu `date`
 
 ```pycon
 >>> import pandas
@@ -50,13 +50,13 @@ Nyní si s grafem můžeme vyhrát podle chuti a nastavit jeho vzezření přesn
 
 ![Sloupcový graf zůstatků](assets/sloupce.png)
 
-Protože možností a parametrů je opravdu hodně, vyplatí se číst [oficiální dokumentaci](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.plot.html) a projít si nějaký vhodný tutoriál na internetu například přímo [ten oficiální](https://pandas.pydata.org/pandas-docs/stable/user_guide/visualization.html) k vizualizaci v Pandasu.
+Protože možností a parametrů je opravdu hodně, vyplatí se číst [oficiální dokumentaci](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.plot.html) a projít si nějaký vhodný tutoriál na internetu například přímo [ten oficiální](https://pandas.pydata.org/pandas-docs/stable/user_guide/visualization.html) k vizualizaci v Pandas.
 
 ## Typy grafů
 
 Typ grafu, který chceme zobrazit, se v metodě `plot` specifikuje pomocí argumentu `type`. Sloupcový graf pohybů na účtu
 
-Základní typy grafů, které se hojně používaji mohou být například tyto:
+Základní typy grafů, které se hojně používají mohou být například tyto:
 
 
 - `plot()` - [Bodový graf](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.plot.html)
@@ -112,7 +112,7 @@ Krabicový graf graficky znázorňuje medián a kvartily naměřených hodnot. M
 
 ![Krabicový graf muži](assets/vysky-muzi-box.png)
 
-Krabicové grafy jsou užitečné předveším pro porovnání dvou různých měření. Přidejme si druhou datovou sadu představující naměřené výšky žen
+Krabicové grafy jsou užitečné především pro porovnání dvou různých měření. Přidejme si druhou datovou sadu představující naměřené výšky žen
 
 ```pycon
 >>> zeny = pandas.Series([
@@ -152,7 +152,7 @@ Na úplný závěr našeho kurzu se naučíme pracovat s Jupyter notebookem. Je 
 $ pip3 install jupyter
 ```
 
-Pod windows jako obvykle stačí
+Pod Windows jako obvykle stačí
 
 ```shell
 $ py -m pip install jupyter

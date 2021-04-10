@@ -1,9 +1,9 @@
-Databáze je systém, který slouží k ukládání dat. Standardní relační databáze ukládají data do předem definovaých tabulek, které jsou provázány vztahy (odtud pojem "relační"). Nejznámější zdarma dostupné databáze jsou PostreSQL, MySQL a SQLite, z placených poté Microsoft SQL Server nebo Oracle Database. Pro práci s databázemi používáme jazyk SQL (Structured Query Language).
+Databáze je systém, který slouží k ukládání dat. Standardní relační databáze ukládají data do předem definovaných tabulek, které jsou provázány vztahy (odtud pojem "relační"). Nejznámější zdarma dostupné databáze jsou PostgreSQL, MySQL a SQLite, z placených poté Microsoft SQL Server nebo Oracle Database. Pro práci s databázemi používáme jazyk SQL (Structured Query Language).
 
 Hlavní motivace, proč používat databáze, jsou:
 
 - umožňují efektivně uložit velké množství dat,
-- poskytují způsob, jak snadno a rychle najít požadovatnou informaci,
+- poskytují způsob, jak snadno a rychle najít požadovanou informaci,
 - snadno můžeme přidávat, upravovat, řadit a mazat záznamy,
 - umožňují propojení s aplikacemi (např. weby),
 - řeší přístup více uživatelů najednou,
@@ -13,7 +13,7 @@ Hlavní motivace, proč používat databáze, jsou:
 
 NoSQL databáze jsou poměrně široký pojem a zahrnuje různé typy databází, které používají jiný způsob ukládání dat než tabulky provázané relacemi. Konkrétně existuje několik typů NoSQL databází.
 
-- Key-value databáze ukládají data do dvojic, kde jeden prvek (klíč) identifikuje hodnotu (value). Na stejném principuje fungují například slovníky v Pythonu.
+- Key-value databáze ukládají data do dvojic, kde jeden prvek (klíč) identifikuje hodnotu (value). Na stejném principu fungují například slovníky v Pythonu.
 - Grafové databáze vycházejí z teorie grafů. To je součást matematiky, která se zabývá strukturami složenými z bodů (vrcholů) a spojnic mezi nimi (hranami). Pomocí teorie grafů lze řešit například dopravní úlohy. V grafu pak vrcholy symbolizují města a hrany vzdálenosti mezi nimi. Můžeme pak např. spočítat nejkratší trasu pro návštěvu několika měst. (Speciální případ, kdy navštěvujeme všechna města, se na nazývá *problém obchodního cestujícího*.)
 - Dokumentové databáze slouží k ukládání dokumentů, nejčastěji ve formátu JSON, XML nebo YAML.
 
@@ -98,7 +98,7 @@ zbyvajici_nakupy = [
         "Částka v korunách": 124,
         "Vratná záloha": 20,
         "Datum": "2020-03-01",
-        "Poznámka": "Vrátit otevírák sousedům",
+        "Poznámka": "Vrátit otvírák sousedům",
     },
     {
         "Jméno": "Petr",
@@ -242,13 +242,13 @@ for dokument in vysledek:
 
 ### Úprava jednoho záznamu
 
-Při úpravách záznamů musíme vždy specifikovat, který záznam chceme upravit. Záznam, který chceme upravit, opět vybereme pomocí dotazu. Jednomu dotazu může vyhovovat více dokumentů. funkce `update_one()` však upraví pouze první vyhovující záznam, na který narazí. Úpravu hodnot specifikujeme jako slovník, do něhož vložíme dvojice klíče-hodnota stejně, jako když jsme vytvářeli nový záznam, např. takto: `{ "Poznámka": "Otevírák jsme vrátili. " }`. Podobně jako u dotazů pak použijeme operátor, který bude tvořit nadřazený slovník. Tentokrát použijeme operátor `$set`. Výsledný slovník pro úpravu dokumentu tedy vypadá takto: `{ "$set": { "Poznámka": "Otevírák jsme vrátili. " } }`.
+Při úpravách záznamů musíme vždy specifikovat, který záznam chceme upravit. Záznam, který chceme upravit, opět vybereme pomocí dotazu. Jednomu dotazu může vyhovovat více dokumentů. funkce `update_one()` však upraví pouze první vyhovující záznam, na který narazí. Úpravu hodnot specifikujeme jako slovník, do něhož vložíme dvojice klíče-hodnota stejně, jako když jsme vytvářeli nový záznam, např. takto: `{ "Poznámka": "Otvírák jsme vrátili. " }`. Podobně jako u dotazů pak použijeme operátor, který bude tvořit nadřazený slovník. Tentokrát použijeme operátor `$set`. Výsledný slovník pro úpravu dokumentu tedy vypadá takto: `{ "$set": { "Poznámka": "Otvírák jsme vrátili. " } }`.
 
 Níže vidíš sestavení obou slovníků a volání funkce `update_one()`.
 
 ```py
 dotaz = { "Věc": "Pivo" }
-noveHodnoty = { "$set": { "Poznámka": "Otevírák jsme vrátili. " } }
+noveHodnoty = { "$set": { "Poznámka": "Otvírák jsme vrátili. " } }
 kolekce.update_one(dotaz, noveHodnoty)
 ```
 

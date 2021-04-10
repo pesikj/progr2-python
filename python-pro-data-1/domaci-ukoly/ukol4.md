@@ -20,7 +20,7 @@ Dále napiš následující dotazy:
 
 **Pokročilá varianta**
 
-Nainstaluj si modul `pytemperature` a zkus si vytvořit nový sloupec, který bude obsahovat průměrnou templotu ve stupních Celsia. Ve svém programu nejprve proveď import modulu `pytemperature`. Nový sloupec pak přidáš do tabulky tak, že nalevo od `=` vložíš tabulku a název nového sloupce do hranatých závorek. Napravo pak můžeš provádět výpočty pomocí již existujících sloupců. Můžeš např. použít funkci `f2c` z modulu `pytemperature`, která převede teplotu ze stupňů Fahrenheita na stupně Celsia.
+Nainstaluj si modul `pytemperature` a zkus si vytvořit nový sloupec, který bude obsahovat průměrnou teplotu ve stupních Celsia. Ve svém programu nejprve proveď import modulu `pytemperature`. Nový sloupec pak přidáš do tabulky tak, že nalevo od `=` vložíš tabulku a název nového sloupce do hranatých závorek. Napravo pak můžeš provádět výpočty pomocí již existujících sloupců. Můžeš např. použít funkci `f2c` z modulu `pytemperature`, která převede teplotu ze stupňů Fahrenheita na stupně Celsia.
 
 ```python
 import pytemperature

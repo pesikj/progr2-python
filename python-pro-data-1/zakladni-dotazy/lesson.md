@@ -140,7 +140,7 @@ Pokud nás zajímá více sloupců, můžeme opět použít seznam, do kterého 
 
 ### Co vlastně umí série
 
-Asi se teď říkáš, k čemu je to vlastně dobré. Zkusme si jednoduchý příklad: Chceme zjistit, kolik lidí žije ve všech státech světa. Bude nás tedy zajímat pouze sloupec `population`, kde máme sérii s počty obavytel jednotlivých států. Série sama o sobě umí zajímavé věci, například umí sama spočítat svůj součet a vrátit výsledek jako číslo. K tomu slouží funkce `sum`. K jejímu volání opět použijeme tečkovou notaci.
+Asi se teď říkáš, k čemu je to vlastně dobré. Zkusme si jednoduchý příklad: Chceme zjistit, kolik lidí žije ve všech státech světa. Bude nás tedy zajímat pouze sloupec `population`, kde máme sérii s počty obyvatel jednotlivých států. Série sama o sobě umí zajímavé věci, například umí sama spočítat svůj součet a vrátit výsledek jako číslo. K tomu slouží funkce `sum`. K jejímu volání opět použijeme tečkovou notaci.
 
 ```pycon
 >>> populace = staty["population"]
@@ -162,7 +162,7 @@ Série umí spočítat řadu dalších věcí, jako třeba průměr (funkce `mea
 V datové analýze podmínkám rozhodně neutečeš. Podmínky jsou velmi užitečné, protože bez nich bychom museli pracovat se všemi daty, co jsme dostali, což není vždy žádoucí.
 
 - Data často obsahují chyby, která vzniknou třeba špatným nastavením stroje nebo překlepem pracovníka, který je zadával. Pokud bychom chyby nechali v datech a dále s nimi pracovali, udělaly by nám tam pěknou paseku.
-- Často cheme zpracovat jen část dat. Pokud máme například firmu s obchůdky v několika městech, můžeme chtít zpracovat jen data z jednoho města, pro nějaké konkrétní zboží nebo časové období.
+- Často chceme zpracovat jen část dat. Pokud máme například firmu s obchůdky v několika městech, můžeme chtít zpracovat jen data z jednoho města, pro nějaké konkrétní zboží nebo časové období.
 
 V jazyce SQL píšeme podmínky za klíčové slovo `WHERE`, v Excelu můžeme použít funkce Filtr atd. V `pandas` používáme funkci `query`. Název této funkce si ale pamatovat nemusíš, protože namísto ní opět můžeme použít hranaté závorky.
 
@@ -217,7 +217,7 @@ V tabulce vidíme několik států a kromě Holy See (tj. Vatikánu) jsme o nich
 Pokud chceme, aby musely být splněny obě podmínky, vložíme mezi ně symbol `&`. Uvažujme dvě podmínky:
 
 - Stát musí mít alespoň 20 milionů obyvatel: `(staty["population"] > 20000000)`
-- Stát se musí nacházev v Evropě: `staty["region"] == "Europe")`
+- Stát se musí nacházet v Evropě: `staty["region"] == "Europe")`
 
 Obě tyto podmínky napíšeme do závorek a vložíme mezi ně symbol `&`. Následně použijeme již známé hranaté závorky, které přidáme hned za proměnnou `staty`.
 
@@ -258,7 +258,7 @@ United States of America         US        USA  Washington, D.C.  Americas      
 
 Uvažujme, že bychom chtěli vypsat všechny státy, které leží v západní nebo východní Evropě. Na to bychom mohli použít operátor `|`, ale při dotazu na tři nebo čtyři hodnoty by se takový zápis extrémně protáhl.
 
-V seznamu operátorů na porovnávání jsme měli ještě operátor `in`, kterým jsme ověřovali, jestli je nějaký prvek přítomný v kolekci. Tento operátor nám v `pandas` supluje fukce `isin()`. Pokud tuto funkci aplikujeme na jeden konkrétní sloupec, vrátí ním `True` pro všechny řádky, pro které je hodnota přítomná v seznamu. Náš dotaz na země východní a západní Evropy bychom tedy napsali jako `isin(["Western Europe", "Eastern Europe"])`.
+V seznamu operátorů na porovnávání jsme měli ještě operátor `in`, kterým jsme ověřovali, jestli je nějaký prvek přítomný v kolekci. Tento operátor nám v `pandas` supluje funkce `isin()`. Pokud tuto funkci aplikujeme na jeden konkrétní sloupec, vrátí ním `True` pro všechny řádky, pro které je hodnota přítomná v seznamu. Náš dotaz na země východní a západní Evropy bychom tedy napsali jako `isin(["Western Europe", "Eastern Europe"])`.
 
 ```pycon
 >>> staty[staty["subregion"].isin(["Western Europe", "Eastern Europe"])]
@@ -300,7 +300,7 @@ K takovému převodu na seznam nám poslouží kombinace funkcí `to_numpy` a `t
 ['Kabul', 'Asia', 'Southern Asia', 27657145, 652230.0, 27.8]
 ```
 
-Ve výsledných seznamech nám chybí názvy států. Potíž je v tom, že index se v Pandasu nebere jako součást dat. Pokud chceme index vrátit do původního stavu a mít ho jako automaticky generovaná čísla řádků, můžeme použít metodu `reset_index`. S její pomocí pak už dokážeme dostat z DataFramu čistá data takto
+Ve výsledných seznamech nám chybí názvy států. Potíž je v tom, že index se v Pandas nebere jako součást dat. Pokud chceme index vrátit do původního stavu a mít ho jako automaticky generovaná čísla řádků, můžeme použít metodu `reset_index`. S její pomocí pak už dokážeme dostat z DataFramu čistá data takto
 
 ```pycon
 >>> statyList = staty.reset_index().to_numpy().tolist() 

@@ -15,11 +15,11 @@ Do datové analýzy můžeme započítat velké množství činnost. Typickými 
 - interpretace výsledků a vizualizace dat,
 - tradiční výzkum s použitím statistických metod.
 
-Různé zdroje se shodují, že nejvíce času je věnování právě získávání a čištění dat. Je to i klíčový bod, protože s chybnými nebo špatně upravenými daty zpravidla dojdeme ke špatným závěrům. Zpravidla máme data z více zdrojů, pak je nutné data správně propojit (např. osoby bychom neměli propojovat podle jména a přijímení, protože v datech můžeme mít více osob se stejným jménem a přijímením).
+Různé zdroje se shodují, že nejvíce času je věnování právě získávání a čištění dat. Je to i klíčový bod, protože s chybnými nebo špatně upravenými daty zpravidla dojdeme ke špatným závěrům. Zpravidla máme data z více zdrojů, pak je nutné data správně propojit (např. osoby bychom neměli propojovat podle jména a příjmení, protože v datech můžeme mít více osob se stejným jménem a příjmením).
 
 ### Strojové učení
 
-Součástí zpracování je i **strojové učení** (machine learning), což si můžeme představit jako používání různých algoritmů k hledání společných trendů a závislostí mezi daty a vytváření predikcí. Často je to označování jako **datová věda** (mechine learning).
+Součástí zpracování je i **strojové učení** (machine learning), což si můžeme představit jako používání různých algoritmů k hledání společných trendů a závislostí mezi daty a vytváření predikcí. Často je to označování jako **datová věda** (machine learning).
 
 Strojové učení má spoustu různých aplikací. Služby jako Netflix nebo Youtube mají spoustu dat o tom, jaká videa uživatel sledoval, a úkolem datové vědy je nabízet uživatelům obsah, který je zaujme. U kybernetické bezpečnosti máme spoustu dat o tom, jaká data putují sítí, a úkolem je rozpoznat podezřelý provoz, který může být způsoben nějakým kybernetickým útokem.
 
