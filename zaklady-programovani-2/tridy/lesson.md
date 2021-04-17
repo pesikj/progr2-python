@@ -6,102 +6,134 @@ Objekty mají často reprezentovat nějaké entity v realitě. Pokud bychom nap�
 
 Na začátku si musíme vytvořit **třídu** (`class`). Vztah mezi třídou a objekty si můžeme představit na příkladu formulářů. Třída je prázdný formulář - obsahuje kolonky, které by měly být vyplněny. Objekt je pak vyplněný formulář, který už má v sobě nějaká konkrétní data. Podobně jako formulářů můžeme vyplnit více, může na základě jedné třídy vzniknout několik objektů. Objekty jsou vzájemně nezávislé, takže práce s jedním objektem neovlivňuje ostatní. Analogicky, pokud upravujeme jeden formulář, nijak tím neměníme ostatní.
 
-Třídy mají dvě důležité charakteristiky - mají **atributy** (v nich uchováváme hodnoty) a **funkce** (vykonávají nějaké příkazy). Atributy jsou vlastně proměnné, pouze jsou navázané na konkrétní objekt. Funkce jsme poznali v předchozí kapitole, jsou ale též navázané na konkrétní objekt a pracují s jeho atributy.
+Třídy mají dvě důležité charakteristiky - mají **atributy** (v nich uchováváme hodnoty) a **metody** (vykonávají nějaké příkazy). Atributy jsou vlastně proměnné, pouze jsou navázané na konkrétní objekt. Funkce jsme poznali v předchozí kapitole, metody jsou pak funkce navázané na konkrétní objekt a pracují s jeho atributy.
 
-Popišme si konkrétně náš příklad software pro firmy. V něm můžeme mít například třídu `Employee`, který reprezentuje zaměstnance. Třída může mít jméno, pracovní pozici, oddělení, plat, zbývající dny dovolené atd. Zaměstnanec může mít i funkce - například funkci na vybrání dovolené, vytištění výplatní pásky, výpočet věku atd.
+Popišme si konkrétně náš příklad software pro firmy. V něm můžeme mít například třídu `Zamestnanec`, který reprezentuje zaměstnance. Třída může mít jméno, pracovní pozici, oddělení, plat, zbývající dny dovolené atd. Zaměstnanec může mít i metody - například metodu na vybrání dovolené, vytištění výplatní pásky, výpočet věku atd.
 
-Před vytvářením objektů je třeba mít připravenou třídu, na základě které objekt vznikne. K tomu použijeme klíčové slovo `class`. Za něj přijde **název třídy** a opět **dvojtečka**. Pro začátek si vytvořme třídu jen s jednou funkcí `getInfo`, která vypíše informace o zaměstnanci.
+Před vytvářením objektů je třeba mít připravenou třídu, na základě které objekt vznikne. K tomu použijeme klíčové slovo `class`. Za něj přijde **název třídy** a opět **dvojtečka**. Pro začátek si vytvořme třídu jen s jednou metodou `vypis_informace`, která vypíše informace o zaměstnanci.
 
-Všimni si parametru `self` u funkce. Pomocí `self` se **odkazujeme na atributy objektu**. Pokud chceme získat hodnotu atributu, napíšeme klíčové slovo `self`, **tečku** a **název atributu**. Tečky při práci s objekty používáme velmi často a jsou jakousi analogií k hranatým závorkám u sekvencí.
+Všimni si parametru `self` u metody. Pomocí `self` se **odkazujeme na atributy objektu**. Pokud chceme získat hodnotu atributu, napíšeme klíčové slovo `self`, **tečku** a **název atributu**. Tečky při práci s objekty používáme velmi často a jsou jakousi analogií k hranatým závorkám u sekvencí.
 
 ```py
-class Employee:
-  def getInfo(self):
-    return f"{self.name} pracuje na pozici {self.position}."
+class Zamestnanec:
+  def vypis_informace(self):
+    return f"{self.jmeno} pracuje na pozici {self.pozice}."
 ```
 
-Protože pracujeme s funkcí, můžeme (ale nemusíme) použít klíčové slovo `return` a vrátit nějakou hodnotu.
+Protože pracujeme s metodou, můžeme (ale nemusíme) použít klíčové slovo `return` a vrátit nějakou hodnotu.
 
-Zkusme si nyní vytvořit objekt, který reprezentuje zaměstnance Františka. Objekt vytvoříme podobně, jako bychom volali funkci - použijeme **název třídy** a **kulaté závorky**. Objekt uložíme do proměnné `frantisek`. Dále přiřadíme proměnné `frantisek` hodnoty atributů `name` a `position` a vyzkoušíme funkci `getInfo`. 
+Zkusme si nyní vytvořit objekt, který reprezentuje zaměstnance Františka. Objekt vytvoříme podobně, jako bychom volali funkci - použijeme **název třídy** a **kulaté závorky**. Objekt uložíme do proměnné `frantisek`. Dále přiřadíme proměnné `frantisek` hodnoty atributů `jmeno` a `pozice` a vyzkoušíme metodu `vypis_informace`. 
 
 ```py
-frantisek = Employee()
-frantisek.name = "František Novák"
-frantisek.position = "konstruktér"
-print(frantisek.getInfo())
+frantisek = Zamestnanec()
+frantisek.jmeno = "František Novák"
+frantisek.pozice = "konstruktér"
+print(frantisek.vypis_informace())
 ```
 
 Zkusíme přidat ještě jednu zaměstnankyni.
 
 ```py
-klara = Employee()
-klara.name = "Klára Nová"
-klara.position = "konstruktérka"
+klara = Zamestnanec()
+klara.jmeno = "Klára Nová"
+klara.pozice = "konstruktérka"
 ```
 
 Nyní vyzkoušíme vypsat informace obou zaměstnanců.
 
 ```py
-print(frantisek.getInfo())
-print(klara.getInfo())
+print(frantisek.vypis_informace())
+print(klara.vypis_informace())
 ```
 
-## Funkce `__init__`
+## Metoda `__init__`
 
 Z výpis vidíme, že se informace zaměstnanců nijak nepomíchaly a každý zaměstnanec má uložené své vlastní údaje.
 
-Tento postup ale působí lehce chaoticky. V naší analogii s formuláři to vypadá, že si každý může do formuláře vyplnit, co chce. Abychom měli objekt více pod kontrolou, můžeme využít funkce `__init__` (název zapisujeme včetně podtržítek). Tato funkce je speciální v tom, že je **zavolána při vytvoření objektu**. Můžeme jí (jako jakékoli jiné funkci) přiřadit parametry a zajistit, aby hodnoty parametrů uložila jako atributy objektu.
+Tento postup ale působí lehce chaoticky. V naší analogii s formuláři to vypadá, že si každý může do formuláře vyplnit, co chce. Abychom měli objekt více pod kontrolou, můžeme využít metodu `__init__` (název zapisujeme včetně podtržítek). Tato metoda je speciální v tom, že je **zavolána při vytvoření objektu**. Můžeme jí (jako jakékoli jiné metodě) přiřadit parametry a zajistit, aby hodnoty parametrů uložila jako atributy objektu.
 
 ```py
-class Employee:
-  def getInfo(self):
-    return f"{self.name} pracuje na pozici {self.position}."
-  def __init__(self, name, position):
-    self.name = name
-    self.position = position
+class Zamestnanec:
+  def vypis_informace(self):
+    return f"{self.jmeno} pracuje na pozici {self.pozice}."
+  def __init__(self, jmeno, pozice):
+    self.jmeno = jmeno
+    self.pozice = pozice
 ```
 
-Tento styl je standardní - parametry jsou pojmenované stejně jako atributy objektu, kam se jejich hodnoty ukládají. Mezi `self.name` a `name` je důležitý rozdíl:
+Tento styl je standardní - parametry jsou pojmenované stejně jako atributy objektu, kam se jejich hodnoty ukládají. Mezi `self.jmeno` a `jmeno` je důležitý rozdíl:
 
-- `name` je parametr funkce `__init__` a jeho hodnota **není přístupná** pro ostatní funkce objektu.
-- `self.name` je atribut objektu, který v objektu **zůstane** a můžou s ním pracovat ostatní funkce. 
+- `jmeno` je parametr metody `__init__` a jeho hodnota **není přístupná** pro ostatní funkce objektu.
+- `self.jmeno` je atribut objektu, který v objektu **zůstane** a můžou s ním pracovat ostatní metody. 
 
-Díky funkci `__init__` máme zjednodušené vytváření objektu, protože hodnoty parametrů nyní vepíšeme přímo do závorek při vytváření objektu.
+Díky metodě `__init__` máme zjednodušené vytváření objektu, protože hodnoty parametrů nyní vepíšeme přímo do závorek při vytváření objektu.
 
 ```py
-frantisek = Employee("František Novák", "konstruktér")
-klara = Employee("Klára Nová", "svářeč")
+frantisek = Zamestnanec("František Novák", "konstruktér")
+klara = Zamestnanec("Klára Nová", "svářeč")
 
-print(frantisek.getInfo())
-print(klara.getInfo())
+print(frantisek.vypis_informace())
+print(klara.vypis_informace())
 ```
 
-Nyní již víme, že každý objekt třídy `Employee` má vyplněné jméno a pozici. Zkusme nyní naši třídu obohatit o novou funkci - čerpání dovolené. Na začátku bude mít každý zaměstnanec nárok na dovolenou, kterou může v průběhu roku čerpat. Čerpání zajistíme pomocí funkce `takeHoliday`. Budeme hlídat i to, aby zaměstnanec nárok na dovolenou nepřečerpal.
+Nyní již víme, že každý objekt třídy `Zamestnanec` má vyplněné jméno a pozici. Zkusme nyní naši třídu obohatit o novou metodu - čerpání dovolené. Na začátku bude mít každý zaměstnanec nárok na dovolenou, kterou může v průběhu roku čerpat. Čerpání zajistíme pomocí metody `cerpani_dovolene`. Budeme hlídat i to, aby zaměstnanec nárok na dovolenou nepřečerpal.
 
 ```py
-class Employee:
-  def takeHoliday(self, days):
-    if self.remainingHolidayDays >= days:
-      self.remainingHolidayDays -= days
+class Zamestnanec:
+  def cerpani_dovolene(self, days):
+    if self.pocet_dni_dovolene >= days:
+      self.pocet_dni_dovolene -= days
       return f"Užij si to."
     else:
-      return f"Bohužel už máš nárok jen na {self.remainingHolidayDays} dní."
-  def getInfo(self):
-    return f"{self.name} pracuje na pozici {self.position}."
-  def __init__(self, name, position):
-    self.name = name
-    self.position = position
-    self.remainingHolidayDays = 25
+      return f"Bohužel už máš nárok jen na {self.pocet_dni_dovolene} dní."
+  
+  def vypis_informace(self):
+    return f"{self.jmeno} pracuje na pozici {self.pozice}."
+    
+  def __init__(self, jmeno, pozice):
+    self.jmeno = jmeno
+    self.pozice = pozice
+    self.pocet_dni_dovolene = 25
 ```
 
 Nyní se podívejme, jak budou vyřizovány Františkovy žádosti o dovolenou.
 
 ```py
-frantisek = Employee("František Novák", "konstruktér")
+frantisek = Zamestnanec("František Novák", "konstruktér")
 
-print(frantisek.takeHoliday(5))
-print(frantisek.takeHoliday(15))
-print(frantisek.takeHoliday(10))
+print(frantisek.cerpani_dovolene(5))
+print(frantisek.cerpani_dovolene(15))
+print(frantisek.cerpani_dovolene(10))
+```
+
+### Metoda `__str__`
+
+Pojďme ještě použití naší třídy trochu zjednodušit. Naše třída umí přehledně vypsat informace díky metodě `cerpani_dovolene()`. Třídu ale může používat i jiný programátor a ten o této metodě nemusí vědět a tak intuitivně vyzkouší funkci `print()`, které vloží nějaký objekt třídy `Zamestnanec`.
+
+```python
+print(frantisek)
+```
+
+Odpovědí bude poněkud záhadný text ve stylu
+
+```python
+<__main__.Zamestnanec object at 0x00000126F0084850>
+```
+
+Funke `print()` se totiž pokusí převést objekt na typ řetězec. Protože naše třída nemá tuto funkci naprogramovanou, použije se standardní formát, který nám říká, že jde o objekt třídy `Zamestnanec` a kde je uložený v paměti. Bylo by však dobré místo toho získat nějaký srozumitelný výpis, třeba takový, který poskytuje metoda `vypis_informace()`.
+
+Převod na řetězec zařídíme tím, že třídě přidáme metodu `__str__`. Dvě lomítka opět značný zvláštní význam. Ten spočívá v tom, že Python využije tuto metodu vždy, když jej požádáme o převod objektu na řetězec. Můžeme tedy přejmenovat metodu `vypis_informace()` na `__str__`. Výstupem našeho programu pak bude text o tom, jak se zaměstnanec jmenuje a kde pracuje.
+
+```python
+class Zamestnanec:
+  def __str__(self):
+    return f"{self.jmeno} pracuje na pozici {self.pozice}."
+  def __init__(self, jmeno, pozice):
+    self.jmeno = jmeno
+    self.pozice = pozice
+
+frantisek = Zamestnanec("František Novák", "konstruktér")
+print(str(frantisek))
 ```
 
 Tím jsme si ukázali, jak vytvořit třídu, objekty a jak s nimi pracovat.
