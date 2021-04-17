@@ -8,4 +8,7 @@ lessons:
   - title: Úvod do vývoje webu
     link: uvod
     brief: Řekneme si něco o tom, jak vlastně vyvíjíme web.
+  - title: Šablony a pohledy
+    link: sablony-a-pohledy
+    brief: Vytvoříme si jednoduché šablony a pomocí pohledů je zobrazíme uživatelům.
     

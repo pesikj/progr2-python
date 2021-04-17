@@ -300,43 +300,6 @@ admin.site.register(models.Kurz)
 
 Po obnovení stránky již model vidíme. Zkus si nyní přidat nějaký záznam do našeho modelu pomocí tlačítka 'Add' v administraci projektu. Všimni si, že díky vhodně zvoleným datovým typům jednotlivých polí je jednoduché zadat data ve správném formátu.
 
-## Vazby mezi modely
-
-Modely jsou často mezi sebou provázané. Například víme, že Czechitas organizují kurzy do témat, např. Programuju, Tvořím web atd. Pojďme si vytvořit model, který bude tyto kategorie reprezentovat.
-
-```python
-class Kategorie(models.Model):
-  nazev = models.CharField(max_length=100)
-```
-
-Jako druhý krok upravíme model `Kurz`, kterému přidáme nové pole `pobocka`, které je typu `ForeignKey` (tj. cizí klíč). Poli nastavíme parametr `null` jako `True`, což znamená, že toto pole nemusí mít vyplněnou hodnotu.
-
-```python
-class Kurz(models.Model):
-  nazev = models.CharField(max_length=100)
-  zacatek = models.DateTimeField()
-  konec = models.DateTimeField()
-  popis = models.CharField(max_length=1000)
-  cena = models.IntegerField()
-  kategorie = models.ForeignKey(Kategorie, on_delete=models.SET_NULL, null=True)
-```
-
-Následně opět provedeme migraci, abychom model přidali do databáze.
-
-```
-python manage.py makemigrations kurzy
-python manage.py migrate
-```
-
-Abychom model `Kategorie` viděli v databázi, musíme jej ještě zaregistrovat.
-
-```python
-from django.contrib import admin
-from . import models
-admin.site.register(models.Kurz)
-admin.site.register(models.Kategorie)
-```
-
 ## Úkol
 
 Czechitas potřebují spravovat nejen kurzy, ale i tradiční firemní agendu, mezi kterou patří kontakty se sponzory, partnery a dalšími důležitými osobami. Vytvořme si základ jednoduchého CRM systému (Customer Relationship Management), který by takovou agendu dokázal obstarat.
