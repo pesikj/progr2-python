@@ -21,7 +21,6 @@ prodeje2020 = {
     "Vražda podle knihy": 2510,
     "Past": 2364,
     "Zločinný steh": 5412,
-    "Zkus mě chytit": 6671,
 }
 
 ```
