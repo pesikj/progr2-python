@@ -9,4 +9,4 @@ Předchozí ukázku uprav následujícím způsobem:
 1. Vypiš podíl těchto čísel
 1. Ošetři, aby program nezhavaroval při pokusu o dělení nulou
 
-Všechny chyby řeš ošetřovnám výjimek.
+Všechny chyby řeš ošetřováním výjimek.

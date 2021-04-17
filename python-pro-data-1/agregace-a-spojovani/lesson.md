@@ -141,7 +141,7 @@ U operace JOIN jsou důležité dvě věci:
 - Podle jakého sloupce (nebo jakých sloupců) dvě různé tabulky spojujeme.
 - Co udělat v případě, že pro jeden řádek nemám ve druhé tabulce odpovídající hodnotu.
 
-Join tabulek se v Pandase dělá pomocí funkce `merge` (dokumentaci k ní je [zde](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.merge.html)). Ve výchozím nastavení funkce `merge` provádí spojení podle sloupců, které mají shodný název. V našem případě mají oba `DataFrame` sloupec `cisloStudenta`, je tedy použit tento sloupec, což je přesně ten sloupec, podle kterého bychom je chtěli spojit.
+Join tabulek se v Pandas dělá pomocí funkce `merge` (dokumentaci k ní je [zde](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.merge.html)). Ve výchozím nastavení funkce `merge` provádí spojení podle sloupců, které mají shodný název. V našem případě mají oba `DataFrame` sloupec `cisloStudenta`, je tedy použit tento sloupec, což je přesně ten sloupec, podle kterého bychom je chtěli spojit.
 
 Ve výchozím nastavení funkce `merge()` ponechá pouze řádky, které mají záznamy v obou tabulkách. V SQL bychom tuto operaci označili jako INNER JOIN. 
 
@@ -167,7 +167,7 @@ Pokud by například nějaký student nebyl uvedený v tabulce se studenty, jeho
 
 Zde vidíme, že data jsou zřejmě v pořádku.
 
-Dále připojíme tabulku [predsedajici.csv](assets/predsedajici.csv), kde máme vypsané předsedy maturitních komusí. Tu si opět načteme jako `DataFrame`.
+Dále připojíme tabulku [predsedajici.csv](assets/predsedajici.csv), kde máme vypsané předsedy maturitních komisí. Tu si opět načteme jako `DataFrame`.
 
 ```pycon
 >>> preds = pandas.read_csv('predsedajici.csv')
@@ -223,7 +223,7 @@ Tentokrát jsme již o data nepřišli, ale kde se stala chyba? Zkusme si zobraz
 
 Nyní jsme již na stopě problému. Z nějakého důvodu nám nefunguje propojení v případě, že ve sloupci `den` je hodnota `po`. Po chvíli zkoumání zjistíme, že za chybu může nenápadná mezera, která je ve sloupci `den` za hodnotou `po` v souboru `prednasejici.csv`. Ať už vznikla chyba překlepem nebo nějakou jinou chybou, takové věci se bohužel stávají a proto při práci s daty musíme neustále kontrolovat, zda jsme nějako operací o část dat nepřišli.
 
-Pokud nemáme možnost vstupní data opravit, můžeme použít funkci `strip()`, která z řetězce odstraní mezery (a další bílé znaky) na začátku a na konci. Tyto mezery jsou v drtivé většině případů způsobeny chybou a proto jejich ostraněním nic nezkazíme.
+Pokud nemáme možnost vstupní data opravit, můžeme použít funkci `strip()`, která z řetězce odstraní mezery (a další bílé znaky) na začátku a na konci. Tyto mezery jsou v drtivé většině případů způsobeny chybou a proto jejich odstraněním nic nezkazíme.
 
 ```pycon
 >>> preds["den"] = preds["den"].str.strip()
@@ -239,7 +239,7 @@ Poslední nepříjemností, na kterou se podíváme, je to, že sloupce `jmeno` 
 ```
 ## Agragace
 
-Z databází známe kromě UNION a JOIN také operaci GROUP BY. V Pandase ji provedeme tak, že pomocí metody `groupby` vyrobíme z `DataFrame` speciální objekt `DataFrameGroupBy`. Dejme tomu, že chceme grupovat podle sloupečku `mistnost`.
+Z databází známe kromě UNION a JOIN také operaci GROUP BY. V Pandas ji provedeme tak, že pomocí metody `groupby` vyrobíme z `DataFrame` speciální objekt `DataFrameGroupBy`. Dejme tomu, že chceme grupovat podle sloupečku `mistnost`.
 
 ```pycon
 >>> maturita.groupby('mistnost')
@@ -295,13 +295,13 @@ Name: Částka v korunách, dtype: int64
 
 ### Čtení na doma: Více různých agregací
 
-Pokud chceme provést více různých agregací, použijeme metodu `agg`. Metodě `agg` vložíme jako parametr slovník, kde klíčem je název sloupce, pro který počítáme agregaci, a hodnotou je řetězec nebo seznam řetězců se jmény agregací, které chceme provést. Například u maturity chceme zjistit, jestli student prospěl, prospěl s vyznamenámím nebo neprospěl. K tomu potřebujeme funkci `max()` (pětka znamená, že student neuspěl a trojka znamená, že nemůže získat vyznamenání) a funkci `mean()` (abychom zjistili, zda je průměr známek menší než 1.5).
+Pokud chceme provést více různých agregací, použijeme metodu `agg`. Metodě `agg` vložíme jako parametr slovník, kde klíčem je název sloupce, pro který počítáme agregaci, a hodnotou je řetězec nebo seznam řetězců se jmény agregací, které chceme provést. Například u maturity chceme zjistit, jestli student prospěl, prospěl s vyznamenáním nebo neprospěl. K tomu potřebujeme funkci `max()` (pětka znamená, že student neuspěl a trojka znamená, že nemůže získat vyznamenání) a funkci `mean()` (abychom zjistili, zda je průměr známek menší než 1.5).
 
 ```pycon
 >>> maturita.groupby("cisloStudenta").agg({"znamka": ["max", "mean"]})
 ```
 
-K určení výsledk studenta bychom ještě potřebovali nový sloupec, jehož hodnota bude určena na základě podmínky, což si ukážeme níže.
+K určení výsledku studenta bychom ještě potřebovali nový sloupec, jehož hodnota bude určena na základě podmínky, což si ukážeme níže.
 
 ## Počítané sloupce
 
@@ -314,7 +314,7 @@ Pokud nemáme načtený soubor s daty, načteme si ho.
 >>> staty = staty.set_index("name")
 ```
 
-Přidání nového sloupce je poměrně jednoduché. Před znaménko `=` vložíme proměnnou s `DataFrame` a do hranaých závorek vložíme název nového sloupce. Na pravou stranu umístíme výpočet. Ve výpočtu pracujeme s jednotlivými sloupci, v našem konkrétním případě vydělíme sloupec `population` sloupcem `area`.
+Přidání nového sloupce je poměrně jednoduché. Před znaménko `=` vložíme proměnnou s `DataFrame` a do hranatých závorek vložíme název nového sloupce. Na pravou stranu umístíme výpočet. Ve výpočtu pracujeme s jednotlivými sloupci, v našem konkrétním případě vydělíme sloupec `population` sloupcem `area`.
 
 ```pycon
 >>> staty["populationDensity"] = staty["population"] / staty["area"]
@@ -328,11 +328,11 @@ Občas chceme do výpočtu zapracovat i podmínku. Ve skutečnosti je podmínka 
 
 1. Provedeme agregaci hodnot nákupů podle jmen. Tím zjistíme sumu, kolik každý utratil.
 1. Zjistíme si průměrnou útratu za osobu. K tomu použijeme funkci `mean()`.
-1. Přidáme sloupec s podmínkou. V podmínce porovnáváme, zda spolubydlící utratil více nebo méně, než je průměr. K tomu použijeme funkci `where`, která je součástí modulu `numpy`. Nejprve provedeme import modulu `numpy` a následně z modulu zavoláme funkci `where()`. Jako první parametr zadáme podmínku (porovnání hodnot), jako druhý hodnotu vloženou v případě splnění podmínky (text "má dáti") a jako poslední hodnotu vloženou v případě nesplnění podmínky (text "dostane"). Jako předposlední krok si určíme částku potřebnou k vypořádání - rozdíl mezi součtem pro danou osbu a průměrnou útratou. Poslední krok je pak jen výpisem hodnoty.
+1. Přidáme sloupec s podmínkou. V podmínce porovnáváme, zda spolubydlící utratil více nebo méně, než je průměr. K tomu použijeme funkci `where`, která je součástí modulu `numpy`. Nejprve provedeme import modulu `numpy` a následně z modulu zavoláme funkci `where()`. Jako první parametr zadáme podmínku (porovnání hodnot), jako druhý hodnotu vloženou v případě splnění podmínky (text "má dáti") a jako poslední hodnotu vloženou v případě nesplnění podmínky (text "dostane"). Jako předposlední krok si určíme částku potřebnou k vypořádání - rozdíl mezi součtem pro danou osobu a průměrnou útratou. Poslední krok je pak jen výpisem hodnoty.
 
 ```pycon
 >>> nakupy = pandas.read_csv('nakupy.csv')
->>> nakupyCelkem = nakupy.groupby("Jméno")[["Částka v korunách"]].sum() 
+>>> nakupyCelkem = nakupy.groupby("Jméno")[["Částka v korunách"]].sum()
 >>> prumernaHodnota = nakupyCelkem["Částka v korunách"].mean()
 >>> import numpy
 >>> nakupyCelkem["Operace"] = numpy.where(nakupyCelkem["Částka v korunách"] > prumernaHodnota, "má dáti", "dostane")

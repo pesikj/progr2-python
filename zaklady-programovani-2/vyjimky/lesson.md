@@ -81,7 +81,7 @@ ValueError: invalid literal for int() with base 10: 'cislo'
 ```
 
 ## Různé přístupy k ošetřování vstupů
-Ještě než se pustíme do samotného ošetřování výjimek povíme si něco o ošetřování vstupů programu. Pokud totiž program nemá žádné uživatelské vstupy, nejedná se o moc užitečný program. Takový program by se choval vždy stejně a vypsal by jen to, co jsme mu zadrátovali uvnitř (např. text "Hello wordl!").
+Ještě než se pustíme do samotného ošetřování výjimek povíme si něco o ošetřování vstupů programu. Pokud totiž program nemá žádné uživatelské vstupy, nejedná se o moc užitečný program. Takový program by se choval vždy stejně a vypsal by jen to, co jsme mu zadrátovali uvnitř (např. text "Hello world!").
 
 Důležité je si pod pojmem vstup programu představit mnoho různých věcí, např.:
 * Návratovou hodnotu funkce `input()` - vstup textu z klávesnice

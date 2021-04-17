@@ -8,7 +8,7 @@ Modifikujme si předchozí příklad. Horší známku z matematiky může studen
 Otázka může vypadat například takto:
 
 ```py
-input("Zúčastnil ses okresního kola krajské olympidáy? [a/n] ")
+input("Zúčastnil ses okresního kola krajské olympiády? [a/n] ")
 ```
 
-Pokud se student olympidáy zůstatnil, odpoví `a`.
+Pokud se student olympiády zúčastnil, odpoví `a`.

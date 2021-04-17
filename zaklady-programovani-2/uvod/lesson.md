@@ -8,7 +8,7 @@ Na této stránce najdeš několik příkladů. Nejlepší způsob, jak si svoje
 
 Proměnné jsou způsob, jak v našem programu uložit nějaké hodnoty. Jak jejich název napovídá, hodnotu uloženou v proměnné můžeme kdykoli změnit. Proměnné můžeme použít například jako vstup pro nějaké výpočty, předat je funkci ke zpracování nebo vypsat uživateli.
 
-Do proměnných jsme ukládali například vstupy od uživatelů nebo výsledky našich výpočtů. Hodnoty proměnných jsme též často vypisovali na obrazovnku.
+Do proměnných jsme ukládali například vstupy od uživatelů nebo výsledky našich výpočtů. Hodnoty proměnných jsme též často vypisovali na obrazovku.
 
 ## Datové typy
 
@@ -101,7 +101,7 @@ itemsInStock = 5
 numberOfItems = int(input("Kolik si přejete koupit kusů zboží? "))
 
 if numberOfItems <= itemsInStock:
-  print("Položky byly vloženy do košiků.")
+  print("Položky byly vloženy do košíku.")
 else:
   print(f"Bohužel máme na skladě posledních {itemsInStock} kusů.")
 ```
@@ -157,7 +157,7 @@ Všimněte si, že klíčová slova `else` a `elif` jsou vždy zarovnaná stejn�
 
 Sekvence jsou hodnoty, které v sobě obsahují jiné hodnoty. Zatím jsme poznali základní dva typy sekvencí - řetězec (`string`) a seznam (`list`).
 
-### Řetězce jeko sekvence
+### Řetězce jako sekvence
 
 Řetězce jsou vlastně sekvence skládající se z jednotlivých písmen. K jednotlivým prvkům sekvence přistupujeme pomocí hranatých závorek, které píšeme za název řetězce. Písmena jsou číslovaná (indexovaná) od 0.
 
@@ -227,20 +227,20 @@ Ideální je využití cyklů spolu s kolekcemi. Pro každý prvek kolekce prove
 
 ```py
 schoolReport = [
-  ["Český jazyk", 1], 
-  ["Anglický jazyk", 1], 
-  ["Matematika", 1], 
+  ["Český jazyk", 1],
+  ["Anglický jazyk", 1],
+  ["Matematika", 1],
   ["Přírodopis", 2],
   ["Dějepis", 1],
   ["Fyzika", 2],
   ["Hudební výchova", 4],
   ["Výtvarná výchova", 2],
-  ["Tělešná výchova", 3],
+  ["Tělesná výchova", 3],
   ["Chemie", 4],
 ]
 ```
 
-Nejprve si zkusme vypočítat průměrnou známku studenta na vysvědčení. 
+Nejprve si zkusme vypočítat průměrnou známku studenta na vysvědčení.
 
 ```py
 sumOfMarks = 0

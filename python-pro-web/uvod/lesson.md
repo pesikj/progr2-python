@@ -24,7 +24,7 @@ Druhou možností je architektura označovaná jako model-view-controller, obvyk
 
 - Model reprezentuje datovou strukturu. Pomocí modelu říkáme, s jakými daty bude naše aplikace pracovat, jaká bude ukládat do databáze atd.
 - View (pohled) převádí data do podoby vhodné k zobrazení uživateli.
-- Controler (řadič) reaguje na události uživatele.
+- Controller (řadič) reaguje na události uživatele.
 
 My budeme využívat framework Django, který je založený na obdobném přístupu, který je označovaný jako model-template-views. Modely zde mají stejnou funkci jako v MVC architektuře. Šablony určují, jak má stránka vypadat (obsahují i HTML kód) a view připravuje data k zobrazení uživateli a řídí zpracování uživatelských požadavků.
 
@@ -45,7 +45,7 @@ django-admin startproject czechitas
 Django vytvoří řadu souborů, z nichž jsou pro nás důležité:
 
 - `manage.py` je skript, který zajišťuje správu naší aplikace, např. díky ní můžeme aplikaci spustit.
-- `czechitas/settings` obsahuje nastavení applikace (např. nastavení připojení k databázi).
+- `czechitas/settings` obsahuje nastavení aplikace (např. nastavení připojení k databázi).
 - `czechitas/urls.py` obsahuje URL adresy, které jsou dostupné v naší aplikaci (ukážeme si později).
 
 Příkaz ti vytvoří nový webový projekt. Tento projekt už si můžeš zkusit spustit pomocí příkazu
@@ -61,8 +61,16 @@ Zkus si nyní otevřít [tento odkaz](http://127.0.0.1:8000/), ve kterém by mě
 
 Aplikace v `django` je složena do funkčních celků, které označujeme jako `app` (aplikace). Jednotlivé aplikace jsou mezi sebou relativně nezávislé a v jednom projektu jich samozřejmě můžeme mít více.
 
+Pro Windows:
+
 ```
 python manage.py startapp kurzy
+```
+
+Pro MacOS nebo Linux:
+
+```
+python3 manage.py startapp kurzy
 ```
 
 Nová aplikace obsahuje následující soubory:
@@ -77,7 +85,7 @@ Nová aplikace obsahuje následující soubory:
 
 Začneme s tím, že si vytvoříme pohled. Náš pohled bude velmi jednoduchý a zobrazí jen jednoduchý text "Vítej na webu Czechitas". Vyzkoušíme si na něm ale základní techniku vytvoření pohledu a přiřazení URL adresy.
 
-Pohled vytvoř v souboru `views.py`. Django umožňuje vytvářet dva typy pohledů - pohledy založené na třídě (`class-based`) a pohledy založené na funkci (`function-based`). Doporučuji ti využívat pohledy založené na třídě, protože jsou přehlednější a využívají techniku, kterou již známe, a tou je dedičnost.
+Pohled vytvoř v souboru `views.py`. Django umožňuje vytvářet dva typy pohledů - pohledy založené na třídě (`class-based`) a pohledy založené na funkci (`function-based`). Doporučuji ti využívat pohledy založené na třídě, protože jsou přehlednější a využívají techniku, kterou již známe, a tou je dědičnost.
 
 Nový pohled může dědit od celé řady tříd, tvůj první pohled bude dědit od třídy `View`. Následně přidej funkci `get()`.
 
@@ -127,7 +135,7 @@ urlpatterns = [
 ]
 ```
 
-Pokud nyní obnovíme stránku v prohlížeči, zobrazí se požadovaný text "Vítej na webu Czechitas!".
+Pokud si nyní otevřeme námi přidanou [url adresu](http://127.0.0.1:8000/kurzy), zobrazí se požadovaný text "Vítej na webu Czechitas!".
 
 ### Migrace databáze
 
@@ -150,8 +158,16 @@ DATABASES = {
 
 Poté zadáme příkaz pro provedení migrace.
 
+Pro Windows:
+
 ```
 python manage.py migrate
+```
+
+Pro MacOS nebo Linux:
+
+```
+python3 manage.py migrate
 ```
 
 Soubor `settings.py` obsahuje řadu dalších důležitých nastavení. Jednou z nich je seznam `INSTALLED_APPS`. `django` umožňuje, aby do něj byla instalována různá rozšíření, podobně jako je možné instalovat moduly pro Python. 
@@ -167,7 +183,7 @@ INSTALLED_APPS = [
 ]
 ```
 
-Už v zákadu v sobě má například aplikaci `auth`, která zajišťuje přihlášení uživatele pomocí hesla. Aplikace `admin` obsahuje administrátorské rozhraní, ve kterém můžete neomzeně prohlížet, upravovat, přidávat a mazat data v aplikaci.
+Už v základu v sobě má například aplikaci `auth`, která zajišťuje přihlášení uživatele pomocí hesla. Aplikace `admin` obsahuje administrátorské rozhraní, ve kterém můžete neomezeně prohlížet, upravovat, přidávat a mazat data v aplikaci.
 
 ### Vytvoření modelu
 
@@ -218,8 +234,16 @@ INSTALLED_APPS = [
 
 Nyní vytvoříme migraci, tj. připravíme skript, který obsahuje všechny informace o našem modelu:
 
+Pro Windows:
+
 ```
 python manage.py makemigrations kurzy
+```
+
+Pro MacOS nebo Linux:
+
+```
+python3 manage.py makemigrations kurzy
 ```
 
 Terminál nám odpoví následující:
@@ -232,16 +256,32 @@ Migrations for 'kurzy':
 
 Pokud si otevřeme adresář `migrations`, uvidíme v něm nový soubor `0001_initial.py`, který obsahuje popis našeho modelu. Nyní musíme migraci spustit, aby se připravené změny propsaly do databáze.
 
+Pro Windows:
+
 ```
 python manage.py migrate
+```
+
+Pro MacOS nebo Linux:
+
+```
+python3 manage.py migrate
 ```
 
 ### Vytvoření prvního uživatele
 
 Nyní nastal čas podívat se do administrátorského rozhraní. Administrátorské rozhraní umožňuje vytvářet nové uživatele, pro přístup do něj se ale musíme přihlásit. Tento problém ve stylu Hlavy 22 vyřešíme pomocí příkazu do terminálu.
 
+Pro Windows:
+
 ```
 python manage.py createsuperuser
+```
+
+Pro MacOs nebo Linux:
+
+```
+python3 manage.py createsuperuser
 ```
 
 Terminál se nás postupně zeptá na uživatelské jméno, e-mail a heslo. Postupně vyplníme všechny údaje a otevřeme si stránku [pro přihlášení](http://localhost:8000/admin/), kam naše uživatelské jméno a heslo zadáme.
@@ -258,7 +298,7 @@ from . import models
 admin.site.register(models.Kurz)
 ```
 
-Po obnovení stránky již model vidíme. Zkus si nyní do vytvořit nějaký záznam.
+Po obnovení stránky již model vidíme. Zkus si nyní přidat nějaký záznam do našeho modelu pomocí tlačítka 'Add' v administraci projektu. Všimni si, že díky vhodně zvoleným datovým typům jednotlivých polí je jednoduché zadat data ve správném formátu.
 
 ## Vazby mezi modely
 
@@ -303,5 +343,5 @@ Czechitas potřebují spravovat nejen kurzy, ale i tradiční firemní agendu, m
 
 - Uvnitř svého projektu `czechitas` založ novou aplikaci `crm`.
 - Vytvoř pohled, který přivítá uživatele na úvodní straně textem "Vítej v CRM systému Czechitas!"
-- Vytvoř moddel `Kontakt`, který bude reprezentovat kontakt na nějakou osobu. U kontaktu eviduj jméno, příjmení, e-mail a datum posledního kontaktu. Vyber pro každý údaj vhodný typ pole. Přidej aplikaci do souboru `settings.py` a proveď migraci databáze.
+- Vytvoř model `Kontakt`, který bude reprezentovat kontakt na nějakou osobu. U kontaktu eviduj jméno, příjmení, e-mail a datum posledního kontaktu. Vyber pro každý údaj vhodný typ pole. Přidej aplikaci do souboru `settings.py` a proveď migraci databáze.
 - Zaregistruj model do administrátorského rozhraní a vytvoř testovací záznam.

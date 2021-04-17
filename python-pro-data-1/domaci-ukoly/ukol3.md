@@ -14,7 +14,7 @@ open('country_vaccinations.csv', 'wb').write(r.content)
 
 Dále napiš následující dotazy:
 
-* Dotaz na počty očkovaných (sloupec `total_vaccinations`) v jednotlivých státech dne `2021-03-10` (s datem pracuj úplně stejně jako s řetězcem, tj. nevyužívej modeul `datetime`, ale vlož do dotazu přímo řetězec).
+* Dotaz na počty očkovaných (sloupec `total_vaccinations`) v jednotlivých státech dne `2021-03-10` (s datem pracuj úplně stejně jako s řetězcem, tj. nevyužívej modul `datetime`, ale vlož do dotazu přímo řetězec).
 * Dotaz na řádky, kde `2021-03-10` bylo naočkováno více než 1 mil. obyvatel.
 * Podíváme se na extrémní hodnoty. Napiš dotaz na řádky, kde za daný den naočkování více než 100 tisíc lidí nebo naopak méně než 100 lidí.
 * Vypiš informace o očkování za dny `2021-03-10` a `2021-03-11` pro státy `United Kingdom`, `Finland` a `Italy`. Použij např. funkci `isin()`.
