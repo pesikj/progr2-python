@@ -48,26 +48,26 @@ Máme-li proměnnou `kurz`, můžeme nyní do naší webové stránky vypsat lib
 
 Níže je výsledný kód naší šablony.
 
-```python
+```
 {% block content %}
-<ol>
+<ul>
     {% for kurz in object_list %}
     <li>{{ kurz.nazev }}</li>
     {% endfor %}
-</ol>
+</ul>
 {% endblock %}
 ```
 
 ## Vazby mezi modely
 
-Modely jsou často mezi sebou provázané. Například víme, že Czechitas organizují kurzy do témat, např. Programuju, Tvořím web atd. Pojďme si vytvořit model, který bude tyto kategorie reprezentovat.
+Modely jsou často mezi sebou provázané. Například víme, že Czechitas organizují kurzy do témat, např. Programuju, Tvořím web atd. Pojďme si vytvořit model, který bude tyto kategorie reprezentovat a umožní uživatelům si např. filtrovat kurzy podle jejich zájmu.
 
 ```python
 class Kategorie(models.Model):
   nazev = models.CharField(max_length=100)
 ```
 
-Jako druhý krok upravíme model `Kurz`, kterému přidáme nové pole `pobocka`, které je typu `ForeignKey` (tj. cizí klíč). Poli nastavíme parametr `null` jako `True`, což znamená, že toto pole nemusí mít vyplněnou hodnotu.
+Jako druhý krok upravíme model `Kurz`, kterému přidáme nové pole `kategorie`, které je typu `ForeignKey` (tj. cizí klíč). Poli nastavíme parametr `null` jako `True`, což znamená, že toto pole nemusí mít vyplněnou hodnotu. Cizí klíč je ve skutečnosti vazba na jiný model. Tato konkrétní vazba je typu 1:N, což znamená, že jeden kurz má přiřazenou jednu kategorii, ale jedna kategorie může mít více kurzů.
 
 ```python
 class Kurz(models.Model):
@@ -79,6 +79,8 @@ class Kurz(models.Model):
   kategorie = models.ForeignKey(Kategorie, on_delete=models.SET_NULL, null=True)
 ```
 
+Pokud bychom uvažovali složitější případ N:N (např. jako tagy u článků na blogu), pak můžeme využít pole `ManyToManyField`. Naopak pokud má být vazba 1:1, použijeme pole `OneToOneField`. V takovém případě bychom ale teoreticky mohli oba modely spojit do jednoho.
+
 Následně opět provedeme migraci, abychom model přidali do databáze.
 
 ```
@@ -86,7 +88,7 @@ python manage.py makemigrations kurzy
 python manage.py migrate
 ```
 
-Abychom model `Kategorie` viděli v databázi, musíme jej ještě zaregistrovat.
+Abychom model `Kategorie` viděli v administrátorském rozhraní, musíme jej ještě zaregistrovat.
 
 ```python
 from django.contrib import admin
@@ -97,8 +99,83 @@ admin.site.register(models.Kategorie)
 
 ## Pohled pohledu na detail kurzu
 
+Stránka se seznamem zpravidla neobsahuje všechny dostupné informace, protože by to bylo nepřehledné. Namísto toho jsou do stránky vložené odkazy na stránku s detaily konkrétního záznamu, v našem případě vybraného kurzu.
+
 ### Vytvoření pohledu
+
+Před vytvořením pohledu bychom si měli připravit prázdný soubor, do kterého později vložíme šablonu. Náš soubor opět uložíme do podadresáře `teplates/kurzy` a pojmenujeme ho `detail_kurzu.html`.
+
+K vytvoření pohledu na jeden konkrétní záznam vytvoříme nový pohled na základě dalšího z generických pohledů, a to `DetailView`. Jak už název napovídá, jedná se o pohled na jeden vybraný záznam. Vytvoříme tedy nový pohled `DetailKurzView` a opět mu nastavíme atributy `model` a `template_name.`
+
+```python
+from django.http import HttpResponse
+from django.views import View
+from django.views.generic import ListView, DetailView
+from . import models
+
+
+class KurzyView(ListView):
+    model = models.Kurzy
+    template_name = "kurzy/kurzy_list.html"
+
+
+class DetailKurzView(DetailView):
+    model = models.Kurzy
+    template_name = "kurzy/detail_kurzu.html"
+```
 
 ### Vytvoření šablony
 
-### Vytvoření odkazu
+Pojďme nyní vložit náš kód do šablony. Ke konkrétnímu záznamu budeme přistupovat pomocí proměnné `object`, což je opět umožněno díky mateřské třídě `DetailView`.
+
+Vyzkoušejme si ještě další důležitou součást frameworku Djagno -- šablonové filtry (`template filters`). Ty nám umožňují upravit nějakou informaci předtím, než ji zobrazíme uživatelům. Uvažujme třeba, že budeme chtít zobrazit zvlášť datum workshopu a zvlášť čas začátku a konce. Abychom z pole `zacatek` získali pouze datum, využijeme filtr `date`. Filtry píšeme do dvojice složených závorek a za znak `|`. Dále využijeme filtr `time` pro získání času začátku a konce kurzu.
+
+Seznam všech dostupných kurzů najdeš [v dokumentaci](https://docs.djangoproject.com/en/3.2/ref/templates/builtins/).
+
+```
+{% block content %}
+<h2>{{ object.nazev }}</h2>
+
+<h3>Kdy</h3>
+<p>{{ object.zacatek | date }} <br /> {{ object.zacatek | time }}-{{ object.konec | time }}</p>
+<h3>Cena</h3>
+<p>{{ object.cena }} Kč</p>
+
+<p>{{ object.popis }}</p>
+
+{% endblock %}
+```
+
+### Vytvoření odkazů
+
+Pohled a šablonu máme připravené, ale zatím nemají uživatelé možnost se k nim dostat. Musíme opět pohledu přiřadit nějakou adresu. Adresa tentokrát musí obsahovat jeden důležitý prvek, a to je označení kurzu, který má stránka zobrazit. Toto označení vložíme do adresy jako číslo, které bude svázané s **primárním klíčem** nějakého záznamu. Primární klíč vytváří `django` u všech modelů automaticky a je posloupností celý čísel jdoucí od 1.
+
+Pokud chceme nějaký parametr vložit do adresy, vkládáme ho do dvojice špičatých závurek. Zapisujeme tam typ hodnoty (jde o celé číslo, takže píšeme `int`) a název pole. Jako název pole napíšeme `pk`. Mezi typ a název hodnoty vložíme dvojtečku.
+
+```python
+from django.urls import path
+
+from . import views
+
+urlpatterns = [
+    path('', views.KurzyView.as_view(), name='index'),
+    path('<int:pk>', views.DetailKurzView.as_view(), name='detail_kurzu'),
+]
+```
+
+Následně upravíme šablonu `kurzy_list.html`, aby k názvům kurzů vkládala i odkazy na detaily jednotlivých kurzů. K tomu využijeme tag `url`. Protože jde o tag, zapíšeme ho do dvojice `{% %}`. Následně přidáme název URL adresy `detail_kurzu` a hodnotu, která bude vložena jako parametr do adresy, tedy primární klíč `kurz.pk`.
+
+```python
+{% block content %}
+<h2>Seznam kurzů</h2>
+<p>Zde vidíte aktuální nabídku kurzů</p>
+<ul>
+    {% for kurz in object_list %}
+    <li><a href="{% url 'detail_kurzu' kurz.pk %}">{{ kurz.nazev }}</a></li>
+    <li>{{ kurz.nazev }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
+```
+
+Nyní se uživatel může prokliknout ze seznamu kurzů na detail vybraného kurzu.
