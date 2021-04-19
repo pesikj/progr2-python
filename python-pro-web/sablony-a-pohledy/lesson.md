@@ -58,6 +58,15 @@ Níže je výsledný kód naší šablony.
 {% endblock %}
 ```
 
+### Úkol
+
+Vrať se nyní k práci na aplikaci `crm`.
+
+- Vytvoř pohled `KontakyView`, který bude obsahovat seznam všech kontaktů, které jsou uložené v databázi. Pohledu vytvoř šablonu. U kontaktu zobrazuj jméno, přijímení a email. Pohledu přiřaď URL a otestuj ho.
+- Přidej do své aplikace model `Organizace`, který bude obsahovat informace o organizacích. Každá organizace bude mít jméno, identifikační číslo a adresu. Zamysli se nad tím, jestli by adresu bylo dobré uložit jako jedno pole, nebo jestli např. uložit ulici, město a PSČ zvlášť.
+- Proveď migraci databáze, zaregistruj model do administrátorského rozhraní a vytvoř nějakou testovací organizaci (např. svoji firmu nebo školu).
+- Vytvoř pohled `OrganizaceView`, která zobrazí všechny organizace v databázi. Pohledu vytvoř šablonu. Pohledu přiřaď URL a otestuj ho.
+
 ## Vazby mezi modely
 
 Modely jsou často mezi sebou provázané. Například víme, že Czechitas organizují kurzy do témat, např. Programuju, Tvořím web atd. Pojďme si vytvořit model, který bude tyto kategorie reprezentovat a umožní uživatelům si např. filtrovat kurzy podle jejich zájmu.
@@ -97,7 +106,13 @@ admin.site.register(models.Kurz)
 admin.site.register(models.Kategorie)
 ```
 
-## Pohled pohledu na detail kurzu
+### Úkol
+
+Uprav své modely tak, aby bylo možné propojit organizaci a konkrétního člověka. 
+
+- Uvažuj, že chceš propojit jeden kontakt vždy s maximálně jednou organizací. Zamysli se nad tím, kde by mělo být umístěno pole `ForeignKey`. Pole umísti, proveď migraci databáze a zkus propojit některé ze svých záznamů.
+
+## Pohled na detail kurzu
 
 Stránka se seznamem zpravidla neobsahuje všechny dostupné informace, protože by to bylo nepřehledné. Namísto toho jsou do stránky vložené odkazy na stránku s detaily konkrétního záznamu, v našem případě vybraného kurzu.
 
@@ -179,3 +194,9 @@ Následně upravíme šablonu `kurzy_list.html`, aby k názvům kurzů vkládala
 ```
 
 Nyní se uživatel může prokliknout ze seznamu kurzů na detail vybraného kurzu.
+
+### Úkol
+
+Umožni uživatelům pohled na detaily organizace a kontaktu.
+
+- Vytvoř pohledy pro zobrazení detailu organizace a kontaktu. Na stránce zobrazuj všechny informace, které máš uložené v databázi. Pohledům vytvoř šablony a provázej je pomocí odkazů s pohledy na seznam kontaktů a organizací.
