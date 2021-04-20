@@ -199,4 +199,5 @@ Nyní se uživatel může prokliknout ze seznamu kurzů na detail vybraného kur
 
 Umožni uživatelům pohled na detaily organizace a kontaktu.
 
-- Vytvoř pohledy pro zobrazení detailu organizace a kontaktu. Na stránce zobrazuj všechny informace, které máš uložené v databázi. Pohledům vytvoř šablony a provázej je pomocí odkazů s pohledy na seznam kontaktů a organizací.
+- Vytvoř pohledy pro zobrazení detailu organizace a kontaktu.
+- Pohledům vytvoř šablony a provázej je pomocí odkazů s pohledy na seznam kontaktů a organizací. Na stránce zobrazuj všechny informace, které máš uložené v databázi. 
