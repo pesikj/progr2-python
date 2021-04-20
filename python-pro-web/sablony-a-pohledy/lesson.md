@@ -48,7 +48,7 @@ Máme-li proměnnou `kurz`, můžeme nyní do naší webové stránky vypsat lib
 
 Níže je výsledný kód naší šablony.
 
-```
+```html
 {% block content %}
 <ul>
     {% for kurz in object_list %}
@@ -147,7 +147,7 @@ Vyzkoušejme si ještě další důležitou součást frameworku Djagno -- šabl
 
 Seznam všech dostupných kurzů najdeš [v dokumentaci](https://docs.djangoproject.com/en/3.2/ref/templates/builtins/).
 
-```
+```html
 {% block content %}
 <h2>{{ object.nazev }}</h2>
 
@@ -180,7 +180,7 @@ urlpatterns = [
 
 Následně upravíme šablonu `kurzy_list.html`, aby k názvům kurzů vkládala i odkazy na detaily jednotlivých kurzů. K tomu využijeme tag `url`. Protože jde o tag, zapíšeme ho do dvojice `{% %}`. Následně přidáme název URL adresy `detail_kurzu` a hodnotu, která bude vložena jako parametr do adresy, tedy primární klíč `kurz.pk`.
 
-```python
+```html
 {% block content %}
 <h2>Seznam kurzů</h2>
 <p>Zde vidíte aktuální nabídku kurzů</p>
