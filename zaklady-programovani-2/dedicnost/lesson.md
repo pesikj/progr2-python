@@ -222,11 +222,11 @@ class Obrazec(ABC):
 class Ctverec(Obrazec):
   @property
   def obvod(self):
-    return self.a * self.a
+    return 4 * self.a
   
   @property
   def obsah(self):
-    return 4 * self.a
+    return self.a * self.a
 
   def __init__(self, a):
     self.a = a
@@ -234,11 +234,11 @@ class Ctverec(Obrazec):
 class Obdelnik(Obrazec):
   @property
   def obvod(self):
-    return self.a * self.b
+    return 2 (self.a + self.b)
   
   @property
   def obsah(self):
-    return 4 * self.b
+    return self.a * self.b
 
   def __init__(self, a, b):
     self.a = a
