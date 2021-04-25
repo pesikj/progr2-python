@@ -1,3 +1,5 @@
+Pojďme se nyní podívat na to, jak vytvořit formuláře, pomocí kterých uživatelů komunikují s aplikací.
+
 ## Formuláře
 
 Na začátku přidáme do aplikace model `Prihlaska`. Pokud se uživatel přihlásí do kurzu, ve skutečnosti vytvoří jeden záznam tohoto modelu a ten uloží do databáze.
@@ -13,7 +15,9 @@ class Prihlaska(models.Model):
 
 Abychom vytvořili nový záznam, můžeme vytvořit nový pohled na základě dalšího z generických pohledů, a to konkrétně `CreateView`. To patří do skupiny generických pohedů, které jsou určeny k úpravám záznamů. Dalšími takovými jsou `UpdateView`, `DeleteView` a obecný pohled `FormView`.
 
-Po přidání modelu je potřeba provést migraci databáze.
+Po přidání modelu je potřeba provést migraci databáze a zaregistrovat model do administrátorského rozhraní.
+
+### Přidání formuláře
 
 Následně přidáme šablonu, kterou uložíme do souboru `prihlaska/prihlaska.html`. Šablona je poměrně jednoduchá, bude obsahovat tag `<from>`, do kterého vložíme `{{ form.as_p }}`. Tím říkáme, že chceme využít výchozí způsob frameworku Django na vykreslení formuláře, který si ještě vysvětlíme. Následně přidáme tag `<input>`, které vloží tlačítko pro uložení vstupu ve formuláři.
 
@@ -76,7 +80,7 @@ class VytvorPrihlasku(CreateView):
     success_url = reverse_lazy('potvrzeni_prihlasky')
 ```
 
-## Upravení vzhledu formuláře
+### Upravení vzhledu formuláře
 
 Formulář jsme sice vytvořili, ale vypadá poněkud nemoderně. Abychom dosáhli lepšího vzhledu, můžeme využít řadu existujících a zdarma dostupných nástrojů. Jedním z nich je framework [Boostrap](https://getbootstrap.com/), který vyvinula společnost Twitter. Boostrap lze poměrně snadno využít v naší aplikaci, a to s využitím modulu `django-bootstrap4`.
 
@@ -117,3 +121,55 @@ Dále upravíme šablonu `prihlaska/prihlaska.html` a k vytvoření formuláře 
 </form>
 {% endblock %}
 ```
+
+### Přečtení kurzu z adresy
+
+Náš formulář funguje, ale není uživatelsky přívětivý, protože obsahuje výběr konkrétního kurzu a těch mohou být i desítky. Lepší by bylo, kdyby mohl uživatel otevřít přihlášku ze stránky vybraného kurzu a informace o vybraném kurzu by se doplnila automaticky. Abychom toho dosáhli, musíme přidat metodu `form_valid()`, která je spuštěna při vyplnění formuláře a slouží k jeho validaci. My budeme uvažovat, že ID kurzu je v URL adrese, odkud ji načteme do proměnné `id_kurzu`. Následně informaci přiložíme k objektu `form.instance`. Nakonec využijeme funkci `super()`, protože jsme provedli jen malou úpravu a zbytek práce ponecháme na mateřské třídě.
+
+```python
+class VytvorPrihlasku(CreateView):
+    model = models.Prihlaska
+    template_name = "prihlaska/prihlaska.html"
+    fields = ["email", "jmeno", "prijmeni", "motivace"]
+    success_url = reverse_lazy('potvrzeni_prihlasky')
+
+    def form_valid(self, form):
+        id_kurzu = self.kwargs['pk']
+        kurz = models.Kurzy.objects.get(pk=id_kurzu)
+        form.instance.kurz = kurz
+        return super().form_valid(form)
+```
+
+Následně musíme provést malou úpravu, aby aplikace počítala s výskytem klíče kurzu v URL adrese.
+
+```python
+urlpatterns = [
+    path('', views.KurzyView.as_view(), name='index'),
+    path('<int:pk>', views.DetailKurzView.as_view(), name='detail_kurzu'),
+    path('prihlaska/<int:pk>/', views.VytvorPrihlasku.as_view(), name='prihlaska'),
+    path('prihlaska/potvrzeni/', views.PotvrzeniPrihlasky.as_view(), name='potvrzeni_prihlasky'),
+]
+```
+
+Nyní přidáme na stránku detailů kurzu tlačítko s odkazem na přihlášku. Využijeme tag `bootstrap_button`, aby náš odkaz vypadal jako tlačítko. Pro vygenerování adresy využijeme tag `url`, který již známe. Pouze je potřeba vytvořit adresu jako první krok a uložit ji do proměnné `target_url`, abychom se vyhnuli využití vnořených tagů.
+
+```python
+{% extends "base.html" %}
+{% load bootstrap4 %}
+{% block content %}
+<h2>{{ object.nazev }}</h2>
+
+<h3>Kdy</h3>
+<p>{{ object.zacatek | date }} <br /> {{ object.zacatek | time }}-{{ object.konec | time }}</p>
+<h3>Cena</h3>
+<p>{{ object.cena }} Kč</p>
+
+<p>{{ object.popis }}</p>
+
+{% url 'prihlaska' object.pk as target_url %}
+{% bootstrap_button "Přihlásit se" href=target_url button_type="link" button_class="btn-info" %}
+
+{% endblock %}
+```
+
+Nyní se může uživatel snadno přihlásit, aniž by musel řešit výběr kurzu ze seznamu.
