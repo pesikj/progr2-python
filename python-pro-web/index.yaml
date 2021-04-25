@@ -11,4 +11,7 @@ lessons:
   - title: Šablony a pohledy
     link: sablony-a-pohledy
     brief: Vytvoříme si jednoduché šablony a pomocí pohledů je zobrazíme uživatelům.
+  - title: Formáláře
+    link: formulare
+    brief: Přidáme formuláře, aby s námi mohl uživatel komunikovat.
     
