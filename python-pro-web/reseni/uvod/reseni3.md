@@ -54,8 +54,6 @@ Soubor `urls.py`. Do seznamu je přidáno `vytvor-kontakt`.
 
 ```python
     path("vytvor-kontakt/", views.VytvorKontakt.as_view(), name="vytvor_kontakt"),
-]
-
 ```
 
 ## Druhý úkol
