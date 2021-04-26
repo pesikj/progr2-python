@@ -14,4 +14,6 @@ lessons:
   - title: Formáláře
     link: formulare
     brief: Přidáme formuláře, aby s námi mohl uživatel komunikovat.
-    
+  - title: Dotazy
+    link: dotazy
+    brief: Dotazy nám umožňují provádět různé operace s daty, například filtrování.

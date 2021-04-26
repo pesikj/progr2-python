@@ -122,9 +122,19 @@ Dále upravíme šablonu `prihlaska/prihlaska.html` a k vytvoření formuláře 
 {% endblock %}
 ```
 
+### Úkoly
+
+Vrať se ke své aplikaci `crm` pro správu kontaktů. 
+
+- Přidej do aplikace formulář na přidání kontaktu. Vytvoř šablonu a pohled se všemi poli, které má model `Kontakt`. Následně pohledu přidej URL adresu.
+- Pokud máš zájem, použij Bootstrap a vytvoř si šablonu `base.html`.
+- Ověř, že vše funguje tím, že pro firmu vytvoříš nový kontakt.
+
 ### Přečtení kurzu z adresy
 
-Náš formulář funguje, ale není uživatelsky přívětivý, protože obsahuje výběr konkrétního kurzu a těch mohou být i desítky. Lepší by bylo, kdyby mohl uživatel otevřít přihlášku ze stránky vybraného kurzu a informace o vybraném kurzu by se doplnila automaticky. Abychom toho dosáhli, musíme přidat metodu `form_valid()`, která je spuštěna při vyplnění formuláře a slouží k jeho validaci. My budeme uvažovat, že ID kurzu je v URL adrese, odkud ji načteme do proměnné `id_kurzu`. Následně informaci přiložíme k objektu `form.instance`. Nakonec využijeme funkci `super()`, protože jsme provedli jen malou úpravu a zbytek práce ponecháme na mateřské třídě.
+Náš formulář funguje, ale není uživatelsky přívětivý, protože obsahuje výběr konkrétního kurzu a těch mohou být i desítky. Lepší by bylo, kdyby mohl uživatel otevřít přihlášku ze stránky vybraného kurzu a informace o vybraném kurzu by se doplnila automaticky. Abychom toho dosáhli, musíme přidat metodu `form_valid()`, která je spuštěna při vyplnění formuláře a slouží k jeho validaci. My budeme uvažovat, že ID kurzu je v URL adrese, odkud ji načteme do proměnné `id_kurzu`. Přístup k této proměnné nám zajistí atribut `kwargs`, který v sobě agreguje různé informace z různých metod a můžeme si jej představit třeba jako domovní nástěnku, kam různí obyvatelé domu umisťují informace, které chtějí sdílet s ostatními. 
+
+Následně informaci přiložíme k objektu `form.instance`. Nakonec využijeme funkci `super()`, protože jsme provedli jen malou úpravu a zbytek práce ponecháme na mateřské třídě.
 
 ```python
 class VytvorPrihlasku(CreateView):
@@ -173,3 +183,10 @@ Nyní přidáme na stránku detailů kurzu tlačítko s odkazem na přihlášku.
 ```
 
 Nyní se může uživatel snadno přihlásit, aniž by musel řešit výběr kurzu ze seznamu.
+
+### Úkoly
+
+- Vytvoř nový pohled pohled pro vytvoření kontaktu, který nebude mít pole `organizace`, ale bude organizaci číst z URL adresy.
+- Nastav URL adresu pohledu, aby s ID firmy počítala.
+- Na stránku firmy přidej tlačítko s odkazem "Přidej kontakt", které tě přesměruje na stránku s formulářem na přidání kontaktu.
+- Ověř, že vše funguje tím, že pomocí nového formuláře vytvoříš kontakt.
