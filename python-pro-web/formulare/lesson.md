@@ -126,9 +126,10 @@ Dále upravíme šablonu `prihlaska/prihlaska.html` a k vytvoření formuláře 
 
 Vrať se ke své aplikaci `crm` pro správu kontaktů. 
 
-- Přidej do aplikace formulář na přidání kontaktu. Vytvoř šablonu a pohled se všemi poli, které má model `Kontakt`. Následně pohledu přidej URL adresu.
-- Pokud máš zájem, použij Bootstrap a vytvoř si šablonu `base.html`.
-- Ověř, že vše funguje tím, že pro firmu vytvoříš nový kontakt.
+- Pokud máš zájem, použij ve cvičení Bootstrap a vytvoř si šablonu `base.html` a používej tagy pro Bootstrap v dalších bodech.
+- Přidej do aplikace formulář na přidání kontaktu. Vytvoř šablonu, která bude obsahovat tag pro vložení formuláře. Dále přidej pohled a nastav potřebné atributy. Počítej, že chceme zobrazit ve formuláři všechna pole, které má model `Kontakt`. 
+- Pohledu přidej URL adresu.
+- Ověř, že vše funguje tím, že si otevřeš cílovou stránku, na které je daný formulář. Zkus pro některou organizaci vytvořit nový kontakt.
 
 ### Přečtení kurzu z adresy
 
@@ -186,7 +187,7 @@ Nyní se může uživatel snadno přihlásit, aniž by musel řešit výběr kur
 
 ### Úkoly
 
-- Vytvoř nový pohled pohled pro vytvoření kontaktu, který nebude mít pole `organizace`, ale bude organizaci číst z URL adresy.
-- Nastav URL adresu pohledu, aby s ID firmy počítala.
-- Na stránku firmy přidej tlačítko s odkazem "Přidej kontakt", které tě přesměruje na stránku s formulářem na přidání kontaktu.
+- Vytvoř nový pohled pohled pro vytvoření kontaktu, který nebude mít pole `organizace`, ale bude organizaci číst z URL adresy. Pohled může používat stejnou šablonu jako ten, který jsi použil(a) v předchozím cvičení.
+- Nastav URL adresu pohledu, aby s ID orgaizace počítala, tj. aby obsahovala část `<int:pk>`.
+- Na stránku orgaizace přidej tlačítko s textem "Přidej kontakt", které tě přesměruje na stránku s formulářem na přidání kontaktu. Nezapomeň, že výsledná adresa musí obsahovat ID organzace.
 - Ověř, že vše funguje tím, že pomocí nového formuláře vytvoříš kontakt.
