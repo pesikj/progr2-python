@@ -1,4 +1,40 @@
-## První úkol
+## Šablony a pohledy
+
+### Poslední úkol
+
+`organizace_detail.html`
+
+```html
+<h2>{{ object.jmeno }}</h2>
+<p>IČO: {{ object.ico }}</p>
+<p>Ulice: {{ object.ulice }}</p>
+<p>PSČ: {{ object.psc }}</p>
+<p>Město: {{ object.mesto }}</p>
+```
+
+```python
+class DetailOrganizaceView(DetailView):
+    model = models.Organizace
+    template_name = "organizace_detail.html"
+```
+
+```python
+path("organizace/<int:pk>/", views.DetailOrganizaceView.as_view(), name="organizace_detail"),
+```
+
+`organizace.html`
+
+```html
+<ul>
+    {% for organizace in object_list %}
+    <li><a href="{% url 'organizace_detail' organizace.pk %}">{{ organizace.jmeno }}</a></li>
+    {% endfor %}
+</ul>
+```
+
+## Formuláře
+
+### První úkol
 
 Soubor `views.py`, přidán pohled `VytvorKontakt` a `KontaktUlozen` a importy.
 
@@ -56,7 +92,7 @@ Soubor `urls.py`. Do seznamu je přidáno `vytvor-kontakt`.
     path("vytvor-kontakt/", views.VytvorKontakt.as_view(), name="vytvor_kontakt"),
 ```
 
-## Druhý úkol
+### Druhý úkol
 
 Přidán nový pohled `VytvorKontaktKOrganizaciView`. Šablona zůstává stejná.
 

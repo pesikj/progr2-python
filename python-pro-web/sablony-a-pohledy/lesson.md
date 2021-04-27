@@ -197,7 +197,11 @@ Nyní se uživatel může prokliknout ze seznamu kurzů na detail vybraného kur
 
 ### Úkol
 
-Umožni uživatelům pohled na detaily organizace a kontaktu.
+Umožni uživatelům prohlédnout si detaily organizace.
 
-- Vytvoř pohledy pro zobrazení detailu organizace a kontaktu.
-- Pohledům vytvoř šablony a provázej je pomocí odkazů s pohledy na seznam kontaktů a organizací. Na stránce zobrazuj všechny informace, které máš uložené v databázi. 
+- Vytvoř pohledy pro zobrazení detailu organizace.
+- Pohledu vytvoř šablonu a provázej je pomocí odkazů s pohledy na seznam organizací. Na stránce zobrazuj všechny informace, které máš uložené v databázi. 
+
+### Bonus
+
+Obdobným způsobem umožni uživatelům prohlédnout si detaily kontaktu.
