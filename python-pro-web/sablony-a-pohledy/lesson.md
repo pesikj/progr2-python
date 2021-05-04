@@ -165,7 +165,7 @@ Seznam všech dostupných kurzů najdeš [v dokumentaci](https://docs.djangoproj
 
 Pohled a šablonu máme připravené, ale zatím nemají uživatelé možnost se k nim dostat. Musíme opět pohledu přiřadit nějakou adresu. Adresa tentokrát musí obsahovat jeden důležitý prvek, a to je označení kurzu, který má stránka zobrazit. Toto označení vložíme do adresy jako číslo, které bude svázané s **primárním klíčem** nějakého záznamu. Primární klíč vytváří `django` u všech modelů automaticky a je posloupností celý čísel jdoucí od 1.
 
-Pokud chceme nějaký parametr vložit do adresy, vkládáme ho do dvojice špičatých závurek. Zapisujeme tam typ hodnoty (jde o celé číslo, takže píšeme `int`) a název pole. Jako název pole napíšeme `pk`. Mezi typ a název hodnoty vložíme dvojtečku.
+Pokud chceme nějaký parametr vložit do adresy, vkládáme ho do dvojice špičatých závorek. Zapisujeme tam typ hodnoty (jde o celé číslo, takže píšeme `int`) a název pole. Jako název pole napíšeme `pk`. Mezi typ a název hodnoty vložíme dvojtečku.
 
 ```python
 from django.urls import path
