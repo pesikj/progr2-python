@@ -4,7 +4,7 @@ V této lekci si řekneme něco o tom, jak vlastně provádíme vývoj webu.
 
 Vývoj a provoz webu je disciplína, která v sobě zahrnuje několik složek.
 
-Definice toho, jak by webová stránka měla vypadat, nazýváme kódování. Zpravidla prováděno v jazyce HTML s využitím kaskádových stylů (CSS). HTML a CSS vlastně poskytují informace pro webový prohlížeč, jaké informace má zobrazit a jak je naformátovat.
+Definice toho, jak by webová stránka měla vypadat, nazýváme **kódování**. Zpravidla prováděno v jazyce HTML s využitím kaskádových stylů (CSS). HTML a CSS vlastně poskytují informace pro webový prohlížeč, jaké informace má zobrazit a jak je naformátovat.
 
 K vytvoření webové stránky mohou stačit pouze tyto jazyky. Jedná se především o weby, které zobrazují nějaké statické informace (např. osobní web, životopis atd.). Všechny informace, které stránka obsahuje, pak musí být vloženy do HTML souborů jako text a stránka nemůže obsahovat žádné prvky pro komunikaci mezi uživatelem a správcem webu (např. formuláře).
 
@@ -18,25 +18,25 @@ Programovacích jazyků, které můžeme použít pro vývoj webu, je spousta. V
 
 Další programovací jazyky, které používáme pro vývoj webu, jsou C#, Python, PHP, Ruby, Java a řada dalších.
 
-V některých případech můžeme webový vývoj jasně rozdělit na front-end a back-end. Front-end je část aplikace, která "je vidět", a back-end ta část aplikace, která poskytuje data. Obě tyto části jsou pak spojené a komunikují spolu. Jasně oddělené jsou tyto části v architektuře označované jako microservices, která se skládá ze spousty malých API, ke kterým posílají jednotlivé části front-endu své zprávy a zobrazují odpovědi. U této architektury mohou být front-end a back-end zcela nezávislé projekty a každý může být vyvíjen jinou technologií, v jiném jazyce atd. 
+V některých případech můžeme webový vývoj jasně rozdělit na **front-end** a **back-end**. Front-end je část aplikace, která "je vidět", a back-end ta část aplikace, která poskytuje data pro front-end. Obě tyto části jsou pak spojené a komunikují spolu. Jasně oddělené jsou tyto části v architektuře označované jako microservices, která se skládá ze spousty malých API, ke kterým posílají jednotlivé části front-endu své zprávy a zobrazují odpovědi. U této architektury mohou být front-end a back-end zcela nezávislé projekty a každý může být vyvíjen jinou technologií, v jiném jazyce atd. 
 
 Druhou možností je architektura označovaná jako model-view-controller, obvykle označované pod zkratkou MVC. Jednotlivé komponenty mají následující význam:
 
-- Model reprezentuje datovou strukturu. Pomocí modelu říkáme, s jakými daty bude naše aplikace pracovat, jaká bude ukládat do databáze atd.
-- View (pohled) převádí data do podoby vhodné k zobrazení uživateli.
-- Controller (řadič) reaguje na události uživatele.
+- **Model** reprezentuje datovou strukturu. Pomocí modelu říkáme, s jakými daty bude naše aplikace pracovat, jaká bude ukládat do databáze atd.
+- **View** (pohled) převádí data do podoby vhodné k zobrazení uživateli.
+- **Controller** (řadič) reaguje na události uživatele.
 
-My budeme využívat framework Django, který je založený na obdobném přístupu, který je označovaný jako model-template-views. Modely zde mají stejnou funkci jako v MVC architektuře. Šablony určují, jak má stránka vypadat (obsahují i HTML kód) a view připravuje data k zobrazení uživateli a řídí zpracování uživatelských požadavků.
+My budeme využívat framework `Django`, který je založený na obdobném přístupu, který je označovaný jako model-template-views. Modely zde mají stejnou funkci jako v MVC architektuře. **Šablony** určují, jak má stránka vypadat (obsahují i HTML kód) a view připravuje data k zobrazení uživateli a řídí zpracování uživatelských požadavků.
 
-![Adult only](assets/django-mvt-based-control-flow.png)
+![MVT](assets/django-mvt-based-control-flow.png)
 
 ## Django
 
-Na začátku si v našem vývojovém prostředí vytvoříme nový projekt. Pokud používáme virtuální prostředí, nainstalujeme si do prostředí modul `django`.
+Na začátku si v našem vývojovém prostředí vytvoříme nový projekt. 
 
 ### Vytvoření projektu
 
-Máš-li modul dobře nainstalovaný, měl by ti fungovat následující příkaz na vytvoření nového projektu:
+Máš-li modul `Django` dobře nainstalovaný, měl by ti fungovat následující příkaz na vytvoření nového projektu:
 
 ```
 django-admin startproject czechitas
@@ -55,7 +55,9 @@ cd czechitas
 python manage.py runserver
 ```
 
-Zkus si nyní otevřít [tento odkaz](http://127.0.0.1:8000/), ve kterém by měl běžet tvůj nový projekt. Adresa `127.0.0.1` je adresa tvého počítače, často označovaná jako `loopback`. Nepřipojuješ se tedy nikam do internetu, ale pracuješ na svém počítači.
+Zkus si nyní otevřít [tento odkaz](http://127.0.0.1:8000/), ve kterém by měl běžet tvůj nový projekt. Adresa `127.0.0.1` je adresa tvého počítače, často se používá slovní název `locahost`. Nepřipojuješ se tedy nikam do internetu, ale pracuješ na svém počítači.
+
+![MVT](assets/start-app.png)
 
 ### Vytvoření aplikace
 
@@ -64,22 +66,36 @@ Aplikace v `django` je složena do funkčních celků, které označujeme jako `
 Pro Windows:
 
 ```
-python manage.py startapp kurzy
+python manage.py startapp courses
 ```
 
 Pro MacOS nebo Linux:
 
 ```
-python3 manage.py startapp kurzy
+python3 manage.py startapp courses
 ```
 
 Nová aplikace obsahuje následující soubory:
 
 - `admin.py` obsahuje modely, které budou přístupné v administrátorském rozhraní.
-- `migrations/` je adresář s tzv. migracemi, tj. úpravami struktury databáze.
+- `migrations/` je adresář s tzv. migracemi. Migrace je úprava struktury databáze, ke které dochází, pokud měníme data, jaká aplikace ukládá.
 - `models.py` obsahuje definici modelů.
 - `tests.py` obsahuje definici automatických textů.
 - `views.py` je soubor s definicí pohledů.
+
+Po vytvoření prvního modelu již máme plnohodnotnou aplikaci a je ji nutné přidat do seznamu `INSTALLED_APPS`, který najdeme v souboru `settings.py`. Vidíme, že samotný seznam již obsahuje nějaké hodnoty. To jsou aplikace, které se starají o běh základních funkcí, jako je administrátorské rozhraní nebo přihlašování uživatelů.
+
+```python
+INSTALLED_APPS = [
+  'courses.apps.CoursesConfig',
+  'django.contrib.admin',
+  'django.contrib.auth',
+  'django.contrib.contenttypes',
+  'django.contrib.sessions',
+  'django.contrib.messages',
+  'django.contrib.staticfiles',
+]
+```
 
 ### Vytvoření pohledu
 
@@ -87,29 +103,29 @@ Začneme s tím, že si vytvoříme pohled. Náš pohled bude velmi jednoduchý 
 
 Pohled vytvoř v souboru `views.py`. Django umožňuje vytvářet dva typy pohledů - pohledy založené na třídě (`class-based`) a pohledy založené na funkci (`function-based`). Doporučuji ti využívat pohledy založené na třídě, protože jsou přehlednější a využívají techniku, kterou již známe, a tou je dědičnost.
 
-Nový pohled může dědit od celé řady tříd, tvůj první pohled bude dědit od třídy `View`. Následně přidej funkci `get()`.
+Nový pohled může dědit od celé řady tříd, tvůj první pohled bude dědit od třídy `TemplateView`. Tento pohled umí zobrazit nějakou šablonu.
 
 ```python
-from django.http import HttpResponse
-from django.views import View
+from django.views.generic.base import TemplateView
 
 
-class MujPrvniPohled(View):
-    def get(self, request):
-        return HttpResponse('Vítej na webu Czechitas!')
+class IndexView(TemplateView):
+    template_name = "index.html"
 ```
 
-V tomto kratičkém kódu je spousta záhadných výrazů. Zkratka HTTP je označení protokolu `Hypertext Transfer Protocol`, což je protokol, na kterém je založený web. Internet a počítačové sítě totiž nabízejí mnoho služeb a každá služba má svůj protokol. My ale vyvíjíme webovou aplikaci, proto nás bude zajímat především protokol HTTP. Třída `HttpResponse` je pak jednoduchá odpověď, která může obsahovat pouze jednoduchou textovou zprávu.
+Dále vytvoříme šablonu. V adresáři `courses` si vytvoříme nový adresář `templates`, do kterého přidáme soubor `index.html`. Obsah souboru pak může být libovolný, pro jednoduchost stačí třeba vloži nějaký nadpis.
 
-Název funkce `get` odkazuje na typ požadavku. Vždy, když posíláme na webový server nějaký požadavek, má tento požadavek nějaký typ. Nejjednodušší a nejpoužívanější typ požadavku je právě GET, což v podstatě znamená otevření webové adresy. Pokud chceme serveru poslat nějaká data (např. vyplníme formulář), pak posíláme typ požadavku POST. Tvůj pohled zatím bude umět reagovat na požadavek typu GET, ale to nám zpočátku bude stačit.
+```html
+<h1>Vítejte na webu Czechitas!</h1>
+```
 
 ### Přidání URL adresy
 
 Nyní máš vytvořený pohled, ale zatím si jej nemůžeš otevřít, protože nemá přiřazenou žádnou adresu. Pojďme to napravit.
 
 Je třeba provést dvě operace:
-1. Upravit soubor `urls.py` v adresáři `czechitas` (adresář projektu), aby uměl uživatele přesměrovat do aplikace `kurzy`.
-1. Upravit soubor `urls.py` v adresáři `kurzy` (adresář aplikace), aby tato aplikace uměla uživatele přesměrovat na náš pohled.
+1. Upravit soubor `urls.py` v adresáři `czechitas` (adresář projektu), aby uměl uživatele přesměrovat do aplikace `courses`.
+1. Upravit soubor `urls.py` v adresáři `courses` (adresář aplikace), aby tato aplikace uměla uživatele přesměrovat na náš pohled.
 
 Začni s prvním krokem, tj. s úpravou souboru  `czechitas/urls.py`:
 
@@ -119,11 +135,11 @@ from django.urls import include, path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('kurzy/', include("kurzy.urls")),
+    path('', include("courses.urls")),
 ]
 ```
 
-A následuje druhý krok, tj. úprava souboru `kurzy/urls.py`:
+A následuje druhý krok, tj. vytvoření souboru `courses/urls.py`:
 
 ```python
 from django.urls import path
@@ -131,30 +147,24 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.MujPrvniPohled.as_view(), name='index'),
+    path('', views.IndexView.as_view(), name='index'),
 ]
 ```
 
-Pokud si nyní otevřeme námi přidanou [url adresu](http://127.0.0.1:8000/kurzy), zobrazí se požadovaný text "Vítej na webu Czechitas!".
+Pokud si nyní otevřeme námi přidanou [url adresu](http://127.0.0.1:8000/), zobrazí se požadovaný text "Vítej na webu Czechitas!".
+
+[[[ excs Cvičení
+- pridani-pohledu
+]]]
+
+[[[ excs Bonusy
+- o-nas
+]]]
+
 
 ### Migrace databáze
 
 Dalším důležitým pojmem je migrace. Migrace je vlastně soupis změn v databázi. Pokud totiž definujeme nový model, potřebujeme pro něj vytvořit tabulku v databázi, abychom záznamy tohoto modelu měli kam ukládat a odkud je načítat. Takový soupis změn označujeme jako migrace databáze. První migraci nám vytvoří `django` automaticky, protože potřebujeme vytvořil základní tabulky, jako třeba tabulku pro informace o uživatelích.
-
-Před migrací bychom měli nastavit informace o databázi. Můžeme použít jednoduchou databázi SQLite, která je v nastavena jako výchozí, nebo použít jinou databázi, nejčastěji PostgreSQL.
-
-```python
-DATABASES = {
-  'default': {
-    'ENGINE': 'django.db.backends.postgresql',
-    'NAME': 'moje_databáze',
-    'USER': 'jirka',
-    'PASSWORD': 'supertajne_heslo',
-    'HOST': 'localhost',
-    'PORT': '5432',
-  }
-}
-```
 
 Poté zadáme příkaz pro provedení migrace.
 
@@ -170,20 +180,29 @@ Pro MacOS nebo Linux:
 python3 manage.py migrate
 ```
 
-Soubor `settings.py` obsahuje řadu dalších důležitých nastavení. Jednou z nich je seznam `INSTALLED_APPS`. `django` umožňuje, aby do něj byla instalována různá rozšíření, podobně jako je možné instalovat moduly pro Python. 
+Už v základu v sobě má například aplikaci `auth`, která zajišťuje přihlášení uživatele pomocí hesla. Aplikace `admin` obsahuje administrátorské rozhraní, ve kterém můžete neomezeně prohlížet, upravovat, přidávat a mazat data v aplikaci.
+
+### Čtení na doma: Nastavení databáze
+
+Při práci s frameworkem Django můžeme použít jednoduchou databázi SQLite, která je v nastavena jako výchozí, nebo použít jinou databázi, nejčastěji PostgreSQL. Příklad nastavení PostgreSQL databáze je níže. Pro úspěšné nastavení potřebujeme následující:
+
+- adresu serveru, kde databáze běží (pole `HOST`),
+- uživatelské jméno a heslo pro připojení k databázi (pole `USER`, `PASSWORD`),
+- jméno databáze (pole `NAME`),
+- pole `ENGINE` pak určuje typ databáze, ke které se připojujeme.
 
 ```python
-INSTALLED_APPS = [
-  'django.contrib.admin',
-  'django.contrib.auth',
-  'django.contrib.contenttypes',
-  'django.contrib.sessions',
-  'django.contrib.messages',
-  'django.contrib.staticfiles',
-]
+DATABASES = {
+  'default': {
+    'ENGINE': 'django.db.backends.postgresql',
+    'NAME': 'moje_databáze',
+    'USER': 'jirka',
+    'PASSWORD': 'supertajne_heslo',
+    'HOST': 'localhost',
+    'PORT': '5432',
+  }
+}
 ```
-
-Už v základu v sobě má například aplikaci `auth`, která zajišťuje přihlášení uživatele pomocí hesla. Aplikace `admin` obsahuje administrátorské rozhraní, ve kterém můžete neomezeně prohlížet, upravovat, přidávat a mazat data v aplikaci.
 
 ### Vytvoření modelu
 
@@ -218,39 +237,25 @@ class Kurz(models.Model):
   cena = models.IntegerField()
 ```
 
-Po vytvoření prvního modelu již máme plnohodnotnou aplikaci a je ji nutné přidat do seznamu `INSTALLED_APPS`.
-
-```python
-INSTALLED_APPS = [
-  'kurzy.apps.KurzyConfig',
-  'django.contrib.admin',
-  'django.contrib.auth',
-  'django.contrib.contenttypes',
-  'django.contrib.sessions',
-  'django.contrib.messages',
-  'django.contrib.staticfiles',
-]
-```
-
 Nyní vytvoříme migraci, tj. připravíme skript, který obsahuje všechny informace o našem modelu:
 
 Pro Windows:
 
 ```
-python manage.py makemigrations kurzy
+python manage.py makemigrations
 ```
 
 Pro MacOS nebo Linux:
 
 ```
-python3 manage.py makemigrations kurzy
+python3 manage.py makemigrations
 ```
 
 Terminál nám odpoví následující:
 
 ```
-Migrations for 'kurzy':
-  kurzy\migrations\0001_initial.py
+Migrations for 'courses':
+  courses\migrations\0001_initial.py
     - Create model Kurz
 ```
 
@@ -300,11 +305,11 @@ admin.site.register(models.Kurz)
 
 Po obnovení stránky již model vidíme. Zkus si nyní přidat nějaký záznam do našeho modelu pomocí tlačítka 'Add' v administraci projektu. Všimni si, že díky vhodně zvoleným datovým typům jednotlivých polí je jednoduché zadat data ve správném formátu.
 
-## Úkol
+[[[ excs Cvičení
+- pridani-modelu
+]]]
 
-Czechitas potřebují spravovat nejen kurzy, ale i tradiční firemní agendu, mezi kterou patří kontakty se sponzory, partnery a dalšími důležitými osobami. Vytvořme si základ jednoduchého CRM systému (Customer Relationship Management), který by takovou agendu dokázal obstarat.
+[[[ excs Bonusy
+- lide
+]]]
 
-- Uvnitř svého projektu `czechitas` založ novou aplikaci `crm`.
-- Vytvoř pohled, který přivítá uživatele na úvodní straně textem "Vítej v CRM systému Czechitas!"
-- Vytvoř model `Kontakt`, který bude reprezentovat kontakt na nějakou osobu. U kontaktu eviduj jméno, příjmení, e-mail a datum posledního kontaktu. Vyber pro každý údaj vhodný typ pole. Přidej aplikaci do souboru `settings.py` a proveď migraci databáze.
-- Zaregistruj model do administrátorského rozhraní a vytvoř testovací záznam.
