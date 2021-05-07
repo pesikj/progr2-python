@@ -143,7 +143,7 @@ Pohled a šablonu máme připravené, ale zatím nemají uživatelé možnost se
 Pokud chceme nějaký parametr vložit do adresy, vkládáme ho do dvojice špičatých závorek. Zapisujeme tam typ hodnoty (jde o celé číslo, takže píšeme `int`) a název pole. Jako název pole napíšeme `pk`. Mezi typ a název hodnoty vložíme dvojtečku.
 
 ```python
-    path('<int:pk>', views.CourseDetailView.as_view(), name='course_detail'),
+    path('kurz/<int:pk>', views.CourseDetailView.as_view(), name='course_detail'),
 ```
 
 Následně upravíme šablonu `course_list.html`, aby k názvům kurzů vkládala i odkazy na detaily jednotlivých kurzů. K tomu využijeme tag `url`. Protože jde o tag, zapíšeme ho do dvojice `{% %}`. Následně přidáme název URL adresy `course_detail` a hodnotu, která bude vložena jako parametr do adresy, tedy primární klíč `kurz.pk`.
