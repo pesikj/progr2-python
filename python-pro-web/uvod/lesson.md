@@ -212,7 +212,7 @@ Model je ve skutečnosti další třída, která dědí od základní třídy `M
 
 | Údaj | Datový typ |
 |------|-------------|
-| Název | text |
+| Jméno | text |
 | Začátek | datum a čas |
 | Konec | datum a čas |
 | Popis | text |
@@ -230,11 +230,11 @@ U textových polí je dobré nastavit maximální délku textu, kterou vložíme
 
 ```python
 class Kurz(models.Model):
-  nazev = models.CharField(max_length=100)
-  zacatek = models.DateTimeField()
-  konec = models.DateTimeField()
-  popis = models.CharField(max_length=1000)
-  cena = models.IntegerField()
+  name = models.CharField(max_length=100)
+  start = models.DateTimeField()
+  end = models.DateTimeField()
+  description = models.CharField(max_length=1000)
+  price = models.IntegerField()
 ```
 
 Nyní vytvoříme migraci, tj. připravíme skript, který obsahuje všechny informace o našem modelu:
