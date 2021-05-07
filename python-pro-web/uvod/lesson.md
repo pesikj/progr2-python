@@ -300,7 +300,7 @@ Registrace modelu je jednoduchá, stačí vložit následující kód do souboru
 ```python
 from django.contrib import admin
 from . import models
-admin.site.register(models.Kurz)
+admin.site.register(models.Course)
 ```
 
 Po obnovení stránky již model vidíme. Zkus si nyní přidat nějaký záznam do našeho modelu pomocí tlačítka 'Add' v administraci projektu. Všimni si, že díky vhodně zvoleným datovým typům jednotlivých polí je jednoduché zadat data ve správném formátu.

@@ -1,0 +1,9 @@
+{% block content %}
+<h2>Seznam poboček</h2>
+
+<ul>
+    {% for item in object_list %}
+    <li>{{ item.name }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

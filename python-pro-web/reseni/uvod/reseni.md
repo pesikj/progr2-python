@@ -22,7 +22,6 @@ class ContactsView(TemplateView):
     template_name = "contacts.html"
 ```
 
-
 `templates/urls.py`
 
 ```python
@@ -101,6 +100,16 @@ class Branch(models.Model):
   head_count = models.IntegerField()
 ```
 
+`admin.py`
+
+```python
+from django.contrib import admin
+from . import models
+
+admin.site.register(models.Course)
+admin.site.register(models.Branch)
+```
+
 ## Lidé
 
 ```python
@@ -128,3 +137,13 @@ class Person(models.Model):
   mobile_number = models.CharField(max_length=100)
 ```
 
+`admin.py`
+
+```python
+from django.contrib import admin
+from . import models
+
+admin.site.register(models.Course)
+admin.site.register(models.Branch)
+admin.site.register(models.Person)
+```

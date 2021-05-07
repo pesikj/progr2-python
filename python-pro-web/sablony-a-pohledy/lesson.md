@@ -16,6 +16,8 @@ Začneme s tím, že vytvoříme pohled. Tentokrát náš pohled založíme na t
 Vytvoříme tedy třídu `CourseListView` a nastavíme jí potřebné atributy.
 
 ```python
+from django.views.generic import ListView
+
 class CourseListView(ListView):
     model = models.Course
     template_name = "course_list.html"

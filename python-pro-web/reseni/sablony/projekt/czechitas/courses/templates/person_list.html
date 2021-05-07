@@ -1,0 +1,9 @@
+{% block content %}
+<h2>Tým Czechitas</h2>
+
+<ul>
+    {% for item in object_list %}
+    <li>{{ item.first_name }} {{ item.last_name }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
