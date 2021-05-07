@@ -16,11 +16,6 @@ Začneme s tím, že vytvoříme pohled. Tentokrát náš pohled založíme na t
 Vytvoříme tedy třídu `CourseListView` a nastavíme jí potřebné atributy.
 
 ```python
-from django.shortcuts import render
-
-from django.views.generic import ListView
-from . import models
-
 class CourseListView(ListView):
     model = models.Course
     template_name = "course_list.html"
@@ -29,7 +24,7 @@ class CourseListView(ListView):
 Našemu pohledu už můžeme přidat i URL adresu.
 
 ```python
-    path('kurzy/', views.KurzyView.as_view(), name='index'),
+    path('kurzy/', views.CourseListView.as_view(), name='course_list'),
 ```
 
 ### Vytvoření šablony
@@ -114,7 +109,7 @@ Stránka se seznamem zpravidla neobsahuje všechny dostupné informace, protože
 
 Před vytvořením pohledu bychom si měli připravit prázdný soubor, do kterého později vložíme šablonu. Náš soubor opět uložíme do adresáře `teplates` a pojmenujeme ho `course_detail.html`.
 
-K vytvoření pohledu na jeden konkrétní záznam vytvoříme nový pohled na základě dalšího z generických pohledů, a to `DetailView`. Jak už název napovídá, jedná se o pohled na jeden vybraný záznam. Vytvoříme tedy nový pohled `CoursedetailView` a opět mu nastavíme atributy `model` a `template_name.`
+K vytvoření pohledu na jeden konkrétní záznam vytvoříme nový pohled na základě dalšího z generických pohledů, a to `DetailView`. Jak už název napovídá, jedná se o pohled na jeden vybraný záznam. Vytvoříme tedy nový pohled `CourseDetailView` a opět mu nastavíme atributy `model` a `template_name.`
 
 ```python
 class CourseDetailView(DetailView):
@@ -159,7 +154,6 @@ Následně upravíme šablonu `course_list.html`, aby k názvům kurzů vkládal
 <ul>
     {% for item in object_list %}
     <li><a href="{% url 'course_detail' item.pk %}">{{ item.nazev }}</a></li>
-    <li>{{ item.nazev }}</li>
     {% endfor %}
 </ul>
 ```
