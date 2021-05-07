@@ -306,7 +306,7 @@ admin.site.register(models.Kurz)
 Po obnovení stránky již model vidíme. Zkus si nyní přidat nějaký záznam do našeho modelu pomocí tlačítka 'Add' v administraci projektu. Všimni si, že díky vhodně zvoleným datovým typům jednotlivých polí je jednoduché zadat data ve správném formátu.
 
 [[[ excs Cvičení
-- pridani-modelu
+- pobocky
 ]]]
 
 [[[ excs Bonusy
