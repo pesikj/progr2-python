@@ -3,3 +3,4 @@ env
 example.py
 czechitas-env
 forex-python-master*
+*.pyc 

@@ -1,80 +1,130 @@
+## Vytvoření pohledu
+
+`templates/contacts.html`
+
+```html
+<h2>Kontakty</h2>
+
+<p>První kontakt</p>
+<p>Druhý kontakt</p>
 ```
-python manage.py startapp crm
-```
+
+`templates/views.py`
 
 ```python
-#views.py
+from django.shortcuts import render
+from django.views.generic.base import TemplateView
 
-from django.http import HttpResponse
-from django.views import View
+class IndexView(TemplateView):
+    template_name = "index.html"
 
-class Index(View):
-    def get(self, request):
-        return HttpResponse('Vítej v CRM systému Czechitas!')
+class ContactsView(TemplateView):
+    template_name = "contacts.html"
 ```
 
-```python
-# crm/urls.py
 
+`templates/urls.py`
+
+```python
 from django.urls import path
 
 from . import views
 
 urlpatterns = [
-    path('', views.Index.as_view(), name='index'),
+    path('', views.IndexView.as_view(), name='index'),
+    path("contacts", views.ContactsView.as_view(), name="contacts")
 ]
 ```
 
-```python
-# czechitas/urls.py
+## O nás
 
-from django.contrib import admin
-from django.urls import include, path
+`about.html`
+
+```html
+
+<h2>O nás</h2>
+
+<p>
+  Informace o nás.
+</p>
+```
+
+`templates/views.py`
+
+```python
+from django.shortcuts import render
+from django.views.generic.base import TemplateView
+
+class IndexView(TemplateView):
+    template_name = "index.html"
+
+class ContactsView(TemplateView):
+    template_name = "contacts.html"
+  
+class AboutView(TemplateView):
+    template_name = "about.html"
+```
+
+`templates/urls.py`
+
+```python
+from django.urls import path
+
+from . import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include("kurzy.urls")),
-    path('crm/', include("crm.urls"))
+    path('', views.IndexView.as_view(), name='index'),
+    path("contacts", views.ContactsView.as_view(), name="contacts"),
+    path("about", views.AboutView.as_view(), name="about"),
 ]
 ```
 
+## Pobočky
+
+`templates/models.py`
+
 ```python
-# models.py
 
 from django.db import models
 
-class Kontakt(models.Model):
-    jmeno = models.CharField(max_length=100)
-    prijmeni = models.CharField(max_length=100)
-    email = models.CharField(max_length=100)
-    posledni_kontakt = models.DateTimeField()
+class Kurz(models.Model):
+  name = models.CharField(max_length=100)
+  start = models.DateTimeField()
+  end = models.DateTimeField()
+  description = models.CharField(max_length=1000)
+  price = models.IntegerField()
+
+class Branch(models.Model):
+  name = models.CharField(max_length=100)
+  founded_on = models.DateField() # nebo DateTimeField
+  email = models.CharField(max_length=50)
+  head_count = models.IntegerField()
 ```
+
+## Lidé
 
 ```python
-# settings.py - INSTALLED_APPS
+from django.db import models
 
-INSTALLED_APPS = [
-    'kurzy.apps.KurzyConfig',
-    'crm.apps.CrmConfig',
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-]
+class Kurz(models.Model):
+  name = models.CharField(max_length=100)
+  start = models.DateTimeField()
+  end = models.DateTimeField()
+  description = models.CharField(max_length=1000)
+  price = models.IntegerField()
+
+class Branch(models.Model):
+  name = models.CharField(max_length=100)
+  founded_on = models.DateField() # nebo DateTimeField
+  email = models.CharField(max_length=50)
+  head_count = models.IntegerField()
+
+class Person(models.Model):
+  # Může být i jedno pole name
+  first_name = models.CharField(max_length=100)
+  last_name = models.CharField(max_length=100)
+  email = models.CharField(max_length=100)
+  # příklad dalšího pole
+  mobile_number = models.CharField(max_length=100)
 ```
 
-```
-python manage.py makemigrations
-python manage.py migrate
-```
-
-```python
-# admin.py
-
-from django.contrib import admin
-from . import models
-
-admin.site.register(models.Kontakt)
-```

@@ -10,7 +10,7 @@ Vytvoř pohled `ContactsView` a k němu šablonu `contacts.html`, která bude ob
 Do souboru `kurzy/urls.py` přidej adresu stránky s kontakty. V seznamu `urlpatterns` přibude nová hodnota:
 
 ```python
-path("contacts", views.ContactsView.as_view(), name="kontakty")
+path("contacts", views.ContactsView.as_view(), name="contacts")
 ```
 
 Celý soubor tedy bude vypadat takto:
@@ -22,7 +22,7 @@ from . import views
 
 urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
-    path("contacts", views.ContactsView.as_view(), name="kontakty")
+    path("contacts", views.ContactsView.as_view(), name="contacts")
 ]
 ```
 
