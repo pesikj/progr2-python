@@ -120,6 +120,80 @@ urlpatterns = [
     path('pobocky/', views.BranchListView.as_view(), name='branch_list'),
     path('tym/', views.PersonListView.as_view(), name='branch_list'),
 ]
-
 ```
 
+## Detail pobočky
+
+`templates/branch_detail.html`
+
+```html
+<h2>Pobočka {{ object.name }}</h2>
+
+<p>V pobočce pracuje {{ object.head_count }} lidí. </p>
+```
+
+`views.py`
+
+```python
+from django.shortcuts import render
+from django.views.generic import ListView
+from django.views.generic.base import TemplateView
+from . import models
+
+class IndexView(TemplateView):
+    template_name = "index.html"
+
+class ContactsView(TemplateView):
+    template_name = "contacts.html"
+  
+class AboutView(TemplateView):
+    template_name = "about.html"
+
+class CourseListView(ListView):
+    model = models.Course
+    template_name = "course_list.html"
+
+class BranchListView(ListView):
+    model = models.Branch
+    template_name = "branch_list.html"
+
+class PersonListView(ListView):
+    model = models.Person
+    template_name = "person_list.html"
+
+class CourseDetailView(DetailView):
+    model = models.Course
+    template_name = "course_detail.html"
+
+class BranchDetailView(DetailView):
+    model = models.Branch
+    template_name = "branch_detail.html"
+```
+
+`urls.py`
+
+```python
+from django.urls import path
+
+from . import views
+
+urlpatterns = [
+    path('', views.IndexView.as_view(), name='index'),
+    path("contacts", views.ContactsView.as_view(), name="contacts"),
+    path("about", views.AboutView.as_view(), name="about"),
+    path('kurzy/', views.CourseListView.as_view(), name='course_list'),
+    path('pobocky/', views.BranchListView.as_view(), name='branch_list'),
+    path('tym/', views.PersonListView.as_view(), name='branch_list'),
+    path('kurz/<int:pk>', views.CourseDetailView.as_view(), name='course_detail'),
+    path('pobocka/<int:pk>', views.BranchDetailView.as_view(), name='course_detail'),
+]
+```
+
+## Navigační panel
+
+```html
+<ul>
+    <li><a href="{% url 'contacts' %}">Kontaky</a></li>
+    <li><a href="{% url 'course_list' %}">Kurzy</a></li>
+</ul>
+```

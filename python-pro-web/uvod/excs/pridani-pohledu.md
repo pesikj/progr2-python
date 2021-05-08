@@ -22,9 +22,9 @@ from . import views
 
 urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
-    path("contacts", views.ContactsView.as_view(), name="contacts")
+    path("kontakty", views.ContactsView.as_view(), name="contacts")
 ]
 ```
 
 
-Otevři si odkaz [http://127.0.0.1:8000/contacts/](http://127.0.0.1:8000/contacts/) a ověř, že se zobrazí stránka s kontakty.
+Otevři si odkaz [http://127.0.0.1:8000/kontakty/](http://127.0.0.1:8000/kontakty/) a ověř, že se zobrazí stránka s kontakty.

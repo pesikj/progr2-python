@@ -40,13 +40,11 @@ Máme-li proměnnou `item`, můžeme nyní do naší webové stránky vypsat lib
 Níže je výsledný kód naší šablony.
 
 ```html
-{% block content %}
 <ul>
     {% for item in object_list %}
     <li>{{ item.name }}</li>
     {% endfor %}
 </ul>
-{% endblock %}
 ```
 
 [[[ excs Cvičení
@@ -155,7 +153,7 @@ Následně upravíme šablonu `course_list.html`, aby k názvům kurzů vkládal
 <p>Zde vidíte aktuální nabídku kurzů</p>
 <ul>
     {% for item in object_list %}
-    <li><a href="{% url 'course_detail' item.pk %}">{{ item.nazev }}</a></li>
+    <li><a href="{% url 'course_detail' item.pk %}">{{ item.name }}</a></li>
     {% endfor %}
 </ul>
 ```
@@ -165,3 +163,8 @@ Nyní se uživatel může prokliknout ze seznamu kurzů na detail vybraného kur
 [[[ excs Cvičení
 - detail-pobocky
 ]]]
+
+[[[ excs Bonus
+- navigacni-panel
+]]]
+

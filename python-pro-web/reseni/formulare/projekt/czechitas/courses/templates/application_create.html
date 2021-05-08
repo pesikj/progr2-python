@@ -1,0 +1,6 @@
+{% load bulma_tags %}
+
+<form method="post">{% csrf_token %}
+    {{ form|bulma }}
+  <input type="submit" class="button is-primary" value="Odeslat">
+</form>

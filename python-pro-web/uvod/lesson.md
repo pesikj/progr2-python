@@ -229,7 +229,7 @@ Pro naše datové typy využijeme následující třídy:
 U textových polí je dobré nastavit maximální délku textu, kterou vložíme jako pojmenovaný parametr do závorek při vytváření třídy.
 
 ```python
-class Kurz(models.Model):
+class Course(models.Model):
   name = models.CharField(max_length=100)
   start = models.DateTimeField()
   end = models.DateTimeField()
@@ -313,3 +313,15 @@ Po obnovení stránky již model vidíme. Zkus si nyní přidat nějaký záznam
 - lide
 ]]]
 
+### Čtení na doma: Množné číslo
+
+V administrátorském rozhraní Django přidává na konec názvu modelu písmeno `s`, protože to je nejčastější způsob tvorby množného čísla v angličtině. Ne vždy je to ale správně, jak ukazuje například model `Branch`, kde by množné číslo správně mělo být `Branches`. Abychom toto vylepšili, vložíme dovnitř třídy `Branch` třídu `Meta`, která nastavuje různá metadata modelu. Této třídě pak nastavíme atribut `verbose_name_plural` jako řetězec s názvem našeho modelu v množném čísle.
+
+```python
+class Branch(models.Model):
+  city = models.CharField(max_length=100
+  # Ostatní parametry jsou vynechané, aby zde nebylo řešení cvičení :-)
+  
+  class Meta:
+    verbose_name_plural = "Branches"
+```
