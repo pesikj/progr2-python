@@ -59,6 +59,68 @@ urlpatterns = [
 ]
 ```
 
+## Kurzy a pobočky
+
+`models.py`
+
+```python
+from django.db import models
+
+class Kurz(models.Model):
+  name = models.CharField(max_length=100)
+  start = models.DateTimeField()
+  end = models.DateTimeField()
+  description = models.CharField(max_length=1000)
+  price = models.IntegerField()
+
+class Branch(models.Model):
+  name = models.CharField(max_length=100)
+  founded_on = models.DateField() # nebo DateTimeField
+  email = models.CharField(max_length=50)
+  head_count = models.IntegerField()
+  branch = models.ForeignKey("Branch", on_delete=models.PROTECT, null=True)
+
+class Course(models.Model):
+  name = models.CharField(max_length=100)
+  start = models.DateTimeField()
+  end = models.DateTimeField()
+  description = models.CharField(max_length=1000)
+  price = models.IntegerField()
+  category = models.ForeignKey("Category", on_delete=models.PROTECT, null=True)
+```
+
+## Lidé a kurzy
+
+`models.py`
+
+```python
+from django.db import models
+
+class Kurz(models.Model):
+  name = models.CharField(max_length=100)
+  start = models.DateTimeField()
+  end = models.DateTimeField()
+  description = models.CharField(max_length=1000)
+  price = models.IntegerField()
+
+class Branch(models.Model):
+  name = models.CharField(max_length=100)
+  founded_on = models.DateField() # nebo DateTimeField
+  email = models.CharField(max_length=50)
+  head_count = models.IntegerField()
+  branch = models.ForeignKey("Branch", on_delete=models.PROTECT, null=True)
+
+class Course(models.Model):
+  name = models.CharField(max_length=100)
+  start = models.DateTimeField()
+  end = models.DateTimeField()
+  description = models.CharField(max_length=1000)
+  price = models.IntegerField()
+  category = models.ForeignKey("Category", on_delete=models.PROTECT, null=True)
+  lecturer = models.ForeignKey(Person, on_delete=models.SET_NULL, null=True, related_name="course_lecturer")
+  event_coordinator = models.ForeignKey(Person, on_delete=models.SET_NULL, null=True,related_name="course_event_coordinator")
+```
+
 ## Vytvoření pohledu
 
 `person_list.html`

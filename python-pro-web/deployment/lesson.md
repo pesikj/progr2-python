@@ -8,7 +8,7 @@ pip freeze > requirements.txt
 ```
 
 
-Vytvořte soubor `touch Procfile`
+Vytvořte soubor `Procfile`
 
 ```
 web: gunicorn (Your app).wsgi
