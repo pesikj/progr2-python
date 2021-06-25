@@ -3,7 +3,7 @@ title: Ave, Caesar!
 demand: 3
 ---
 
-Římské číslice se dodnes používají například pro označení století, pořadí panovníků a papežů atd. Zkus sestavit regulární výraz, který zachytí římské číslice od 1 (I) do 10 (X).
+Římské číslice se dodnes používají například pro označení století, pořadí panovníků a papežů atd. Zkus sestavit regulární výraz, který zachytí římské číslice obsahující znaky I, V a X.
 
 ```
 IX. století

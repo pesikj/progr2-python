@@ -8,9 +8,8 @@ Níže jsou informace o třech různých knihách.
 První kniha:
 
 - Název: Smrt bere jackpot
+- Autor: Vincent McEveety
 - Počet stran: 542
-- Oběť: Freddy Brower
-- Vrah: Leon Lamarr
 
 Druhá kniha:
 
@@ -21,8 +20,7 @@ Druhá kniha:
 
 Třetí kniha:
 
-- Název: Matyáš Sandorf
-- Podtitul: Nový hrabě Monte Christo
+- Název: Matyáš Sandorf (Nový hrabě Monte Christo)
 - Autor: Jules Verne
 - Počet stran: 442
 
