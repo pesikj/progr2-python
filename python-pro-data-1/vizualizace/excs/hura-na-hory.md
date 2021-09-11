@@ -6,7 +6,7 @@ demand: 2
 Následující data obsahují úhrnné množství sněhu (v cm) napadlé za každý rok pro posledních 50 let pro dva lyžarské resorty. První sloupec je rok, druhý jsou data pro resort Hora šílenství, třetí jsou data pro resort Prašné údolí.
 
 ```pycon
->>> snih = [
+snih = [
   [1968, 480, 351],
   [1969, 462, 663],
   [1970, 443, 490],
@@ -58,8 +58,8 @@ Následující data obsahují úhrnné množství sněhu (v cm) napadlé za kaž
   [2016, 422, 690],
   [2017, 420, 699]
 ]
->>> snihdf = pandas.DataFrame(snih, columns=['rok', 'hora', 'udoli'])
->>> snihdf = snihdf.set_index('rok')
+snihdf = pandas.DataFrame(snih, columns=['rok', 'hora', 'udoli'])
+snihdf = snihdf.set_index('rok')
 ```
 
 Použijte krabicový graf k porovnání sněhových srážek v obou resortech. Do kterého byste se vypravili příští rok na lyže a proč?

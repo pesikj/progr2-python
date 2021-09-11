@@ -9,3 +9,10 @@ Načtěte tato data do Python seznamu, ze kterého vyrobte sérii. Zobrazte hist
 
 1. Jaká je nejčastější hodnota, která na dvou kostkách padne?
 1. Je větší šance, že padne hodnota 12 než že padne hodnota 2?
+
+```pycon
+import requests
+
+r = requests.get("https://kodim.cz/czechitas/progr2-python/python-pro-data-1/vizualizace/excs/hazeni-kostkami/assets/kostky.csv")
+open("kostky.csv", "wb").write(r.content)
+```

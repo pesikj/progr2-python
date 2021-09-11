@@ -5,38 +5,39 @@ V této lekci si ukážeme, jak zobrazovat různé druhy grafů pomocí modulu `
 Modul `matplotlib` nabízí ohromné množství možností pro vizualizaci dat. My zde probereme jen naprosté základy, aby nám lekce nenarostla to olbřímích rozměrů.
 
 ```pycon
->>> import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 ```
 
 Pokud vše proběhlo jak má, můžeme vyzkoušet zobrazit naše první data. Budou to pohyby na bankovním účtu za měsíc březen 2019.
 
 ```pycon
->>> pohyby = [746, 52, -749, -63, 71, 958, 157, -1223, -1509, -285, -350, 728, -260, 809, -164, 243, -238, 233, -646, -82, -275, 179, 417, 149, 301, 957, -711, 376, 421, -15, -663]
+pohyby = [746, 52, -749, -63, 71, 958, 157, -1223, -1509, -285, -350, 728, -260, 809, -164, 243, -238, 233, -646, -82, -275, 179, 417, 149, 301, 957, -711, 376, 421, -15, -663]
 ```
 
 Z těchto dat si vyrobíme Pandas sérii. Abychom byli co nejpoctivější, vyrobíme si index naší série jako objekty typu `date`
 
 ```pycon
->>> import pandas
->>> import datetime as dt
->>> datumy = [dt.date(2019, 3, d) for d in range(1, 32)]
->>> ucet = pandas.Series(pohyby, index=datumy)
+import pandas
+import datetime
+for day in range(1, 32):
+    datumy.append(datetime.date(2019, 3, day)
+ucet = pandas.Series(pohyby, index=datumy)
 ```
 
 Nyní vyzkoušíme zobrazit přírůstky jako graf. Stačí napsat
 
 ```pycon
->>> ucet.plot()
->>> plt.show()
+ucet.plot()
+plt.show()
 ```
 
 ![Graf pohybů](assets/prirustky.png)
 
-Užitečnější by mohlo být zobrazit například graf zůstatků
+Užitečnější by mohlo být zobrazit graf zůstatků
 
 ```pycon
->>> ucet.cumsum().plot()
->>> plt.show()
+ucet.cumsum().plot()
+plt.show()
 ```
 
 ![Graf zůstatků](assets/zustatky.png)
@@ -44,8 +45,8 @@ Užitečnější by mohlo být zobrazit například graf zůstatků
 Nyní si s grafem můžeme vyhrát podle chuti a nastavit jeho vzezření přesně tak, jak potřebujeme. Metoda `plot` na sériích obsahuje nepřeberné možnosti nastavení. Například takto vyrobíme z pohybů na účtu sloupcový graf s mřížkou ve žluté barvě.
 
 ```pycon
->>> ucet.plot(kind='bar', color='yellow', grid=True)
->>> plt.show()
+ucet.plot(kind='bar', color='yellow', grid=True)
+plt.show()
 ```
 
 ![Sloupcový graf zůstatků](assets/sloupce.png)
@@ -59,17 +60,19 @@ Typ grafu, který chceme zobrazit, se v metodě `plot` specifikuje pomocí argum
 Základní typy grafů, které se hojně používají mohou být například tyto:
 
 
-- `plot()` - [Bodový graf](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.plot.html)
-- `bar()` - [Sloupcový graf](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.bar.html)
-- `hist()` - [Histogram](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.hist.html)
-- `boxplot()` - [Krabicový graf](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.boxplot.html)
+- `plot()` - [Bodový graf](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.plot.html),
+- `bar()` - [Sloupcový graf](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.bar.html),
+- `hist()` - [Histogram](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.hist.html),
+- `boxplot()` - [Krabicový graf](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.boxplot.html).
+
+Výběr vhodného typu vizualizace se odvíjí od toho, jaká data zobrazujeme. Rady, jak vybrat vhodný typ vizualizace, najdete třeba [v tomto článku](https://blog.hubspot.com/marketing/types-of-graphs-for-data-visualization).
 
 ## Histogramy
 
 Histogram je důležitý typ grafu, který nám umožňuje zobrazit četnost hodnot z nějakého datasetu. Následující seznam obsahuje výšku 64 náhodných mužů v České republice, měřeno v centimetrech.
 
 ```pycon
->>> muzi = pandas.Series([
+muzi = pandas.Series([
   179.3, 183.7, 181.4, 176.0, 183.6, 184.7, 163.4, 180.3,
   167.5, 166.8, 173.5, 172.5, 173.0, 177.6, 176.0, 179.5,
   182.6, 172.0, 183.2, 177.0, 176.2, 175.7, 174.3, 180.3,
@@ -84,8 +87,8 @@ Histogram je důležitý typ grafu, který nám umožňuje zobrazit četnost hod
 Pomocí histogramu zobrazíme četnosti jednotlivých hodnot.
 
 ```pycon
->>> muzi.hist()
->>> plt.show()
+muzi.hist()
+plt.show()
 ```
 
 ![Histogram výšek](assets/vysky-muzi.png)
@@ -93,7 +96,7 @@ Pomocí histogramu zobrazíme četnosti jednotlivých hodnot.
 Histogram si pro přehlednost můžeme rozdělit do <term cs="přihrádek" en="bins"> po pěti centimetrech
 
 ```pycon
->>> muzi.hist(bins=[
+muzi.hist(bins=[
   150, 155, 160, 165, 170, 175, 180, 185, 190, 195, 200, 205, 210
 ])
 >>> plt.show()
@@ -106,8 +109,8 @@ Histogram si pro přehlednost můžeme rozdělit do <term cs="přihrádek" en="b
 Krabicový graf graficky znázorňuje medián a kvartily naměřených hodnot. Můžeme si jej vyzkoušet na výškách mužů.
 
 ```pycon
->>> muzi.plot(kind='box', whis=[0, 100])
->>> plt.show()
+muzi.plot(kind='box', whis=[0, 100])
+plt.show()
 ```
 
 ![Krabicový graf muži](assets/vysky-muzi-box.png)
@@ -115,7 +118,7 @@ Krabicový graf graficky znázorňuje medián a kvartily naměřených hodnot. M
 Krabicové grafy jsou užitečné především pro porovnání dvou různých měření. Přidejme si druhou datovou sadu představující naměřené výšky žen
 
 ```pycon
->>> zeny = pandas.Series([
+zeny = pandas.Series([
   172.0, 169.0, 166.8, 164.6, 172.7, 171.5, 167.0, 167.0,
   168.3, 184.7, 166.0, 160.0, 168.8, 165.8, 173.5, 163.0,
   168.9, 158.4, 166.4, 169.4, 174.2, 175.6, 167.2, 168.0,
@@ -130,10 +133,10 @@ Krabicové grafy jsou užitečné především pro porovnání dvou různých m�
 Nyní chceme zobrazit krabicový graf porovnávající výšky obou pohlaví. K tomu si z našich sérií vyrobíme DataFrame.
 
 ```pycon
->>> vysky = muzi.to_frame(name='muži')
->>> vysky['ženy'] = zeny
->>> vysky.plot(kind='box', whis=[0, 100])
->>> plt.show()
+vysky = muzi.to_frame(name='muži')
+vysky['ženy'] = zeny
+vysky.plot(kind='box', whis=[0, 100])
+plt.show()
 ```
 
 ![Krabicový graf muži vs ženy](assets/vysky-muzi-zeny-box.png)
