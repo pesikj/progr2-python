@@ -19,8 +19,9 @@ Z těchto dat si vyrobíme Pandas sérii. Abychom byli co nejpoctivější, vyro
 ```pycon
 import pandas
 import datetime
+datumy = []
 for day in range(1, 32):
-    datumy.append(datetime.date(2019, 3, day)
+    datumy.append(datetime.date(2019, 3, day))
 ucet = pandas.Series(pohyby, index=datumy)
 ```
 
@@ -99,7 +100,7 @@ Histogram si pro přehlednost můžeme rozdělit do <term cs="přihrádek" en="b
 muzi.hist(bins=[
   150, 155, 160, 165, 170, 175, 180, 185, 190, 195, 200, 205, 210
 ])
->>> plt.show()
+plt.show()
 ```
 
 ![Histogram výšek s přihrádkami](assets/vysky-muzi-bins.png)

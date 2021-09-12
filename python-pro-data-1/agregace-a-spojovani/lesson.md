@@ -122,7 +122,7 @@ maturita = pandas.concat([u202, u203, u302])
 Pozor ale na to, že v takto vzniklém DataFrame se nám **rozbije index**, protože se prostě spojí za sebe indexy jednotlivých tabulek. Pokud chceme, aby Pandas při spojování index přepočítal, musíme nastavit hodnotu parametru `ignore_index` na `True`.
 
 ```pycon
->>> maturita = pandas.concat([u202, u203, u302], ignore_index=True)
+maturita = pandas.concat([u202, u203, u302], ignore_index=True)
 ```
 
 To už je lepší. Stále nám však zůstává jeden problém. Po spojení tabulek do jedné už nevíme, kdo maturoval v jaké místnosti. Tuto informaci si proto doplníme do původních tří tabulek jako nový sloupeček. Až poté tabulky spojíme do jedné.
@@ -187,9 +187,9 @@ print(propojeny_df.head())
 Pokud by například nějaký student nebyl uvedený v tabulce se studenty, jeho maturitní výsledek by zmizel. U nového `DataFrame` bychom tedy měli zkontrolovat, zda má `spojenyDF` stejný počet řádků jako `u202`.
 
 ```pycon
->>> u202.shape
+u202.shape
 (15, 4)
->>> propojeny_df.shape
+propojeny_df.shape
 (15, 5)
 ```
 
@@ -285,7 +285,8 @@ maturita.groupby('mistnost')
 Na tomto speciálním objektu pak můžeme používat různé agregační funkce. Nejjednodušší je funkce `count`
 
 ```pycon
->>> maturita.groupby('mistnost').count()
+maturita.groupby('mistnost').count()
+
           jméno  předmět  známka  den  datum  předs
 místnost
 u202         13       13      13   13     13     13
