@@ -148,7 +148,7 @@ Tím jsme si ukázali, jak vytvořit třídu, objekty a jak s nimi pracovat.
 - zkusebka
 ]]]
 
-# Čtení na doma - datové třídy
+## Čtení na doma - datové třídy
 
 Obsah metody `__init__()` je příklad `boilerplate code`. Název se odkazuje na kovové štítky, které jsou umístěny na bojlerech. V programování to znamená kód, který se často opakuje bez nějakých velkých změn.
 
