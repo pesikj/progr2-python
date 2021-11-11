@@ -138,11 +138,11 @@ class Manazer(Zamestnanec):
 - ridic
 ]]]
 
-# Další možnosti objektově orientovaného programování
+## Další možnosti objektově orientovaného programování
 
 Následující text popisuje další pokročilá témata, které většinou není možné během kurzu probrat, můžeš se však k nim kdykoli vrátit a prohloubit svoje znalosti.
 
-## Abstraktní třída
+### Abstraktní třída
 
 Abstraktní třída má speciální význam v tom, že z ní rovnou **nevytváříme objekty**, je ale šablonou pro třídy, které od ní dědí.
 
@@ -207,7 +207,7 @@ else:
   print("Objekt není dvourozměrný odstavec.")
 ```
 
-## Vlastnosti objektu
+### Vlastnosti objektu
 
 U našich obrazců máme implementované metody metody `vypocti_obvod()` a `vypocti_obsah()`. Obvod a obsah jsou hodnoty, které jsou pro nějaký obrazec konkrétní velikosti konstantní. Bylo by tedy zajímavé upravit naše objekty tak, aby se obsah a obrazec tvářily jako atributy. Atribut objektu, pro jehož získání používáme funkci, je v Pythonu označován jako vlastnost (`property`). Vlastnosti označíme pomocí dekorátoru `@property`. U abstraktní třídy pak použijeme speciální dekorátor `@abstractproperty`.
 
@@ -256,7 +256,7 @@ plocha_celkem = maly_ctverec.obsah + velky_obdelnik.obsah
 print(f"Celková plocha obou obrazců je {plocha_celkem}.")
 ```
 
-## Soukromé a veřejné metody
+### Soukromé a veřejné metody
 ​
 Soukromé metody jsou metody, které mohou být volány pouze jinými metodami dané třídy, nikoli však zvenku. Python, na rozdíl od jiných programovacích jazyků, skutečně soukromé metody nemá. Všechny metody a atributy tříd jsou veřejné a není žádný způsob jak je opravdu skrýt před vývojářem. 
 
@@ -280,7 +280,7 @@ class Zamestnanec:
         else:
             return f"{self.krestni_jmeno[0]}. {self.prijmeni}"
 ```
-## Dvojité podtržítko — dunder funkce
+### Dvojité podtržítko — dunder funkce
 ​
 `dunder` (double under) jsou funkce začínající a končící dvěma podtržítky. Dvěma z nich je již známé funkce `__init__` pro inizializaci třidy a `__str__` pro převod na řetězc. Mají svůj význam také mimo třídy, například `__file__` pro zjištění cesty, kde se soubor nachází. Jedná se o funkce či atributy, které jsou něčím výjimečné, v Pythonu mají předdefinováné chování a Python ví, jak s nimi pracovat. 
 
@@ -298,7 +298,7 @@ class Company:
         return iter(self.Zamestnanecs)
 ```
 ​
-## Dědičnost a dvojíté podtržítko
+### Dědičnost a dvojíté podtržítko
 ​
 Dvojité podtržení z jedné strany má také svůj význam. Jde o soukromé metody, které navíc zdědí jméno své třídy. Tím dává vývojář třídy najevo, že tato by opravdu za žádných okolností neměla být volána zvenku.
 
