@@ -17,7 +17,7 @@ Na rozdíl od seznamů nemají slovníky indexy, ale **klíče** (`key`). Jako k
 Vezměme nyní náš seznam s informacemi o položce v e-shopu a převeďme ho na slovník.
 
 ```py
-item = {"title": "Čajová konvička s hrnky", "price": 899, "inStock": True}
+item = {"title": "Čajová konvička s hrnky", "price": 899, "in_stock": True}
 ```
 
 Takový zápis je jistě mnohem srozumitelnější. Nyní vidíme, že poslední hodnota označuje, zda je položka skladem. Všimni si, že slovníky zapisujeme do **složených závorek**, mezi klíčem a hodnotou je **dvojtečka** a jednotlivé dvojice jsou odděleny **čárkami**.
@@ -31,23 +31,29 @@ title = item['title']
 Zkusme si třeba vypsat informace o položce.
 
 ```py
+print(f"Vybraný předmět je", item["title"], "a stojí", item["price"], "Kč.")
+```
+
+Je možné též použít formátované řetězce (f-stringy).
+
+```py
 print(f"Vybraný předmět je {item['title']} a stojí {item['price']} Kč.")
 ```
 
 **Pozor:** Při použití f-stringů je nutné uvnitř hranatých závorek použít jiný typ označení řetězců. Začínáte-li text pomocí uvozovek, pro klíče slovníku použijte apostrofy.
 
-Funkci `print` můžeme použít i na celý slovník. Python pak použije standardní výpis, který vypadá stejně, jako když slovník zapisujeme. Hodí se to, když potřebujeme zkontrolovat, co vlastně ve slovníku je.
+Funkci `print()` můžeme použít i na celý slovník. Python pak použije standardní výpis, který vypadá stejně, jako když slovník zapisujeme. Hodí se to, když potřebujeme zkontrolovat, co vlastně ve slovníku je.
 
 ```py
-{'title': 'Čajová konvička s hrnky', 'price': 899, 'inStock': True}
+{'title': 'Čajová konvička s hrnky', 'price': 899, 'in_stock': True}
 ```
 
 K ověření, jestli nějaký klíč už ve slovníku je, použijeme operátor `in`, jako tomu bylo v případě seznamu. Pouze namísto indexu vkládáme klíč.
 
 ```py
-item = {"title": "Čajová konvička s hrnky", "price": 899, "inStock": True}
+item = {"title": "Čajová konvička s hrnky", "price": 899, "in_stock": True}
 if "weight" in item:
-  print(f"Hmotnost předmětu je {item['weight']} kg.")
+  print(f"Hmotnost předmětu je", item["weight"], "kg.")
 else:
   print("Hmotnost není zadána.")
 ```

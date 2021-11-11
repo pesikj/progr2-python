@@ -1,4 +1,4 @@
-V úvodním workshopu jsme si ukázali, že pro práci se sekvencemi jsou ideální cykly. Vyzkoušíme si nyní, jak se slovníky pracovat pomocí cyklů.
+Na kurzu Úvod do programování v Pythonu jsme si ukázali, že pro práci se sekvencemi jsou ideální cykly. Vyzkoušíme si nyní, jak se slovníky pracovat pomocí cyklů.
 
 ## Slovníky a cykly
 
@@ -12,31 +12,35 @@ sales = {
 }
 ```
 
-Zkusme si nejprve vypsat názvy všech knih ve slovníku (bez počtu prodaných kusů). K tomu použijeme cyklus `for`, který již známe. Pomocnou proměnnou si pojmenujeme `key`. Tato proměnná funkce podobně jako u seznamu - postupně se do ní vloží hodnoty jednotlivých klíčů slovníku.
+Zkusme si nejprve vypsat názvy všech knih ve slovníku (bez počtu prodaných kusů). K tomu použijeme cyklus `for`, který již známe. Pomocnou proměnnou si pojmenujeme `key`. Tato proměnná funguje podobně jako u seznamu - postupně se do ní vloží hodnoty jednotlivých klíčů slovníku.
 
 ```py
 for key in sales:
   print(key)
 ```
 
-Zkusme nyní informaci o každém prodeji vypsat pomocí věty, do které vložíme název knihy a počet prodaných kusů. Oproti předchozímu příkladu je tu změna. **Každá položka** slovníku se skládá z **klíče a samotné hodnoty**. V cyklu můžeme přečíst oboje (a často i používáme). Využijeme tedy **dvě proměnné**, které oddělíme čárkou. Do první proměnné je uložený klíč a do druhé hodnota. 
+Zkusme nyní informaci o každém prodeji vypsat pomocí věty, do které vložíme název knihy a počet prodaných kusů. Oproti předchozímu příkladu je tu změna. **Každá položka** slovníku se skládá z **klíče** a **hodnoty**. V cyklu můžeme použít oboje (a často i používáme). Využijeme tedy **dvě proměnné**, které oddělíme čárkou. Do první proměnné je uložený klíč a do druhé hodnota. 
 
-Všimněte si též, že za slovník vkládáme `.items()`.
+Všimni si též, že za slovník vkládáme `.items()`. To je důleižé, protože bez metody `.items()` bychom získali pouze klíče.
 
 
 ```py
 for key, value in sales.items():
+  print(f"Knihy", key, "bylo prodáno", value, "výtisků.")
+  # Použití f-stringu
   print(f"Knihy {key} bylo prodáno {value} výtisků.")
 ```
 
-Zkusme si nyní spočítat celkový počet prodaných kusů. Vytvoříme si tedy proměnnou `totalSales` a pro každou knihu do ní přičteme počet prodaných kusů.
+Zkusme si nyní spočítat celkový počet prodaných kusů. Vytvoříme si tedy proměnnou `total_sales` a pro každou knihu do ní přičteme počet prodaných kusů.
 
 ```py
-totalSales = 0
+total_sales = 0
 for key, value in sales.items():
+  print(f"Knihy", key, "bylo prodáno", value, "výtisků.")
+  # Použití f-stringu
   print(f"Knihy {key} bylo prodáno {value} výtisků.")
   totalSales += value
-print(f"Celkem bylo prodáno {totalSales} výtisků.")
+print(f"Celkem bylo prodáno {total_sales} výtisků.")
 ```
 
 
@@ -48,7 +52,7 @@ O knihách můžeme evidovat mnohem více informací. Uvažujme nyní, že chcem
 book = {"title": "Zkus mě chytit", "sold": 4165, "price": 347}
 ```
 
-My ale máme další dvě knihy. Jak vložíme všechny knihy do jedné proměnné? Použijeme k tomu seznamy, které již známe! Seznam se všemi slovníky může vypadat takto:
+My ale máme další dvě knihy. Jak vložíme všechny knihy do jedné proměnné? Použijeme k tomu **seznamy**, které již známe! Seznam se všemi slovníky může vypadat takto:
 
 ```py
 books = [
@@ -57,7 +61,7 @@ books = [
   {"title": "Zločinný steh", "sold": 2565, "price": 369, "year": 2019},
 ]
 ```
-Je to v podstatě běžná dvourozměrná tabulka, jakou můžeme vytvořit například v Excelu.
+Je to v podstatě běžná **dvourozměrná tabulka**, jakou můžeme vytvořit například v Excelu.
 
 Upravme nyní náš výpočet celkového počtu prodaných knih. Nyní pomocí cyklu `for` procházíme seznam, vrátíme se tedy zpět k jedné proměnné, kterou si pojmenujeme `item`. Do té cyklus nyní nebude ukládat číslo, ale slovník. Protože my chceme vědět počet prodaných kusů, z každého slovníku si načteme hodnotu uloženou pod klíčem `sold`.
 
@@ -77,7 +81,7 @@ for item in books:
 print(f"Celkové tržby jsou {sales} Kč.")
 ```
 
-A zkusme ještě jednu úpravu. Nakladatele zajímá, jaké jsou peněžní tržby za knihy vydané v roce 2019. U každé knihy tedy musíme zkontrolovat, zda vyšla v roce 2019, a pouze pokud je tato podmínka splněná, přičteme tržbu za knihu k proměnné `sales`.
+Zkusme ještě jednu úpravu. Nakladatele zajímá, jaké jsou peněžní tržby za knihy vydané v roce 2019. U každé knihy tedy musíme zkontrolovat, zda vyšla v roce 2019, a pouze pokud je tato podmínka splněná, přičteme tržbu za knihu k proměnné `sales`.
 
 ```py
 sales = 0
@@ -88,17 +92,17 @@ print(f"Celkové tržby za knihy prodané v roce 2019 jsou {sales} Kč.")
 ```
 
 [[[ excs Cvičení: Slovníky a cykly
-- ctenar
 - vysvedceni
+- ctenar
 ]]]
 
 [[[ excs Bonusy
 - spz
 ]]]
 
-## Čtení na doma
+## Čtení na doma - finanční vyrovnání
 
-Vraťme se nyní k našemu úplně prvnímu příkladu - finančnímu vyrovnání spolubydlících. Slovníky by nám zde mohla pomoci, protože nám pomůžou při tvorbě tabulky s celkovou útratou za jednotlivé spolubydlící.
+Vraťme se nyní k našemu úplně prvnímu příkladu - finančnímu vyrovnání spolubydlících. Slovníky by nám zde mohly pomoci, protože nám pomůžou při tvorbě tabulky s celkovou útratou za jednotlivé spolubydlící.
 
 Jeden nákup zapsaný do slovníku vypadá například takto:
 
@@ -156,3 +160,21 @@ print(f"Průměrná hodnota na osobu je {round(averageValue)} Kč.")
 [[[ excs Cvičení na doma
 - spolubydlici
 ]]]
+
+
+## Čtení na doma - funkce filter
+
+K výběru určitých hodnot ze slovníku můžeme použít i funkci `filter()`. Tato funkce je zpravidla používána s tzv. anonymní funkcí, tj. funkcí, která nemá žádné jméno. Je to z důvodu, že funkce je použita pouze na tomto místě a nepotřebujete tedy jméno, aby byla volána. Anonymním funkcím se často říká i *lambda* funkce, protože se k jejich definici používá klíčové slovo `lambda`.
+
+Níže je příklad, jak použít funkci `filter()` k výběru knih, které vyšly v roce 2019.
+
+```py
+books = [
+  {"title": "Zkus mě chytit", "sold": 4165, "price": 347, "year": 2018},
+  {"title": "Vrah zavolá v deset", "sold": 5681, "price": 299, "year": 2019},
+  {"title": "Zločinný steh", "sold": 2565, "price": 369, "year": 2019},
+]
+
+books_2019 = list(filter(lambda item: item["year"] == 2019, books))
+print(books_2019)
+```

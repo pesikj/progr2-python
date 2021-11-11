@@ -3,7 +3,7 @@ title: Čtenářský deník
 demand: 2
 ---
 
-Gustav je vášnivým čtenářem detektive z našeho nakladatelství a navíc si zapisuje knihy, které přečetl. Níže ve slovníku vidíme, jaké informace si eviduje - název knihy, počet stran a hodnocení od 0 do 10.
+Gustav je vášnivým čtenářem detektivek z našeho nakladatelství a navíc si zapisuje knihy, které přečetl. Níže ve slovníku vidíme, jaké informace si eviduje - název knihy, počet stran a hodnocení od 0 do 10.
 
 - Napiš program, který spočte celkový počet stran, které Gustav přečetl.
 - Připiš do programu výpočet počtu knih, kterým dal Gustav hodnocení alespoň 8.

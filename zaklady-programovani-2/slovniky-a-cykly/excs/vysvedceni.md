@@ -9,7 +9,7 @@ Uvažujme vysvědčení, které máme zapsané jako slovník.
 - Uprav program, aby vypsal všechny předměty, ve kterých získal student známku 1.
 
 ```py
-schoolReport = {
+school_report = {
   "Český jazyk": 1,
   "Anglický jazyk": 1,
   "Matematika": 1,

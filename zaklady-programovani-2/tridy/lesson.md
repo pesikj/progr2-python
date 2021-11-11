@@ -4,11 +4,11 @@ Objekty mají často reprezentovat nějaké entity v realitě. Pokud bychom nap�
 
 ## Objekty a třídy
 
-Na začátku si musíme vytvořit **třídu** (`class`). Vztah mezi třídou a objekty si můžeme představit na příkladu formulářů. Třída je prázdný formulář - obsahuje kolonky, které by měly být vyplněny. Objekt je pak vyplněný formulář, který už má v sobě nějaká konkrétní data. Podobně jako formulářů můžeme vyplnit více, může na základě jedné třídy vzniknout několik objektů. Objekty jsou vzájemně nezávislé, takže práce s jedním objektem neovlivňuje ostatní. Analogicky, pokud upravujeme jeden formulář, nijak tím neměníme ostatní.
+Na začátku si musíme vytvořit **třídu** (`class`). Vztah mezi třídou a objekty si můžeme představit na příkladu formulářů. Třída je prázdný formulář - obsahuje kolonky, které by měly být vyplněny. Objekt je pak vyplněný formulář, který už má v sobě nějaká konkrétní data. Podobně jako formulářů můžeme vyplnit více, může na základě jedné třídy vzniknout několik objektů. Objekty jsou vzájemně **nezávislé**, takže práce s jedním objektem neovlivňuje ostatní. Analogicky, pokud upravujeme jeden formulář, nijak tím neměníme ostatní.
 
 Třídy mají dvě důležité charakteristiky - mají **atributy** (v nich uchováváme hodnoty) a **metody** (vykonávají nějaké příkazy). Atributy jsou vlastně proměnné, pouze jsou navázané na konkrétní objekt. Funkce jsme poznali v předchozí kapitole, metody jsou pak funkce navázané na konkrétní objekt a pracují s jeho atributy.
 
-Popišme si konkrétně náš příklad software pro firmy. V něm můžeme mít například třídu `Zamestnanec`, který reprezentuje zaměstnance. Třída může mít jméno, pracovní pozici, oddělení, plat, zbývající dny dovolené atd. Zaměstnanec může mít i metody - například metodu na vybrání dovolené, vytištění výplatní pásky, výpočet věku atd.
+Popišme si konkrétně náš příklad software pro firmy. V něm můžeme mít například třídu `Zamestnanec`, který reprezentuje zaměstnance. Třída může mít jméno, pracovní pozici, oddělení, plat, zbývající dny dovolené atd. Zaměstnanec může mít i metody - například metodu na vybrání dovolené, vytištění výplatní pásky, výpočet věku atd. Název třídy bychom měli začínat vždy **velkým písmenem**.
 
 Před vytvářením objektů je třeba mít připravenou třídu, na základě které objekt vznikne. K tomu použijeme klíčové slovo `class`. Za něj přijde **název třídy** a opět **dvojtečka**. Pro začátek si vytvořme třídu jen s jednou metodou `vypis_informace`, která vypíše informace o zaměstnanci.
 
@@ -147,3 +147,36 @@ Tím jsme si ukázali, jak vytvořit třídu, objekty a jak s nimi pracovat.
 [[[ excs Bonusy
 - zkusebka
 ]]]
+
+# Čtení na doma - datové třídy
+
+Obsah metody `__init__()` je příklad `boilerplate code`. Název se odkazuje na kovové štítky, které jsou umístěny na bojlerech. V programování to znamená kód, který se často opakuje bez nějakých velkých změn.
+
+V Pythonu ve verzi 3.7 přibyly datové třídy (`dataclass`), které si obsah metody vytvoří samy. Do datové třídy pouze napíšeme seznam jejích atributů spolu s jejich typy hodnot. Můžeme přidat i výchozí hodnotu, jak je vidět u atributu `pocet_dni_dovolene`
+
+```py
+from dataclasses import dataclass
+
+@dataclass
+class Zamestnanec:
+  jmeno: str
+  pozice: str
+  pocet_dni_dovolene: int = 25
+
+  def cerpani_dovolene(self, days):
+    if self.pocet_dni_dovolene >= days:
+      self.pocet_dni_dovolene -= days
+      return f"Užij si to."
+    else:
+      return f"Bohužel už máš nárok jen na {self.pocet_dni_dovolene} dní."
+
+  def vypis_informace(self):
+    return f"{self.jmeno} pracuje na pozici {self.pozice}."
+    
+frantisek = Zamestnanec("František Novák", "konstruktér")
+print(frantisek.cerpani_dovolene(5))
+print(frantisek.cerpani_dovolene(15))
+print(frantisek.cerpani_dovolene(10))
+```
+
+Více o datových třídách najdeš v [v dokumentaci](https://docs.python.org/3/library/dataclasses.html).
