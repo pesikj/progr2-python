@@ -85,8 +85,8 @@ Náš kód už bychom mohli spustit, ale nemohli bychom pořádně otestovat, ž
 
 ```py
 class Manazer(Zamestnanec):
-  def pridej_podrizeneho(self, newSubordinate):
-    self.podrizeni.append(newSubordinate)
+  def pridej_podrizeneho(self, novy_podrizeny):
+    self.podrizeni.append(novy_podrizeny)
 
   def vypis_podrizene(self):
     podrizeni = ""
@@ -120,8 +120,8 @@ class Manazer(Zamestnanec):
   def __str__(self):
     return super().__str__() + f" Má {len(self.podrizeni)} podřízených."
 
-  def pridej_podrizeneho(self, newSubordinate):
-    self.podrizeni.append(newSubordinate)
+  def pridej_podrizeneho(self, novy_podrizeny):
+    self.podrizeni.append(novy_podrizeny)
 
   def vypis_podrizene(self):
     podrizeni = ""
