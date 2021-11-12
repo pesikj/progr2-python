@@ -39,7 +39,7 @@ for key, value in sales.items():
   print(f"Knihy", key, "bylo prodáno", value, "výtisků.")
   # Použití f-stringu
   print(f"Knihy {key} bylo prodáno {value} výtisků.")
-  totalSales += value
+  total_sales += value
 print(f"Celkem bylo prodáno {total_sales} výtisků.")
 ```
 
@@ -131,30 +131,30 @@ purchaseList = [
 Útraty jednotlivých spolubydlících si budeme ukládat do nového slovníku. Musíme si tedy nejprve vysvětlit, jak ověřit, jestli nějaká hodnota už ve slovníku je. Pokud spolubydlící v našem novém slovníku ještě částku nemá, vložíme tam hodnotu aktuálního nákupu. Pokud tam nějakou částku už má, přičteme k této částce hodnotu aktuálního nákupu.
 
 ```py
-sumPerPerson = {}
+sum_per_person = {}
 for item in purchaseList:
   person = item["person"]
   value = item["value"]
-  if person in sumPerPerson:
-    sumPerPerson[person] += value
+  if person in sum_per_person:
+    sum_per_person[person] += value
   else:
-    sumPerPerson[person] = value
+    sum_per_person[person] = value
 ```
 
 Vypíšeme si nyní útraty jednotlivých spolubydlících a spočteme celkovou útratu. K tomu můžeme využít cyklus `for`. Zde je pouze jeden malý rozdíl.
 
 ```py
-totalValue = 0
-for person, value in sumPerPerson.items():
-  totalValue += value
+total_value = 0
+for person, value in sum_per_person.items():
+  total_value += value
   print(f"{person} utratil(a) za společné nákupy {value} Kč.")
 ```
 
 Jako poslední krok zbývá určení průměrné hodnoty na osobu. Zde opět využijeme funkci `len`, která umí pracovat i se slovníky.
 
 ```py
-averageValue = totalValue / len(sumPerPerson)
-print(f"Průměrná hodnota na osobu je {round(averageValue)} Kč.")
+average_value = total_value / len(sum_per_person)
+print(f"Průměrná hodnota na osobu je {round(average_value)} Kč.")
 ```
 
 [[[ excs Cvičení na doma
