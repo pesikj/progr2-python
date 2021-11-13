@@ -60,7 +60,7 @@ Podívejme se nyní na základní formáty, jak zapisovat data. Pro nás nejzná
 | Pavla |      Máslo       |                50 |
 | Ondra |       Káva       |               300 |
 
-S tabulkami pracujeme v software Microsoft Excel (soubory mají příponu `.xlsx`), případně v alternativách jako Google Spreadsheet, Libre Office Calc atd. Python umí pracovat přímo se soubory XLSX, slouží k tomu modul ´openpylx´ (můžete ho stáhnout [zde](https://openpyxl.readthedocs.io/en/stable/)), případně s nimi lze pracovat i v `pandas`. Práce s nimi je ale poměrně složitá, proto budeme používat soubory CSV.
+S tabulkami pracujeme v software Microsoft Excel (soubory mají příponu `.xlsx`), případně v alternativách jako Google Spreadsheet, Libre Office Calc atd. Python umí pracovat přímo se soubory XLSX, slouží k tomu modul `openpyxl` (můžete ho stáhnout [zde](https://openpyxl.readthedocs.io/en/stable/)), případně s nimi lze pracovat i v `pandas`. Práce s nimi je ale poměrně složitá, proto budeme používat soubory CSV.
 
 Soubor CSV obsahuje data v textové podobě ve struktuře podobné tabulce. Jednotlivé buňky jsou odděleny **středníky** nebo **čárkami**. Většinou závisí na nastavení našeho systému.
 
