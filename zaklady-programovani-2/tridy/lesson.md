@@ -139,15 +139,6 @@ print(str(frantisek))
 Tím jsme si ukázali, jak vytvořit třídu, objekty a jak s nimi pracovat.
 
 
-[[[ excs Cvičení: Objekty a třídy
-- kniha
-- balik
-]]]
-
-[[[ excs Bonusy
-- zkusebka
-]]]
-
 ## Čtení na doma - datové třídy
 
 Obsah metody `__init__()` je příklad `boilerplate code`. Název se odkazuje na kovové štítky, které jsou umístěny na bojlerech. V programování to znamená kód, který se často opakuje bez nějakých velkých změn.
