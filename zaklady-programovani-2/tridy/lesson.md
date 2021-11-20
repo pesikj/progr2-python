@@ -141,7 +141,7 @@ Tím jsme si ukázali, jak vytvořit třídu, objekty a jak s nimi pracovat.
 
 [[[ excs Cvičení: Slovníky
 - balik
-- kniha
+- zkusebka
 ]]]
 
 ## Čtení na doma - datové třídy
