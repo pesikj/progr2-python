@@ -139,10 +139,9 @@ print(str(frantisek))
 Tím jsme si ukázali, jak vytvořit třídu, objekty a jak s nimi pracovat.
 
 
-[[[ excs Cvičení: Objekty a třídy
-- kniha
+[[[ excs Cvičení: Slovníky
+- balik
 ]]]
-
 
 ## Čtení na doma - datové třídy
 
