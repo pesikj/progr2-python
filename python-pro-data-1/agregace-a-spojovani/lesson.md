@@ -1,4 +1,4 @@
-V předchozí lekci jsme si ukázali, jak v `pandas` vytváříme DataFrame a jak z něj můžeme vybírat data pomocí různých způsobů dotazování. Nyní se posuneme o kus dále a ukážeme si, jak můžeme s `DataFrame` dělat složitější operace jako je filtrování chybějících hodnot, spojování a agregace.
+V předchozí lekci jsme si ukázali, jak v `pandas` vytváříme `DataFrame` a jak z něj můžeme vybírat data pomocí různých způsobů dotazování. Nyní se posuneme o kus dále a ukážeme si, jak můžeme s `DataFrame` dělat složitější operace jako je filtrování chybějících hodnot, spojování a agregace.
 
 ## Maturita
 
@@ -274,7 +274,7 @@ Poslední nepříjemností, na kterou se podíváme, je to, že sloupce `jmeno` 
 ```pycon
 novy_propojeny_df = novy_propojeny_df.rename(columns={'jméno_x': 'jméno', 'jméno_y': 'předs'})
 ```
-## Agragace
+## Agregace
 
 Z databází známe kromě UNION a JOIN také operaci GROUP BY. V Pandas ji provedeme tak, že pomocí metody `groupby` vyrobíme z `DataFrame` speciální objekt `DataFrameGroupBy`. Dejme tomu, že chceme grupovat podle sloupečku `mistnost`.
 
