@@ -68,7 +68,7 @@ class Category(models.Model):
 Jako druhý krok upravíme model `Course`, kterému přidáme nové pole `category`, které je typu `ForeignKey` (tj. cizí klíč). Poli nastavíme parametr `null` jako `True`, což znamená, že toto pole nemusí mít vyplněnou hodnotu. Cizí klíč je ve skutečnosti vazba na jiný model. Tato konkrétní vazba je typu 1:N, což znamená, že jeden kurz má přiřazenou jednu kategorii, ale jedna kategorie může mít více kurzů.
 
 ```python
-class Kurz(models.Model):
+class Course(models.Model):
   name = models.CharField(max_length=100)
   start = models.DateTimeField()
   end = models.DateTimeField()
