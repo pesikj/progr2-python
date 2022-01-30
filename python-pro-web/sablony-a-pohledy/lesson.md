@@ -82,7 +82,7 @@ Pokud bychom uvažovali složitější případ N:N (např. jako tagy u článk�
 Následně opět provedeme migraci, abychom model přidali do databáze.
 
 ```
-python manage.py makemigrations kurzy
+python manage.py makemigrations
 python manage.py migrate
 ```
 
