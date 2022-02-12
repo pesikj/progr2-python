@@ -8,8 +8,12 @@ url = "https://kodim.cz/czechitas/progr2-python/python-pro-data-1/vizualizace/ex
 r = requests.get(url, allow_redirects=True, verify=False)
 open('kostky.txt', 'wb').write(r.content)
 
+# Načtěte tato data do tabulky a zobrazte histogram hodů. Zvolte vhodné rozložení přihrádek a zodpovězte následující dotazy:
+# Jaká je nejčastější hodnota, která na dvou kostkách padne?
+# Je větší šance, že padne hodnota 12 než že padne hodnota 2?
 kostky = pandas.read_csv("kostky.txt", header=None)
 kostky.hist(bins=[2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
+# kostky.hist(bins=11)
 plt.show()
 
 url = "https://kodim.cz/czechitas/progr2-python/python-pro-data-1/vizualizace/excs/call-centrum/assets/callcentrum.txt"
@@ -17,14 +21,14 @@ r = requests.get(url, allow_redirects=True, verify=False)
 open('callcentrum.txt', 'wb').write(r.content)
 
 # 2
-callcentrum = pandas.read_csv("callcentrum.txt", header=None)
-callcentrum = callcentrum[0].str.split(':', expand=True).astype(int)
-callcentrum["seconds"] = callcentrum[0] * 60 + callcentrum[1]
+callcentrum = pandas.read_csv("callcentrum.txt")
+callcentrum = callcentrum["hodnota"].str.split(':', expand=True).astype(int)
+callcentrum["vteriny"] = callcentrum[0] * 60 + callcentrum[1]
 
-callcentrum["seconds"].hist()
+callcentrum["vteriny"].hist()
 plt.show()
 
-callcentrum["seconds"].plot(kind='box', whis=[0, 100])
+callcentrum["vteriny"].plot(kind='box', whis=[0, 100])
 plt.show()
 
 # 3
