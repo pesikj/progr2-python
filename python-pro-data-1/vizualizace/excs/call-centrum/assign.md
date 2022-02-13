@@ -14,6 +14,6 @@ import requests
 r = requests.get("https://kodim.cz/czechitas/progr2-python/python-pro-data-1/vizualizace/excs/call-centrum/assets/callcentrum.csv")
 open("callcentrum.csv", "wb").write(r.content)
 
-callcentrum = pandas.read_csv("callcentrum.csv", header=None)
+callcentrum = pandas.read_csv("callcentrum.csv")
 callcentrum = callcentrum["hodnota"].str.split(':', expand=True).astype(int)
 ```

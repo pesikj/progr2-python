@@ -199,7 +199,7 @@ Dále připojíme tabulku [predsedajici.csv](assets/predsedajici.csv), kde máme
 
 ```pycon
 r = requests.get("https://kodim.cz/czechitas/progr2-python/python-pro-data-1/agregace-a-spojovani/assets/predsedajici.csv")
-open("studenti.csv", "wb").write(r.content)
+open("predsedajici.csv", "wb").write(r.content)
 
 preds = pandas.read_csv('predsedajici.csv')
 ```
@@ -272,7 +272,7 @@ print(novy_propojeny_df.shape)
 Poslední nepříjemností, na kterou se podíváme, je to, že sloupce `jmeno` se automaticky přejmenovaly, aby neměly v tabulce stejný název. Zde můžeme použít metodu `rename`, abychom sloupečky přejmenovali na něco smysluplného.
 
 ```pycon
-novy_propojeny_df = novy_propojeny_df.rename(columns={'jméno_x': 'jméno', 'jméno_y': 'předs'})
+novy_propojeny_df = novy_propojeny_df.rename(columns={'jmeno_x': 'jmeno', 'jmeno_y': 'predseda'})
 ```
 ## Agregace
 
