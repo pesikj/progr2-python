@@ -31,20 +31,20 @@ Některé operace naopak dělat nemůžeme - například není možné sečíst 
 Často zapomínáme, že funkce `input()` nám vrací vždy řetězec, bez ohledu na to, jestli uživatel zadal text nebo číslo. Vyzkoušejte si následující příklad:
 
 ```py
-numberOfTickets = input("Kolik si přejete lístků? ")
-pricePerTicket = 345
-totalPrice = numberOfTickets * pricePerTicket
-print(totalPrice)
+number_of_tickets = input("Kolik si přejete lístků? ")
+price_per_ticket = 345
+total_price = number_of_tickets * price_per_ticket
+print(total_price)
 ```
 
 Python bere náš vstup jako řetězec a pokud jej násobíme číslem, udělá standardní operaci při násobení čísla a řetězce - 345krát zopakuje daný text. Následující program už bude fungovat tak, jak čekáme.
 
 ```py
-numberOfTickets = input("Kolik si přejete lístků? ")
-pricePerTicket = 345
-numberOfTickets = int(numberOfTickets)
-totalPrice = numberOfTickets * pricePerTicket
-print(totalPrice)
+number_of_tickets = input("Kolik si přejete lístků? ")
+price_per_ticket = 345
+number_of_tickets = int(number_of_tickets)
+total_price = number_of_tickets * price_per_ticket
+print(total_price)
 ```
 
 **Námět:** Zkus spojit funkce `input` a `int` do jedné, tj. napiš obě funkce do jednoho řádku. Tím program zkrátíš a zpřehledníš.
@@ -56,17 +56,17 @@ Pokud má náš program dát uživateli nějaký výstup, často v něm musíme 
 
 ```py
 play = "Každý má svou pravdu"
-numberOfTickets = int(input("Kolik si přejete lístků? "))
-pricePerTicket = 345
-totalPrice = pricePerTicket * numberOfTickets
+number_of_tickets = int(input("Kolik si přejete lístků? "))
+price_per_ticket = 345
+total_price = price_per_ticket * number_of_tickets
 
-print("Cena " + str(numberOfTickets) + " lístků na hru " + play + " je celkem " + str(totalPrice) + " Kč.")
+print("Cena " + str(number_of_tickets) + " lístků na hru " + play + " je celkem " + str(total_price) + " Kč.")
 ```
 
 Relativně novou vlastností Pythonu je možnost využívání f-stringů. Důležité je před uvozovky vložit písmeno `f`. Poté můžeme vkládat do složených závorek přímo názvy proměnných, nemusíme tedy používat znaménka `+`. Navíc za nás Python automaticky obstará i převod čísel na `string`, není tedy třeba používat funkci `str()`.
 
 ```py
-print(f"Cena {numberOfTickets} lístků na hru {play} je celkem {totalPrice} Kč.")
+print(f"Cena {number_of_tickets} lístků na hru {play} je celkem {total_price} Kč.")
 ```
 
 ## Podmínky
@@ -76,14 +76,15 @@ Naše programy se často musejí *rozhodovat* a některé bloky kódu se spoušt
 Uvažujme například kino, které dává slevu 10 % při nákupu lístků za celkovou cenu více než 500 Kč. Pokud tedy zákazník zakoupí větší množství lístků, dostaneme informaci o získané slevě. Každý zákazník pak získá informaci o celkvé ceně, protože tento blok již není odsazený.
 
 ```py
-numberOfTickets = int(input("Kolik si přejete lístků? "))
-pricePerTicket = 190
-totalPrice = numberOfTickets * pricePerTicket
-if totalPrice >= 500:
+number_of_tickets = int(input("Kolik si přejete lístků? "))
+price_per_ticket = 190
+total_price = number_of_tickets * price_per_ticket
+if total_price >= 500:
   discount = 0.1
-  totalPrice = totalPrice * (1 - discount)
+  total_price = total_price * (1 - discount)
   print(f"Získáváte slevu {discount * 100} %")
-print(f"Celková cena nákupu je {totalPrice} Kč.")
+
+print(f"Celková cena nákupu je {total_price} Kč.")
 ```
 
 **Námět:** Zkus přidat zaokrouhlení ceny na celé koruny.
@@ -97,13 +98,13 @@ Na konci řádku s podmínkou musíme zapsat dvojtečku (`:`). Poté Visual Stud
 Pokud si přejeme spustit nějaký blok kódu v případě, že podmínka není splněná, použijeme klíčové slovo `else`.
 
 ```py
-itemsInStock = 5
-numberOfItems = int(input("Kolik si přejete koupit kusů zboží? "))
+items_in_stock = 5
+number_of_items = int(input("Kolik si přejete koupit kusů zboží? "))
 
-if numberOfItems <= itemsInStock:
+if number_of_items <= items_in_stock:
   print("Položky byly vloženy do košíku.")
 else:
-  print(f"Bohužel máme na skladě posledních {itemsInStock} kusů.")
+  print(f"Bohužel máme na skladě posledních {items_in_stock} kusů.")
 ```
 
 Podmínek můžeme mít i několik za sebou.
@@ -130,21 +131,21 @@ print(f"Známka z testu je {mark}.")
 Poslední možností jsou vnořené podmínky, tj. podmínky uvnitř podmínek. Uvažujme například mládeži nepřístupný film. Není-li zájemce o film plnoletý, je mu vypsán text o nepřístupnosti. Pouze plnoletý zákazník je tázán na počet lístků a při nákupu většího množství lístků může opět získat slevu. Tentokrát máme dvě možné slevy - 10 % při nákupu nad 500 Kč a 25 % při nákupu nad 1000 Kč.
 
 ```py
-pricePerTicket = 190
+price_per_ticket = 190
 age = int(input("Jaký je váš věk? "))
 if age >= 18:
-  numberOfTickets = int(input("Kolik si přejete lístků? "))
-  totalPrice = numberOfTickets * pricePerTicket
-  if totalPrice >= 1000:
+  number_of_tickets = int(input("Kolik si přejete lístků? "))
+  total_price = number_of_tickets * price_per_ticket
+  if total_price >= 1000:
     discount = 0.25
     print(f"Získáváte slevu {discount * 100} %")
-  elif totalPrice >= 500:
+  elif total_price >= 500:
     discount = 0.1
     print(f"Získáváte slevu {discount * 100} %")
   else:
     discount = 0
-  totalPrice *=  (1 - discount)
-  print(f"Celková cena nákupu je {round(totalPrice)} Kč.")
+  total_price *=  (1 - discount)
+  print(f"Celková cena nákupu je {round(total_price)} Kč.")
 else:
   print("Tento film bohužel není mládeži přístupný.")
 ```
@@ -164,14 +165,14 @@ Sekvence jsou hodnoty, které v sobě obsahují jiné hodnoty. Zatím jsme pozna
 Ukážeme si například, jak z rodného čísla zjistit datum narození.
 
 ```py
-birthNumber = input("Zadejte rodné číslo: ")
-yearOfBirth = birthNumber[0] + birthNumber[1]
-yearOfBirth = int(yearOfBirth)
-if yearOfBirth > 20:
-  yearOfBirth = 1900 + yearOfBirth
+id_number = input("Zadejte rodné číslo: ")
+year_of_birth = id_number[0] + id_number[1]
+year_of_birth = int(year_of_birth)
+if year_of_birth > 20:
+  year_of_birth = 1900 + year_of_birth
 else:
-  yearOfBirth = 2000 + yearOfBirth
-print(f"Uživatel(ka) se narodil(a) v roce {yearOfBirth}.")
+  year_of_birth = 2000 + year_of_birth
+print(f"Uživatel(ka) se narodil(a) v roce {year_of_birth}.")
 ```
 
 **Námět:** Doplň do programu určení pohlaví na základě rodného čísla a vypiš ho. Zkus určit měsíc narození obecně pro obě pohlaví pomocí zbytku po celočíselném dělení (operátor `%`).
@@ -181,15 +182,15 @@ print(f"Uživatel(ka) se narodil(a) v roce {yearOfBirth}.")
 Seznamy zapisujeme do hranatých závorek. Do seznamu můžeme vložit libovolný datový typ, jaký už známe. Začněme například s řetězci.
 
 ```py
-guestList = ["Jirka", "Klára", "Natálie"]
+guest_list = ["Jirka", "Klára", "Natálie"]
 ```
 
 Chceme-li přidat jednu položku do seznamu, použijeme funkce `append`.
 
 ```py
-newGuest = input("Zadej jméno dalšího hosta: ")
-guestList.append(newGuest)
-print(guestList)
+new_guest = input("Zadej jméno dalšího hosta: ")
+guest_list.append(new_guest)
+print(guest_list)
 ```
 
 **Námět:** Vypiš uživateli informaci o počtu hostů v seznamu. Můžeš použít funkci `len`.
@@ -197,8 +198,8 @@ print(guestList)
 Chceme-li si ověřit, zda je nějaká hodnota v seznamu, můžeme použít operátor in.
 
 ```py
-incomingPerson = input("Zadej jméno příchozího hosta: ")
-if incomingPerson in guestList:
+incoming_person = input("Zadej jméno příchozího hosta: ")
+if incoming_person in guest_list:
   print("Buď vítán(a)!")
 else:
   print("Bohužel nejsi na seznamu.")
@@ -207,14 +208,14 @@ else:
 Sekvence v sobě mohou obsahovat i jiné sekvence. Je to podobné, jako polička na knihy. Ta obsahuje několik knih, každá kniha má několik kapitol, každá kapitola se skládá ze spousty slov a písmen. Níže máš příklad seznamu uvnitř seznamu, který obsahuje jména a známky studentů v nějakém předmětu.
 
 ```py
-schoolMarks = [
+school_marks = [
   ["Jiří", 1, 4, 3, 2],
   ["Natálie", 2, 3, 4],
   ["Klára", 3, 2, 4, 1, 3]
 ]
 
-print(f"První student(ka) v seznamu je {schoolMarks[0][0]}.")
-print(f"Její/jeho poslední známka je {schoolMarks[0][-1]}.")
+print(f"První student(ka) v seznamu je {school_marks[0][0]}.")
+print(f"Její/jeho poslední známka je {school_marks[0][-1]}.")
 ```
 
 **Námět:** Vypiš počet známek nějakého studenta/studentky. Pozor, ať do počtu nezapočítáváš jméno osoby.
@@ -226,7 +227,7 @@ Poslední kapitolou, kterou si zopakujeme, jsou cykly. Cykly jsou způsob, jak p
 Ideální je využití cyklů spolu s kolekcemi. Pro každý prvek kolekce provedeme nějakou činnost. Uvažujme například vysvědčení studenta základní školy.
 
 ```py
-schoolReport = [
+school_report = [
   ["Český jazyk", 1],
   ["Anglický jazyk", 1],
   ["Matematika", 1],
@@ -243,19 +244,19 @@ schoolReport = [
 Nejprve si zkusme vypočítat průměrnou známku studenta na vysvědčení.
 
 ```py
-sumOfMarks = 0
-for mark in schoolReport:
-  sumOfMarks += mark[1]
-average = round(sumOfMarks/len(schoolReport), 2)
+sum_of_marks = 0
+for mark in school_report:
+  sum_of_marks += mark[1]
+average = round(sum_of_marks/len(school_report), 2)
 print(f"Průměrná známka studenta je {average}.")
 ```
 
 Dále můžeme například vypsat všechny předměty, které jsou pro studenta problematické, tj. ty, ze kterých má známku horší než trojku.
 
 ```py
-problematicSubjects = []
+problematic_subjects = []
 print("Pro studenta jsou problematické tyto předměty:")
-for mark in schoolReport:
+for mark in school_report:
   if mark[1] > 3:
     print(mark[0])
 ```
