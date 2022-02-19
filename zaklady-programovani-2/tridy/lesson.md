@@ -48,7 +48,7 @@ print(klara.vypis_informace())
 
 ## Metoda `__init__`
 
-Z výpis vidíme, že se informace zaměstnanců nijak nepomíchaly a každý zaměstnanec má uložené své vlastní údaje.
+Z výpisů vidíme, že se informace zaměstnanců nijak nepomíchaly a každý zaměstnanec má uložené své vlastní údaje.
 
 Tento postup ale působí lehce chaoticky. V naší analogii s formuláři to vypadá, že si každý může do formuláře vyplnit, co chce. Abychom měli objekt více pod kontrolou, můžeme využít metodu `__init__` (název zapisujeme včetně podtržítek). Tato metoda je speciální v tom, že je **zavolána při vytvoření objektu**. Můžeme jí (jako jakékoli jiné metodě) přiřadit parametry a zajistit, aby hodnoty parametrů uložila jako atributy objektu.
 
