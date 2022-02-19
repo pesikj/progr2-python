@@ -37,11 +37,12 @@ Pojďme ještě upravit výpis informace pomocí metody `__str__()`. U třídy `
 
 ```py
 class Manazer(Zamestnanec):
-  def __str__(self):
-    return super().__str__() + f" Má {self.pocet_podrizenych} podřízených."
   def __init__(self, jmeno, pozice, pocet_podrizenych):
     super().__init__(jmeno, pozice)
     self.pocet_podrizenych = pocet_podrizenych
+
+  def __str__(self):
+    return super().__str__() + f" Má {self.pocet_podrizenych} podřízených."
 ```
 
 Vyzkoušíme znovu dvojici příkazů, kterou jsme zkoušeli předtím.
@@ -60,32 +61,38 @@ Marian Přísný pracuje na pozici vedoucí konstrukčního oddělení. Má 5 po
 ```py
 
 class Zamestnanec:
+  def __init__(self, jmeno, pozice):
+    self.jmeno = jmeno
+    self.pozice = pozice
+    self.dovolena = 160
+
+  def __str__(self):
+    return f"{self.jmeno} a pracuje na pozici {self.pozice}"
+  
   def cerpej_dovolenou(self, pocet_hodin):
     if self.dovolena >= pocet_hodin:
       self.dovolena -= pocet_hodin
       return "Užij si to."
     else:
       return f"Máš nárok je na {self.dovolena} hodin."
-  def __str__(self):
-    return f"Zam. {self.jmeno} a pracuje na poz. {self.pozice}"
-  def __init__(self, jmeno, pozice):
-    self.jmeno = jmeno
-    self.pozice = pozice
-    self.dovolena = 160
+  
+
 class Manazer(Zamestnanec):
+  def __init__(self, jmeno, pozice, pocet_podrizenych):
+    super().__init__(jmeno, pozice)
+    self.pocet_podrizenych = pocet_podrizenych
+
   def __str__(self):
     text = super().__str__()
     text = text + f" Počet podřízených: {self.pocet_podrizenych}"
     return text
-  def __init__(self, jmeno, pozice, pocet_podrizenych):
-    super().__init__(jmeno, pozice)
-    self.pocet_podrizenych = pocet_podrizenych
+
+
 frantisek = Zamestnanec("František Novák", "konstruktér")
 klara = Zamestnanec("Klára Nová", "konstruktérka")
 marian = Manazer("Marian Přísný", "vedoucí", 2)
+
 print(marian)
-
-
 ```
 
 [[[ excs Cvičení: Dědičnost
@@ -102,20 +109,24 @@ Upravme tedy třídu `Manazer` tím, že namísto atributu `pocet_podrizenych` v
 
 ```py
 class Manazer(Zamestnanec):
-  def pridej_podrizeneho(self, podrizeny):
-    self.podrizeni.append(podrizeny)
-
   def __init__(self, jmeno, pozice):
     self.jmeno = jmeno
     self.pozice = pozice
     self.pocet_dni_dovolene = 25
     self.podrizeni = []
+
+  def pridej_podrizeneho(self, podrizeny):
+    self.podrizeni.append(podrizeny)
 ```
 
 Náš kód už bychom mohli spustit, ale nemohli bychom pořádně otestovat, že přidávání podřízených funguje. My je totiž ukládáme, ale zatím nemáme funkci pro jejich vypsání. Přidáme tedy funkci `vypis_podrizene`, která vrátí informaci o podřízených manažera.
 
 ```py
 class Manazer(Zamestnanec):
+  def __init__(self, jmeno, pozice):
+    super().__init__(jmeno, pozice)
+    self.podrizeni = []
+
   def pridej_podrizeneho(self, novy_podrizeny):
     self.podrizeni.append(novy_podrizeny)
 
@@ -124,10 +135,6 @@ class Manazer(Zamestnanec):
     for item in self.podrizeni:
       podrizeni += item.jmeno + ", "
     return podrizeni
-  
-  def __init__(self, jmeno, pozice):
-    super().__init__(jmeno, pozice)
-    self.podrizeni = []
 ```
 
 Nyní můžeme vše vyzkoušet. Vedoucímu, který je uložený v proměnné `boss`, přiřadíme dva podřízené. Následně si zkusíme proměnné vypsat.
@@ -148,6 +155,10 @@ Jako poslední můžeme vrátit metodu `__str__()`, která zjistí počet podř�
 
 ```py
 class Manazer(Zamestnanec):
+  def __init__(self, jmeno, pozice):
+    super().__init__(jmeno, pozice)
+    self.podrizeni = []
+
   def __str__(self):
     return super().__str__() + f" Má {len(self.podrizeni)} podřízených."
 
@@ -159,10 +170,6 @@ class Manazer(Zamestnanec):
     for item in self.podrizeni:
       podrizeni += item.jmeno + ", "
     return podrizeni
-  
-  def __init__(self, jmeno, pozice):
-    super().__init__(jmeno, pozice)
-    self.podrizeni = []
 ```
 
 [[[ excs Kombinace seznamu a objektů
@@ -196,25 +203,27 @@ Dále přidáme třídy `Ctverec` a `Obdelnik`, které budou dědit od třídy `
 
 ```python
 class Ctverec(Obrazec):
+  def __init__(self, a):
+    self.a = a
+
   def vypocti_obvod(self):
     return 4 * self.a
   
   def vypocti_obsah(self):
     return self.a * self.a
 
-  def __init__(self, a):
-    self.a = a
 
 class Obdelnik(Obrazec):
+  def __init__(self, a, b):
+    self.a = a
+    self.b = b
+
   def vypocti_obvod(self):
     return 2 * (self.a + self.b)
   
   def vypocti_obsah(self):
     return self.a * self.b
 
-  def __init__(self, a, b):
-    self.a = a
-    self.b = b
 
 maly_ctverec = Ctverec(10)
 velky_obdelnik = Obdelnik(20, 25)
@@ -257,6 +266,9 @@ class Obrazec(ABC):
     pass
 
 class Ctverec(Obrazec):
+  def __init__(self, a):
+    self.a = a
+
   @property
   def obvod(self):
     return 4 * self.a
@@ -265,10 +277,12 @@ class Ctverec(Obrazec):
   def obsah(self):
     return self.a * self.a
 
-  def __init__(self, a):
-    self.a = a
 
 class Obdelnik(Obrazec):
+  def __init__(self, a, b):
+    self.a = a
+    self.b = b
+
   @property
   def obvod(self):
     return 2 (self.a + self.b)
@@ -277,9 +291,6 @@ class Obdelnik(Obrazec):
   def obsah(self):
     return self.a * self.b
 
-  def __init__(self, a, b):
-    self.a = a
-    self.b = b
 
 maly_ctverec = Ctverec(10)
 velky_obdelnik = Obdelnik(20, 25)
