@@ -48,17 +48,18 @@ print(klara.vypis_informace())
 
 ## Metoda `__init__`
 
-Z výpis vidíme, že se informace zaměstnanců nijak nepomíchaly a každý zaměstnanec má uložené své vlastní údaje.
+Z výpisů vidíme, že se informace zaměstnanců nijak nepomíchaly a každý zaměstnanec má uložené své vlastní údaje.
 
 Tento postup ale působí lehce chaoticky. V naší analogii s formuláři to vypadá, že si každý může do formuláře vyplnit, co chce. Abychom měli objekt více pod kontrolou, můžeme využít metodu `__init__` (název zapisujeme včetně podtržítek). Tato metoda je speciální v tom, že je **zavolána při vytvoření objektu**. Můžeme jí (jako jakékoli jiné metodě) přiřadit parametry a zajistit, aby hodnoty parametrů uložila jako atributy objektu.
 
 ```py
 class Zamestnanec:
-  def vypis_informace(self):
-    return f"{self.jmeno} pracuje na pozici {self.pozice}."
   def __init__(self, jmeno, pozice):
     self.jmeno = jmeno
     self.pozice = pozice
+
+  def vypis_informace(self):
+    return f"{self.jmeno} pracuje na pozici {self.pozice}."
 ```
 
 Tento styl je standardní - parametry jsou pojmenované stejně jako atributy objektu, kam se jejich hodnoty ukládají. Mezi `self.jmeno` a `jmeno` je důležitý rozdíl:
@@ -80,20 +81,20 @@ Nyní již víme, že každý objekt třídy `Zamestnanec` má vyplněné jméno
 
 ```py
 class Zamestnanec:
+  def __init__(self, jmeno, pozice):
+    self.jmeno = jmeno
+    self.pozice = pozice
+    self.pocet_dni_dovolene = 25
+
+  def vypis_informace(self):
+    return f"{self.jmeno} pracuje na pozici {self.pozice}."
+
   def cerpani_dovolene(self, days):
     if self.pocet_dni_dovolene >= days:
       self.pocet_dni_dovolene -= days
       return f"Užij si to."
     else:
       return f"Bohužel už máš nárok jen na {self.pocet_dni_dovolene} dní."
-  
-  def vypis_informace(self):
-    return f"{self.jmeno} pracuje na pozici {self.pozice}."
-    
-  def __init__(self, jmeno, pozice):
-    self.jmeno = jmeno
-    self.pozice = pozice
-    self.pocet_dni_dovolene = 25
 ```
 
 Nyní se podívejme, jak budou vyřizovány Františkovy žádosti o dovolenou.
@@ -126,11 +127,12 @@ Převod na řetězec zařídíme tím, že třídě přidáme metodu `__str__`. 
 
 ```python
 class Zamestnanec:
-  def __str__(self):
-    return f"{self.jmeno} pracuje na pozici {self.pozice}."
   def __init__(self, jmeno, pozice):
     self.jmeno = jmeno
     self.pozice = pozice
+
+  def __str__(self):
+    return f"{self.jmeno} pracuje na pozici {self.pozice}."
 
 frantisek = Zamestnanec("František Novák", "konstruktér")
 print(str(frantisek))
@@ -139,7 +141,7 @@ print(str(frantisek))
 Tím jsme si ukázali, jak vytvořit třídu, objekty a jak s nimi pracovat.
 
 
-[[[ excs Cvičení: Slovníky
+[[[ excs Cvičení: Třídy
 - balik
 - kniha
 - zkusebka
@@ -147,7 +149,7 @@ Tím jsme si ukázali, jak vytvořit třídu, objekty a jak s nimi pracovat.
 
 ## Čtení na doma - datové třídy
 
-Obsah metody `__init__()` je příklad `boilerplate code`. Název se odkazuje na kovové štítky, které jsou umístěny na bojlerech. V programování to znamená kód, který se často opakuje bez nějakých velkých změn.
+Obsah metody `__init__` je příklad `boilerplate code`. Název se odkazuje na kovové štítky, které jsou umístěny na bojlerech. V programování to znamená kód, který se často opakuje bez nějakých velkých změn.
 
 V Pythonu ve verzi 3.7 přibyly datové třídy (`dataclass`), které si obsah metody vytvoří samy. Do datové třídy pouze napíšeme seznam jejích atributů spolu s jejich typy hodnot. Můžeme přidat i výchozí hodnotu, jak je vidět u atributu `pocet_dni_dovolene`
 
