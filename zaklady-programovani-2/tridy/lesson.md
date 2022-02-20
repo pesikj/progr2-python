@@ -141,7 +141,7 @@ print(str(frantisek))
 Tím jsme si ukázali, jak vytvořit třídu, objekty a jak s nimi pracovat.
 
 
-[[[ excs Cvičení: Slovníky
+[[[ excs Cvičení: Třídy
 - balik
 - kniha
 - zkusebka
