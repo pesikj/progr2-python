@@ -15,7 +15,7 @@ class Manazer(Zamestnanec):
     self.pocet_dni_dovolene = 25
 ```
 
-Zkusíme si nyní vytvořit objekt, který bude reprezentovat manažera. U objektu vyzkoušíme, zda u ní funguje metoda `__str__()`. Tuto metodu jsme pro třídu `Manazer` neprogramovali, měla by být *zděděná* od třídy `Zamestnanec`.
+Zkusíme si nyní vytvořit objekt, který bude reprezentovat manažera. U objektu vyzkoušíme, zda u ní funguje metoda `__str__`. Tuto metodu jsme pro třídu `Manazer` neprogramovali, měla by být *zděděná* od třídy `Zamestnanec`.
 
 ```py
 boss = Manazer("Marian Přísný", "vedoucí konstrukčního oddělení")
@@ -33,7 +33,7 @@ class Manazer(Zamestnanec):
     self.pocet_podrizenych = pocet_podrizenych
 ```
 
-Pojďme ještě upravit výpis informace pomocí metody `__str__()`. U třídy `Manazer` budeme chtít do výpisu přidat informaci o tom, kolik má manažer podřízených. Opět můžeme pomocí funkce `super()` zavolat metodu `__str__()` z mateřské třídy `Zamestnanec` a připojit k ní větu o počtu podřízených.
+Pojďme ještě upravit výpis informace pomocí metody `__str__`. U třídy `Manazer` budeme chtít do výpisu přidat informaci o tom, kolik má manažer podřízených. Opět můžeme pomocí funkce `super()` zavolat metodu `__str__` z mateřské třídy `Zamestnanec` a připojit k ní větu o počtu podřízených.
 
 ```py
 class Manazer(Zamestnanec):
@@ -151,7 +151,7 @@ print(boss.vypis_podrizene())
 
 Náš program tedy vytvoří tři objekty - dva zaměstnance a jednoho manažera. Manažerovi jsme přiřadili zaměstnance jako podřízené. A vidíme, že naše akce proběhla správně, protože tito dva zaměstnanci se objevili ve výpisu podřízených.
 
-Jako poslední můžeme vrátit metodu `__str__()`, která zjistí počet podřízených z délky seznamu `podrizeni`.
+Jako poslední můžeme vrátit metodu `__str__`, která zjistí počet podřízených z délky seznamu `podrizeni`.
 
 ```py
 class Manazer(Zamestnanec):
