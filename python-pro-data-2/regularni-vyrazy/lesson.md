@@ -311,4 +311,6 @@ print(anonymniZapis)
 - email-s-teckou
 - zaznamy
 - adresy-stranek
+- ip-adresy
+- prace-s-kodem.md
 ]]]
