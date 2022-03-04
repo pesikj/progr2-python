@@ -312,5 +312,5 @@ print(anonymniZapis)
 - zaznamy
 - adresy-stranek
 - ip-adresy
-- prace-s-kodem.md
+- prace-s-kodem
 ]]]
