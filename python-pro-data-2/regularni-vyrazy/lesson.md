@@ -176,6 +176,7 @@ Podívejme se nyní na pár příkladů. Níže máme tabulku s kurzy Czechitas.
 - registracni-znacka
 - telefonni-cislo
 - ministerstva
+- napravy
 - slavny-soude
 - ave-caesar
 ]]]
