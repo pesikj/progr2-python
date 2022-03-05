@@ -29,7 +29,7 @@ Ministerstvo[\w ]*
 ```
 ## Slavný soude
 ```
-\d{2} [A-Z] \d{1,4}/\d{4}
+\d{2} [A-Z]{1,3} \d{1,4}/\d{4}
 ```
 ## Ave, Caesar!
 ```
