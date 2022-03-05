@@ -7,7 +7,7 @@ demand: 2
 * Najdi knihu, jejíž ISBN (`isbn`) je 038551641X.
 * Napiš dotaz na knihy, jejichž autorem (`authors`) je spisovatel "Robert Graves". Načti všechny knihy dle daného dotazu a vypiš informace o nich na obrazovku.
 * U knih, které napsal Robert Graves, vypiš pouze název a hodnocení (`average_rating`).
-* Vypiš informace o všech knihách, které získaly více než 2 milion hodnocení (`ratings_count`).
+* Vypiš informace o všech knihách, které získaly více než 2 milion hodnocení (`ratings_count`). Kolik takových knih je?
 * Vypiš informace o všech knihách, které alespoň 40 000 textových hodnocení (`text_reviews_count`) a současně mají průměrné hodnocení větší než 4.
 * Vypiš informace o všech knihách, jejímiž autory jsou Jared Diamond nebo Joseph A. Tainter (zde využij operátor `in`).
 
