@@ -1,4 +1,4 @@
-Pokud ještě nemáš nainstalovaný Python a Visual Studio Code na svém počítači, postupuj nejprve podle [tohoto návodu](http://kodim.cz/kurzy/uvod-do-progr/jazyky-nastroje/).
+Pokud ještě nemáš nainstalovaný Python a Visual Studio Code na svém počítači, postupuj nejprve podle [tohoto návodu](https://kodim.cz/czechitas/uvod-do-progr/priprava/jazyky-nastroje).
 
 V rámci workshopu budeme používat modul pro práci s databází MongoDB `pymongo`. `pymongo` je externí modul, který musíme nejdříve nainstalovat. Pro instalaci si otevřeme terminál a napíšeme následující příkazy (pozor, znak dolaru `$` neopisuj):
 
