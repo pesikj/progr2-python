@@ -174,3 +174,18 @@ dotaz = { "publication_date":  "7/1/1982" }
 vysledek = kolekce.find_one(dotaz)
 print(vysledek)
 ```
+
+## Změna názvu nakladatele
+
+Uvažuj, že se nakladatel (`publisher`) "Ballantine Books" přejmenoval na "Johnnie Walker Books". Uprav hodnotu pole `publisher` u všech knih, které mají jako nakladatele "Ballantine Books".
+
+```
+dotaz = { "publisher": "Ballantine Books" }
+noveHodnoty = { "$set": { "publisher": "Johnnie Walker Books" } }
+kolekce.update_many(dotaz, noveHodnoty)
+
+dotaz = { "publisher": "Johnnie Walker Books" }
+vysledek = kolekce.find(dotaz)
+for dokument in vysledek:
+    print(dokument)
+```
