@@ -9,7 +9,7 @@ Hlavní motivace, proč používat databáze, jsou:
 - řeší přístup více uživatelů najednou,
 - zajišťují zabezpečení dat.
 
-## Ukládání dat
+## Čtení dat
 
 NoSQL databáze jsou poměrně široký pojem a zahrnuje různé typy databází, které používají jiný způsob ukládání dat než tabulky provázané relacemi. Konkrétně existuje několik typů NoSQL databází.
 
@@ -46,6 +46,85 @@ nakup = {
     "Hmotnost": 7.8
 }
 ```
+
+Ve světě relačních databází používáme ke čtení příkaz `SELECT`. Většinou nechceme načíst všechna data v tabulce (kolekci), ale pouze jejich část. Nyní si ukážeme, jak nastavit, jaká data chceme získat.
+
+### Test načtení dat
+
+K načtení jednoho záznamu použijeme funkci `find_one()`. Pokud funkci nedáme žádný parametr, vrátí nám první záznam z kolekce.
+
+```py
+vysledek = kolekce.find_one()
+print(vysledek)
+```
+
+Funkce vrátí první vložený záznam, který obsahuje námi zadané hodnoty a vygenerované ID.
+
+### Sestavení dotazu
+
+Na MongoDB a modulu `pymongo` je sympatické, že pro dotazy používáme slovník. Dotazy tedy píšeme stejně, jako když připravujeme data pro vložení. Zkusme třeba napsat dotaz na nákupy, které provedl Libor. Dotaz ve formě slovníku předáme funkce `find_one()`.
+
+```py
+dotaz = {"Jméno": "Libor"}
+vysledek = kolekce.find_one(dotaz)
+print(vysledek)
+```
+
+Většinou chceme vrátit všechny řádky, které odpovídají našemu dotazu. K tomu slouží funkce `find()`. Ta nám vrátí všechny dokumenty, které odpovídají našemu dotazu, jako seznam. Seznam poté můžeme projít pomocí cyklu.
+
+```py
+dotaz = {"Jméno": "Petr"}
+vysledek = kolekce.find(dotaz)
+for dokument in vysledek:
+    print(dokument)
+```
+
+Pokud chceme požadovaný dokument vybrat na základě více klíčů, jednoduše z těchto klíčů sestavíme slovník.
+
+```py
+dotaz = {"Jméno": "Petr", "Věc": "Toaletní papír"}
+vysledek = kolekce.find(dotaz)
+for dokument in vysledek:
+    print(dokument)
+```
+
+### Větší než, menší než...
+
+U číselných hodnot a dat chceme často formulovat dotaz obsahující nerovnost. Mohli bychom například chtít vypsat všechny nákupy v hodnotě větší než 100 Kč. MongoDB nepoužívá symboly `>` a `<`, ale jejich anglické zkratky. Například porovnání **větší než** zapisujeme jako `$gt`, což vychází z anglického "greater than". Dolar přidáváme, aby si MongoDB zkratku nespletlo s názvem sloupce. Kompletní přehled operátorů najdeš v tabulce níže.
+
+| Význam           | Zápis v Pythonu | Zápis v MongoDB |
+| ---------------- | :-------------: | :-------------: |
+| Větší než        |       `>`       |      `$gt`      |
+| Menší než        |       `<`       |      `$lt`      |
+| Větší nebo rovno |      `>=`       |     `$gte`      |
+| Menší nebo rovno |      `<=`       |     `$lte`      |
+
+Operátor a hodnotu, se kterou chceme porovnávat, píšeme jako slovník, kde operátor je klíč `{"$gt": 100}`. To pak vložíme do dalšího slovníku, kterým určíme, pro jaký sloupec naše podmínka platí `{"Částka v korunách": {"$gt": 100}}`. Celý zápis tedy vypadá takto:
+
+```py
+dotaz = {"Částka v korunách": {"$gt": 100}}
+vysledek = kolekce.find(dotaz)
+for dokument in vysledek:
+    print(dokument)
+```
+
+### Výběr hodnoty ze seznamu
+
+Někdy potřebujeme do jednoho dotazu vložit více možných hodnot pro jeden klíč. V MongoDB používáme operátor `in`. Operátor `in` známe i z Pythonu a jeho funkce je zde obdobná: ptáme se, jestli je hodnota klíče pro daný řádek přítomna v námi zadaném seznamu. Syntaxi najdeš na příkladu níže.
+
+```py
+dotaz = {"Jméno": {"$in": ["Libor", "Míša"]}}
+vysledek = kolekce.find(dotaz)
+for dokument in vysledek:
+    print(dokument)
+```
+
+[[[ excs Úkoly
+- hodnoceni-knih
+]]]
+
+
+## Ukládání dat
 
 ### Vložení jednoho záznamu
 
@@ -161,81 +240,6 @@ Více záznamů vložíme pomocí funkce `insert_many()`, které předáme náš
 - knihovna
 ]]]
 
-
-## Čtení dat
-
-Zatím jsme data pouze vkládali, nyní je zkusíme přečíst. Ve světě relačních databází používáme ke čtení příkaz `SELECT`. Většinou nechceme načíst všechna data v tabulce (kolekci), ale pouze jejich část. Nyní si ukážeme, jak nastavit, jaká data chceme získat.
-
-### Test načtení dat
-
-K načtení jednoho záznamu použijeme funkci `find_one()`. Pokud funkci nedáme žádný parametr, vrátí nám první záznam z kolekce.
-
-```py
-vysledek = kolekce.find_one()
-print(vysledek)
-```
-
-Funkce vrátí první vložený záznam, který obsahuje námi zadané hodnoty a vygenerované ID.
-
-### Sestavení dotazu
-
-Na MongoDB a modulu `pymongo` je sympatické, že pro dotazy používáme slovník. Dotazy tedy píšeme stejně, jako když připravujeme data pro vložení. Zkusme třeba napsat dotaz na nákupy, které provedl Libor. Dotaz ve formě slovníku předáme funkce `find_one()`.
-
-```py
-dotaz = {"Jméno": "Libor"}
-vysledek = kolekce.find_one(dotaz)
-print(vysledek)
-```
-
-Většinou chceme vrátit všechny řádky, které odpovídají našemu dotazu. K tomu slouží funkce `find()`. Ta nám vrátí všechny dokumenty, které odpovídají našemu dotazu, jako seznam. Seznam poté můžeme projít pomocí cyklu.
-
-```py
-dotaz = {"Jméno": "Petr"}
-vysledek = kolekce.find(dotaz)
-for dokument in vysledek:
-    print(dokument)
-```
-
-Pokud chceme požadovaný dokument vybrat na základě více klíčů, jednoduše z těchto klíčů sestavíme slovník.
-
-```py
-dotaz = {"Jméno": "Petr", "Věc": "Toaletní papír"}
-vysledek = kolekce.find(dotaz)
-for dokument in vysledek:
-    print(dokument)
-```
-
-### Větší než, menší než...
-
-U číselných hodnot a dat chceme často formulovat dotaz obsahující nerovnost. Mohli bychom například chtít vypsat všechny nákupy v hodnotě větší než 100 Kč. MongoDB nepoužívá symboly `>` a `<`, ale jejich anglické zkratky. Například porovnání **větší než** zapisujeme jako `$gt`, což vychází z anglického "greater than". Dolar přidáváme, aby si MongoDB zkratku nespletlo s názvem sloupce. Kompletní přehled operátorů najdeš v tabulce níže.
-
-| Význam           | Zápis v Pythonu | Zápis v MongoDB |
-| ---------------- | :-------------: | :-------------: |
-| Větší než        |       `>`       |      `$gt`      |
-| Menší než        |       `<`       |      `$lt`      |
-| Větší nebo rovno |      `>=`       |     `$gte`      |
-| Menší nebo rovno |      `<=`       |     `$lte`      |
-
-Operátor a hodnotu, se kterou chceme porovnávat, píšeme jako slovník, kde operátor je klíč `{"$gt": 100}`. To pak vložíme do dalšího slovníku, kterým určíme, pro jaký sloupec naše podmínka platí `{"Částka v korunách": {"$gt": 100}}`. Celý zápis tedy vypadá takto:
-
-```py
-dotaz = {"Částka v korunách": {"$gt": 100}}
-vysledek = kolekce.find(dotaz)
-for dokument in vysledek:
-    print(dokument)
-```
-
-### Čtení na doma: Výběr hodnoty ze seznamu
-
-Někdy potřebujeme do jednoho dotazu vložit více možných hodnot pro jeden klíč. V MongoDB používáme operátor `in`. Operátor `in` známe i z Pythonu a jeho funkce je zde obdobná: ptáme se, jestli je hodnota klíče pro daný řádek přítomna v námi zadaném seznamu. Syntaxi najdeš na příkladu níže.
-
-```py
-dotaz = {"Jméno": {"$in": ["Libor", "Míša"]}}
-vysledek = kolekce.find(dotaz)
-for dokument in vysledek:
-    print(dokument)
-```
-
 ## Úprava dat
 
 Často potřebujeme upravit již existující záznam. V jazyce SQL k tomu existuje příkaz `UPDATE`, MongoDB můžeme využít funkce `update_one()` nebo `update_many()`.
@@ -264,7 +268,5 @@ kolekce.update(dotaz, noveHodnoty)
 
 [[[ excs Úkoly
 - expres
-- hodnoceni-knih
 - oprava-chyby
-- vetsi-nez
 ]]]
