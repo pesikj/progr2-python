@@ -18,11 +18,5 @@ Druhá kniha:
 - Počet povídek: 8
 - Počet stran: 274
 
-Třetí kniha:
-
-- Název: Matyáš Sandorf (Nový hrabě Monte Christo)
-- Autor: Jules Verne
-- Počet stran: 442
-
 Přepiš informace do slovníků a tyto slovníky vlož do jednoho seznamu. Tento seznam pak vlož najednou do kolekce `knihy` funkcí `insert_many()`.
 

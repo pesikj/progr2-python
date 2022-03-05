@@ -65,3 +65,112 @@ vysledek = kolekce.find(dotaz)
 for dokument in vysledek:
     print(dokument)
 ```
+
+# Zápis dat
+
+## Každý má svou pravdu
+
+Uvažujme data o třech divadelních hrách, která jsou v následující tabulce.
+
+| Představení          | Délka v minutách | Premiéra   | Derniéra   |
+| -------------------- | ---------------: | ---------- | ---------- |
+| Modrovous            |               70 | 2018-12-15 |            |
+| Každý má svou pravdu |                  | 2020-02-08 |            |
+| Expres na západ      |              120 |            | 2019-11-13 |
+
+Splň následující úkoly.
+
+- Přepiš tato data to tří slovníků. Pokud nějaký sloupec nemá hodnotu, vynech ho.
+- Vlož jednotlivé slovníky postupně do své databáze do kolekce `hry`.
+- Nech si na obrazovku vypsat ID alespoň jednoho vloženého dokumentu.
+
+```
+kolekce = databaze["hry"]
+hra_1 = {
+    "Představení": "Modrovous",
+    "Délka v minutách": 70,
+    "Premiéra": "2018-12-15"
+}
+hra_2 = {
+    "Představení": "Každý má svou pravdu",
+    "Premiéra": "2020-02-08"
+}
+id = kolekce.insert_one(hra_1)
+print(id)
+kolekce.insert_one(hra_2)
+```
+
+## Knihovna
+
+Níže jsou informace o třech různých knihách.
+
+První kniha:
+
+- Název: Smrt bere jackpot
+- Autor: Vincent McEveety
+- Počet stran: 542
+
+Druhá kniha:
+
+- Název: Zaklínač I. - Poslední přání
+- Autor: Andrzej Sapkowski
+- Počet povídek: 8
+- Počet stran: 274
+
+Přepiš informace do slovníků a tyto slovníky vlož do jednoho seznamu. Tento seznam pak vlož najednou do kolekce `knihy` funkcí `insert_many()`.
+
+```
+kolekce = databaze["knihy"]
+
+knihy = [
+    {
+        "Název": "Smrt bere jackpot",
+        "Autor": "Vincent McEveety",
+        "Počet stran": 542
+    },
+    {
+        "Název": "Zaklínač I. - Poslední přání",
+        "Autor": "Andrzej Sapkowski",
+        "Počet povídek": 8,
+        "Počet stran": 274,
+    }
+]
+    
+kolekce.insert_many(knihy)
+```
+
+## Expres na západ
+
+* Načti z kolekce `hry` informace o hře Expres na západ, kterou jsi uložila v předchozím bloku cvičení.
+* Doplň k této hře datum premiéry 2015-11-10.
+* Ověř, že byla data správně uložena.
+
+```
+kolekce = databaze["hry"]
+
+dotaz = { "Představení": "Expres na západ" }
+noveHodnoty = { "$set": { "Premiéra": "2015-11-10" } }
+kolekce.update_one(dotaz, noveHodnoty)
+
+vysledek = kolekce.find_one(dotaz)
+print(vysledek)
+```
+
+## Oprava chyby
+
+U dat je často nutné kontrolovat jejich správnost. Například datum může být uvedeno v nesprávném formátu nebo může být zadaný den, který neexistuje. V kolekci je `goodreads` jedna kniha, která má jako datum vydání (`publication_date`) nastavenou podivnou hodnotu 6/31/1982, tedy 31. června 1986. Zjisti, o jakou knihu jde. Uprav hodnotu na "7/1/1982". Zkontroluj, že se hodnota správně uložila.
+
+```
+kolekce = databaze["goodreads"]
+
+dotaz = { "publication_date": "6/31/1982" }
+noveHodnoty = { "$set": { "publication_date": "7/1/1982" } }
+kolekce.update_one(dotaz, noveHodnoty)
+
+vysledek = kolekce.find_one(dotaz)
+print(vysledek)
+
+dotaz = { "publication_date":  "7/1/1982" }
+vysledek = kolekce.find_one(dotaz)
+print(vysledek)
+```
