@@ -182,16 +182,9 @@ nakup = {
     "Hmotnost": 7.8
 }
 
-uzivatelskeJmeno = ""
-heslo = ""
-adresa = ""
-databaze = ""
-adresaServeru = ""
-myclient = pymongo.MongoClient(f"mongodb://{uzivatelskeJmeno}:{heslo}@{adresa}:27017/{adresaServeru}")
-databaze = myclient[""]
 kolekce = databaze["nakupy"]
 id = kolekce.insert_one(nakup)
-print(id)
+print(id.inserted_id)
 ```
 
 Ke vložení dokumentu do kolekce použijeme funkce `insert_one()`, která slouží ke vložení jednoho dokumentu. Funkce vrací hodnotu `id`, což je jednoznačný identifikátor našeho záznamu. Samotné ID nám toho moc neřekne, jeho hodnota je například `5fda6f16e6aeccec0ef40b87`.
@@ -242,6 +235,31 @@ kolekce.insert_many(zbyvajici_nakupy)
 ```
 
 Více záznamů vložíme pomocí funkce `insert_many()`, které předáme náš seznam.
+
+### Mazání záznamů
+
+Často se nám stane, že potřebujeme nějaký záznam smazat, například když omylem vložíme stejnou informaci do kolekce dvakrát. K mazání záznamů můžeme používat funkce `delete_one()` a `delete_many()`. Při volání funkcí vždy použijeme dotaz, který určí, který záznam (nebo které záznamy) chceme smazat.
+
+Funkce `delete_one()` smaže jeden záznam, i kdyby konkrétnímu dotazu vyhovovalo záznamů více. Pokud žádný vyhovující záznam nenajde, neprovede žádnou operaci. Následující kód tedy způsobí, že Petr bude mít v kolekci o jeden nákup méně.
+
+```py
+dotaz = {"Jméno": "Petr"}
+kolekce.delete_one(dotaz)
+```
+
+Následující kód je radikálnější a smaže všechny Petrovy nákupy.
+
+```py
+dotaz = {"Jméno": "Petr"}
+kolekce.delete_many(dotaz)
+```
+
+Pokud chceme smazat jeden konkrétní záznam, často to provádíme na základě jeho jednoznačného identifikátoru `_id`, které každému záznamu přiřadí databáze automaticky. Známe-li `_id`, můžeme ho vložit do dotazu stejně jako jakýkoli jiný klíč a použít ke smazání záznamu. Protože každý dokument má své unikátní `_id`, je logické využít funkci `delete_one()`.
+
+```py
+dotaz = {"_id": "62248970d034741099592733"}
+kolekce.delete_one(dotaz)
+```
 
 [[[ excs Cvičení
 - pravda
