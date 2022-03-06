@@ -151,10 +151,12 @@ print(kolekce.count_documents(dotaz))
 
 Uvažujme nyní, že bychom chtěli vyhledat nákupy, které provedl Petr *nebo* šlo o nákupy toaletního papíru. V tomto případě nemůžeme vložit oba klíče a hodnoty vedle sebe, protože bychom získali nákupy, které provedl Petr *a současně* šlo o nákupy toaletního papíru. K získání dokumentů, které vyhovují alespoň jedné z podmínek, můžeme použít operátor `$or`. Klíče a hodnoty, které hledáme, pak vložíme do seznamu.
 
+```py
 dotaz = {"$or": [{"Jméno": "Petr"}, {"Věc": "Pečící papír"}]}
 vysledek = kolekce.find(dotaz)
 for dokument in vysledek:
     print(dokument)
+```
 
 [[[ excs Úkoly
 - hodnoceni-knih
