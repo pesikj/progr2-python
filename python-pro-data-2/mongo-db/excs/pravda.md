@@ -9,6 +9,7 @@ Uvažujme data o dvou divadelních hrách, která jsou v následující tabulce.
 | -------------------- | ---------------: | ---------- | ---------- |
 | Modrovous            |               70 | 2018-12-15 |            |
 | Každý má svou pravdu |                  | 2020-02-08 |            |
+| Expres na západ      |              120 |            | 2019-11-13 |
 
 Splň následující úkoly.
 
