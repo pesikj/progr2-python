@@ -238,7 +238,7 @@ kolekce.insert_many(zbyvajici_nakupy)
 
 Více záznamů vložíme pomocí funkce `insert_many()`, které předáme náš seznam.
 
-### Mazání záznamů
+## Mazání dat
 
 Často se nám stane, že potřebujeme nějaký záznam smazat, například když omylem vložíme stejnou informaci do kolekce dvakrát. K mazání záznamů můžeme používat funkce `delete_one()` a `delete_many()`. Při volání funkcí vždy použijeme dotaz, který určí, který záznam (nebo které záznamy) chceme smazat.
 
