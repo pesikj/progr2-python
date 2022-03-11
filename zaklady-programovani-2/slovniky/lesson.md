@@ -31,7 +31,7 @@ title = item['title']
 Zkusme si třeba vypsat informace o položce.
 
 ```py
-print(f"Vybraný předmět je", item["title"], "a stojí", item["price"], "Kč.")
+print("Vybraný předmět je", item["title"], "a stojí", item["price"], "Kč.")
 ```
 
 Je možné též použít formátované řetězce (f-stringy).
