@@ -1,27 +1,25 @@
 """
-Uvažuj, že navrhuješ software pro zásilkovou společnost.
+Zkus pro našeho nakladatele vytvořit software s využitím tříd a objektů. 
+Vytvoř tedy třídu Book, která reprezentuje knihu. Každá kniha bude mít atributy title, 
+pages a price. Hodnoty nastav ve funkci __init__.
 
-Vytvoř třídu Package, která bude mít tři atributy - address, weightInKilos a delivered. 
-První dva atributy nastav pomocí parametrů funkce __init__. Parametr delivered nastav na začátku jako False.
-
-Připoj ke třídě funkci deliver, která změní hodnotu parametru delivered na True.
-
-Přidej funkci getInfo, která vypíše adresu, hmotnost a informaci o tom, zda byl balík již doručen.
-
-Zkus si vytvořit nějaké objekty ze třídy Package a ověř, že vše funguje.
+Přidej knize funkci getInfo, která vypíše informace o knize v nějakém pěkném formátu.
+Občas se stane, že se kniha moc neprodává a knihkupec se snaží nalákat kupující slevou. 
+Přidej funkci discount, která bude mít jeden parametr - velikost slevy v procentech. 
+Funkce sníží cenu knihy o dané procento.
 """
 
+class Book:
+  def discount(self, discountInPercents):
+    self.price *= (1 - discountInPercents/100)
+  def __str__(self):
+    print(f"Název knihy: {self.title}. Počet stran: {self.pages}. Cena: {self.price}")
+  def __init__(self, title, pages, price):
+    self.title = title
+    self.pages = pages
+    self.price = price
 
-class Package:
-  def deliver(self):
-    self.delivered = True
-  def getInfo(self):
-    if self.delivered:
-      deliveredText = "Balík byl doručen"
-    else:
-      deliveredText = "Balík zatím nebyl doručen."
-    print(f"Balík je na adresu {self.address} a váží {self.weightInKilos}. {deliveredText}")
-  def __init__(self, address, weightInKilos):
-    self.address = address
-    self.weightInKilos = weightInKilos
-    self.delivered = False
+kniha = Book("Noc, která mě zabila", 590, 499)
+kniha.getInfo()
+kniha.discount(10)
+kniha.getInfo()
