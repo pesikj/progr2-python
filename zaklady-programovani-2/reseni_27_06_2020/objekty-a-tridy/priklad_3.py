@@ -8,20 +8,20 @@ Uprav funkci getInfo. Pokud je zaměstnanec ve zkušební době,
 přidej k jeho/jejímu výpisu text Je ve zkušební době.
 """
 
-class Employee:
-  def takeHoliday(self, days):
-    if self.remainingHolidayDays >= days:
-      self.remainingHolidayDays -= days
-      return f"Poté zbývá {self.remainingHolidayDays} dní."
-    else:
-      return f"Bohužel už máš nárok jen na {self.remainingHolidayDays} dní."
-  def getInfo(self):
-    vypis = f"{self.name} pracuje na pozici {self.position}. "
-    if self.probation:
-      vypis += "Je ve zkušební době."
-    return vypis
-  def __init__(self, name, position, probation):
-    self.name = name
-    self.position = position
-    self.probation = probation
-    self.remainingHolidayDays = 25
+class Zamestnanec:
+    def __str__(self):
+        text = f"Jméno: {self.jmeno}, pozice: {self.pozice}."
+        if zkusebni_doba:
+          text = text + " Je ve zkušební době."
+        return text
+    def cerpani_dovolene(self, dny):
+        if self.pocet_dni_dovolene >= dny:
+            self.pocet_dni_dovolene = self.pocet_dni_dovolene - dny
+            return "Dovolená schválena"
+        else:
+            return f"Neschváleno, zbývá pouze {self.pocet_dni_dovolene} dní."
+    def __init__(self, jmeno, pozice, zkusebni_doba):
+        self.jmeno = jmeno
+        self.pozice = pozice
+        self.zkusebni_doba = zkusebni_doba
+        self.pocet_dni_dovolene = 25
