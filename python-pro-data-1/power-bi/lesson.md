@@ -84,3 +84,56 @@ Tím je naše první vizualizace hotová.
 
 ![prumerna_znamka_graf](assets/prumerna_znamka_graf.png)
 
+### Tvorba vizualizací v Pythonu
+
+S pomocí Pythonu můžeme přidat i vizualizace, které budou interaktivně využívat data z dotazů. Pro vytvoření vizualizace klikneme v nabídce vizualizací na možnost `Python visual`. Následně v menu vpravo vybereme sloupce, se kterými chceme pracovat. Pro vybrané sloupce je vhodné nastavit agregaci jako průměr, abychom nemuseli agregaci řešit v kódu.
+
+![graf_agregace](assets/graf_agregace.png)
+
+Následně se nám zpřístupní editor kódu.
+
+![python_visual_editor](assets/python_visual_editor.png)
+
+Kód pro generování vizualizace můžeme zapisovat přímo do editoru nebo můžeme kliknout na ikonu šipky, která otevře kód ve vybraném vývojovém prostředí. Výběr vývojového prostředí můžeme provést na stejném místě, jako jsme nastavovali cestu k instalaci Pythonu. Jako výchozí je nastavená aplikace, ve které operační systém automaticky otevírá soubory s příponou `.py`. Pokud si chceme vývojové prostředí konkrétně vybrat, vybereme možnost `Other` a nastavíme cestu k vybranému vývojovému prostředí. Power BI si nejlépe rozumí s Visual Studio Code, cestu k němu může být například `C:\Users\jirka\AppData\Local\Programs\Microsoft VS Code\Code.exe`. Pro tvorbu složitějších vizualizací se vývojové prostředí vyplatí použít.
+
+![vyber_ide](assets/vyber_ide.png)
+
+Po kliknutí na ikonu se šipkou se otevře vybrané vývojové prostředí se skriptem, do kterého jsou již vložené nějaké řádky. Power BI vygeneruje adresář, do kterého vloží data v souboru CSV a skript s předpřipraveným kódem.
+
+![vs_code_editor](assets/vs_code_editor.png)
+
+Nový kód bychom měli vkládat pod řádek komentáře `# Paste or type your script code here:`. Začneme tím, že vygenerujeme prostor pro rázdný graf. Samotný graf se bude skládat z obrázku (`figure`) a souřadnicové osy (`axis`). Obrázek zastřešuje všechny elementy, které jsou součástí grafu. V některých případech se může obrázek skládat z více grafů (`subplot`). V případě maturit bychom například pomocí grafů mohli srovnat průměrné známky z daných předmětů v různých třídách nebo školách.
+
+Pro vytvoření obrázku a souřadnicových os použijeme funkci `subplots()`. Pokud nezadáme žádné parametry, `matplotlib` vytvoří jednu souřadnicovou osu, tj. počítá pouze s jedním grafem na obrázek.
+
+```py
+import matplotlib.pyplot as plt
+fig, ax = plt.subplots()
+```
+
+Oproti Power BI vizualizaci musíme provést agregaci dat. Na tu využijeme již hotový kód. Protože výsledek chceme vidět seřazený dle velikosti, použijeme na agregovanou tabulku metodu `sort_values()`.
+
+```py
+dataset = dataset.sort_values("Známka")
+```
+
+Dále použijeme metodu `bar` pro vytvoření sloupcového grafu. Aby byl graf vložen do námi připravené souřadnicové osy, jako parametr `ax` nastavíme `ax`. Modul `matplotlib` automaticky vytváří legendu, ta je ale v našem případě zbytečná, parametr `legend` nastavíme na `None`. Parametry `x` a `y` nastavují sloupce, které jsou použity na popisy a výšky řádků. V našem případě by `matplotlib` nastavil parametry automaticky, do budoucna se nám ale změna sloupců může hodit.
+
+```py
+dataset.plot.bar(ax=ax, legend=None, x="Předmět", y="Známka")
+ax.set_title("Průměrná známka podle předmětu")
+```
+
+Popis osy bychom nastavili pomocí metod `set_xlabel()` a `set_ylabel()`. V našem případě nechceme popis osy *x* žádný, zavoláme tedy metodu `set_xlabel()` s parametrem `None`.
+
+```py
+ax.set_xlabel(None)
+```
+
+Abychom ušetřili místo pod grafem, otočíme popisy jednotlivých hodnot o 45 stupňů. I tak se ale pod graf všechny názvy předmětů nevejdou, proto mírně zvětšíme prostor pod grafem pomocí metody `subplots_adjust()`.
+
+```py
+plt.xticks(rotation=45, ha='right')
+fig.subplots_adjust(bottom=0.25)
+plt.show()
+```
