@@ -23,6 +23,9 @@ lessons:
   - title: Vizualizace
     link: vizualizace
     brief: Jeden graf řekne více než tisíc tabulek, ukážeme si tedy, jak grafy vytvářet
+  - title: Python a Power BI
+    link: power-bi
+    brief: Vyzkoušíme si využití Pythonu v interaktivním prostředí pro vizualizace Power BI.
   - title: Další zdroje
     link: dalsi-zdroje
     brief: Na konci si rozebereme, jak můžeš pokračovat dál ve svém vzdělávání.
