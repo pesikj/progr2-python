@@ -4,19 +4,19 @@ import requests
 
 # 1
 
-url = "https://kodim.cz/czechitas/progr2-python/python-pro-data-1/vizualizace/excs/hazeni-kostkami/assets/kostky.txt"
+url = "https://kodim.cz/czechitas/progr2-python/python-pro-data-1/vizualizace/excs/hazeni-kostkami/assets/kostky.csv"
 r = requests.get(url, allow_redirects=True, verify=False)
 open('kostky.txt', 'wb').write(r.content)
 
 # Načtěte tato data do tabulky a zobrazte histogram hodů. Zvolte vhodné rozložení přihrádek a zodpovězte následující dotazy:
 # Jaká je nejčastější hodnota, která na dvou kostkách padne?
 # Je větší šance, že padne hodnota 12 než že padne hodnota 2?
-kostky = pandas.read_csv("kostky.txt", header=None)
+kostky = pandas.read_csv("kostky.txt")
 kostky.hist(bins=[2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
 # kostky.hist(bins=11)
 plt.show()
 
-url = "https://kodim.cz/czechitas/progr2-python/python-pro-data-1/vizualizace/excs/call-centrum/assets/callcentrum.txt"
+url = "https://kodim.cz/czechitas/progr2-python/python-pro-data-1/vizualizace/excs/call-centrum/assets/callcentrum.csv"
 r = requests.get(url, allow_redirects=True, verify=False)
 open('callcentrum.txt', 'wb').write(r.content)
 
