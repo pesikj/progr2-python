@@ -8,7 +8,7 @@ studenti = pandas.concat([studenti1, studenti2], ignore_index=True)
 print(studenti)
 
 # Pokud studentovi chybí ročník, znamená to, že již nestuduje. Pokud mu chybí číslo skupiny, znamená to, že jde o dálkového studenta. Kolik studentů v datovém setu již nestuduje a kolik jsou dálkoví studenti?
-print(studenti[studenti["rocnik"].isnull()].shape)
+print(studenti[studenti["ročník"].isnull()].shape)
 print(studenti[studenti["kruh"].isnull()].shape)
 
 # Vyčisti data od studentů, kteří nestudují nebo studují jen dálkově. Nadále budeme pracovat pouze s prezenčními studenty.
