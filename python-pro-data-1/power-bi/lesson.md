@@ -1,4 +1,14 @@
-[Power BI](https://powerbi.microsoft.com/en-au/) je nástroj vyvinutý společností [Microsoft](https://www.microsoft.com/cs-cz/), který slouží k tvorbě vizualizací a reportů. V Power BI si uživatel může tvořit interaktivní grafy a reporty podobně snadno, jako grafy v Excelu.
+[Power BI](https://powerbi.microsoft.com/en-au/) je nástroj vyvinutý společností [Microsoft](https://www.microsoft.com/cs-cz/), který slouží k tvorbě vizualizací a reportů. V Power BI si uživatel může tvořit interaktivní grafy a reporty podobně snadno, jako grafy v Excelu. Snahou vývojářů Power BI je zpřístupnit a umožnit analýzu dat široké skupině uživatelů, včetně uživatelů bez výrazných technických znalostí.
+
+Power BI se skládá ze dvou částí - Power Query na práci s daty (čtení dat z různých zdrojů, jejich propojování, transformace atd.) a prostředí pro tvorbu reportů a vizualizací na základě dat z Power Query.
+
+Z rodiny Power BI produktů je klíčový desktopový klient Power BI Desktop, který je pro platformu Microsoft Windows k dispozici zdarma. Doporučeným způsobem instalace je instalace prostřednictvím Windows Store, lze však použít i klasický způsob pomocí instalačního souboru. Dále existuje klient pro mobilní telefony a několik služeb, které umožňují spouštět Power BI reporty ve webovém prohlížeči a např. je sdílet napříč organizací. V případě desktopového klienta je možné report sdílet klasicky jako soubor (např. e-mailem).
+
+## Python v Power BI
+
+Před začátkem práce je vhodné zkontrolovat nastavení Power BI a propojení s jazykem Python.
+
+### Nastavení
 
 Power BI obvykle zvládne najít instalaci Pythonu. Před začátkem práce je ale dobré si nastavení zkontrolovat. Otevřeme si menu `File -> Options and Settings -> Options` a v dialogovém okně zvolíme `Python Scripting`. V menu `Detected Python home directories` je přehled instalací Pythonu, které byly Power BI detekovány.
 
@@ -8,7 +18,14 @@ Pokud není požadovaná instalace na výběr, můžeme zvolit možnost `Other` 
 
 ![vyber_instalaci_other](assets/vyber_instalaci_other.png)
 
-## Zdroj dat
+### Příklady užití
+
+Přestože má Power BI k dispozici nástroj Power Query, v řadě případů může být vhodné využít skripty v jazyce Python. Typické příklady využití jsou následující:
+
+- Máme k dispozici již hotový program nebo skript na zpracování dat a chceme výsledky zobrazit v prostředí Power BI.
+- Operace, kterou chceme provést, je v prostředí Power BI příliš komplikovaná (nebo nemožná), zatímco v modulu `pandas` jednoduchá.
+
+## Zdroje dat
 
 Power BI obsahuje samostatnou komponentu Power Query, která slouží pro zpracování dat. Prvním krokem je jejich načtení a získání. Power BI podporuje řadu různých zdrojů:
 
@@ -137,3 +154,9 @@ plt.xticks(rotation=45, ha='right')
 fig.subplots_adjust(bottom=0.25)
 plt.show()
 ```
+
+## Přidání dalších transformací
+
+Existují transformace, které jsou v Power BI velmi komplikované. Příkladem je vložení hodnot z předcházejícího nebo následujícího řádku do aktuálního. V jazyce SQL se k tomu účelu používají různé zápisy (často funkce `lead()` a `lag()`), v modulu `pandas` se používá metoda `shift()`.
+
+Uvažujme například, že máme k dispozici zařízení, které zapisuje informace o začátku a konci výpadku televizního signálu do textového souboru. Abychom zjistili délku výpadku, potřebujeme porovnat čas začátku a konce výpadku. Protože jsou časy událostí na různých řádcích, využijeme modul `pandas` a metodu `shift()`.
