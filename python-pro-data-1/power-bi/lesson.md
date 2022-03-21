@@ -4,7 +4,9 @@ Power BI se skládá ze dvou částí - Power Query na práci s daty (čtení da
 
 Z rodiny Power BI produktů je klíčový desktopový klient Power BI Desktop, který je pro platformu Microsoft Windows k dispozici zdarma. Doporučeným způsobem instalace je instalace prostřednictvím Windows Store, lze však použít i klasický způsob pomocí instalačního souboru. Dále existuje klient pro mobilní telefony a několik služeb, které umožňují spouštět Power BI reporty ve webovém prohlížeči a např. je sdílet napříč organizací. V případě desktopového klienta je možné report sdílet klasicky jako soubor (např. e-mailem).
 
-## Python v Power BI
+Galirie veřejně dostupných reportů v Power BI je k dispozici [zde](https://community.powerbi.com/t5/Galleries/ct-p/PBI_Comm_Galleries).
+
+## Power BI a Python
 
 Před začátkem práce je vhodné zkontrolovat nastavení Power BI a propojení s jazykem Python.
 
@@ -24,6 +26,7 @@ Přestože má Power BI k dispozici nástroj Power Query, v řadě případů m�
 
 - Máme k dispozici již hotový program nebo skript na zpracování dat a chceme výsledky zobrazit v prostředí Power BI.
 - Operace, kterou chceme provést, je v prostředí Power BI příliš komplikovaná (nebo nemožná), zatímco v modulu `pandas` jednoduchá.
+- Distribuce modelů a reportů uživatelům bez hlubších technických znalostí.
 
 ## Zdroje dat
 
@@ -154,6 +157,21 @@ plt.xticks(rotation=45, ha='right')
 fig.subplots_adjust(bottom=0.25)
 plt.show()
 ```
+
+### Přidání filtrů
+
+V Power BI jsou reporty interaktivní a jednotlivé prvky na sebe reagují. Typickým příkladem interaktivního prvku je Slicer, který můžeme využít jako filtr. Po vložení prvku `Slicer` do reportu je do pole `Field` nutné přetáhnout pole, podle kterého chceme filtrovat. Můžeme vyzkoušet například pole `Den`.
+
+![filtr](assets/filtr.png)
+
+Následně po výběru jednoho či více dní se překreslí vizualizace a zobrazí pouze data z vybraných dní.
+
+![filtr](assets/aktivni_filtr.png)
+
+Standardní chování komponenty je umožnit výběr více prvků s využitím klávesy `Ctrl`. Chování komponenty můžeme upravit v pravém panelu po kliknutí na volbu `Format visual`.
+
+![filtr](assets/nastaveni_sliceru.png)
+
 
 ## Přidání dalších transformací
 
