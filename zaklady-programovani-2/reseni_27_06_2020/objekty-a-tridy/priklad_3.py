@@ -11,7 +11,7 @@ přidej k jeho/jejímu výpisu text Je ve zkušební době.
 class Zamestnanec:
     def __str__(self):
         text = f"Jméno: {self.jmeno}, pozice: {self.pozice}."
-        if zkusebni_doba:
+        if self.zkusebni_doba:
           text = text + " Je ve zkušební době."
         return text
     def cerpani_dovolene(self, dny):
