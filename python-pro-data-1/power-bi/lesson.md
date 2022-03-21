@@ -138,9 +138,8 @@ agregace budou vypočteny automaticky při tvorbě vizualizací. Proto klikneme 
 ![editace_skriptu](assets/editace_skriptu.png){.fig}
 
 [[[ excs Cvičení
-- legenda
-- donut
-- funnel
+- registrace
+- registrace-2
 ]]]
 
 ## Vizualizace
