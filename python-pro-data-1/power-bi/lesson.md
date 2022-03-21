@@ -199,3 +199,6 @@ for i in range(df_actual_pivot.shape[0]):
 plt.show()
 ```
 
+[[[ excs Cvičení
+- krabicovy-graf
+]]]
