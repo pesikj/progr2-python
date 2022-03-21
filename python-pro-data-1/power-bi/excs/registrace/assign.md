@@ -12,8 +12,8 @@ Sloupec `date_time` převeď na typ `Date/Time`. Dále vytvoř kopii tohoto slou
 1. Vývojář aplikace tě informoval, že kvůli bugu se některé e-maily v registraci objevují opakovaně. Podívej se, zda při transformaci dat existuje nějaká možnost, jak tyto duplicity odstranit.
 1. Pomocí vhodné vizualizace prezentuj, který marketingový kanál přinesl nejvíce uživatelů.
 
-![user_registration](assets/hierarchy_vs_value.png)
+![user_registration](assets/hierarchy_vs_value.png){.fig}
 
 Na svůj report přidej nástroj `Slicer`. Nejedná se o klasickou vizualizaci, ale filtr, který umožňuje uživateli vybrat, která data jsou v reportu zobrazena. Nastav `Slicer` tak, aby si uživatel s jeho pomocí mohl zobrazit data pouze pro vybranou věkovou skupinu. Vyzkoušej si různá nastavení filtru např. tak, aby uživatel nemusel používat klávesu `Ctrl` při výběru většího množství možností.
 
-![filtr](assets/nastaveni_sliceru.png)
+![filtr](assets/nastaveni_sliceru.png){.fig}
