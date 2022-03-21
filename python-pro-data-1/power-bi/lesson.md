@@ -38,18 +38,71 @@ Power BI obsahuje samostatnou komponentu Power Query, která slouží pro zpraco
 - on-line služby (např. Sharepoint, Dynamics 365, Google Analytics, GitHub, Twilio a řada dalších),
 - ostatní (např. webové stránky či skripty v jazycích Python a R).
 
-Python tedy můžeme využít jako zdroj dat a do Power BI můžeme například přenést již hotové skripty. Zkusme tedy nejprve přenést do Power BI výsledky maturity, se kterými jsme již pracovali. 
+### Nahrání dat z CSV souboru
+
+Začněme tím, že si zkusíme do Power BI nahrát soubor [sales_actual.csv](https://raw.githubusercontent.com/pesikj/progr2-python/master/python-pro-data-1/power-bi/assets/sales_actual.csv), který zobrazuje data o uzavřených kontraktech fiktivní firmy. U každého kontraktu vidíme datum uzavření, název zákazníka, stát, ve kterém sídlí, hodnotu kontraktu a odpovědného obchodníka.
+
+Soubor nejprve uložíme na disk, poté v menu Get Data vybereme Text/CSV a najdeme soubor `sales_actual.csv`. Následně klikneme na tlačítko `Load`.
+
+![nahrani_zdroje_sales_actual](assets/nahrani_zdroje_sales_actual.png)
+
+Zkusme si hned vytvořit vizualizaci, aniž bychom data nějak upravovali. Můžeme například vytvořit graf hodnoty uzavřených kontraktů po jednotlivých měsících. K zobrazení dat stačí přetáhnout soupec `contract_value` do sloupce `Values` a sloupec `Date` do pole `Axis`.
+
+Všimněte si dvou ikonek:
+- Ikonka sumy u sloupce `contract_value` značí, že sloupec je číselná hodnota a přetáhneme-li ho do pole `Values`, automaticky dojde k součtu hodnot.
+- Ikonka kalendáře u sloupce `Date` znamená, že byl sloupec identifikován jako sloupec obsahující datum. Automaticky je u něj vytvořena hierarchie s úrovněmi Rok -> Čtvrtletí -> Měsíc -> Den.
+
+![sales_actual_plot](assets/vizualizace_pole.png)
+
+Jedním ze základních úkonů v Business Intelligence a v datové analýze obecně je přesun mezi úrovněmi detailu. Začneme tedy na nejvyšší úrovni a postupně se přesunujeme na vyšší úroveň detailu. Můžeme si vybrat přesun na vyšší detail pro jeden prvek (např. pro jedno čtvrtletí) nebo pro všechny. K tomu slouží ikony jedné a dvou šipek vpravo nahoře u grafu.
+
+![sales_actual_plot](assets/sales_actual_plot.png)
+
+U tržeb často sledujeme kumulativní součet, který sleduje nárůst tržeb firmy v průběhu jednoho roku. K tomu můžeme využít tzv. `Quick Measure`, které umožňují přidat nové sloupce s výpočty. Můžeme přidat výpočet typu `Running Total`, což je anglický ekvivalent pro kumulativní součet. Pro vytvoření klikneme na ikonu tří teček u názvu tabulky a vybereme `New Quick Measure`.
+
+![new_quick_measure](assets/new_quick_measure.png)
+
+Kumulativní součty musíme vytvářet pro konkrétní prvky hiearchie. Nejčastěji sledujeme tržby po měsících, vybereme tedy pole `date - Month`.
+
+![running_total](assets/running_total.png)
+
+Tím získáme graf kumulativního součtu tržeb za jednotlivé dny.
+
+Graf je dále vhodné vylepšit přidáním popisků os a titulku. Obojí lze provést v menu `Format visual`.
+
+![format_visual](assets/format_visual.png)
+
+[[[ excs Cvičení
+- legenda
+- donut
+- funnel
+]]]
+
+### Transformace dat
+
+Uzavřené smlouvy jsou často porovnávány s plánem, aby bylo jasné, zda hodnoty uzavřených kontraktů dosahují požadové úrovně. Tabulka s plánem tržeb je ke stažení [zde](https://raw.githubusercontent.com/pesikj/progr2-python/master/python-pro-data-1/power-bi/assets/sales_plan.csv). Tabulku importujeme do Power BI jako nový zdroj.
+
+Tabulka má data zadaná jako čísla - číslo roku a číslo měsíce. Abychom mohli zobrazit obě hodnoty v jednom grafu, potřebujeme k tabulce s plánem přidat datum. Kliknutím na tlačítko `Transform data` otevřeme nástroj Power Query, kde můžeme provádět různé transformace dat.
+
+Nejprve přidáme sloupec s datem. Klikneme na tlačítko `Custom column`, které nám umožní přidat sloupec s hodnotou spočítanou na základě ostatních funkcí. V počítaných sloupcích můžeme využít balík více než 700 funkcí, které jsou popsány [v dokumentaci](https://docs.microsoft.com/en-us/powerquery-m/power-query-m-function-reference). V našem případě využijeme funkci [#datetime](https://docs.microsoft.com/en-us/powerquery-m/sharpdatetime).
+
+![custom_column](assets/custom_column.png)
+
+Po zavolání funkce bychom měli zkontrolovat typ hodnoty ve sloupci. Pokud není nastaven jako `Date`, provedeme převod pomocí menu `Change Type`.
+
+![change_type](assets/change_type.png)
+
+Jako poslední krok spojíme obě tabulky dohromady. Nejjednodušší je použití tlačítka `Append Queries`, což je obdoba operace UNION v jazyce SQL nebo funkce `concat()` v modulu `pandas`. 
+
+Nyní můžeme přidat vizualizaci `Lined and Stacked column chart` a porovnat, nakolik se obchodníkům daří plnit obchodní plán.
+
+![change_type](assets/sales_plan_vs_actual.png)
+
+### Využití Pythonu jako zdroje
+
+Python můžeme využít jako zdroj dat a do Power BI můžeme například přenést již hotové skripty. Zkusme tedy nejprve přenést do Power BI výsledky maturity, se kterými jsme již pracovali. 
 
 Ve skupině `Other` vybereme jako zdroj `Python script`. Budeme opět využívat modul `pandas`. Data načteme pomocí metody `read_csv`, do které vložíme URL jednotlivých datových souborů.
-
-```
-import pandas as pd
-
-u202 = pd.read_csv("https://kodim.cz/czechitas/progr2-python/python-pro-data-1/agregace-a-spojovani/assets/u202.csv")
-u203 = pd.read_csv("https://kodim.cz/czechitas/progr2-python/python-pro-data-1/agregace-a-spojovani/assets/u203.csv")
-u302 = pd.read_csv("https://kodim.cz/czechitas/progr2-python/python-pro-data-1/agregace-a-spojovani/assets/u302.csv")
-
-```
 
 Po stisknutí tlačítka OK se zobrazí dialogové okno, ve kterém vybereme, které datové zdroje chceme využít. Jednotlivé "zdroje" se v terminologii Power BI označují jako `query` (dotazy).
 
@@ -84,6 +137,12 @@ agregace budou vypočteny automaticky při tvorbě vizualizací. Proto klikneme 
 
 ![editace_skriptu](assets/editace_skriptu.png)
 
+[[[ excs Cvičení
+- legenda
+- donut
+- funnel
+]]]
+
 ## Vizualizace
 
 Nyní můžeme vytvořit graf zobrazující průměrnou známku dle předmětu. K vytvoření grafu jsou potřeba následující kroky.
@@ -100,7 +159,7 @@ Jako poslední možnost můžeme upravit řazení a seřadit předměty vzestupn
 
 ![popisky](assets/razeni.png)
 
-Tím je naše první vizualizace hotová.
+Tím je naše vizualizace hotová.
 
 ![prumerna_znamka_graf](assets/prumerna_znamka_graf.png)
 
@@ -112,18 +171,6 @@ S pomocí Pythonu můžeme přidat i vizualizace, které budou interaktivně vyu
 
 Následně se nám zpřístupní editor kódu.
 
-![python_visual_editor](assets/python_visual_editor.png)
-
-Kód pro generování vizualizace můžeme zapisovat přímo do editoru nebo můžeme kliknout na ikonu šipky, která otevře kód ve vybraném vývojovém prostředí. Výběr vývojového prostředí můžeme provést na stejném místě, jako jsme nastavovali cestu k instalaci Pythonu. Jako výchozí je nastavená aplikace, ve které operační systém automaticky otevírá soubory s příponou `.py`. Pokud si chceme vývojové prostředí konkrétně vybrat, vybereme možnost `Other` a nastavíme cestu k vybranému vývojovému prostředí. Power BI si nejlépe rozumí s Visual Studio Code, cestu k němu může být například `C:\Users\jirka\AppData\Local\Programs\Microsoft VS Code\Code.exe`. Pro tvorbu složitějších vizualizací se vývojové prostředí vyplatí použít.
-
-![vyber_ide](assets/vyber_ide.png)
-
-Po kliknutí na ikonu se šipkou se otevře vybrané vývojové prostředí se skriptem, do kterého jsou již vložené nějaké řádky. Power BI vygeneruje adresář, do kterého vloží data v souboru CSV a skript s předpřipraveným kódem.
-
-![vs_code_editor](assets/vs_code_editor.png)
-
-Nový kód bychom měli vkládat pod řádek komentáře `# Paste or type your script code here:`. Začneme tím, že vygenerujeme prostor pro rázdný graf. Samotný graf se bude skládat z obrázku (`figure`) a souřadnicové osy (`axis`). Obrázek zastřešuje všechny elementy, které jsou součástí grafu. V některých případech se může obrázek skládat z více grafů (`subplot`). V případě maturit bychom například pomocí grafů mohli srovnat průměrné známky z daných předmětů v různých třídách nebo školách.
-
 Pro vytvoření obrázku a souřadnicových os použijeme funkci `subplots()`. Pokud nezadáme žádné parametry, `matplotlib` vytvoří jednu souřadnicovou osu, tj. počítá pouze s jedním grafem na obrázek.
 
 ```py
@@ -131,50 +178,45 @@ import matplotlib.pyplot as plt
 fig, ax = plt.subplots()
 ```
 
-Oproti Power BI vizualizaci musíme provést agregaci dat. Na tu využijeme již hotový kód. Protože výsledek chceme vidět seřazený dle velikosti, použijeme na agregovanou tabulku metodu `sort_values()`.
+Pro data o registracích uživatelů provedeme porovnání, jaké marketingové kanály jsou nejdůležitější pro různé skupiny uživatelů. K tomu nejprve potřebujeme provést nový typ agregace, tzv. pivot (nebo také kontingenční) tabulku. Tu vytvoříme pomocí funkce `pivot_table()`. Funkci musíme říct, který sloupec bude použitý jako popisek řádku (parametr `index`), popisek sloupců (parametr `columns`), který sloupec má být použitý pro hodnoty (můžeme zvolit třeba `ip_address`) a funkci pro agregaci (využijeme funkci `len`, což je obecná funkce pro výpočet délky řetězce nebo seznamu).
 
 ```py
-dataset = dataset.sort_values("Známka")
+import pandas
+dataset = pandas.read_json("https://raw.githubusercontent.com/pesikj/progr2-python/master/python-pro-data-1/power-bi/assets/user_registration.json")
+df_actual_pivot = pandas.pivot_table(dataset, values="age_group", index="marketing_channel", columns="ip_address", aggfunc=len)
+print(df_actual_pivot)
 ```
 
-Dále použijeme metodu `bar` pro vytvoření sloupcového grafu. Aby byl graf vložen do námi připravené souřadnicové osy, jako parametr `ax` nastavíme `ax`. Modul `matplotlib` automaticky vytváří legendu, ta je ale v našem případě zbytečná, parametr `legend` nastavíme na `None`. Parametry `x` a `y` nastavují sloupce, které jsou použity na popisy a výšky řádků. V našem případě by `matplotlib` nastavil parametry automaticky, do budoucna se nám ale změna sloupců může hodit.
+Vytvořená tabulka je připravená pro grafické zobrazení.
 
-```py
-dataset.plot.bar(ax=ax, legend=None, x="Předmět", y="Známka")
-ax.set_title("Průměrná známka podle předmětu")
+```
+age_group                18-29  30-44  45-60   60+
+marketing_channel
+Friend's recommendation   1795   2268   1423   822
+Newspapers or magazine    1052   1397    887  3325
+Outdoor                   1097   1401   3318   484
+Social network            6738   7186   1433   824
+Television                1407   1809   1111   691
 ```
 
-Popis osy bychom nastavili pomocí metod `set_xlabel()` a `set_ylabel()`. V našem případě nechceme popis osy *x* žádný, zavoláme tedy metodu `set_xlabel()` s parametrem `None`.
+Využijeme vizualizaci pomocí teplotní mapy, což je zobrazení blízké pivot tabulce, jednotlivé hodnoty jsou ale graficky podbarveny.
+
+Celý kód pro tvorbu vizualizace tedy je:
 
 ```py
-ax.set_xlabel(None)
-```
+import matplotlib.pyplot as plt
 
-Abychom ušetřili místo pod grafem, otočíme popisy jednotlivých hodnot o 45 stupňů. I tak se ale pod graf všechny názvy předmětů nevejdou, proto mírně zvětšíme prostor pod grafem pomocí metody `subplots_adjust()`.
+df_actual_pivot = pandas.pivot_table(dataset, values="ip_address", index="marketing_channel", columns="age_group", aggfunc=len)
+fig, ax = plt.subplots()
 
-```py
-plt.xticks(rotation=45, ha='right')
-fig.subplots_adjust(bottom=0.25)
+plt.xticks(range(df_actual_pivot.shape[1]), df_actual_pivot.columns)
+plt.yticks(range(df_actual_pivot.shape[0]), df_actual_pivot.index)
+
+plt.imshow(df_actual_pivot, cmap ="viridis")
+for i in range(df_actual_pivot.shape[0]):
+    for j in range(df_actual_pivot.shape[1]):
+        text = ax.text(j, i, df_actual_pivot.iloc[i, j],
+                       ha="center", va="center", color="w")
 plt.show()
 ```
 
-### Přidání filtrů
-
-V Power BI jsou reporty interaktivní a jednotlivé prvky na sebe reagují. Typickým příkladem interaktivního prvku je Slicer, který můžeme využít jako filtr. Po vložení prvku `Slicer` do reportu je do pole `Field` nutné přetáhnout pole, podle kterého chceme filtrovat. Můžeme vyzkoušet například pole `Den`.
-
-![filtr](assets/filtr.png)
-
-Následně po výběru jednoho či více dní se překreslí vizualizace a zobrazí pouze data z vybraných dní.
-
-![filtr](assets/aktivni_filtr.png)
-
-Standardní chování komponenty je umožnit výběr více prvků s využitím klávesy `Ctrl`. Chování komponenty můžeme upravit v pravém panelu po kliknutí na volbu `Format visual`.
-
-![filtr](assets/nastaveni_sliceru.png)
-
-
-## Přidání dalších transformací
-
-Existují transformace, které jsou v Power BI velmi komplikované. Příkladem je vložení hodnot z předcházejícího nebo následujícího řádku do aktuálního. V jazyce SQL se k tomu účelu používají různé zápisy (často funkce `lead()` a `lag()`), v modulu `pandas` se používá metoda `shift()`.
-
-Uvažujme například, že máme k dispozici zařízení, které zapisuje informace o začátku a konci výpadku televizního signálu do textového souboru. Abychom zjistili délku výpadku, potřebujeme porovnat čas začátku a konce výpadku. Protože jsou časy událostí na různých řádcích, využijeme modul `pandas` a metodu `shift()`.
