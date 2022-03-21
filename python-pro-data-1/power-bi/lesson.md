@@ -78,7 +78,7 @@ Graf je dále vhodné vylepšit přidáním popisků os a titulku. Obojí lze pr
 - funnel
 ]]]
 
-### Transformace dat
+## Transformace dat
 
 Uzavřené smlouvy jsou často porovnávány s plánem, aby bylo jasné, zda hodnoty uzavřených kontraktů dosahují požadové úrovně. Tabulka s plánem tržeb je ke stažení [zde](https://raw.githubusercontent.com/pesikj/progr2-python/master/python-pro-data-1/power-bi/assets/sales_plan.csv). Tabulku importujeme do Power BI jako nový zdroj.
 
@@ -142,27 +142,7 @@ agregace budou vypočteny automaticky při tvorbě vizualizací. Proto klikneme 
 - registrace-2
 ]]]
 
-## Vizualizace
-
-Nyní můžeme vytvořit graf zobrazující průměrnou známku dle předmětu. K vytvoření grafu jsou potřeba následující kroky.
-
-Pokud bychom chtěli názvy sloupců použít jako popisky os grafů, vyplatí se je přejmenovat pomocí volby `Rename`. 
-
-![popisky](assets/popisky.png){.fig}
-
-V menu vpravo vybereme typ vizualizace. Pro zobrazení průměru je vhodný například sloupcový graf (`stacked column chart` nebo `stacket bar chart`). Poté zaškrtneme pole Předmět a Známka vpravo. Power Bi automaticky použije textové pole Předmět jako popisek osy a číselné pole předmět pro výšku sloupců. Automaticky počítá součet, proto je nutné změnit typ agregace na průměr.
-
-Dále je možné upravit titulek grafu a popisky os, aby byl graf co nejvíce srozumitelný. Nastavení vzhledu vizualizace provádíme pomocí menu `Format your visual` vpravo. V případě jednoduchého grafu je možné například vyplnit pouze titulek a popisky os vypnout.
-
-Jako poslední možnost můžeme upravit řazení a seřadit předměty vzestupně podle průměru. Možnosti řazení jsou "schované" v menu vizualizace, které otevřeme pomocí ikonky tří teček vpravo nahoře.
-
-![popisky](assets/razeni.png){.fig}
-
-Tím je naše vizualizace hotová.
-
-![prumerna_znamka_graf](assets/prumerna_znamka_graf.png){.fig}
-
-### Tvorba vizualizací v Pythonu
+## Vizualizace v Pythonu
 
 S pomocí Pythonu můžeme přidat i vizualizace, které budou interaktivně využívat data z dotazů. Pro vytvoření vizualizace klikneme v nabídce vizualizací na možnost `Python visual`. Následně v menu vpravo vybereme sloupce, se kterými chceme pracovat. Pro vybrané sloupce je vhodné nastavit agregaci jako průměr, abychom nemuseli agregaci řešit v kódu.
 
