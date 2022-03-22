@@ -142,6 +142,10 @@ agregace budou vypočteny automaticky při tvorbě vizualizací. Proto klikneme 
 - registrace-2
 ]]]
 
+[[[ excs Bonusová cvičení
+- registrace-3
+]]]
+
 ## Vizualizace v Pythonu
 
 S pomocí Pythonu můžeme přidat i vizualizace, které budou interaktivně využívat data z dotazů. Pro vytvoření vizualizace klikneme v nabídce vizualizací na možnost `Python visual`. Následně v menu vpravo vybereme sloupce, se kterými chceme pracovat. Pro vybrané sloupce je vhodné nastavit agregaci jako průměr, abychom nemuseli agregaci řešit v kódu.
