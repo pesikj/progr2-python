@@ -1,5 +1,5 @@
 ---
-title: Registrace uživatelů
+title: Krabicový graf
 demand: 3
 ---
 
