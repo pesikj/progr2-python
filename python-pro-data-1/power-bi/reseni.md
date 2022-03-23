@@ -4,7 +4,7 @@ Je třeba přetáhnout sloupec `Sales Manager` do pole `Line values`. Volby `Dat
 
 ## Donut
 
-Na začátku je třeba vložit vizualizaci typu `Donut chart` a přetáhnout jednotlivá pole
+Na začátku je třeba vložit vizualizaci typu `Donut chart` a přetáhnout jednotlivá pole. To, jestli u popisků detailů vidíme popisek, hodnotu a podíl v procentech, je určeno polem `Options` v menu `Data labels`.
 
 ## Funnel
 
@@ -56,3 +56,9 @@ dataset.plot(kind="box", ax=ax)
 ax.set_title("Rozložení příjmů a výdajů")
 plt.show()
 ```
+
+# Další vizualizace
+
+Přidání vizualizace je popsáno v zadání. Pro vložení do reportu je třeba použít tlačítko `Add`.
+
+Tlačítko `Conditional Column` je na záložce `Add Column` v Power Query. Je to klasická podmínka, takže stačí přidat sloupec např. s názvem `transaction_type`. Pokud je `amount > 0`, vložte text `income`, jinak `expense` (či jakýkoli jiný text). U vizuálu pak přetáhněte `amout` do pole `Axis` a `transaction_type` do `Axis Category 1`. Velká tečka jde vypnout pomocí volby `Dot` ve `Format your visual`, jdou vypnout i "malé tečky" `Dots`, barvy jdou nastavit v menu `Box options`.

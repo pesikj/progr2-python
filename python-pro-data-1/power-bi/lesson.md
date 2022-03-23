@@ -209,5 +209,8 @@ plt.show()
 
 [[[ excs Cvičení
 - krabicovy-graf
+]]]
+
+[[[ excs Bonusové cvičení
 - dalsi-vizualizace
 ]]]
