@@ -78,6 +78,10 @@ Graf je dále vhodné vylepšit přidáním popisků os a titulku. Obojí lze pr
 - funnel
 ]]]
 
+[[[ excs Bonusové cvičení
+- barvy
+]]]
+
 ## Transformace dat
 
 Uzavřené smlouvy jsou často porovnávány s plánem, aby bylo jasné, zda hodnoty uzavřených kontraktů dosahují požadové úrovně. Tabulka s plánem tržeb je ke stažení [zde](https://raw.githubusercontent.com/pesikj/progr2-python/master/python-pro-data-1/power-bi/assets/sales_plan.csv). Tabulku importujeme do Power BI jako nový zdroj.
