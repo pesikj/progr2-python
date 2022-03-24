@@ -2,13 +2,21 @@
 
 Je třeba přetáhnout sloupec `Sales Manager` do pole `Line values`. Volby `Data labels` a `Total labels`jsou v menu `Format your visual` dole. Musíte mít vždy označenou vizualizaci, abyste mohli měnit její nastavení (označení = kliknout na ni :-) ).
 
+![running_total](reseni-assets/legenda.png)
+
 ## Donut
 
 Na začátku je třeba vložit vizualizaci typu `Donut chart` a přetáhnout jednotlivá pole. To, jestli u popisků detailů vidíme popisek, hodnotu a podíl v procentech, je určeno polem `Options` v menu `Data labels`.
 
+![running_total](reseni-assets/donut.png)
+
 ## Funnel
 
 Opět stačí přetáhnout jednotlivá pole.
+
+Doporučil bych vypnout volbu `Display conversion rate label`, ta se pro tao data příliš nehodí.
+
+![running_total](reseni-assets/funnel.png)
 
 ## Barvy
 
@@ -31,13 +39,19 @@ print(user_registration)
 
 Výběr více polí lze ovlivnit v menu `Format your visual` -> `Slicer settings` -> `Selection`.
 
+![running_total](reseni-assets/registrace.png)
+
 ## Zdroje a skupiny
 
 Stačí vložit matrix, do `Rows` dát `age_group`, do `Columns` `marketing_channel` (nebo obráceně), do `Values` `email`. Pokud chci počty unikátních záznamů, vyberu `Count (Distinct)`.
 
+![running_total](reseni-assets/registrace-2.png)
+
 ## Registrace po týdnech
 
 V Power Query vyberu `Add column` -> `Custom column`. Funkce pro přidání je `Date.WeekOfYear([date_time])`. 
+
+![running_total](reseni-assets/registrace-3.png)
 
 ## Krabicový graf
 
@@ -57,8 +71,12 @@ ax.set_title("Rozložení příjmů a výdajů")
 plt.show()
 ```
 
+![running_total](reseni-assets/krabicovy-graf.png)
+
 # Další vizualizace
 
 Přidání vizualizace je popsáno v zadání. Pro vložení do reportu je třeba použít tlačítko `Add`.
 
-Tlačítko `Conditional Column` je na záložce `Add Column` v Power Query. Je to klasická podmínka, takže stačí přidat sloupec např. s názvem `transaction_type`. Pokud je `amount > 0`, vložte text `income`, jinak `expense` (či jakýkoli jiný text). U vizuálu pak přetáhněte `amout` do pole `Axis` a `transaction_type` do `Axis Category 1`. Velká tečka jde vypnout pomocí volby `Dot` ve `Format your visual`, jdou vypnout i "malé tečky" `Dots`, barvy jdou nastavit v menu `Box options`.
+Tlačítko `Conditional Column` je na záložce `Add Column` v Power Query. Je to klasická podmínka, takže stačí přidat sloupec např. s názvem `transaction_type`. Pokud je `amount > 0`, vložte text `income`, jinak `expense` (či jakýkoli jiný text). U vizuálu pak přetáhněte `bank_id` do pole `Axis`, `transaction_type` do `Axis Category 1` a `amount` do `Value`. Velká tečka jde vypnout pomocí volby `Dot` ve `Format your visual`, jdou vypnout i "malé tečky" `Dots`, barvy jdou nastavit v menu `Box options`.
+
+![running_total](reseni-assets/dalsi-vizualizace.png)

@@ -8,7 +8,7 @@ V některých případech může Python posloužit při načtení větších sou
 Sloupec `date_time` převeď na typ `Date/Time`. Dále vytvoř kopii tohoto sloupce pomocí volby `Duplicate column`, kterou získáš po kliknutí pravým tlačítkem na název sloupce. Nový sloupec vhodně přejmenuj a převeď na typ `Date`.
 
 1. Vytvoř čárový graf, který zobrazuje vývoj počtu registrací v čase. Protože jde o krátkou časovou řadu, namísto hierarchie použij přímo sloupec `date_time` (viz obrázek níže).
-1. Vytvoř graf kumulativního růstu počtu uživatelů.
+1. Vytvoř graf kumulativního počtu uživatelů.
 1. Vývojář aplikace tě informoval, že kvůli bugu se některé e-maily v registraci objevují opakovaně. Podívej se, zda při transformaci dat existuje nějaká možnost, jak tyto duplicity odstranit.
 1. Pomocí vhodné vizualizace prezentuj, který marketingový kanál přinesl nejvíce uživatelů.
 
