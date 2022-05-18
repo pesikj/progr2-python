@@ -123,7 +123,7 @@ Nyní už umíme sestavit výraz, kterým vybereme celý řádek s kurzem dolaru
 
 Pokud bychom neuvažovali předčíslí, stačí nám regulární výraz `\d{6,10}/\d{4}`, který by měl pasovat např. na číslo účtu 2300117015/2010. Nesmíme zapomenout na zpětné lomítko před lomítkem.
 
-Uvažujme, že máme program, do kterého nějaký programátor vložil proměnnou `magickaKonstanta`. Víme, že proměnná je desetinné číslo, ale potřebujeme vědět, kde je zadána její hodnota. Napiš regulární výraz, který najde řádek, který
+Uvažujme, že máme program, do kterého nějaký vývojář vložil proměnnou `magickaKonstanta`. Víme, že proměnná je desetinné číslo, ale potřebujeme vědět, kde je zadána její hodnota. Napiš regulární výraz, který najde řádek, kde je proměnné přiřazená hodnota.
 
 ```
 polomer = input("Zadej poloměr koule: ")
@@ -322,7 +322,7 @@ Regulární výrazy můžeme využívat i v modulu Pandas. Uvažujme, že máme 
 ```py
 import pandas
 
-df = pandas.read_csv("data.csv", sep=";")
+df = pandas.read_csv("zpravy.csv", sep=";")
 ```
 
 Jako první vyzkoušíme metodu `str.contains()`, která ověří, zda je ve sloupci skupina znaků, která odpovídá regulárnímu výrazu. Můžeme tedy například zkontrolovat, zda je ve sloupci `zapis` skupina znaku, která odpovídá rodnému číslu.
