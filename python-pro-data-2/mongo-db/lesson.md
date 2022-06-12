@@ -158,6 +158,48 @@ for dokument in vysledek:
     print(dokument)
 ```
 
+### Použití regulárních výrazů
+
+V MongoDB můžeme k vyhledávání používat i regulární výrazy. Pokud si například nejsme jisti, jak jsou v kolekci zapsané pytle na odpadky (můžou být v jednotném i množném čísle), můžeme použít žolíky na poslední dvě písmena, která se pro jednotné a množné číslo liší. Při použití regulárních výrazů používáme operátor `$regex`.
+
+```py
+dotaz = {"Věc": {"$regex": "Pyt.. na odpadky"}}
+vysledek = kolekce.find(dotaz)
+for polozka in vysledek:
+    print(polozka)
+```
+
+Pro lepší kontrolu můžeme použít i skupiny.
+
+```py
+dotaz = {"Věc": {"$regex": "Pyt(le|el) na odpadky"}}
+vysledek = kolekce.find(dotaz)
+for polozka in vysledek:
+    print(polozka)
+```
+
+### Čtení na doma: Velikost písmen
+
+Pokud bychom chtěli u **hodnot** provádět vyhledávání bez ohledu na velikost písmen, můžeme k tomu využít metodu `collation`. Té jako parametr zadáme dvojici hodnot - `locale` a `strength`. Locale je označení jazyka, podle kterého se má velikost písmen posuzovat, v našem případě zvolíme `cs` (češtinu), pro angličtinu bychom například zadali `en`. Druhý parametr označuje, zda má být velikost písmen ignorována. Pokud zadáme `2`, je při vyhledávání ignorována, pokud `1`, musí být velikost písmen u hodnoty dokumentu stejná jako v našem dotazu.
+
+Pozor, toto nastavení ovlivní pouze hodnoty, velikost písmen u klíče musí být stejná v našem dotazu i dokumentu.
+
+```py
+dotaz = {"Věc": "pytel na odpadky"}
+vysledek = kolekce.find(dotaz).collation({"locale": "cs", "strength": 2})
+for polozka in vysledek:
+    print(polozka)
+```
+
+Alternativně můžeme použít regulární výrazy, kde nastavíme operátoru `$options` hodnotu `i`, což znamená, že je u regulárních výrazů ignorována velikost písmen (další možnosti, které je možné nastavit, jsou k dispozici v [dokumentaci](https://www.mongodb.com/docs/manual/reference/operator/query/regex/)).
+
+```py
+dotaz = {"Věc": {"$regex": "pyt(le|el) na odpadky", "$options": 'i'}}
+vysledek = kolekce.find(dotaz)
+for polozka in vysledek:
+    print(polozka)
+```
+
 [[[ excs Úkoly
 - hodnoceni-knih
 ]]]
